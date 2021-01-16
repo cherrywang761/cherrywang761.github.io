@@ -1,17 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/2021/01/08/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></tbody></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></tbody></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></tbody></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></tbody></table></figure>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>mall_shop遇到的问题</title>
+    <url>/2021/01/12/mall-shop%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="搭建Springboot-Mybatis基本框架"><a href="#搭建Springboot-Mybatis基本框架" class="headerlink" title="搭建Springboot + Mybatis基本框架"></a>搭建Springboot + Mybatis基本框架</h2><h2 id="整合Swagger-UI"><a href="#整合Swagger-UI" class="headerlink" title="整合Swagger-UI"></a>整合Swagger-UI</h2><h2 id="整合Redis问题"><a href="#整合Redis问题" class="headerlink" title="整合Redis问题"></a>整合Redis问题</h2><h3 id="1-RedisTemplate和StringRedisTemplate的区别"><a href="#1-RedisTemplate和StringRedisTemplate的区别" class="headerlink" title="1.RedisTemplate和StringRedisTemplate的区别"></a>1.RedisTemplate和StringRedisTemplate的区别</h3><p>在整合Redis的过程中，注入了StringRedisTemplate来实现RedisService接口</p>
+<p>这里我就产生了一个疑问，RedisTemplate&lt;&gt; 和StringRedisTemplate的区别是什么，两者如何使用？</p>
+<a id="more"></a>
+
+
+<p>这个类名字后缀是Template，我们可以联想到JDBC Template，它是用来封装对Redis的一些常用的操作的</p>
+<p>当然，StringRedisTemplate和RedisTemplate功能是十分类似的</p>
+<p>那么为什么需要两个Template呢，只使用RedisTemplate不行吗？</p>
+<p><strong>其实它们两个之间的区别主要在于它们使用的序列化类</strong></p>
+<ul>
+<li>RedisTemplate使用的是JdkSerializationRedisSerializer</li>
+<li>StringRedisTemplate使用的是StringRedisSerializer</li>
+</ul>
+<p><code>RedisTemplate</code>使用的序列类在在操作数据的时候，比如说<strong>存入数据会将数据先序列化成字节数组</strong></p>
+<p><strong>然后在存入Redis数据库</strong>，这个时候打开Redis查看的时候，你会看到你的数据不是以可读的形式</p>
+<p>展现的，而是以<strong>字节数组显示</strong></p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210112160520349.png" alt="image-20210112160520349" style="zoom:67%;">
+
+
+
+<p>当然，当你要从Redis中获取数据的时候也会默认将数据当做字节数组进行转化，那这时就会出现一个问题，当需要获取的数据不是以字节数组存在redis当中而是以正常的可读的字符串存储的时候，怎么办？</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210112161740520.png" alt="image-20210112161740520" style="zoom:67%;">
+
+<p>这种情况RedisTemplate就无法获取到数据，获取到的值为NULL。</p>
+<p>这个时候StringRedisTemplate就派上了用场。</p>
+<p><strong>当Redis当中的数据值是以可读的形式显示出来的时候，只能使用StringRedisTemplate才能获取到里面的数据。</strong></p>
+<p><strong>总结：</strong></p>
+<p><strong>当你的redis数据库里面本来存的是字符串数据或者你要存取的数据就是字符串类型数据的时候，那么你就使用<code>StringRedisTemplate</code>即可，</strong></p>
+<p><strong>但是如果你的数据是复杂的对象类型，而取出的时候又不想做任何的数据转换，直接从Redis里面取出一个对象，那么使用<code>RedisTemplate</code>会是一个更好的选择</strong></p>
+<h2 id="整合SpringSecurity和JWT"><a href="#整合SpringSecurity和JWT" class="headerlink" title="整合SpringSecurity和JWT"></a>整合SpringSecurity和JWT</h2><h3 id="1-什么是SpringSecurity和JWT"><a href="#1-什么是SpringSecurity和JWT" class="headerlink" title="1. 什么是SpringSecurity和JWT"></a>1. 什么是SpringSecurity和JWT</h3><blockquote>
+<p>SpringSecurity是一个强大的可高度定制的认证和授权框架，对于Spring应用来说它是一套Web安全标准。SpringSecurity注重于为Java应用提供认证和授权功能，像所有的Spring项目一样，它对自定义需求具有强大的扩展性。</p>
+</blockquote>
+<blockquote>
+<p>JWT是JSON WEB TOKEN的缩写，它是基于 RFC 7519 标准定义的一种可以安全传输的的JSON对象，由于使用了数字签名，所以是可信任和安全的。</p>
+</blockquote>
+<h3 id="2-谈谈JWT"><a href="#2-谈谈JWT" class="headerlink" title="2. 谈谈JWT"></a>2. 谈谈JWT</h3><p>说起JWT，我们应该来谈一谈基于token的认证和传统的session认证的区别。</p>
+<h4 id="传统的session认证"><a href="#传统的session认证" class="headerlink" title="传统的session认证"></a>传统的session认证</h4><p>http协议本身是<strong>无状态</strong>的协议，这就意味着如果用户向我们的应用提供用户名和密码进行用户登录验证，<strong>下一次登录仍然需要重新用户登录验证。</strong></p>
+<p>传统的session认证：为了能够让我们的应用能够识别是哪个用户发出的请求，我们只能<strong>在服务器存储一份用户登录的信息</strong>，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。</p>
+<p>session认证的缺陷：</p>
 ]]></content>
+      <categories>
+        <category>项目</category>
+      </categories>
+      <tags>
+        <tag>记录</tag>
+      </tags>
   </entry>
 </search>
