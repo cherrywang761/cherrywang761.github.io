@@ -21,17 +21,21 @@
     var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="搭建Springboot + Mybatis基本框架整合Swagger-UI整合Redis问题1.RedisTemplate和StringRedisTemplate的区别在整合Redis的过程中，注入了StringRedisTemplate来实现RedisService接口 这里我就产生了一个疑问，RedisTemplate&lt;&gt; 和StringRedisTemplate的区别是什么，两">
+  <meta name="description" content="搭建Springboot + Mybatis基本框架1.整合的流程2. 逆向工程3. 常用注解">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mall_shop遇到的问题">
 <meta property="og:url" content="https://cherrywang761.github.io/2021/01/12/mall-shop%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/index.html">
 <meta property="og:site_name" content="Nonbioclock">
-<meta property="og:description" content="搭建Springboot + Mybatis基本框架整合Swagger-UI整合Redis问题1.RedisTemplate和StringRedisTemplate的区别在整合Redis的过程中，注入了StringRedisTemplate来实现RedisService接口 这里我就产生了一个疑问，RedisTemplate&lt;&gt; 和StringRedisTemplate的区别是什么，两">
+<meta property="og:description" content="搭建Springboot + Mybatis基本框架1.整合的流程2. 逆向工程3. 常用注解">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210112160520349.png">
 <meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210112161740520.png">
+<meta property="og:image" content="http://www.macrozheng.com/images/arch_screen_31.png">
+<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210127180345580.png">
+<meta property="og:image" content="http://www.macrozheng.com/images/arch_screen_52.png">
+<meta property="og:image" content="http://www.macrozheng.com/images/arch_screen_85.png">
 <meta property="article:published_time" content="2021-01-12T07:33:14.000Z">
-<meta property="article:modified_time" content="2021-01-15T13:47:23.120Z">
+<meta property="article:modified_time" content="2021-02-21T06:28:23.374Z">
 <meta property="article:author" content="CherryWang761">
 <meta property="article:tag" content="记录">
 <meta name="twitter:card" content="summary">
@@ -226,7 +230,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-01-15 21:47:23" itemprop="dateModified" datetime="2021-01-15T21:47:23+08:00">2021-01-15</time>
+                <time title="修改时间：2021-02-21 14:28:23" itemprop="dateModified" datetime="2021-02-21T14:28:23+08:00">2021-02-21</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -251,14 +255,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.5k</span>
+              <span>7.7k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>7 分钟</span>
             </span>
 
         </div>
@@ -270,9 +274,39 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="搭建Springboot-Mybatis基本框架"><a href="#搭建Springboot-Mybatis基本框架" class="headerlink" title="搭建Springboot + Mybatis基本框架"></a>搭建Springboot + Mybatis基本框架</h2><h2 id="整合Swagger-UI"><a href="#整合Swagger-UI" class="headerlink" title="整合Swagger-UI"></a>整合Swagger-UI</h2><h2 id="整合Redis问题"><a href="#整合Redis问题" class="headerlink" title="整合Redis问题"></a>整合Redis问题</h2><h3 id="1-RedisTemplate和StringRedisTemplate的区别"><a href="#1-RedisTemplate和StringRedisTemplate的区别" class="headerlink" title="1.RedisTemplate和StringRedisTemplate的区别"></a>1.RedisTemplate和StringRedisTemplate的区别</h3><p>在整合Redis的过程中，注入了StringRedisTemplate来实现RedisService接口</p>
+        <h2 id="搭建Springboot-Mybatis基本框架"><a href="#搭建Springboot-Mybatis基本框架" class="headerlink" title="搭建Springboot + Mybatis基本框架"></a>搭建Springboot + Mybatis基本框架</h2><h3 id="1-整合的流程"><a href="#1-整合的流程" class="headerlink" title="1.整合的流程"></a>1.整合的流程</h3><h3 id="2-逆向工程"><a href="#2-逆向工程" class="headerlink" title="2. 逆向工程"></a>2. 逆向工程</h3><h3 id="3-常用注解"><a href="#3-常用注解" class="headerlink" title="3. 常用注解"></a>3. 常用注解</h3><a id="more"></a>
+<h4 id="1-RequestParam和-RequestBody的区别"><a href="#1-RequestParam和-RequestBody的区别" class="headerlink" title="1. @RequestParam和@RequestBody的区别"></a>1. @RequestParam和@RequestBody的区别</h4><blockquote>
+<ol>
+<li>@RequestParam信息存储在请求头中，@RequestBody信息存储在请求体中</li>
+<li>@RequestParam常用来处理简单类型的绑定，get请求，post请求均可使用</li>
+</ol>
+<p>@RequestBody一般用来传递对象，通过post请求。</p>
+</blockquote>
+<h4 id="2-ResponseBody的作用"><a href="#2-ResponseBody的作用" class="headerlink" title="2. @ResponseBody的作用"></a>2. @ResponseBody的作用</h4><blockquote>
+<ol>
+<li>@ResponseBody的作用其实是将java对象转为json格式的数据。</li>
+<li>作用是将controller的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到response对象的body区,通常用来返回JSON数据或者是XML数据。</li>
+<li>它是作用在方法上的</li>
+</ol>
+</blockquote>
+<h2 id="整合Swagger-UI"><a href="#整合Swagger-UI" class="headerlink" title="整合Swagger-UI"></a>整合Swagger-UI</h2><h3 id="1-整合的流程-1"><a href="#1-整合的流程-1" class="headerlink" title="1. 整合的流程"></a>1. 整合的流程</h3><h3 id="2-注解解释"><a href="#2-注解解释" class="headerlink" title="2. 注解解释"></a>2. 注解解释</h3><p>常用的两个注解</p>
+<ul>
+<li>@Api</li>
+</ul>
+<blockquote>
+<p>@Api(tags = “” ,description = “”)</p>
+<p>该注解作用是将一个类标记为Swagger资源</p>
+</blockquote>
+<ul>
+<li>@ApiOperation</li>
+</ul>
+<blockquote>
+<p>@ApiOperation(value = “”)</p>
+<p>该注解作用是描述针对特定路径的操作或者通常的HTTP方法</p>
+</blockquote>
+<h2 id="整合Redis问题"><a href="#整合Redis问题" class="headerlink" title="整合Redis问题"></a>整合Redis问题</h2><h3 id="1-整合的流程-2"><a href="#1-整合的流程-2" class="headerlink" title="1. 整合的流程"></a>1. 整合的流程</h3><h3 id="2-RedisTemplate和StringRedisTemplate的区别"><a href="#2-RedisTemplate和StringRedisTemplate的区别" class="headerlink" title="2.RedisTemplate和StringRedisTemplate的区别"></a>2.RedisTemplate和StringRedisTemplate的区别</h3><p>在整合Redis的过程中，注入了StringRedisTemplate来实现RedisService接口</p>
 <p>这里我就产生了一个疑问，RedisTemplate&lt;&gt; 和StringRedisTemplate的区别是什么，两者如何使用？</p>
-<a id="more"></a>
+<!-- more -->
 
 
 <p>这个类名字后缀是Template，我们可以联想到JDBC Template，它是用来封装对Redis的一些常用的操作的</p>
@@ -299,16 +333,355 @@
 <p><strong>总结：</strong></p>
 <p><strong>当你的redis数据库里面本来存的是字符串数据或者你要存取的数据就是字符串类型数据的时候，那么你就使用<code>StringRedisTemplate</code>即可，</strong></p>
 <p><strong>但是如果你的数据是复杂的对象类型，而取出的时候又不想做任何的数据转换，直接从Redis里面取出一个对象，那么使用<code>RedisTemplate</code>会是一个更好的选择</strong></p>
-<h2 id="整合SpringSecurity和JWT"><a href="#整合SpringSecurity和JWT" class="headerlink" title="整合SpringSecurity和JWT"></a>整合SpringSecurity和JWT</h2><h3 id="1-什么是SpringSecurity和JWT"><a href="#1-什么是SpringSecurity和JWT" class="headerlink" title="1. 什么是SpringSecurity和JWT"></a>1. 什么是SpringSecurity和JWT</h3><blockquote>
-<p>SpringSecurity是一个强大的可高度定制的认证和授权框架，对于Spring应用来说它是一套Web安全标准。SpringSecurity注重于为Java应用提供认证和授权功能，像所有的Spring项目一样，它对自定义需求具有强大的扩展性。</p>
+<h2 id="整合SpringSecurity和JWT"><a href="#整合SpringSecurity和JWT" class="headerlink" title="整合SpringSecurity和JWT"></a>整合SpringSecurity和JWT</h2><h3 id="1-什么是SpringSecurity和JWT"><a href="#1-什么是SpringSecurity和JWT" class="headerlink" title="1. 什么是SpringSecurity和JWT"></a>1. 什么是SpringSecurity和JWT</h3><p>SpringSecurity是一个强大的可高度定制的认证和授权框架，对于Spring应用来说它是一套Web安全标准。SpringSecurity注重于为Java应用提供认证和授权功能，像所有的Spring项目一样，它对自定义需求具有强大的扩展性。</p>
+<p>JWT是JSON WEB TOKEN的缩写，它是基于 RFC 7519 标准定义的一种可以安全传输的的JSON对象，由于使用了数字签名，所以是可信任和安全的。</p>
+<h3 id="2-谈谈JWT"><a href="#2-谈谈JWT" class="headerlink" title="2. 谈谈JWT"></a>2. 谈谈JWT</h3><p>说起JWT，我们应该来谈一谈基于token的认证和传统的session认证的区别。</p>
+<p>传统的session认证<br>http协议本身是无状态的协议，这就意味着如果用户向我们的应用提供用户名和密码进行用户登录验证，下一次登录仍然需要重新用户登录验证。</p>
+<p>传统的session认证：为了能够让我们的应用能够识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。</p>
+<p>session认证的缺陷：</p>
+<h3 id="3-SpringSecurity的使用"><a href="#3-SpringSecurity的使用" class="headerlink" title="3. SpringSecurity的使用"></a>3. SpringSecurity的使用</h3><h3 id="4-JWT的使用"><a href="#4-JWT的使用" class="headerlink" title="4. JWT的使用"></a>4. JWT的使用</h3><hr>
+<h2 id="整合SpringTask实现定时任务"><a href="#整合SpringTask实现定时任务" class="headerlink" title="整合SpringTask实现定时任务"></a>整合SpringTask实现定时任务</h2><p>场景说明：</p>
+<ul>
+<li>用户对某商品进行下单操作</li>
+<li>系统需要根据用户购买的商品信息生成订单并锁定商品的库存</li>
+<li>系统设置了60分钟的用户不付款就自动取消订单</li>
+<li>开启了一个定时任务，每隔10分钟检查下，如果有超时还未付款的订单，就取消订单并取消锁定的商品库存</li>
+</ul>
+<h3 id="1-整合流程"><a href="#1-整合流程" class="headerlink" title="1. 整合流程"></a>1. 整合流程</h3><p>由于SpringTask已经存在于Spring中，所以无需引入其他依赖</p>
+<h4 id="1-添加SpringTask的配置"><a href="#1-添加SpringTask的配置" class="headerlink" title="1. 添加SpringTask的配置"></a>1. 添加SpringTask的配置</h4><p>只需要在配置类中添加一个@EnableScheduling注解即可开启SpringTask的定时任务能力。</p>
+<h4 id="2-添加类来执行定时任务"><a href="#2-添加类来执行定时任务" class="headerlink" title="2. 添加类来执行定时任务"></a>2. 添加类来执行定时任务</h4><h4 id=""><a href="#" class="headerlink" title=""></a></h4><h3 id="2-框架介绍"><a href="#2-框架介绍" class="headerlink" title="2. 框架介绍"></a>2. 框架介绍</h3><ul>
+<li>什么是SpirngTask？</li>
+</ul>
+<blockquote>
+<p>SpringTask是Spring自主研制的轻量级定时任务工具，相比于Quartz更加简单方便，且不需要引入其他依赖就可以使用</p>
+</blockquote>
+<ul>
+<li>Cron表达式</li>
+</ul>
+<blockquote>
+<p>Cron表达式是一个字符串，包括6~7个时间元素，在SpringTask中可以用于指定任务的执行时间。</p>
+</blockquote>
+<ul>
+<li>Cron的语法</li>
+</ul>
+<blockquote>
+<p>Second Minutes Hours DayofMonth Month DayofWeek</p>
+</blockquote>
+<ul>
+<li>Cron格式中每个时间元素的说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>时间元素</th>
+<th>可出现的字符</th>
+<th>有效数值范围</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Seconds</td>
+<td>, - * /</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>Minutes</td>
+<td>, - * /</td>
+<td>0-59</td>
+</tr>
+<tr>
+<td>Hours</td>
+<td>, - * /</td>
+<td>0-23</td>
+</tr>
+<tr>
+<td>DayofMonth</td>
+<td>, - * / ? L W</td>
+<td>0-31</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>, - * /</td>
+<td>1-12</td>
+</tr>
+<tr>
+<td>DayofWeek</td>
+<td>, - * / ? L #</td>
+<td>1-7或SUN-SAT</td>
+</tr>
+</tbody></table>
+<ul>
+<li>Cron格式中特殊字符说明</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>字符</th>
+<th>作用</th>
+<th>举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>,</td>
+<td>列出枚举值</td>
+<td>在Minutes域使用5,10，表示在5分和10分各触发一次</td>
+</tr>
+<tr>
+<td>-</td>
+<td>表示触发范围</td>
+<td>在Minutes域使用5-10，表示从5分到10分钟每分钟触发一次</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配任意值</td>
+<td>在Minutes域使用*, 表示每分钟都会触发一次</td>
+</tr>
+<tr>
+<td>/</td>
+<td>起始时间开始触发，每隔固定时间触发一次</td>
+<td>在Minutes域使用5/10,表示5分时触发一次，每10分钟再触发一次</td>
+</tr>
+<tr>
+<td>?</td>
+<td>在DayofMonth和DayofWeek中，用于匹配任意值</td>
+<td>在DayofMonth域使用?,表示每天都触发一次</td>
+</tr>
+<tr>
+<td>#</td>
+<td>在DayofMonth中，确定第几个星期几</td>
+<td>1#3表示第三个星期日</td>
+</tr>
+<tr>
+<td>L</td>
+<td>表示最后</td>
+<td>在DayofWeek中使用5L,表示在最后一个星期四触发</td>
+</tr>
+<tr>
+<td>W</td>
+<td>表示有效工作日(周一到周五)</td>
+<td>在DayofMonth使用5W，如果5日是星期六，则将在最近的工作日4日触发一次</td>
+</tr>
+</tbody></table>
+<h2 id="整合Elasticsearch"><a href="#整合Elasticsearch" class="headerlink" title="整合Elasticsearch"></a>整合Elasticsearch</h2><h3 id="1-整合流程-1"><a href="#1-整合流程-1" class="headerlink" title="1. 整合流程"></a>1. 整合流程</h3><p>我不是很懂Elasticsearch        //TODO</p>
+<ul>
+<li>Spring Data方式的数据操作</li>
+</ul>
+<blockquote>
+<p>继承ElasticsearchRepository接口可以获得常用的数据操作方法</p>
+</blockquote>
+<img src="http://www.macrozheng.com/images/arch_screen_31.png" alt="img" style="zoom:80%;">
+
+
+
+<ul>
+<li>可以使用衍生查询</li>
+</ul>
+<blockquote>
+<p>在接口中直接指定查询方法名称便可查询，无需进行实现，如商品表中有商品名称、标题或关键字，直接定义以下查询，就可以对这三个字段进行全文搜索</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * 搜索查询</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> name              商品名称</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> subTitle          商品标题</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> keywords          商品关键字</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> page              分页信息</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function">Page&lt;EsProduct&gt; <span class="title">findByNameOrSubTitleOrKeywords</span><span class="params">(String name, String subTitle, String keywords, Pageable page)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="1-引入依赖"><a href="#1-引入依赖" class="headerlink" title="1. 引入依赖"></a>1. 引入依赖</h4><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--Elasticsearch相关依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-elasticsearch<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="2-修改SpringBoot配置文件"><a href="#2-修改SpringBoot配置文件" class="headerlink" title="2. 修改SpringBoot配置文件"></a>2. 修改SpringBoot配置文件</h4><blockquote>
+<p>在spring节点中添加ElasticSearch相关的配置</p>
+</blockquote>
+<h4 id="3-添加商品文档对象EsProduct"><a href="#3-添加商品文档对象EsProduct" class="headerlink" title="3. 添加商品文档对象EsProduct"></a>3. 添加商品文档对象EsProduct</h4><blockquote>
+<p>不需要中文分词的字段设置成@Field(type = FieldType.keyword)类型</p>
+<p>需要中文分词的字段设置成@Field(analyzer = “ik_max_word”,type = FieldType.Text)类型</p>
+</blockquote>
+<h3 id="2-框架介绍-1"><a href="#2-框架介绍-1" class="headerlink" title="2. 框架介绍"></a>2. 框架介绍</h3><ul>
+<li>ElasticSearch</li>
+</ul>
+<blockquote>
+<p>ElasticSearch是一个分布式、可拓展、实时的搜索与数据分析引擎。</p>
+<p>它能从项目一开始就赋予你的数据以搜索，分析和探索的能力，可用于实现全文搜索和实时数据统计。</p>
+</blockquote>
+<ul>
+<li>Spring Data ElasticSearch</li>
+</ul>
+<blockquote>
+<p>Spring Data ElasticSearch是Spring提供的一种以SpringData风格来操作数据存储的方式，它可以避免编写大量的重复代码。</p>
+</blockquote>
+<h3 id="3-常用注解-1"><a href="#3-常用注解-1" class="headerlink" title="3. 常用注解"></a>3. 常用注解</h3><ul>
+<li>@Document</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//标识映射到ElasticSearch文档上的领域对象</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@Interface</span> Document(){</span><br><span class="line">    <span class="comment">//索引库名次(mysql数据库概念)</span></span><br><span class="line">    <span class="function">String <span class="title">indexName</span><span class="params">()</span></span>;</span><br><span class="line">    <span class="comment">//文档类型(mysql表的概念)</span></span><br><span class="line">    <span class="function">String <span class="title">type</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">    <span class="comment">//默认分片数</span></span><br><span class="line">    <span class="function"><span class="keyword">short</span> <span class="title">shards</span><span class="params">()</span> <span class="keyword">default</span> 5</span>;</span><br><span class="line">    <span class="comment">//默认副本数量</span></span><br><span class="line">    <span class="function"><span class="keyword">short</span> <span class="title">replicas</span><span class="params">()</span> <span class="keyword">default</span> 1</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>@Id</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//表示是文档的id，可以理解为mysql中表行的概念</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@Interface</span> Id() {</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>@Field</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@interface</span> Field {</span><br><span class="line">  <span class="comment">//文档中字段的类型</span></span><br><span class="line">    <span class="function">FieldType <span class="title">type</span><span class="params">()</span> <span class="keyword">default</span> FieldType.Auto</span>;</span><br><span class="line">  <span class="comment">//是否建立倒排索引</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">index</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">true</span></span>;</span><br><span class="line">  <span class="comment">//是否进行存储</span></span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">store</span><span class="params">()</span> <span class="keyword">default</span> <span class="keyword">false</span></span>;</span><br><span class="line">  <span class="comment">//分词器名次</span></span><br><span class="line">    <span class="function">String <span class="title">analyzer</span><span class="params">()</span> <span class="keyword">default</span> ""</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//为文档自动指定元数据类型</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">enum</span> <span class="title">FieldType</span> </span>{</span><br><span class="line">    Text,<span class="comment">//会进行分词并建了索引的字符类型</span></span><br><span class="line">    Integer,</span><br><span class="line">    Long,</span><br><span class="line">    Date,</span><br><span class="line">    Float,</span><br><span class="line">    Double,</span><br><span class="line">    Boolean,</span><br><span class="line">    Object,</span><br><span class="line">    Auto,<span class="comment">//自动判断字段类型</span></span><br><span class="line">    Nested,<span class="comment">//嵌套对象类型</span></span><br><span class="line">    Ip,</span><br><span class="line">    Attachment,</span><br><span class="line">    Keyword<span class="comment">//不会进行分词建立索引的类型</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>@Query注解</li>
+</ul>
+<blockquote>
+<p>该注解可以支持用ElasticSearch的DSL语句进行查询</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query("{"bool" : {"must" : {"field" : {"name" : "?0"}}}}")</span></span><br><span class="line"><span class="function">Page&lt;EsProduct&gt; <span class="title">findByName</span><span class="params">(String name,Pageable pageable)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+<h2 id="整合Mongodb实现文档操作"><a href="#整合Mongodb实现文档操作" class="headerlink" title="整合Mongodb实现文档操作"></a>整合Mongodb实现文档操作</h2><blockquote>
+<p>Monogodb是为快速开发互联网Web应用而构建的数据库系统，其数据模型和持久化策略就是为了构建高读/写吞吐量和高自动灾备伸缩性的系统</p>
+</blockquote>
+<h3 id="1-整合流程-2"><a href="#1-整合流程-2" class="headerlink" title="1. 整合流程"></a>1. 整合流程</h3><h4 id="1-添加依赖"><a href="#1-添加依赖" class="headerlink" title="1. 添加依赖"></a>1. 添加依赖</h4><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!---mongodb相关依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-data-mongodb<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="2-添加配置文件"><a href="#2-添加配置文件" class="headerlink" title="2. 添加配置文件"></a>2. 添加配置文件</h4><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">mongodb:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">localhost</span> <span class="comment"># mongodb的连接地址</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">27017</span> <span class="comment"># mongodb的连接端口号</span></span><br><span class="line">  <span class="attr">database:</span> <span class="string">mall-port</span> <span class="comment"># mongodb的连接的数据库</span></span><br></pre></td></tr></tbody></table></figure>
+<h4 id="3-添加对象，Service，Controller"><a href="#3-添加对象，Service，Controller" class="headerlink" title="3. 添加对象，Service，Controller"></a>3. 添加对象，Service，Controller</h4><h3 id="2-框架介绍-2"><a href="#2-框架介绍-2" class="headerlink" title="2. 框架介绍"></a>2. 框架介绍</h3><ul>
+<li>Spring Data MongoDB</li>
+</ul>
+<blockquote>
+<p>和Spring Data ElasticSearch类似，Spring Data Mongodb是Spring提供的一种以SpringData风格来操作数据存储的方式，它可以避免编写大量的样板代码</p>
+</blockquote>
+<p>可以通过集成MongoRepository接口获得常用的数据操作方法</p>
+<ul>
+<li>可以使用衍生查询</li>
+</ul>
+<blockquote>
+<p>在接口中直接指定查询方法名称便可查询，无需进行实现，以下为根据会员id按时间倒序获取浏览记录的例子。</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">MemberReadHistoryRepository</span> <span class="keyword">extends</span> <span class="title">MongoRepository</span>&lt;<span class="title">MemberReadHistory</span>,<span class="title">String</span>&gt; </span>{</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 根据会员id按时间倒序获取浏览记录</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> memberId 会员id</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function">List&lt;MemberReadHistory&gt; <span class="title">findByMemberIdOrderByCreateTimeDesc</span><span class="params">(Long memberId)</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>@Query注解</li>
+</ul>
+<blockquote>
+<p>使用该注解可以用MongoDB的JSON查询语句进行查询</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Query("{ 'memberId' : ?0 }")</span></span><br><span class="line"><span class="function">List&lt;MemberReadHistory&gt; <span class="title">findByMemberId</span><span class="params">(Long memberId)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<h3 id="3-常用注解-2"><a href="#3-常用注解-2" class="headerlink" title="3. 常用注解"></a>3. 常用注解</h3><ul>
+<li>Document ：表示映射到MongoDB文档上的领域文件</li>
+<li>@Id: 标示某个域为ID域</li>
+<li>@Indexed：标示某个字段为Mongodb的索引字段</li>
+</ul>
+<h2 id="整合RabbitMQ实现延迟消息"><a href="#整合RabbitMQ实现延迟消息" class="headerlink" title="整合RabbitMQ实现延迟消息"></a>整合RabbitMQ实现延迟消息</h2><p>mall整合RabbitMQ实现延迟消息的过程，以发送延迟消息取消超时订单为例</p>
+<h3 id="1-整合流程-3"><a href="#1-整合流程-3" class="headerlink" title="1. 整合流程"></a>1. 整合流程</h3><h4 id="1-添加相关依赖"><a href="#1-添加相关依赖" class="headerlink" title="1. 添加相关依赖"></a>1. 添加相关依赖</h4><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--消息队列相关依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-amqp<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!--lombok依赖--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.projectlombok<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>lombok<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">optional</span>&gt;</span>true<span class="tag">&lt;/<span class="name">optional</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="2-修改Springboot配置文件"><a href="#2-修改Springboot配置文件" class="headerlink" title="2. 修改Springboot配置文件"></a>2. 修改Springboot配置文件</h4><figure class="highlight yaml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">rabbitmq:</span></span><br><span class="line">  <span class="attr">host:</span> <span class="string">localhost</span> <span class="comment"># rabbitmq的连接地址</span></span><br><span class="line">  <span class="attr">port:</span> <span class="number">5672</span> <span class="comment"># rabbitmq的连接端口号</span></span><br><span class="line">  <span class="attr">virtual-host:</span> <span class="string">/mall</span> <span class="comment"># rabbitmq的虚拟host</span></span><br><span class="line">  <span class="attr">username:</span> <span class="string">mall</span> <span class="comment"># rabbitmq的用户名</span></span><br><span class="line">  <span class="attr">password:</span> <span class="string">mall</span> <span class="comment"># rabbitmq的密码</span></span><br><span class="line">  <span class="attr">publisher-confirms:</span> <span class="literal">true</span> <span class="comment">#如果对异步消息需要回调必须设置为true</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="3-添加枚举配置类和RabbitMQ配置"><a href="#3-添加枚举配置类和RabbitMQ配置" class="headerlink" title="3. 添加枚举配置类和RabbitMQ配置"></a>3. 添加枚举配置类和RabbitMQ配置</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210127180345580.png" alt="image-20210127180345580" style="zoom:80%;">
+
+<ul>
+<li><strong>交换机及队列说明</strong></li>
+</ul>
+<blockquote>
+<p>mall.order.direct(取消订单消息队列所绑定的交换机)：绑定的队列为mall.order.cancel，一旦有消息以mall.order.cancel为路由键发过来，就会发送此队列</p>
 </blockquote>
 <blockquote>
-<p>JWT是JSON WEB TOKEN的缩写，它是基于 RFC 7519 标准定义的一种可以安全传输的的JSON对象，由于使用了数字签名，所以是可信任和安全的。</p>
+<p>mall.order.direct.ttl(订单延迟消息队列所绑定的交换机)：绑定的队列为mall.order.cancel.ttl，一旦有消息以mall.order.cancel.ttl为路由键发送过来，会转发此队列，并在此队列保存一段时间，等到超时后将自动将消息发送到mall.order.cancel(取消订单消息消费队列)</p>
 </blockquote>
-<h3 id="2-谈谈JWT"><a href="#2-谈谈JWT" class="headerlink" title="2. 谈谈JWT"></a>2. 谈谈JWT</h3><p>说起JWT，我们应该来谈一谈基于token的认证和传统的session认证的区别。</p>
-<h4 id="传统的session认证"><a href="#传统的session认证" class="headerlink" title="传统的session认证"></a>传统的session认证</h4><p>http协议本身是<strong>无状态</strong>的协议，这就意味着如果用户向我们的应用提供用户名和密码进行用户登录验证，<strong>下一次登录仍然需要重新用户登录验证。</strong></p>
-<p>传统的session认证：为了能够让我们的应用能够识别是哪个用户发出的请求，我们只能<strong>在服务器存储一份用户登录的信息</strong>，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。</p>
-<p>session认证的缺陷：</p>
+<h3 id="2-框架介绍-3"><a href="#2-框架介绍-3" class="headerlink" title="2. 框架介绍"></a>2. 框架介绍</h3><ul>
+<li>RabbitMQ</li>
+</ul>
+<blockquote>
+<p>RabbitMQ是一个被广泛使用的开源消息队列。它是轻量级且易于部署的，它能支持多种消息队列。</p>
+<p>RabbitMQ可以部署在分布式和联合配置中，以满足高规模、高可用性的需求</p>
+</blockquote>
+<ul>
+<li>RabbitMQ消息模型</li>
+</ul>
+<p><img src="http://www.macrozheng.com/images/arch_screen_52.png" alt="img"></p>
+<table>
+<thead>
+<tr>
+<th>标志</th>
+<th>中文名</th>
+<th>英文名</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>P</td>
+<td>生产者</td>
+<td>Producer</td>
+<td>消息的发送者，可以将消息发送到交换机</td>
+</tr>
+<tr>
+<td>C</td>
+<td>消费者</td>
+<td>Consumer</td>
+<td>消息的接收者，从队列中获取消息进行消费</td>
+</tr>
+<tr>
+<td>X</td>
+<td>交换机</td>
+<td>Exchange</td>
+<td>接收生产者发送的消息，并根据路由键发送给指定队列</td>
+</tr>
+<tr>
+<td>Q</td>
+<td>队列</td>
+<td>Queue</td>
+<td>存储从交换机发来的消息</td>
+</tr>
+<tr>
+<td>type</td>
+<td>交换机类型</td>
+<td>type</td>
+<td>direct表示直接根据路由键（orange/black）发送消息</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>消息队列应用场景</p>
+<blockquote>
+<p>用于解决用户下单以后，订单超时如何取消订单的问题</p>
+</blockquote>
+<ul>
+<li> 用户进行下单操作（会有锁定商品库存，使用优惠券，积分等一系列操作）</li>
+<li> 生成订单，获取订单的Id</li>
+<li>获取到设置的订单超时时间（假设设置的为60分钟不支付取消订单）</li>
+<li>按订单超时时间发送一个延迟消息给RabbitMQ，让它在订单超时后触发取消订单的操作；</li>
+<li>如果用户没有支付，进行取消订单的操作（释放锁定商品库存，返还优惠券，积分等一系列操作）</li>
+</ul>
+</li>
+</ul>
+<h2 id="整合OSS实现文件上传"><a href="#整合OSS实现文件上传" class="headerlink" title="整合OSS实现文件上传"></a>整合OSS实现文件上传</h2><blockquote>
+<p>mall整合OSS实现文件上传的过程，采用的是服务端签名，后前端直传的方式</p>
+</blockquote>
+<h3 id="1-整合流程-4"><a href="#1-整合流程-4" class="headerlink" title="1. 整合流程"></a>1. 整合流程</h3><h4 id="1"><a href="#1" class="headerlink" title="1."></a>1.</h4><h3 id="2-框架介绍-4"><a href="#2-框架介绍-4" class="headerlink" title="2. 框架介绍"></a>2. 框架介绍</h3><ul>
+<li>OSS</li>
+</ul>
+<blockquote>
+<p>阿里云对象存储服务（Object Storage Service 简称OSS）,是阿里云提供的海量，安全，低成本，高可靠的云存储服务。OSS可用于文件，音视频，日志等海量数据的存储。各种终端设备，Web网站程序，移动应用可以直接向OSS中写入或读取数据。</p>
+</blockquote>
+<ul>
+<li>OSS中相关概念</li>
+</ul>
+<blockquote>
+<p>EndPoint: 访问域名，通过该域名可以访问OSS服务的API，进行文件上传、下载等操作</p>
+<p>Bucket：存储空间，是存储对象的容器，所有存储对象都必须隶属于某个存储空间</p>
+<p>Object：对象，对象是OSS存储数据的基本单元，也被称为OSS的文件</p>
+<p>AccessKey：访问密钥，指的是访问身份验证中用到AccessKeyId和AccessKeySecret</p>
+</blockquote>
+<ul>
+<li>服务端签名前后端直传的相关说明</li>
+</ul>
+<img src="http://www.macrozheng.com/images/arch_screen_85.png" alt="img" style="zoom:80%;">
+
+<p><strong>流程介绍</strong></p>
+<ol>
+<li>Web前端请求应用服务器，获取上传所需参数（如OSS的accessKeyId、policy、callback等参数）</li>
+<li>应用服务器返回相关参数</li>
+<li>Web前端直接向OSS服务发起上传文件请求</li>
+<li>等上传完成后OSS服务会回调应用服务器的回调接口</li>
+<li>应用服务器返回响应给OSS服务</li>
+<li>OSS服务将应用服务器回调接口的内容返回给Web前端</li>
+</ol>
 
     </div>
 
@@ -328,6 +701,13 @@
 
 
         
+    <div class="post-nav">
+      <div class="post-nav-item"></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/16/Java%E5%9F%BA%E7%A1%80/" rel="next" title="Java基础">
+      Java基础 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
       </footer>
     
   </article>
@@ -385,7 +765,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BASpringboot-Mybatis%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">搭建Springboot + Mybatis基本框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Swagger-UI"><span class="nav-number">2.</span> <span class="nav-text">整合Swagger-UI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Redis%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">整合Redis问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-RedisTemplate%E5%92%8CStringRedisTemplate%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.1.</span> <span class="nav-text">1.RedisTemplate和StringRedisTemplate的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88SpringSecurity%E5%92%8CJWT"><span class="nav-number">4.</span> <span class="nav-text">整合SpringSecurity和JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFSpringSecurity%E5%92%8CJWT"><span class="nav-number">4.1.</span> <span class="nav-text">1. 什么是SpringSecurity和JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B0%88%E8%B0%88JWT"><span class="nav-number">4.2.</span> <span class="nav-text">2. 谈谈JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%A0%E7%BB%9F%E7%9A%84session%E8%AE%A4%E8%AF%81"><span class="nav-number">4.2.1.</span> <span class="nav-text">传统的session认证</span></a></li></ol></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BASpringboot-Mybatis%E5%9F%BA%E6%9C%AC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">搭建Springboot + Mybatis基本框架</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E7%9A%84%E6%B5%81%E7%A8%8B"><span class="nav-number">1.1.</span> <span class="nav-text">1.整合的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="nav-number">1.2.</span> <span class="nav-text">2. 逆向工程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3"><span class="nav-number">1.3.</span> <span class="nav-text">3. 常用注解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-RequestParam%E5%92%8C-RequestBody%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">1.3.1.</span> <span class="nav-text">1. @RequestParam和@RequestBody的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-ResponseBody%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">1.3.2.</span> <span class="nav-text">2. @ResponseBody的作用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Swagger-UI"><span class="nav-number">2.</span> <span class="nav-text">整合Swagger-UI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E7%9A%84%E6%B5%81%E7%A8%8B-1"><span class="nav-number">2.1.</span> <span class="nav-text">1. 整合的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%B3%A8%E8%A7%A3%E8%A7%A3%E9%87%8A"><span class="nav-number">2.2.</span> <span class="nav-text">2. 注解解释</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Redis%E9%97%AE%E9%A2%98"><span class="nav-number">3.</span> <span class="nav-text">整合Redis问题</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E7%9A%84%E6%B5%81%E7%A8%8B-2"><span class="nav-number">3.1.</span> <span class="nav-text">1. 整合的流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-RedisTemplate%E5%92%8CStringRedisTemplate%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="nav-number">3.2.</span> <span class="nav-text">2.RedisTemplate和StringRedisTemplate的区别</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88SpringSecurity%E5%92%8CJWT"><span class="nav-number">4.</span> <span class="nav-text">整合SpringSecurity和JWT</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E4%BB%80%E4%B9%88%E6%98%AFSpringSecurity%E5%92%8CJWT"><span class="nav-number">4.1.</span> <span class="nav-text">1. 什么是SpringSecurity和JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E8%B0%88%E8%B0%88JWT"><span class="nav-number">4.2.</span> <span class="nav-text">2. 谈谈JWT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-SpringSecurity%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.3.</span> <span class="nav-text">3. SpringSecurity的使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-JWT%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">4.4.</span> <span class="nav-text">4. JWT的使用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88SpringTask%E5%AE%9E%E7%8E%B0%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">5.</span> <span class="nav-text">整合SpringTask实现定时任务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B"><span class="nav-number">5.1.</span> <span class="nav-text">1. 整合流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0SpringTask%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="nav-number">5.1.1.</span> <span class="nav-text">1. 添加SpringTask的配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E7%B1%BB%E6%9D%A5%E6%89%A7%E8%A1%8C%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="nav-number">5.1.2.</span> <span class="nav-text">2. 添加类来执行定时任务</span></a></li><li class="nav-item nav-level-4"><a class="nav-link"><span class="nav-number">5.1.3.</span> <span class="nav-text"></span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D"><span class="nav-number">5.2.</span> <span class="nav-text">2. 框架介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Elasticsearch"><span class="nav-number">6.</span> <span class="nav-text">整合Elasticsearch</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B-1"><span class="nav-number">6.1.</span> <span class="nav-text">1. 整合流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%BC%95%E5%85%A5%E4%BE%9D%E8%B5%96"><span class="nav-number">6.1.1.</span> <span class="nav-text">1. 引入依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9SpringBoot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">6.1.2.</span> <span class="nav-text">2. 修改SpringBoot配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0%E5%95%86%E5%93%81%E6%96%87%E6%A1%A3%E5%AF%B9%E8%B1%A1EsProduct"><span class="nav-number">6.1.3.</span> <span class="nav-text">3. 添加商品文档对象EsProduct</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D-1"><span class="nav-number">6.2.</span> <span class="nav-text">2. 框架介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3-1"><span class="nav-number">6.3.</span> <span class="nav-text">3. 常用注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88Mongodb%E5%AE%9E%E7%8E%B0%E6%96%87%E6%A1%A3%E6%93%8D%E4%BD%9C"><span class="nav-number">7.</span> <span class="nav-text">整合Mongodb实现文档操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B-2"><span class="nav-number">7.1.</span> <span class="nav-text">1. 整合流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96"><span class="nav-number">7.1.1.</span> <span class="nav-text">1. 添加依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">7.1.2.</span> <span class="nav-text">2. 添加配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0%E5%AF%B9%E8%B1%A1%EF%BC%8CService%EF%BC%8CController"><span class="nav-number">7.1.3.</span> <span class="nav-text">3. 添加对象，Service，Controller</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D-2"><span class="nav-number">7.2.</span> <span class="nav-text">2. 框架介绍</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%B8%B8%E7%94%A8%E6%B3%A8%E8%A7%A3-2"><span class="nav-number">7.3.</span> <span class="nav-text">3. 常用注解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88RabbitMQ%E5%AE%9E%E7%8E%B0%E5%BB%B6%E8%BF%9F%E6%B6%88%E6%81%AF"><span class="nav-number">8.</span> <span class="nav-text">整合RabbitMQ实现延迟消息</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B-3"><span class="nav-number">8.1.</span> <span class="nav-text">1. 整合流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E6%B7%BB%E5%8A%A0%E7%9B%B8%E5%85%B3%E4%BE%9D%E8%B5%96"><span class="nav-number">8.1.1.</span> <span class="nav-text">1. 添加相关依赖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E4%BF%AE%E6%94%B9Springboot%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="nav-number">8.1.2.</span> <span class="nav-text">2. 修改Springboot配置文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E6%B7%BB%E5%8A%A0%E6%9E%9A%E4%B8%BE%E9%85%8D%E7%BD%AE%E7%B1%BB%E5%92%8CRabbitMQ%E9%85%8D%E7%BD%AE"><span class="nav-number">8.1.3.</span> <span class="nav-text">3. 添加枚举配置类和RabbitMQ配置</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D-3"><span class="nav-number">8.2.</span> <span class="nav-text">2. 框架介绍</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%B4%E5%90%88OSS%E5%AE%9E%E7%8E%B0%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="nav-number">9.</span> <span class="nav-text">整合OSS实现文件上传</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E6%95%B4%E5%90%88%E6%B5%81%E7%A8%8B-4"><span class="nav-number">9.1.</span> <span class="nav-text">1. 整合流程</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1"><span class="nav-number">9.1.1.</span> <span class="nav-text">1.</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E6%A1%86%E6%9E%B6%E4%BB%8B%E7%BB%8D-4"><span class="nav-number">9.2.</span> <span class="nav-text">2. 框架介绍</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -399,20 +779,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">1</span>
+          <span class="site-state-item-count">11</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -448,12 +828,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">1k</span>
+    <span title="站点总字数">95k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">1 分钟</span>
+    <span title="站点阅读时长">1:26</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
