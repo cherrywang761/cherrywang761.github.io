@@ -1238,7 +1238,15 @@
 <h5 id="LinkedList"><a href="#LinkedList" class="headerlink" title="LinkedList"></a>LinkedList</h5><p><code>LinkedList</code>是一个实现了<code>List</code>接口和<code>Deque</code>接口的双向链表。</p>
 <p><strong><code>LinkedList</code>底层的链表结构使它支持高效的插入和删除操作</strong></p>
 <p><strong>它实现了<code>Deque</code>接口，使得<code>LinkedList</code>类也具有队列的特性;</strong></p>
-<h4 id="5"><a href="#5" class="headerlink" title="5."></a>5.</h4>]]></content>
+<h3 id="5-继承封装多态"><a href="#5-继承封装多态" class="headerlink" title="5. 继承封装多态"></a>5. 继承封装多态</h3><p>继承</p>
+<p>封装</p>
+<p>多态</p>
+<ol>
+<li><p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210328181206316.png" alt="image-20210328181206316"></p>
+</li>
+</ol>
+<p>2. </p>
+]]></content>
       <categories>
         <category>java</category>
         <category>基础知识</category>
@@ -1612,17 +1620,6 @@
       <tags>
         <tag>框架</tag>
         <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>guli-shop高级篇</title>
-    <url>/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%87/</url>
-    <content><![CDATA[<a id="more"></a>]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>项目</tag>
       </tags>
   </entry>
   <entry>
@@ -2875,6 +2872,1567 @@
 <li>创建一个远程服务调用接口</li>
 </ol>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@FeignClient("gulimall-product")</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">ProductFeignService</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * feign有两种写法</span></span><br><span class="line"><span class="comment">     * /api/product/skuinfo/info/{skuId}</span></span><br><span class="line"><span class="comment">     * /product/skuinfo/info/{skuId}</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 1. 让所有请求过网关</span></span><br><span class="line"><span class="comment">     *      1）<span class="doctag">@FeignClient</span>("gulimall-gateway")  给gulimall-gateway所在的机器发请求</span></span><br><span class="line"><span class="comment">     *      2）/api/product/skuinfo/info/{skuId}</span></span><br><span class="line"><span class="comment">     *</span></span><br><span class="line"><span class="comment">     * 2. 不过网关，直接让后台指定服务处理</span></span><br><span class="line"><span class="comment">     *      1）<span class="doctag">@FeignClient</span>("gulimall-product")  给gulimall-product所在的机器发请求</span></span><br><span class="line"><span class="comment">     *      2) /product/skuinfo/info/{skuId}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping("/product/skuinfo/info/{skuId}")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> R <span class="title">info</span><span class="params">(<span class="meta">@PathVariable("skuId")</span> Long skuId)</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SpringMVC理解</title>
+    <url>/2021/03/12/SpringMVC%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>谈一谈对SpringMVC的认识？</p>
+<a id="more"></a>
+
+<ul>
+<li>概念</li>
+</ul>
+<p>SpringMVC是一个轻量级的开源框架，主要应用于表现层，是基于MVC架构设计的。</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>SpringMVC是单例的，可以设置成多例子</li>
+<li>线程安全</li>
+<li>方法级别的拦截</li>
+<li>接收请求参数的方式是参数绑定。</li>
+<li>携带参数到页面是通过request对象。</li>
+</ol>
+<ul>
+<li><strong>SpringMVC流程</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>apache calcite学习</title>
+    <url>/2021/03/16/apache-calcite%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h3 id="Calcite前言简介"><a href="#Calcite前言简介" class="headerlink" title="Calcite前言简介"></a>Calcite前言简介</h3><p>Apache Calcite是一个动态数据管理的框架</p>
+<p>它能对各种数据库（不同数据源）的查询进行封装，对外提供查询入口。</p>
+<a id="more"></a>
+
+<p>默认不指定数据库配置信息时，Calcite是基于Linq4j进行操作的，利用Linq4j进行groupBy和Join</p>
+<p>如果将</p>
+<blockquote>
+<p>Schema可以理解为database，只不过calcite有另外的一种叫法）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Schema schema = ReflectiveSchema.create(calciteConnection, rootSchema, <span class="string">"hr"</span>, <span class="keyword">new</span> HrSchema());</span><br></pre></td></tr></tbody></table></figure>
+<p>替换成：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">BasicDataSource dataSource = <span class="keyword">new</span> BasicDataSource();</span><br><span class="line">dataSource.setUrl(<span class="string">"jdbc:mysql://localhost"</span>);</span><br><span class="line">dataSource.setUsername(<span class="string">"username"</span>);</span><br><span class="line">dataSource.setPassword(<span class="string">"password"</span>);</span><br><span class="line">Schema schema = JdbcSchema.create(rootSchema, <span class="string">"hr"</span>, dataSource, <span class="keyword">null</span>, <span class="string">"name"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>那么calcite将会使用jdbc进行同样的查询</p>
+<p>尽管数据和api都是一样的，但是背后的实现是完全不同的。</p>
+<p>Calcite是使用<strong>优化器规则</strong>将Join和GroupBy推送到源数据库的。</p>
+<p><strong>Calcite可以适配所有的数据源和数据格式，如果想要添加一种数据源，就需要编写一个适配器，告知Calcite该数据源中的哪些集合在逻辑上可以被认为是“表”。</strong></p>
+<p>Calcite工程的/example/csv目录中的子项目中提供了一个CSV适配器，这个适配器可完全应用在实际的应用中，但是它又是足够的简单以至于能够作为一个案例提供给你，供你自己编写适配器做参考。</p>
+<p>后面会详细说怎么编写适配器</p>
+<h4 id="Calcite的功能"><a href="#Calcite的功能" class="headerlink" title="Calcite的功能"></a>Calcite的功能</h4><ul>
+<li>查询解析,校验,优化</li>
+<li>从json文件中中创建模型</li>
+<li>支持大多数标准函数和聚合函数</li>
+<li>Linq4j front-end</li>
+<li>支持SQL功能</li>
+<li>本地或者远程JDBC,使用Avatica实现</li>
+<li>支持适配器</li>
+</ul>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>本节主要介绍一个CSV适配器怎么一步步创建和连接到Calcite</p>
+<p>适配器能够将一个目录下的csv文件表现成一个包装各种表的Schema</p>
+<p>CSV可以作为构建适配器到其他数据格式的模板，有几个重要的概念：</p>
+<ul>
+<li><p>通过SchemaFactory和Schema接口自定义schema</p>
+</li>
+<li><p>用json模型文件描述schema</p>
+</li>
+<li><p>用json模型文件描述视图view</p>
+</li>
+<li><p>通过表接口自定义表</p>
+</li>
+<li><p>确定表的记录类型</p>
+</li>
+<li><p>创建一个表的简单方法是使<code>ScannableTable</code>接口直接列举所有行</p>
+</li>
+<li><p>创建一个表的更高级方法是实现<code>FilterableTable</code>接口，并且能够根据一些简单的判断来进行过滤</p>
+</li>
+<li><p>创建一个表的高级方法是使用<code>TranslatableTable</code>类，这个类能够将规划规则转换为关系操作符</p>
+</li>
+</ul>
+<blockquote>
+<p>一些对calcite客户端进行操作的流程在这省略，详情见官网（其实就是我进不去。。）</p>
+<p><a href="https://calcite.apache.org/docs/tutorial.html#download-and-build">https://calcite.apache.org/docs/tutorial.html#download-and-build</a></p>
+</blockquote>
+<h4 id="calcite怎么找到表的？"><a href="#calcite怎么找到表的？" class="headerlink" title="calcite怎么找到表的？"></a>calcite怎么找到表的？</h4><p>calcite可以看做是不包含存储层的数据库，所以它其实不需要关系任何文件格式。</p>
+<p>calcite的执行链条有很多步骤：</p>
+<ol>
+<li>基于在model文件中定义的Schema工厂类定义了一个<a href="https://calcite.apache.org/javadocAggregate/org/apache/calcite/schema/Schema.html">Schema</a></li>
+<li>schema工厂创建一个schema，并且这个schema创建多张表，每张表都知道如何扫描csv文件获取数据</li>
+<li>calcite解析了查询语句并创建了执行计划来使用这些表</li>
+<li>在执行查询中，calcite利用表来读取数据</li>
+</ol>
+<blockquote>
+<p>用JDBC来举个例子</p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">#JSON格式的模型路径</span><br><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'SALES',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'SALES',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',</span><br><span class="line">      operand: {</span><br><span class="line">        directory: 'target/test-classes/sales'</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面的模型定义了一个SALES的schema，是由org.apache.calcite.adapter.csv.CsvSchemaFactory提供的</p>
+<p>这个插件类是calcite-example-csv项目的一部分并且实现了<a href="https://calcite.apache.org/javadocAggregate/org/apache/calcite/schema/SchemaFactory.html">SchemaFactory</a>接口。</p>
+<p>Schema的create方法可以用来实例化一个模式，从模型文件传入目录参数:</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Schema <span class="title">create</span><span class="params">(SchemaPlus parentSchema, String name,</span></span></span><br><span class="line"><span class="function"><span class="params">    Map&lt;String, Object&gt; operand)</span> </span>{</span><br><span class="line">  String directory = (String) operand.get(<span class="string">"directory"</span>);	<span class="comment">//文件目录地址</span></span><br><span class="line">  String flavorName = (String) operand.get(<span class="string">"flavor"</span>);	<span class="comment">//falvor是查询规则</span></span><br><span class="line">  CsvTable.Flavor flavor;</span><br><span class="line">  <span class="keyword">if</span> (flavorName == <span class="keyword">null</span>) {		</span><br><span class="line">    flavor = CsvTable.Flavor.SCANNABLE;</span><br><span class="line">  } <span class="keyword">else</span> {</span><br><span class="line">    flavor = CsvTable.Flavor.valueOf(flavorName.toUpperCase());</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CsvSchema(		<span class="comment">//感兴趣可以去看一下CsvSchema的getTableMap()方法</span></span><br><span class="line">      <span class="keyword">new</span> File(directory),</span><br><span class="line">      flavor);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>schema扫描模型文件中定义的目录并且根据以.csv || .csv.gz 结尾的文件创建对应的表</p>
+<p>它可以从directory目录中读取到EMPS.csv和DEPTS.csv，并根据这两个csv文件生成EMPS和DEPTS表</p>
+<h4 id="calcite中的视图"><a href="#calcite中的视图" class="headerlink" title="calcite中的视图"></a>calcite中的视图</h4><p>视图其实就是一条取了名字的查询语句，它是一个虚拟表，存储的是查询后的数据</p>
+<p>下面是定义了一个视图的schema：</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'SALES',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'SALES',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',</span><br><span class="line">      operand: {</span><br><span class="line">        directory: 'target/test-classes/sales'</span><br><span class="line">      },</span><br><span class="line">      tables: [</span><br><span class="line">        {</span><br><span class="line">          name: 'FEMALE_EMPS',</span><br><span class="line">          type: 'view',		#定义类型为视图view</span><br><span class="line">          sql: 'SELECT * FROM emps WHERE gender = \'F\''	#json单引号用反斜杠转义</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Calcite自定义表"><a href="#Calcite自定义表" class="headerlink" title="Calcite自定义表"></a>Calcite自定义表</h4><blockquote>
+<p>准备一个.csv || .csv.gz结尾的表文件，编写一个适配器如下</p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'CUSTOM_TABLE',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'CUSTOM_TABLE',</span><br><span class="line">      tables: [</span><br><span class="line">        {</span><br><span class="line">          name: 'EMPS',</span><br><span class="line">          type: 'custom',</span><br><span class="line">          factory: 'org.apache.calcite.adapter.csv.CsvTableFactory',</span><br><span class="line">          operand: {</span><br><span class="line">            file: 'target/test-classes/sales/EMPS.csv.gz',</span><br><span class="line">            flavor: "scannable"</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这是一个常规的schema，并且包含了一个由<code>org.apache.calcite.adapter.csv.CsvTableFactory</code>支持的自定义表，它实现了Calcite的接口<code>TableFactory</code>，它的<code>create</code>方法实例化一个<code>CsvScannableTable</code>，传入来自模型文件的<code>file</code>参数：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">public CsvTable create(SchemaPlus schema, String name,</span><br><span class="line">    Map&lt;String, Object&gt; map, RelDataType rowType) {</span><br><span class="line">  String fileName = (String) map.get("file");</span><br><span class="line">  final File file = new File(fileName);</span><br><span class="line">  final RelProtoDataType protoRowType =</span><br><span class="line">      rowType != null ? RelDataTypeImpl.proto(rowType) : null;</span><br><span class="line">  return new CsvScannableTable(file, protoRowType);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>实现自定义的表比实现自定义模式更简单，虽然都创建了相似的Table接口实现，但自定义表不需要实现元数据的发现。</p>
+<h4 id="执行计划优化查询"><a href="#执行计划优化查询" class="headerlink" title="执行计划优化查询"></a>执行计划优化查询</h4><p>Calcite支持通过添加查询计划规则来优化查询。</p>
+<h2 id="优化器？-todo"><a href="#优化器？-todo" class="headerlink" title="优化器？//todo"></a>优化器？//todo</h2><h4 id="简述查询优化过程"><a href="#简述查询优化过程" class="headerlink" title="简述查询优化过程"></a>简述查询优化过程</h4><blockquote>
+<p>Calcite的查询计划非常巧妙</p>
+</blockquote>
+<ol>
+<li><p>Calcite并没有按照规定的顺序去触发规则，查询优化过程会尝试分枝树中很多分支</p>
+<p>如果规则A和规则B都符合查询运算符树中的给定部分，Calcite会同时触发他们。</p>
+</li>
+<li><p>Calcite会用”成本”来筛选计划，但是成本模型不会阻止Calcite选择短期内成本更昂贵的计划（可能长远来说成本会更平滑低廉，<code>括号内容我猜的嘻嘻</code>）</p>
+</li>
+<li><blockquote>
+<p>很多优化器都会有一个线性优化方案。在面对选择规则A或者规则B时，如上所述，这样的优化器需要立即选择。一般的优化器可能会有这样的策略，例如”将规则A应用于整棵树，然后将规则B应用于整棵树”，或者基于成本的策略，使用成本更便宜的结果的规则。</p>
+<p>其实这些做法是一种妥协，但是Calcite并没有这么做，这使得组合各种规则变得简单。如果你想要将规则组合在一起以识别具有规则的物化视图从而能够从csv或者jdbc源系统中读取数据的话，你只需要将Calcite设置为所有规则的集合并告知她即可。</p>
+<p>Calcite使用了一个成本模型。这个成本模型决定哪个计划最终得到执行，并且有时候会对搜索树进行剪纸操作以防止搜索空间爆炸，但是它不会强制你在规则A还是B之间做出选择。这个非常重要，因为这能避免实际上并不是最佳的搜索空间中陷入局部极小值。</p>
+<p>这个成本模型也是”可插拔”的，就像它基于的表和查询运算符统计一样。这个会在后面讲到。</p>
+<p>(不理解等学会了回来。。)</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="JDBC适配器"><a href="#JDBC适配器" class="headerlink" title="JDBC适配器"></a>JDBC适配器</h4>   <figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'FOODMART',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'FOODMART',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory',</span><br><span class="line">      operand: {</span><br><span class="line">        jdbcDriver: 'com.mysql.jdbc.Driver',</span><br><span class="line">        jdbcUrl: 'jdbc:mysql://localhost/foodmart',</span><br><span class="line">        jdbcUser: 'foodmart',</span><br><span class="line">        jdbcPassword: 'foodmart'</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>   限制：JDBC适配器目前只能下推表扫描的操作；所有的其他的操作（过滤，链接，聚合等等）都没有发生在Calcite中。如果Calcite查询是建立在单一的JDBC数据库中的表上，原则上整个查询应该都转到数据库中执行。如果数据表是来自于多个JDBC源，或者是JDBC和非JDBC的混合源，Calcite将使用最有效的分布式查询方法。</p>
+]]></content>
+      <categories>
+        <category>大数据</category>
+        <category>面试</category>
+        <category>学习记录</category>
+      </categories>
+      <tags>
+        <tag>apache_calcite</tag>
+        <tag>SQL</tag>
+        <tag>java</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hadoop学习笔记</title>
+    <url>/2021/03/15/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>OS问题通俗版</title>
+    <url>/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h2 id="1-操作系统概念"><a href="#1-操作系统概念" class="headerlink" title="1. 操作系统概念"></a>1. 操作系统概念</h2><p>OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死）</p>
+<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>内核决定程序在什么时候对硬件操作多久</p>
+<p>内核其实就是完成了对硬件的抽象，给一些硬件API让你调</p>
+<p>这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。</p>
+<ol>
+<li><p><strong>内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。</strong></p>
+</li>
+<li><p><strong>内核连接硬件和程序的桥梁，决定OS的性能和稳定性。</strong></p>
+</li>
+</ol>
+<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ol>
+<li>cpu是运算核心（core）+控制核心（Control Unit），可以称之为计算机的大脑</li>
+<li>CPU主要包括控制器+运算器</li>
+<li>CPU根本任务是执行指令，一串串0，1序列</li>
+</ol>
+<h3 id="CPU与Kernel"><a href="#CPU与Kernel" class="headerlink" title="CPU与Kernel"></a>CPU与Kernel</h3><p><img src="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png" alt="操作系统的基本概念"></p>
+<ol>
+<li>Kernel属于OS层面，CPU属于硬件层面</li>
+<li>CPU提供运算，处理各种指令，Kernel屏蔽了对硬件的操作，提供四种管理。</li>
+</ol>
+<h2 id="2-同步异步，阻塞非阻塞"><a href="#2-同步异步，阻塞非阻塞" class="headerlink" title="2. 同步异步，阻塞非阻塞"></a>2. 同步异步，阻塞非阻塞</h2><h3 id="2-1-同步异步"><a href="#2-1-同步异步" class="headerlink" title="2.1 同步异步"></a>2.1 同步异步</h3><p>同步和异步关注的是<strong>消息通信机制</strong> (synchronous communication/ asynchronous communication)</p>
+<p>同步：就是在发出一个调用时，在没有得到结果之前，该调用就不返回。（一直等直到要到值为止）<br>换句话说，就是由<strong>调用者</strong>主动等待这个调用的结果。(等到它返回值为止)</p>
+<p>异步：调用在发出之后，这个调用就直接返回了，所以没有返回结果。</p>
+<p>换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在<em>调用</em>发出后，<em>被调用者</em>通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
+<p>区别：<strong>调用者</strong>需不需要等待处理结果，<strong>被调用者</strong>是否会有回调等机制通知调用者返回结果（针对于被调用者）</p>
+<p>举例：打电话问书店老板有没有《操作系统》这本书，如果是同步通信机制，老板会说<strong>你等等，我查一下</strong></p>
+<p>如果是异步通信机制，老板会说你等等，我查一下等会告诉你，<strong>然后把电话挂了</strong></p>
+<h3 id="2-2-阻塞非阻塞"><a href="#2-2-阻塞非阻塞" class="headerlink" title="2.2 阻塞非阻塞"></a>2.2 阻塞非阻塞</h3><p>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></p>
+<p>阻塞：阻塞就是发起一个请求，调用者一直等待请求结果返回，当前线程挂起</p>
+<p>非阻塞：非阻塞就是发起一个请求，被调用者不用一直等待结果返回。</p>
+<p>你打电话问书店老板有没有《分布式系统》这本书，你如果是阻塞式调用，你会一直把自己“挂起”，直到得到这本书有没有的结果，如果是非阻塞式调用，你不管老板有没有告诉你，你自己先一边去玩了， 当然你也要偶尔过几分钟check一下老板有没有返回结果。</p>
+<h2 id="3-BIO-AIO-NIO"><a href="#3-BIO-AIO-NIO" class="headerlink" title="3. BIO,AIO,NIO"></a>3. BIO,AIO,NIO</h2><p>先了解一下套接字的概念：</p>
+<p>套接字（socket）：操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。</p>
+<p>Socket(套接字)可以看成是两个网络应用程序进行通信时，各自通信连接中的端点。</p>
+<p>socket 的表现方式  <strong>IP:端口</strong></p>
+<h3 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h3><p>同步阻塞的IO模型</p>
+<p>一连接一线程，有连接请求就要启动一个线程来处理，</p>
+<p>​    客户端发送请求后，先咨询服务端是否有线程相应，如果没有则会一直等待或者遭到拒绝请求</p>
+<p>​    如果有的话，客户端会线程会等待请求结束后才继续执行。</p>
+<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步阻塞.gif"></p>
+<p>线程不必要开销问题可以通过线程池改善</p>
+<p><strong>select的好处是它可以同时监听多个句柄，提高并发量</strong></p>
+<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>同步非阻塞IO模型</p>
+<p>一个请求一个线程</p>
+<p><img src="http://images2015.cnblogs.com/blog/37237/201512/37237-20151222220329015-207666376.png" alt="img"></p>
+<p>​    NIO就是，当一个连接创建后，不需要对应一个线程，该连接会被注册到多路复用器上，所以的连接只需要一个线程就可以搞定</p>
+<p>​    当这个线程中的多路复用器进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式。</p>
+<p>​    适合连接数多且连接短。</p>
+<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\同步非阻塞.gif"></p>
+<h3 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h3><p>异步非阻塞IO模型</p>
+<p>一个有效请求一个线程</p>
+<p>客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理</p>
+<p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了<strong>，程序没有进行实际的读写</strong></p>
+<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步非阻塞.gif"></p>
+<p>三种IO的使用场景</p>
+<ul>
+<li>BIO方式适用于<strong>连接数目比较小且固定的架构</strong>，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</li>
+<li>NIO方式适用于<strong>连接数目多且连接比较短（轻操作）的架构</strong>，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</li>
+<li>AIO方式使用于<strong>连接数目多且连接比较长（重操作）的架构</strong>，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
+</ul>
+<h2 id="4-操作系统基本特性"><a href="#4-操作系统基本特性" class="headerlink" title="4. 操作系统基本特性"></a>4. 操作系统基本特性</h2><h3 id="并发性"><a href="#并发性" class="headerlink" title="并发性"></a>并发性</h3><ul>
+<li>并发图</li>
+</ul>
+<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并发图.webp"></p>
+<p>多个事件<strong>在同一时间间隔内发生</strong>（宏观上是并发的，微观串行）</p>
+<ul>
+<li>并行图</li>
+</ul>
+<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并行图.webp"></p>
+<p>多个事件<strong>在同一时刻发生</strong></p>
+<p>并行需要硬件支持，多核驱动啊什么的CPU</p>
+<h3 id="共享性"><a href="#共享性" class="headerlink" title="共享性"></a>共享性</h3><p>系统资源可供系统多个并发进程共同使用（资源共享）</p>
+<ul>
+<li>互斥共享方式（互斥锁，独占资源，比如说打印机）</li>
+<li>同时访问方式（磁盘）</li>
+</ul>
+<h3 id="虚拟性"><a href="#虚拟性" class="headerlink" title="虚拟性"></a>虚拟性</h3><p>虚拟技术把一个物理实体转换为多个逻辑实体</p>
+<p>两种技术：时分复用、空分复用</p>
+<p>空分复用：虚拟技术把物理内存抽象为地址空间，进程拥有各自的地址空间，地址空间的页被映射到物理内存中，当用到一个没有在物理内存的页，会执行页面置换算法，将该也置换到内存中。</p>
+<p>时分复用：时间片轮转法</p>
+<h3 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h3><p>在多道程序环境下允许多个进程并发执行，但只有进程在获得所需的资源后方能执行。</p>
+<h2 id="5-用户态系统态"><a href="#5-用户态系统态" class="headerlink" title="5. 用户态系统态"></a>5. 用户态系统态</h2><p>根据进程访问资源的特点，可分为两个级别：</p>
+<ul>
+<li>用户态：用户态运行的程序可以直接读取用户程序的数据</li>
+<li>系统态：几乎可以访问计算机的任何资源</li>
+</ul>
+<p>一般程序都是在用户态，如果要调用系统资源就需要系统调用</p>
+<ul>
+<li>为什么划分两态？</li>
+</ul>
+<blockquote>
+<p>因为有些指令是十分危险的，如果使用不当，可能造成程序崩溃</p>
+</blockquote>
+<h3 id="用户态切换到内存态的方式"><a href="#用户态切换到内存态的方式" class="headerlink" title="用户态切换到内存态的方式"></a>用户态切换到内存态的方式</h3><ol>
+<li>系统调用</li>
+</ol>
+<blockquote>
+<p>系统调用是OS为应用程序提供能够访问到内核态的资源接口</p>
+</blockquote>
+<ol start="2">
+<li>异常</li>
+</ol>
+<blockquote>
+<p>CPU执行程序时，发生了某些不可知的异常。于是程序进入到处理该异常的内核程序中</p>
+</blockquote>
+<ol start="3">
+<li>硬件设备的中断</li>
+</ol>
+<blockquote>
+<p>硬件完成用户请求后会发送中断给CPU，CPU会暂停执行下一条指令，转而执行与中断信号对应的应用程序。转换过程涉及到用户态到内核态的转换</p>
+</blockquote>
+<h2 id="6-程序进程协程"><a href="#6-程序进程协程" class="headerlink" title="6. 程序进程协程"></a>6. 程序进程协程</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>是系统资源分配和调度的基本单位</p>
+<p>是程序的一次执行过程，是系统运行程序的基本单位</p>
+<p>系统运行一个程序就是一个进程从创建，运行到消亡的过程</p>
+<p>程序段，相关的数据段和PCB三部分便构成了进程实体。</p>
+<blockquote>
+<p>PCB:进程控制块，一般在内存中，所谓的进程的创建和销毁都是对PCB的操作。（动态特征的集中反映）</p>
+</blockquote>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>线程是比进程更小的一个单位，是独立调度和分派的基本单位</p>
+<p>一个进程在其执行过程可以产生多个线程</p>
+<p>引入线程的原因是为了减少程序在并发执行过程中的时空开销</p>
+<h3 id="线程进程区别"><a href="#线程进程区别" class="headerlink" title="线程进程区别"></a>线程进程区别</h3><ol>
+<li><p>同类的线程共享进程的堆和方法区资源。但是线程本身有程序计数器，虚拟机栈，本地方法栈。所以线程在上下文切换的开销小</p>
+</li>
+<li><p>进程是独立的，同一进程内的线程可能互相干扰。</p>
+</li>
+<li><p>进程是OS的范畴，可以并发，线程更像是并行；线程执行开销小，不利于资源的管理和保护。</p>
+</li>
+<li><p>线程内可以通过读写进程内数据进行通信，进程通信需要依靠IPC</p>
+</li>
+</ol>
+<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p><strong>本质上是一种用户态的轻量级线程</strong></p>
+<p>线程==内核态线程</p>
+<p>协程==用户态线程</p>
+<p>协程和线程关系</p>
+<p>N:1    N个线程绑定一个协程</p>
+<p>1:1    </p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/</url>
+    <content><![CDATA[<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。</p>
+<p>db主要是承担数据的落盘工作</p>
+<p><strong>哪些数据适合放入缓存？</strong></p>
+<ul>
+<li>即时性、数据一致性不高的数据</li>
+<li>访问量大且更新频率不高的数据（读多写少）</li>
+</ul>
+<a id="more"></a>
+
+<p>举例：电商类应用，商品分类，商品列表等适合缓存并加一个失效时间，</p>
+<p>因为这些数据并不是会经常更新且数据一致性要求并不高的数据。</p>
+<h4 id="本地缓存"><a href="#本地缓存" class="headerlink" title="本地缓存"></a>本地缓存</h4><p>本地缓存又称为服务器缓存，存储于服务端的缓存</p>
+<p>与客户端缓存反向代理缓存不同，本地缓存主要用于存储一些常用的数据</p>
+<p>每个请求进入服务端获取数据都要进行一系列的计算以及数据库操作，加了缓存之后，请求进如服务端之后先查找缓存，缓存中有需要的数据就直接返回，否则才去进行计算，并记录缓存，优点就是使数据库与服务器压力降低。</p>
+<p>缺点就是分布式的时候会有数据一致性的问题。<strong>（分布式的情况下不应该使用本地缓存）</strong></p>
+<h3 id="整合Redis"><a href="#整合Redis" class="headerlink" title="整合Redis"></a>整合Redis</h3><ul>
+<li>导入依赖</li>
+</ul>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>配置Redis配置文件</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">redis:</span></span><br><span class="line">    <span class="attr">host:</span> <span class="number">192.168</span><span class="number">.56</span><span class="number">.10</span></span><br><span class="line">    <span class="attr">port:</span> <span class="number">6379</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>使用SpringBoot自动配置好的StringRedisTemplate来操作redis</li>
+</ul>
+<ul>
+<li>测试一下</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Autowired</span></span><br><span class="line">StringRedisTemplate stringRedisTemplate;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">teststringRedisTemplate</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="comment">//往redis添加key-value:hello world</span></span><br><span class="line">    ValueOperations&lt;String, String&gt; ops = stringRedisTemplate.opsForValue();</span><br><span class="line">    <span class="comment">//保存</span></span><br><span class="line">    ops.set(<span class="string">"hello"</span>, <span class="string">"world"</span> + UUID.randomUUID().toString());</span><br><span class="line">    <span class="comment">//查询</span></span><br><span class="line">    String hello = ops.get(<span class="string">"hello"</span>);</span><br><span class="line">    System.out.println(<span class="string">"之前保存的数据："</span> + hello);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210303165127489.png" alt="image-20210303165127489" style="zoom:50%;">
+
+
+
+<h4 id="三级分类加缓存"><a href="#三级分类加缓存" class="headerlink" title="三级分类加缓存"></a>三级分类加缓存</h4><ol>
+<li>将原本的查询方法重命名为 <code>getCatelogJsonFromDb()</code><strong>从数据库查询并封装整个分类数据</strong></li>
+<li>编写getCatelogJson()的业务逻辑</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, List&lt;Catelog2Vo&gt;&gt; getCatelogJson() {</span><br><span class="line">    <span class="comment">//给缓存中放json字符串，拿出的json字符串，还要逆转为能用的对象类型【序列化与反序列化】</span></span><br><span class="line">    <span class="comment">//加入缓存逻辑，缓存中存的数据是json字符串</span></span><br><span class="line">    <span class="comment">//JSON是跨语言跨平台的兼容的</span></span><br><span class="line">    String catelogJSON = redisTemplate.opsForValue().get(<span class="string">"catelogJSON"</span>);</span><br><span class="line">    <span class="keyword">if</span>(StringUtils.isEmpty(catelogJSON)){</span><br><span class="line">        <span class="comment">//缓存中没有数据</span></span><br><span class="line">        Map&lt;String, List&lt;Catelog2Vo&gt;&gt; catelogJsonFromDb = getCatelogJsonFromDb();</span><br><span class="line">        <span class="comment">//查到的数据再放入缓存,将对象转为JSON放到redis中</span></span><br><span class="line">        String jsonString = JSON.toJSONString(catelogJsonFromDb);</span><br><span class="line">        redisTemplate.opsForValue().set(<span class="string">"catelogJSON"</span>, jsonString);</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//缓存中的json对象转为指定的对象</span></span><br><span class="line">    Map&lt;String, List&lt;Catelog2Vo&gt;&gt; result = </span><br><span class="line">            JSON.parseObject(catelogJSON, <span class="keyword">new</span> TypeReference&lt;Map&lt;String, List&lt;Catelog2Vo&gt;&gt;&gt;(){});</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="redis堆外内存溢出bug"><a href="#redis堆外内存溢出bug" class="headerlink" title="redis堆外内存溢出bug"></a>redis堆外内存溢出bug</h5><p>当进行压力测试时后期后出现堆外内存溢出<code>OutOfDirectMemoryError</code></p>
+<blockquote>
+<p>产生原因</p>
+</blockquote>
+<p>1)、springboot2.0以后默认使用lettuce作为操作redis的客户端，它使用netty进行网络通信</p>
+<p>2)、lettuce的bug导致netty堆外内存溢出。netty如果没有指定堆外内存，默认使用Xms的值，可以使用-Dio.netty.maxDirectMemory进行设置</p>
+<p>解决方案：由于是lettuce的bug造成，不能直接使用-Dio.netty.maxDirectMemory去调大虚拟机堆外内存，治标不治本。</p>
+<p>1)、升级lettuce客户端。但是没有解决的<br>2)、切换使用jedis</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-data-redis&lt;/artifactId&gt;</span><br><span class="line">    &lt;exclusions&gt;</span><br><span class="line">        &lt;exclusion&gt;</span><br><span class="line">            &lt;groupId&gt;io.lettuce&lt;/groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;lettuce-core&lt;/artifactId&gt;</span><br><span class="line">        &lt;/exclusion&gt;</span><br><span class="line">    &lt;/exclusions&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;redis.clients&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;jedis&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="缓存失效的问题"><a href="#缓存失效的问题" class="headerlink" title="缓存失效的问题"></a>缓存失效的问题</h4><h5 id="缓存穿透"><a href="#缓存穿透" class="headerlink" title="缓存穿透"></a>缓存穿透</h5><p>缓存穿透是指缓存和数据库中都没有的数据，而用户不断发起请求，如发起为id为“-1”的数据或id为特别大不存在的数据。这时的用户很可能是攻击者，攻击会导致数据库压力过大。</p>
+<p>解决：缓存空对象、布隆过滤器、mvc拦截器</p>
+<h5 id="缓存雪崩"><a href="#缓存雪崩" class="headerlink" title="缓存雪崩"></a>缓存雪崩</h5><p>缓存雪崩是指在我们设置缓存时key采用了相同的过期时间，导致缓存在某一时刻同时失效，请求全部转发到DB，DB瞬时压力过重雪崩。</p>
+<p>解决方案：</p>
+<p>规避雪崩：缓存数据的过期时间设置随机，防止同一时间大量数据过期现象发生。<br>如果缓存数据库是分布式部署，将热点数据均匀分布在不同缓存数据库中。<br>设置热点数据永远不过期。</p>
+<p>出现雪崩：<strong>降级 熔断</strong><br>事前：尽量保证整个 redis 集群的高可用性，发现机器宕机尽快补上。选择合适的内存淘汰策略。<br>事中：本地ehcache缓存 + hystrix限流&amp;降级，避免MySQL崩掉<br>事后：利用 redis 持久化机制保存的数据尽快恢复缓存</p>
+<h5 id="缓存击穿"><a href="#缓存击穿" class="headerlink" title="缓存击穿"></a>缓存击穿</h5><p>缓存雪崩和缓存击穿不同的是：</p>
+<p>缓存击穿 指 并发查同一条数据。缓存击穿是指缓存中没有但数据库中有的数据（一般是缓存时间到期），这时由于并发用户特别多，同时读缓存没读到数据，又同时去数据库去取数据，引起数据库压力瞬间增大，造成过大压力<br>缓存雪崩是不同数据都过期了，很多数据都查不到从而查数据库。<br>解决方案：</p>
+<ol>
+<li>设置热点数据永远不过期。</li>
+<li>加互斥锁：业界比较常用的做法，是使用mutex。简单地来说，就是在缓存失效的时候（判断拿出来的值为空），不是立即去load db去数据库加载，而是先使用缓存工具的某些带成功操作返回值的操作（比如Redis的SETNX或者Memcache的ADD）去set一个mutex key，当操作返回成功时，再进行load db的操作并回设缓存；否则，就重试整个get缓存的方法</li>
+</ol>
+<img src="https://img-blog.csdnimg.cn/img_convert/4de06a06f282444c4399add9dd75ba12.png" alt="img" style="zoom:150%;">
+
+<p>本地锁会出现<strong>锁-时序问题</strong>：第一个线程set数据到缓存，但是IO交互是需要时间的，其他线程拿到锁发现现在缓存还是没有数据，然后取竞争锁查数据库，这样就造成多次查数据库。</p>
+<p>解决方法：竞争到锁后，再次确认缓存中没有，再去查数据库。</p>
+<ul>
+<li>如何复制微服务：</li>
+</ul>
+<blockquote>
+<p>右键点击服务，copy configuration</p>
+<p>在<code>program arguments: --server.port=10003</code></p>
+</blockquote>
+<h3 id="分布式缓存"><a href="#分布式缓存" class="headerlink" title="分布式缓存"></a>分布式缓存</h3><p>本地缓存问题：每个微服务都要有缓存服务、数据更新时只更新自己的缓存，造成<strong>缓存数据不一致</strong></p>
+<p>解决方案：分布式缓存，微服务共用缓存中间件</p>
+<h4 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h4><blockquote>
+<p>分布式项目时，但本地锁只能锁住当前服务，需要分布式锁</p>
+</blockquote>
+<p><strong>redis分布式锁的原理：setnx，同一时刻只能设置成功一个</strong></p>
+<p>前提，锁的key是一定的，value可以变, 没获取到锁阻塞或者sleep一会</p>
+<ul>
+<li>设置好了锁，要是服务出现宕机，没有执行删除锁逻辑，这就造成了死锁</li>
+</ul>
+<p>解决：设置锁的过期时间</p>
+<ul>
+<li>业务还没执行完锁就过期了，别人拿到锁，自己执行完去删了别人的锁</li>
+</ul>
+<p>解决：锁续期（redisson有看门狗），。删锁的时候明确是自己的锁。如uuid</p>
+<ul>
+<li>判断uuid对了，但是将要删除的时候锁过期了，别人设置了新值，那删除了别人的锁</li>
+</ul>
+<p>解决：删除锁必须保证原子性（保证判断和删锁是原子的）。使用redis+Lua脚本完成，脚本是原子的</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> redis.call(<span class="string">"get"</span>,KEYS[<span class="number">1</span>]) == ARGV[<span class="number">1</span>] </span><br><span class="line">then</span><br><span class="line">	<span class="keyword">return</span> redis.call(<span class="string">"del"</span>,KEYS[<span class="number">1</span>])</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">end;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>最终代码</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> Map&lt;String, List&lt;Catelog2Vo&gt;&gt; getCatelogJsonFromDbWithRedisLock() {</span><br><span class="line">        <span class="comment">//1. 抢占分布式锁</span></span><br><span class="line">        String uuid = UUID.randomUUID().toString();</span><br><span class="line">        Boolean lock = redisTemplate.opsForValue().setIfAbsent(<span class="string">"lock"</span>, uuid, <span class="number">300</span>, TimeUnit.SECONDS);</span><br><span class="line">        <span class="keyword">if</span>(lock){</span><br><span class="line">            <span class="comment">//加锁成功...执行业务</span></span><br><span class="line">            Map&lt;String, List&lt;Catelog2Vo&gt;&gt; dataFromDB;</span><br><span class="line">            <span class="keyword">try</span>{</span><br><span class="line">                dataFromDB = getDataFromDB();</span><br><span class="line">            }<span class="keyword">finally</span> {</span><br><span class="line">                String script = <span class="string">"if redis.call(\"get\",KEYS[1]) == ARGV[1] then return redis.call(\"del\",KEYS[1]) else return 0 end"</span>;</span><br><span class="line">                <span class="comment">//删除锁</span></span><br><span class="line">                Long lock1 = redisTemplate.execute(<span class="keyword">new</span> DefaultRedisScript&lt;Long&gt;(script, Long.class)</span><br><span class="line">                        , Arrays.asList(<span class="string">"lock"</span>), uuid);</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//获取值对比 + 对比成功删除 = 原子操作  Lua脚本解锁</span></span><br><span class="line"><span class="comment">//            String lockValue = redisTemplate.opsForValue().get("lock");</span></span><br><span class="line"><span class="comment">//            if(uuid.equals(lockValue)){</span></span><br><span class="line"><span class="comment">//                //删除我自己的锁</span></span><br><span class="line"><span class="comment">//                redisTemplate.delete("lock");       //删除锁</span></span><br><span class="line"><span class="comment">//            }</span></span><br><span class="line">            <span class="keyword">return</span> dataFromDB;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="comment">//加锁失败...重试。synchronized()</span></span><br><span class="line">            <span class="comment">//休眠100ms重试</span></span><br><span class="line">            <span class="keyword">try</span>{</span><br><span class="line">                Thread.sleep(<span class="number">200</span>);</span><br><span class="line">            }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">                </span><br><span class="line">            }</span><br><span class="line">            <span class="keyword">return</span> getCatelogJsonFromDbWithRedisLock(); <span class="comment">//自旋的方式</span></span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>上面的lua脚本写法每次用分布式锁时比较麻烦，我们可以采用redisson现有框架</p>
+<h3 id="Redisson"><a href="#Redisson" class="headerlink" title="Redisson"></a>Redisson</h3><blockquote>
+<p><a href="https://github.com/redisson/redisson">https://github.com/redisson/redisson</a></p>
+</blockquote>
+<p>以后使用redisson作为所有分布式锁，分布式对象等功能框架</p>
+<ul>
+<li>导入依赖</li>
+</ul>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.redisson&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;redisson&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;3.13.4&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>配置文件目录</p>
+<p><a href="https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95">https://github.com/redisson/redisson/wiki/2.-%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95</a></p>
+</blockquote>
+<ul>
+<li>创建配置类MyRedissonConfig</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyRedissonConfig</span> </span>{</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// redission通过redissonClient对象使用</span></span><br><span class="line">    <span class="comment">// 如果是多个redis集群，可以配置</span></span><br><span class="line">    <span class="meta">@Bean(destroyMethod = "shutdown")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RedissonClient <span class="title">redisson</span><span class="params">()</span> </span>{</span><br><span class="line">        Config config = <span class="keyword">new</span> Config();</span><br><span class="line">        <span class="comment">// 创建单节点模式的配置</span></span><br><span class="line">        config.useSingleServer()</span><br><span class="line">            .setAddress(<span class="string">"redis://47.112.148.165:6379"</span>)</span><br><span class="line">            .setPingConnectionInterval(<span class="number">1000</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//根据Config创建出RedissionClient实例</span></span><br><span class="line">        <span class="keyword">return</span> Redisson.create(config);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="可重入锁"><a href="#可重入锁" class="headerlink" title="可重入锁"></a>可重入锁</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">RLock lock = redisson.getLock(<span class="string">"my-lock"</span>);</span><br><span class="line"><span class="comment">// 最常见的使用方法</span></span><br><span class="line">lock.lock();</span><br><span class="line"><span class="comment">//1. 锁的自动续期，如果业务超长，运行期间自动给锁续上30s。不用担心业务时间长锁自动过期被删掉</span></span><br><span class="line"><span class="comment">//2. 加锁的业务只要完成，就不会给当前锁续期，即使不手动解锁，锁默认在30s后自动删除</span></span><br><span class="line">lock.lock(<span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line"><span class="comment">//3. 自动解锁时间一定要大于业务执行时间</span></span><br><span class="line"><span class="comment">//4. 规定了过期时间的话，就会发送给redis执行lua脚本,Redission就不会有自动续期的机制</span></span><br><span class="line"><span class="comment">//5. 只要占锁成功，就会启动一个定时任务[重新给锁设置过期时间，新的过期时间就是看门狗的过期时间]</span></span><br><span class="line"><span class="comment">// 重新续期的时间是internalLockLeaseTime[看门狗时间]/3，  10s重新续一次期</span></span><br><span class="line">lock.trylock(<span class="number">100</span>, <span class="number">10</span>, TimeUnit.SECONDS);</span><br><span class="line"><span class="comment">//尝试加锁，最多等待100秒，上锁以后10秒自动解锁</span></span><br></pre></td></tr></tbody></table></figure>
+<p>看门狗的检查锁的超时时间是30秒钟，也可以通过修改Config.lockWatchdogTimeout来另行指定。</p>
+<h5 id="读写锁"><a href="#读写锁" class="headerlink" title="读写锁"></a>读写锁</h5><blockquote>
+<p>保证一定能读到最新数据，修改期间，写锁是一个排他锁（互斥锁）。该锁是一个共享锁</p>
+<p>写锁没释放，读锁就必须等待</p>
+<p>读+读    ：相当于无锁，并发读，只会在redis中记录好，所有当前的读锁。他们都会加锁成功</p>
+<p>写+读    ：等待写锁释放</p>
+<p>写+写    ：阻塞状态</p>
+<p>读+写    ：有读锁。写也需要等待</p>
+</blockquote>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">@GetMapping("/write")</span><br><span class="line">@ResponseBody</span><br><span class="line">public String writeValue(){</span><br><span class="line">    String s = "";</span><br><span class="line">    RReadWriteLock rwLock = redissonClient.getReadWriteLock("rw-lock");</span><br><span class="line">    RLock rLock = rwLock.writeLock();</span><br><span class="line">    try {</span><br><span class="line">        //改数据加写锁，读数据加读锁</span><br><span class="line">        rLock.lock();</span><br><span class="line">        s = UUID.randomUUID().toString();</span><br><span class="line">        Thread.sleep(30000);</span><br><span class="line">        redisTemplate.opsForValue().set("writeValue", s);</span><br><span class="line">    } catch (InterruptedException e) {</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    } finally {</span><br><span class="line">        rLock.unlock();</span><br><span class="line">    }</span><br><span class="line">    return s;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">@GetMapping("/read")</span><br><span class="line">@ResponseBody</span><br><span class="line">public String readValue(){</span><br><span class="line">    RReadWriteLock rwLock = redissonClient.getReadWriteLock("rw-lock");</span><br><span class="line">    RLock rLock = rwLock.readLock();</span><br><span class="line">    String s = "";</span><br><span class="line">    try {</span><br><span class="line">        rLock.lock();</span><br><span class="line">        s = redisTemplate.opsForValue().get("writeValue");</span><br><span class="line">    } catch (Exception e) {</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    } finally {</span><br><span class="line">        rLock.unlock();</span><br><span class="line">    }</span><br><span class="line">    return s;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="分布式信号量"><a href="#分布式信号量" class="headerlink" title="分布式信号量"></a>分布式信号量</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/** Redis分布式信号量</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@Description</span> 模拟一个车库停车的场景，在Redis中设置park为3（set park 3）</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="meta">@GetMapping("/park")</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">park</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>{</span><br><span class="line">        RSemaphore park = redissonClient.getSemaphore(<span class="string">"park"</span>);</span><br><span class="line"><span class="comment">//        park.acquire(); //获取一个信号，获取一个值,占一个车位</span></span><br><span class="line">        <span class="comment">//每park一次，get(park) - 1;只能park三次，三次后park就阻塞了</span></span><br><span class="line">        <span class="comment">//分布式信号量可以用来做限流操作，先去获取信号量，</span></span><br><span class="line">        <span class="comment">//获取的到就说明有空余线程进行操作，获取不到就要等别的线程释放才能进行操作</span></span><br><span class="line">        </span><br><span class="line">        park.tryAcquire();</span><br><span class="line">        <span class="comment">// acquire()阻塞式等待 , tryAcquire()是尝试性等待</span></span><br><span class="line">        <span class="comment">//限流的时候就可以使用tryAcquire()</span></span><br><span class="line">        <span class="comment">//if(b){//执行业务} else{//返回一个限流的处理方案（错误提示啊） }</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@GetMapping("/go")</span></span><br><span class="line">    <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">go</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>{</span><br><span class="line">        RSemaphore park = redissonClient.getSemaphore(<span class="string">"park"</span>);</span><br><span class="line">        park.release(); <span class="comment">//释放一个信号，释放一个车位</span></span><br><span class="line">        <span class="keyword">return</span> <span class="string">"ok"</span>;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="闭锁（CountDownLatch）"><a href="#闭锁（CountDownLatch）" class="headerlink" title="闭锁（CountDownLatch）"></a>闭锁（CountDownLatch）</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">放假，锁门</span></span><br><span class="line"><span class="comment">1班没人了，wait..</span></span><br><span class="line"><span class="comment">5个班都走完了，可以锁大门</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@GetMapping("/lockDoor")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">lockDoor</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>{</span><br><span class="line">    RCountDownLatch door = redissonClient.getCountDownLatch(<span class="string">"door"</span>);</span><br><span class="line">    door.trySetCount(<span class="number">5</span>);</span><br><span class="line">    <span class="comment">//等待5个班的人都走完</span></span><br><span class="line">    System.out.println(<span class="string">"准备锁门。。。"</span>);</span><br><span class="line">    door.await();   <span class="comment">//等待闭锁都完成</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"锁门了。。"</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="meta">@GetMapping("/gogogo/{id}")</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">gogogo</span><span class="params">(<span class="meta">@PathVariable("id")</span>Long id)</span></span>{</span><br><span class="line">    RCountDownLatch door = redissonClient.getCountDownLatch(<span class="string">"door"</span>);</span><br><span class="line">    door.countDown();   <span class="comment">//技术减一</span></span><br><span class="line">    System.out.println(<span class="string">"走了"</span> + id + <span class="string">"班"</span>);</span><br><span class="line">    <span class="keyword">return</span> id+<span class="string">"班的人都走了"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="缓存一致性问题"><a href="#缓存一致性问题" class="headerlink" title="缓存一致性问题"></a>缓存一致性问题</h4><p>解决缓存一致性问题的方法：</p>
+<ul>
+<li><p>双写模式：写数据库后，写缓存</p>
+<ul>
+<li>问题：并发时，2写进入，写完DB后都写缓存。有暂时的脏数据</li>
+</ul>
+</li>
+<li><p>失效模式：写完数据库后，删缓存</p>
+<ul>
+<li>问题：写数据到DB过程中，有新线程读缓存并更新缓存的话可能有旧缓存存在</li>
+</ul>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210306152350330.png" alt="image-20210306152350330" style="zoom:50%;">
+
+<ul>
+<li>解决：缓存设置过期时间，定期更新</li>
+<li>解决：写数据写时，加分布式的读写锁。</li>
+</ul>
+</li>
+</ul>
+<p><strong>无论是双写模式还是失效模式，都会导致缓存的一致性问题。即多个实例同时更新会出事，怎么办？</strong></p>
+<ul>
+<li><p>如果是用户纬度数据（订单数据、用户数据），这种并发几率非常小，不用考虑这个问题，缓存数据加上过期时间，每隔一段时间触发读的主动更新即可</p>
+</li>
+<li><p>如果是菜单，商品介绍等基础数据，也可以去使用canal订阅binlog的方式</p>
+</li>
+<li><p>缓存数据+过期时间也足够解决大部分业务对于缓存的要求。</p>
+</li>
+<li><p>通过加锁保证并发读写，写写的时候按顺序排好队。读读无所谓。所以适合使用读写锁。（业务不关心脏数据，允许临时脏数据可忽略）；</p>
+</li>
+</ul>
+<p><strong>总结：</strong></p>
+<ul>
+<li>我们能放入缓存的数据本就不应该是实时性、一致性要求超高的。所以缓存数据的时候加上过期时间，保证每天拿到当前最新数据即可。</li>
+<li>我们不应该过度设计，增加系统的复杂性</li>
+<li>遇到实时性、一致性要求高的数据，就应该查数据库，即使慢点。</li>
+</ul>
+<h5 id="Canal解决方案（大数据会用）"><a href="#Canal解决方案（大数据会用）" class="headerlink" title="Canal解决方案（大数据会用）"></a>Canal解决方案（大数据会用）</h5><p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210306171606790.png" alt="image-20210306171606790"></p>
+<p>我们的系统一致性解决方案</p>
+<ol>
+<li>缓存的所有数据都有过期时间，数据过期下一次查询触发主动更新</li>
+<li>读写数据的数据，加上分布式的读写锁。（经常写，经常读）</li>
+</ol>
+<h3 id="SpringCache"><a href="#SpringCache" class="headerlink" title="SpringCache"></a>SpringCache</h3><p>Spring提供的缓存抽象层，我们可以使用SpringCache简化开发。</p>
+<p>每次调用需要缓存功能的方法时，spring会检查检查指定参数的指定的目标方法是否已经被调用过；</p>
+<p>如果有就直接从缓存中获取方法调用后的结果，如果没有就调用方法并缓存结果后返回给用户。下次调用直接从缓存中获取。</p>
+<blockquote>
+<p>使用Spring缓存抽象时我们需要关注以下两点：</p>
+</blockquote>
+<ol>
+<li>确定方法需要缓存以及他们的缓存策略</li>
+<li>从缓存中读取之前缓存存储的数据</li>
+</ol>
+<h4 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h4><ul>
+<li>引入依赖</li>
+</ul>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-cache&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>原理</li>
+</ul>
+<ol>
+<li>CacheAutoConfiguration会导入RedisCacheConfiguration</li>
+<li>自动配好了缓存管理器（RedisCacheMangement）</li>
+<li>RedisCacheMangement要初始化所有的缓存，每个缓存决定使用什么配置<ul>
+<li>如果redisCacheConfiguration有就用已有的，没有就用默认配置</li>
+<li>想改缓存的配置，只需要给容器中放一个RedisCacheConfiguration即可</li>
+<li>就会应用到当前RedisCacheManager管理所有缓存分区中</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>写配置</li>
+</ul>
+<figure class="highlight properties"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">#缓存的类型</span></span><br><span class="line"><span class="meta">spring.cache.type</span>=<span class="string">redis</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#指定redis缓存过期时间1h</span></span><br><span class="line"><span class="meta">spring.cache.redis.time-to-live</span>=<span class="string">3600000</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#缓存增加前缀，这样子前缀是CACHE_的就知道它是缓存了</span></span><br><span class="line"><span class="comment">#如果指定了前缀就用指定的前缀，如果没有指定前缀就默认使用缓存的名字作为前缀</span></span><br><span class="line"><span class="comment">#spring.cache.redis.key-prefix=CACHE_</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#是否缓存空值（解决缓存穿透问题）</span></span><br><span class="line"><span class="meta">spring.cache.redis.cache-null-values</span>=<span class="string">true</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>开启缓存功能</li>
+</ul>
+<p>在Main（）上添加@EnableCaching注解开启缓存的功能</p>
+<h4 id="注解说明"><a href="#注解说明" class="headerlink" title="注解说明"></a>注解说明</h4><table>
+<thead>
+<tr>
+<th>注解</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>@Cacheable</td>
+<td>通常用于配置方法，将方法的返回结果注入到缓存对象中</td>
+</tr>
+<tr>
+<td>@CacheConfig</td>
+<td>用于对类进行配置，对整个类的缓存进行配置，可用 <code>@Cacheable</code>取代</td>
+</tr>
+<tr>
+<td>@CacheEvict</td>
+<td>可用于类或方法，用于清空缓存（可以在一些update方法上加该注解，失效模式）</td>
+</tr>
+<tr>
+<td>@CachePut</td>
+<td>强制执行方法并将返回结果放入缓存，而不是像 <code>@Cacheable</code> 那样首先从缓存中寻找方法返回结果是否存在缓存</td>
+</tr>
+<tr>
+<td>@EnableCaching</td>
+<td>用于SpringBoot的启动类，开启注解功能</td>
+</tr>
+</tbody></table>
+<ul>
+<li>默认的行为</li>
+</ul>
+<ol>
+<li><p>如果缓存中有，方法就不会调用。</p>
+</li>
+<li><p>key默认自动生成，<strong>缓存分区名字::SimpleKey []</strong> (自主生成的key值)</p>
+</li>
+<li><p>缓存的value值：默认使用jdk序列化机制，将序列化后的数据存到redis</p>
+</li>
+<li><p>默认ttl时间-1</p>
+</li>
+</ol>
+<p>自定义：</p>
+<ol>
+<li>指定生成的缓存key</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Cacheable(value = {"category"}, key = "#root.method.name")</span>	<span class="comment">//指定key为方法名</span></span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>指定缓存的数据的存活时间（在配置文件中指定）</li>
+<li>将数据保存为json（在config包中创建MyCacheConfig类）</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@EnableConfigurationProperties(CacheProperties.class)</span></span><br><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@EnableCaching</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyCacheConfig</span> </span>{</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 配置文件中的东西没有用上：</span></span><br><span class="line"><span class="comment">     * 1. 原来和配置文件绑定的配置类是这样子的</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@ConfigurationProperties</span>(prefix = "spring.cache")</span></span><br><span class="line"><span class="comment">     * public class CacheProperties </span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * 2. 要让它生效</span></span><br><span class="line"><span class="comment">     * 加个注解<span class="doctag">@EnableConfigurationProperties</span>,传入CacheProperties，从CacheProperties中get到Redis实例</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function">RedisCacheConfiguration <span class="title">redisCacheConfiguration</span><span class="params">(CacheProperties cacheProperties)</span></span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">//改缓存的默认配置</span></span><br><span class="line">        RedisCacheConfiguration config = RedisCacheConfiguration.defaultCacheConfig();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//改k-v的序列化机制</span></span><br><span class="line">        config = config.serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(<span class="keyword">new</span> StringRedisSerializer()));</span><br><span class="line">        config = config.serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(<span class="keyword">new</span> GenericFastJsonRedisSerializer()));</span><br><span class="line"></span><br><span class="line">        CacheProperties.Redis redisProperties = cacheProperties.getRedis();</span><br><span class="line">        <span class="comment">//将配置文件中的所有东西都拿过来，让它生效</span></span><br><span class="line">        <span class="keyword">if</span> (redisProperties.getTimeToLive() != <span class="keyword">null</span>) {</span><br><span class="line">            config = config.entryTtl(redisProperties.getTimeToLive());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (redisProperties.getKeyPrefix() != <span class="keyword">null</span>) {</span><br><span class="line">            config = config.prefixCacheNameWith(redisProperties.getKeyPrefix());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (!redisProperties.isCacheNullValues()) {</span><br><span class="line">            config = config.disableCachingNullValues();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">if</span> (!redisProperties.isUseKeyPrefix()) {</span><br><span class="line">            config = config.disableKeyPrefix();</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> config;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="CacheEvict"><a href="#CacheEvict" class="headerlink" title="@CacheEvict"></a>@CacheEvict</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* <span class="doctag">@CacheEvict</span> 缓存失效模式</span></span><br><span class="line"><span class="comment"> * 1. 用<span class="doctag">@Caching</span>组合多种缓存操作</span></span><br><span class="line"><span class="comment"> * //    <span class="doctag">@Caching</span>(evict = {</span></span><br><span class="line"><span class="comment"> * //            <span class="doctag">@CacheEvict</span>(value = "category", key = "'getLevel1Categories'"),</span></span><br><span class="line"><span class="comment"> * //            <span class="doctag">@CacheEvict</span>(value = "category", key = "'getCatelogJson'")</span></span><br><span class="line"><span class="comment"> * //    })</span></span><br><span class="line"><span class="comment"> * 2. 指定删除某个分区下的所有属性</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@CacheEvict</span>(value = "category", allEntries = true)</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * 所以我们存储同一类型的数据，都可以指定为同一分区（分区名默认就是缓存前缀）</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"></span><br><span class="line"><span class="meta">@CacheEvict(value = "category", allEntries = true)</span></span><br><span class="line"><span class="comment">//@CachePut	//双写模式</span></span><br><span class="line"><span class="meta">@Transactional</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">updateCascade</span><span class="params">(CategoryEntity category)</span> </span>{</span><br><span class="line">    <span class="keyword">this</span>.updateById(category);</span><br><span class="line">    categoryBrandRelationService.updateCategory(category.getCatId(), category.getName());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Spring-Cache的不足"><a href="#Spring-Cache的不足" class="headerlink" title="Spring-Cache的不足"></a>Spring-Cache的不足</h4><ol>
+<li><p>读模式：</p>
+<p>缓存穿透：查询一个null数据。解决：缓存空数据：cache-null-values=true</p>
+<p>缓存击穿：大量并发进来同时查询一个正好过期的数据。解决：加锁， sync = true(加锁解决缓存击穿)</p>
+<p>缓存雪崩：大量的key同时过期。解决：加随机时间。或者设置成热点数据永不过期</p>
+</li>
+</ol>
+<ol start="2">
+<li>写模式：（缓存一致性问题）<ol>
+<li>读写加锁</li>
+<li>引入Canal，感知到MySQL的更新去更新数据库</li>
+<li>读多写多，直接取DB查询就行</li>
+</ol>
+</li>
+</ol>
+<p>总结：</p>
+<p>​    常规数据（读多写少，即时性，一致性要求不高的数据）：完全可以使用SpringCache，写模式（只要缓存的数据有过期时间就足够了）</p>
+<p>​    特殊数据：特殊数据</p>
+<h3 id="商品检索服务"><a href="#商品检索服务" class="headerlink" title="商品检索服务"></a>商品检索服务</h3><ul>
+<li><p>gulimall-search导入thymeleaf依赖</p>
+<blockquote>
+<p>templates下导入index.html</p>
+<ul>
+<li>index.html中导入thymeleaf的名称空间</li>
+<li>href=”替换成href=”/static/search/(所有的静态资源都加上static/search前缀)</li>
+</ul>
+</blockquote>
+</li>
+<li><p>将静态资源放到nginx中</p>
+</li>
+<li><p>在SwitchHosts中给search服务配置一个域名</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">#gulimall-search</span></span><br><span class="line">192.169.17.1 search.gulimall.com</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置网关路由规则</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">id:</span> <span class="string">gulimall_search_route</span></span><br><span class="line">  <span class="comment">#lb：表示负载均衡</span></span><br><span class="line">  <span class="attr">uri:</span> <span class="string">lb://gulimall-search</span></span><br><span class="line">  <span class="attr">predicates:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Host=search.gulimall.com</span></span><br></pre></td></tr></tbody></table></figure>
+<p>Tips1：首页匹配规则改成gulimall.com</p>
+<p>Tips2：search必须要注册到nacos中，并注册到注册中心</p>
+<h4 id="搜索页面环境调整"><a href="#搜索页面环境调整" class="headerlink" title="搜索页面环境调整"></a>搜索页面环境调整</h4><ul>
+<li>引入devtools</li>
+<li>关闭thymeleaf的缓存</li>
+</ul>
+<ol>
+<li>改商城首页跳转</li>
+</ol>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210308220050102.png" alt="image-20210308220050102" style="zoom:50%;">
+
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210308220116716.png" alt="image-20210308220116716" style="zoom:50%;">
+
+<p>Tips:发现nginx并不能有效跳转（修改nginx.conf）</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">listen  80;</span><br><span class="line">server_name  gulimall.com, *.gulimall.com;	//加一个*.gulimall.com</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ol start="2">
+<li><p>首页点击手机能跳转到search页面</p>
+<ul>
+<li>将/template/index.html改成/template/list.html</li>
+<li>建一个SearchController</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping("/list.html")</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">listPage</span><span class="params">()</span></span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"list"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210309221737300.png" alt="image-20210309221737300" style="zoom:50%;"></li>
+<li><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210309221755365.png" alt="image-20210309221755365" style="zoom:50%;"></li>
+<li>catalogLoader.js中把search.gmall.com改成search.gulimall.com</li>
+</ul>
+</li>
+</ol>
+<ol start="3">
+<li>绑定搜索按钮</li>
+</ol>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210310204627916.png" alt="image-20210310204627916" style="zoom:50%;">
+
+
+
+<h4 id="商品检索的条件分析"><a href="#商品检索的条件分析" class="headerlink" title="商品检索的条件分析"></a>商品检索的条件分析</h4><blockquote>
+<ol>
+<li>全文检索: skuTitle -&gt; keyword</li>
+<li>排序： saleCount(销量)、hotScore(热度)、skuPrice(价格)</li>
+<li>过滤：hasStock(是否有货)、skuPrice区间(价格区间)、brandId(品牌Id)、catelog3Id（分类Id）、attrs(属性)</li>
+<li>聚合：attrs（属性）</li>
+</ol>
+</blockquote>
+<h4 id="封装Vo"><a href="#封装Vo" class="headerlink" title="封装Vo"></a>封装Vo</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="comment">//Search用于检索Vo</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchParam</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> String keyword;     <span class="comment">//页面传递过来的全文匹配关键字</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Long catelog3Id;    <span class="comment">//三级分类id</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    sort=saleCount_asc/desc</span></span><br><span class="line"><span class="comment">    sort=hotScore_asc/desc</span></span><br><span class="line"><span class="comment">    sort=skuPrice_asc/desc</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> String sort;    <span class="comment">//排序条件</span></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    过滤条件</span></span><br><span class="line"><span class="comment">    hasStock（是否有货）、skuPrice(价格区间）、</span></span><br><span class="line"><span class="comment">    hasStock=0/1</span></span><br><span class="line"><span class="comment">    skuPrice=1_500/_500/500_</span></span><br><span class="line"><span class="comment">    brandId=1</span></span><br><span class="line"><span class="comment">    attrs=2_5寸：6寸</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> Integer hasStock;  <span class="comment">//是否有货</span></span><br><span class="line">    <span class="keyword">private</span> String skuPrice;    <span class="comment">//价格区间</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Long&gt; brandId;       <span class="comment">//品牌id,允许多选</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">private</span> List&lt;String&gt; attrs;     <span class="comment">//属性</span></span><br><span class="line">    <span class="keyword">private</span> Integer pageNum;    <span class="comment">//页码</span></span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="comment">//返回结果Vo</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SearchResult</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">//查询到的商品信息</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;SkuEsModel&gt; products;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前页码</span></span><br><span class="line">    <span class="keyword">private</span> Integer pageNum;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//总记录数</span></span><br><span class="line">    <span class="keyword">private</span> Long total;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//总页码</span></span><br><span class="line">    <span class="keyword">private</span> Integer totalPage;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前查询到的结果，所有涉及到的品牌</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;BrandVo&gt; brands;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前查询到的结果，所有涉及到的分类</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;BrandVo&gt; catelogs;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//当前查询到的结果，所有涉及到的属性</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;AttrVo&gt; attrs;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//===================以上是返回给页面的所有信息=============</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">BrandVo</span></span>{</span><br><span class="line">        <span class="keyword">private</span> Long brandId;</span><br><span class="line">        <span class="keyword">private</span> String brandName;</span><br><span class="line">        <span class="keyword">private</span> String brandImg;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CatelogVo</span></span>{</span><br><span class="line">        <span class="keyword">private</span> Long catelogId;</span><br><span class="line">        <span class="keyword">private</span> String catelogName;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">AttrVo</span></span>{</span><br><span class="line">        <span class="keyword">private</span> Long attrId;</span><br><span class="line">        <span class="keyword">private</span> String attrName;</span><br><span class="line">        <span class="keyword">private</span> String attrImg;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="检索DSL"><a href="#检索DSL" class="headerlink" title="检索DSL"></a>检索DSL</h4><blockquote>
+<p>DSL包括</p>
+<p>#模糊匹配，过滤（SearchParam的参数过滤），排序，分页，高亮，聚合分析</p>
+<p>#如果是嵌入式的属性，查询，聚合，分析都应该用嵌入式的</p>
+</blockquote>
+<figure class="highlight javascript"><table><tbody><tr><td class="code"><pre><span class="line">GET gulimall_product/_search</span><br><span class="line">{</span><br><span class="line">  <span class="string">"query"</span>: {</span><br><span class="line">    <span class="string">"bool"</span>: {</span><br><span class="line">      <span class="string">"must"</span>: [ {<span class="string">"match"</span>: {  <span class="string">"skuTitle"</span>: <span class="string">"华为"</span> }} ],</span><br><span class="line">      "filter": [	#页面路径传递来的数据进行过滤（SearchParam）</span><br><span class="line">        { <span class="string">"term"</span>: { <span class="string">"catalogId"</span>: <span class="string">"225"</span> } },</span><br><span class="line">        { <span class="string">"terms"</span>: {<span class="string">"brandId"</span>: [ <span class="string">"2"</span>] } }, </span><br><span class="line">        { <span class="string">"term"</span>: { <span class="string">"hasStock"</span>: <span class="string">"false"</span>} },</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"range"</span>: {</span><br><span class="line">            <span class="string">"skuPrice"</span>: {</span><br><span class="line">              <span class="string">"gte"</span>: <span class="number">1000</span>,</span><br><span class="line">              <span class="string">"lte"</span>: <span class="number">7000</span></span><br><span class="line">            }</span><br><span class="line">          }</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">          <span class="string">"nested"</span>: {</span><br><span class="line">            <span class="string">"path"</span>: <span class="string">"attrs"</span>,</span><br><span class="line">            <span class="string">"query"</span>: {</span><br><span class="line">              <span class="string">"bool"</span>: {</span><br><span class="line">                <span class="string">"must"</span>: [</span><br><span class="line">                  {</span><br><span class="line">                    <span class="string">"term"</span>: { <span class="string">"attrs.attrId"</span>: { <span class="string">"value"</span>: <span class="string">"6"</span>} }</span><br><span class="line">                  }</span><br><span class="line">                ]</span><br><span class="line">              }</span><br><span class="line">            }</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="string">"sort"</span>: [ {<span class="string">"skuPrice"</span>: {<span class="string">"order"</span>: <span class="string">"desc"</span> } } ],</span><br><span class="line">  <span class="string">"from"</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="string">"size"</span>: <span class="number">5</span>,</span><br><span class="line">  "highlight": {  	# 高亮</span><br><span class="line">    <span class="string">"fields"</span>: {<span class="string">"skuTitle"</span>: {}},</span><br><span class="line">    <span class="string">"pre_tags"</span>: <span class="string">"&lt;b style='color:red'&gt;"</span>, </span><br><span class="line">    <span class="string">"post_tags"</span>: <span class="string">"&lt;/b&gt;"</span></span><br><span class="line">  },</span><br><span class="line">  #聚合分析</span><br><span class="line">  <span class="string">"aggs"</span>: {</span><br><span class="line">    <span class="string">"brandAgg"</span>: {</span><br><span class="line">      <span class="string">"terms"</span>: {</span><br><span class="line">        <span class="string">"field"</span>: <span class="string">"brandId"</span>,</span><br><span class="line">        <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">      },</span><br><span class="line">      <span class="string">"aggs"</span>: {</span><br><span class="line">        <span class="string">"brandNameAgg"</span>: {</span><br><span class="line">          <span class="string">"terms"</span>: {</span><br><span class="line">            <span class="string">"field"</span>: <span class="string">"brandName"</span>,</span><br><span class="line">            <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">          }</span><br><span class="line">        },</span><br><span class="line">      </span><br><span class="line">        <span class="string">"brandImgAgg"</span>: {</span><br><span class="line">          <span class="string">"terms"</span>: {</span><br><span class="line">            <span class="string">"field"</span>: <span class="string">"brandImg"</span>,</span><br><span class="line">            <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">        </span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"catalogAgg"</span>:{</span><br><span class="line">      <span class="string">"terms"</span>: {</span><br><span class="line">        <span class="string">"field"</span>: <span class="string">"catalogId"</span>,</span><br><span class="line">        <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">      },</span><br><span class="line">      <span class="string">"aggs"</span>: {</span><br><span class="line">        <span class="string">"catalogNameAgg"</span>: {</span><br><span class="line">          <span class="string">"terms"</span>: {</span><br><span class="line">            <span class="string">"field"</span>: <span class="string">"catalogName"</span>,</span><br><span class="line">            <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="string">"attrs"</span>:{</span><br><span class="line">      <span class="string">"nested"</span>: {<span class="string">"path"</span>: <span class="string">"attrs"</span> },</span><br><span class="line">      <span class="string">"aggs"</span>: {</span><br><span class="line">        <span class="string">"attrIdAgg"</span>: {</span><br><span class="line">          <span class="string">"terms"</span>: {</span><br><span class="line">            <span class="string">"field"</span>: <span class="string">"attrs.attrId"</span>,</span><br><span class="line">            <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">          },</span><br><span class="line">          <span class="string">"aggs"</span>: {</span><br><span class="line">            <span class="string">"attrNameAgg"</span>: {</span><br><span class="line">              <span class="string">"terms"</span>: {</span><br><span class="line">                <span class="string">"field"</span>: <span class="string">"attrs.attrName"</span>,</span><br><span class="line">                <span class="string">"size"</span>: <span class="number">10</span></span><br><span class="line">              }</span><br><span class="line">            }</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>Controller层</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping(value = {"/search.html","/"})</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">getSearchPage</span><span class="params">(SearchParam searchParam, </span></span></span><br><span class="line"><span class="function"><span class="params">                            Model model, HttpServletRequest request)</span> </span>{</span><br><span class="line">    searchParam.set_queryString(request.getQueryString());</span><br><span class="line">    SearchResult result=searchService.getSearchResult(searchParam);</span><br><span class="line">    model.addAttribute(<span class="string">"result"</span>, result);</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"search"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Service方法</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>项目</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>guli-shop高级篇1</title>
+    <url>/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%871/</url>
+    <content><![CDATA[<h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><p>Elasticsearch 是一个分布式、可扩展、实时的搜索与数据分析引擎。</p>
+<p> <strong>它能从项目一开始就赋予你的数据以搜索、分析和探索的能力</strong></p>
+<a id="more"></a>
+
+
+
+<h4 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h4><ul>
+<li>index（索引）</li>
+</ul>
+<p>当成动词：相当于Mysql中的insert操作</p>
+<p>当成名词：相当于Mysql中的database</p>
+<ul>
+<li>Type（类型）</li>
+</ul>
+<p>在Index中，可以定义一个或多个类型（Type）</p>
+<p>类似于MYSQL中的Table；每一种类型的数据放在一起</p>
+<ul>
+<li>Document（文档）</li>
+</ul>
+<p>保存在某个索引（index）下，某种类型（Type）的一个数据（Document）</p>
+<p>文档是JSON数据格式的，Document就像是MySQL中的某个Table里面的内容</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210221151402572.png" alt="image-20210221151402572" style="zoom:67%;">
+
+
+
+<p>倒排索引机制</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210221151419462.png" alt="image-20210221151419462" style="zoom:67%;">
+
+<p>比如说，我们往ES中添加保存的记录，ES会维护一张倒排索引表，将记录分词后存放在表中如图所示</p>
+<p>如果检索红海特工行动：</p>
+<p>会先把红海特工行动拆分成单词，会查到12345中都有相关的数据</p>
+<p>此外还会有一个<strong>相关性得分</strong>的机制：</p>
+<p>1235匹配了两个分词，而4只匹配了一个分词，显然1235的相关性更高</p>
+<p>当然，分词进行全文检索的时候，如果每搜索一个单词，就都要全局遍历，效率特别低。</p>
+<p>所以在上面表格的基础上，在左边增加了一层<strong>字典树 term index</strong>，它不存储所有的单词，只存储单词前缀，通过字典书找到单词所在的块，也就是单词的大概位置，再在块里二分查找，找到对应的单词，再找到单词对应的文档列表。</p>
+<p><img src="https://qiniu.xiaoming.net.cn/Lucene%E5%80%92%E6%8E%92%E7%B4%A2%E5%BC%95%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84.jpg" alt="Lucene倒排索引内部结构"></p>
+<h4 id="Docker安装ES"><a href="#Docker安装ES" class="headerlink" title="Docker安装ES"></a>Docker安装ES</h4><h5 id="下载镜像"><a href="#下载镜像" class="headerlink" title="下载镜像"></a>下载镜像</h5><blockquote>
+<p>docker pull elasticsearch:7.4.2        #存储和检索数据</p>
+</blockquote>
+<h5 id="创建实例"><a href="#创建实例" class="headerlink" title="创建实例"></a>创建实例</h5><blockquote>
+<p>mkdir -p /mydata/elasticsearch/config</p>
+<p>mkdir -p /mydata/elasticsearch/data</p>
+<p>echo “http.host: 0.0.0.0” &gt;&gt; /mydata/elasticsearch/config/elasticsearch.yml</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">docker run --name elasticsearch -p 9200:9200 -p 9300:9300 \</span><br><span class="line">-e  <span class="string">"discovery.type=single-node"</span> \</span><br><span class="line">-e ES_JAVA_OPTS=<span class="string">"-Xms64m -Xmx256m"</span> \</span><br><span class="line">-v /mydata/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml \</span><br><span class="line">-v /mydata/elasticsearch/data:/usr/share/elasticsearch/data \</span><br><span class="line">-v  /mydata/elasticsearch/plugins:/usr/share/elasticsearch/plugins \</span><br><span class="line">-d elasticsearch:7.4.2 </span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>Tips：如果报AccessDeniedException的话，要把elasticsearch的文件夹权限改为777</p>
+<blockquote>
+<p>chmod -R 777 /mydata/elasticsearch/</p>
+</blockquote>
+<h4 id="Docker安装Kibana"><a href="#Docker安装Kibana" class="headerlink" title="Docker安装Kibana"></a>Docker安装Kibana</h4><h5 id="下载镜像-1"><a href="#下载镜像-1" class="headerlink" title="下载镜像"></a>下载镜像</h5><blockquote>
+<p>docker pull kibana:7.4.2        #可视化检索数据</p>
+</blockquote>
+<h5 id="创建实例-1"><a href="#创建实例-1" class="headerlink" title="创建实例"></a>创建实例</h5><figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">docker run --name kibana -e ELASTICSEARCH_HOSTS=http://47.112.148.165:9200 -p 5601:5601 -d kibana:7.4.2</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="初步检索"><a href="#初步检索" class="headerlink" title="初步检索"></a>初步检索</h4><h5 id="cat"><a href="#cat" class="headerlink" title="_cat"></a>_cat</h5><blockquote>
+<p>GET /_cat/nodes: 查看所有节点</p>
+<p>GET /_cat/health: 查看es健康状态</p>
+<p>GET /_cat/master: 查看主节点</p>
+<p>GET /_cat/indices: 查看所有索引    show databases;</p>
+</blockquote>
+<h5 id="索引一个文档"><a href="#索引一个文档" class="headerlink" title="索引一个文档"></a>索引一个文档</h5><p>意思就是<strong>保存一个数据</strong></p>
+<p>保存数据，需要知道数据保存在哪个索引的哪个类型下，指定用哪个唯一标识</p>
+<blockquote>
+<p>POST customer/external/1        #在customer索引下的external类型下保存1号元素</p>
+<p>​                                                        发送一个JSON数据</p>
+</blockquote>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210221204246334.png" alt="image-20210221204246334" style="zoom:50%;">
+
+
+
+<p>Tips: PUT和POST都可以发送该请求</p>
+<p><strong>POST新增。如果不指定id，会自动生成id。指定id就会修改这个数据，并新增版本号</strong></p>
+<p><strong>PUT可以新增可以修改。必须指定id，由于PUT需要指定id，我们一般用来做修改操作，不指定id会报错。</strong></p>
+<h5 id="查询文档"><a href="#查询文档" class="headerlink" title="查询文档"></a>查询文档</h5><blockquote>
+<p>GET /customer/external/1</p>
+</blockquote>
+<blockquote>
+<p>{</p>
+<p>  “_index”: “customer”,        //在哪个索引</p>
+<p>  “_type”: “external”,            //在哪个类型</p>
+<p>  “_id”: “1”,                             //记录id</p>
+<p>  “_version”: 1,                      //版本号</p>
+<p>  “_seq_no”: 0,                      //并发控制字段，每次更新就会+1，用来做乐观锁</p>
+<p>  “_primary_term”: 1,          //同上，主分片重新分配，如果重启，就会变化</p>
+<p>  “found”: <strong>true</strong>,</p>
+<p>  “_source”: {                        //真正的内容</p>
+<p>​    “name”: “Cherrywang”</p>
+<p>  }</p>
+<p>}</p>
+</blockquote>
+<p>并发控制字段会跟在地址后面</p>
+<p>/customer/external/1?if_seq_no=0?if_primary_term=1</p>
+<h5 id="更新文档"><a href="#更新文档" class="headerlink" title="更新文档"></a>更新文档</h5><blockquote>
+<p>PUT customer/external/1</p>
+</blockquote>
+<p>Tips: PUT和POST（不带_update）都会直接更新数据，并不会比较两次数据是否相同（版本号会变）</p>
+<p>POST带_update，会比较数据是否相同，相同的话版本号就不会变</p>
+<p>带_update的语句JSON语法要写成</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">    <span class="attr">"doc"</span>:{</span><br><span class="line">        <span class="attr">"name"</span>:<span class="string">"Nonbioclock"</span></span><br><span class="line">    }  </span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="删除操作"><a href="#删除操作" class="headerlink" title="删除操作"></a>删除操作</h5><blockquote>
+<p>DELETE customer/external/1        //删除文档</p>
+<p>DELETE customer                            //删除索引</p>
+</blockquote>
+<h5 id="bulk批量API"><a href="#bulk批量API" class="headerlink" title="bulk批量API"></a>bulk批量API</h5><blockquote>
+<p>POST customer/external/_bulk</p>
+</blockquote>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">{"index":{"id":"1"}}			//我们要索引一条数据，id是1，name是John Doe</span><br><span class="line">{"name":"John Doe"}</span><br><span class="line">{"index":{"id":"2"}}</span><br><span class="line">{"name":"Jane Doe"}</span><br><span class="line">						//这里有个空格，不然Postman测不了</span><br></pre></td></tr></tbody></table></figure>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210221212901366.png" alt="image-20210221212901366" style="zoom:50%;">
+
+
+
+<p><a href="https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json">https://github.com/elastic/elasticsearch/blob/master/docs/src/test/resources/accounts.json</a> 导入测试数据</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210221214603995.png" alt="image-20210221214603995" style="zoom:50%;">
+
+
+
+
+
+<h4 id="search-Api"><a href="#search-Api" class="headerlink" title="search Api"></a>search Api</h4><p>ES支持两种基本方式检索；</p>
+<p><strong>1. 通过REST request uri 发送搜索参数 （uri +检索参数）；</strong></p>
+<p><strong>一切检索从_search开始</strong></p>
+<blockquote>
+<p>GET bank/_search        //检索bank下所有信息，包括type和docs</p>
+<p>GET bank/_search?q=*&amp;sort=account_number:asc    //请求参数方式检索</p>
+<p>//q=*意思是查询所有，sort=account_number:asc 表示按照account_number来升序排列</p>
+<p>// 检索了1000条数据，但是根据相关性算法，只返回10条</p>
+</blockquote>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210222131344856.png" alt="image-20210222131344856" style="zoom:50%;">
+
+<ul>
+<li><code>took</code> – 花费多少ms搜索</li>
+<li><code>timed_out</code> – 是否超时</li>
+<li><code>_shards</code> – 多少分片被搜索了，以及多少成功/失败的搜索分片</li>
+<li><code>max_score</code> –文档相关性最高得分</li>
+<li><code>hits.total.value</code> - 多少匹配文档被找到</li>
+<li><code>hits.sort</code> - 结果的排序key，没有的话按照score排序</li>
+<li><code>hits._score</code> - 相关得分 (not applicable when using <code>match_all</code>)</li>
+</ul>
+<p><strong>2. 通过REST request body 来发送它们（uri+请求体）</strong></p>
+<p>称这种形式为Query DSL</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210222132105004.png" alt="image-20210222132105004" style="zoom:50%;">
+
+<p>match_all    ：表示查询所有</p>
+<h4 id="match匹配查询"><a href="#match匹配查询" class="headerlink" title="match匹配查询"></a>match匹配查询</h4><ul>
+<li>查询基本类型（精确查询）</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"match"</span>: {</span><br><span class="line">      <span class="attr">"account_number"</span>: <span class="string">"20"</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"><span class="comment">//match返回account_number=20的数据</span></span><br></pre></td></tr></tbody></table></figure>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210222135040006.png" alt="image-20210222135040006" style="zoom:50%;">
+
+
+
+<ul>
+<li>查询字符串（模糊匹配）</li>
+</ul>
+<p>全文检索，最终会按照评分进行排序，会对检索条件进行分词匹配。</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"match"</span>: {</span><br><span class="line">      <span class="attr">"address"</span>: <span class="string">"Kings"</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210222134630533.png" alt="image-20210222134630533" style="zoom:50%;">
+
+
+
+<ul>
+<li>短句匹配（match_phrase）</li>
+</ul>
+<p>将需要匹配的值当成一整个单词（不分词）进行检索</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"match_phrase"</span>: {</span><br><span class="line">      <span class="attr">"address"</span>: <span class="string">"mill road"</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"><span class="comment">//这种匹配就是需要字符串都包含这两个单词才能被查出来，而不是像之前只需要包含一个单词就会被检索出来</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>multi_match【多字段匹配】</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"multi_match"</span>: {</span><br><span class="line">      <span class="attr">"query"</span>: <span class="string">"mill"</span>,</span><br><span class="line">      <span class="attr">"fields"</span>: [			<span class="comment">//只要在state或者address中包含mill就可以被检索到</span></span><br><span class="line">        <span class="string">"state"</span>,</span><br><span class="line">        <span class="string">"address"</span>	</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>bool复合查询</li>
+</ul>
+<p>复合语句可以合并，任何其他查询语句，包括符合语句。</p>
+<p>这也就意味着，复合语句之间可以互相嵌套，可以表达非常复杂的逻辑。</p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"bool"</span>: {</span><br><span class="line">      <span class="attr">"must"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="attr">"match"</span>: {</span><br><span class="line">            <span class="attr">"gender"</span>: <span class="string">"M"</span>			<span class="comment">//必须匹配gender=M</span></span><br><span class="line">          }</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">          <span class="attr">"match"</span>: {</span><br><span class="line">            <span class="attr">"address"</span>: <span class="string">"mill"</span>		<span class="comment">//必须匹配address中包含mill的</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"must_not"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="attr">"match"</span>: {</span><br><span class="line">            <span class="attr">"age"</span>: <span class="string">"18"</span>				<span class="comment">//必须不包含age=18</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ],</span><br><span class="line">      <span class="attr">"should"</span>: [</span><br><span class="line">        {</span><br><span class="line">          <span class="attr">"match"</span>: {</span><br><span class="line">            <span class="attr">"lastname"</span>: <span class="string">"Wallace"</span>	<span class="comment">//lastname最好包含wallace</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>must：必须达到must所列举的所有条件</li>
+<li>must_not：必须不匹配must_not所列举的所有条件。</li>
+<li>should：应该满足should所列举的条件。满足条件最好，不满足也可以，满足得分更高</li>
+</ul>
+<ul>
+<li>filter 结果过滤</li>
+</ul>
+<blockquote>
+<p>并不是所有的查询都需要产生分数，特别是哪些仅用于filtering过滤的文档。</p>
+<p>为了不计算分数，elasticsearch会自动检查场景并且优化查询的执行。</p>
+<p>如果只有filter条件的话，我们会发现得分都是0 (must not 也是一个filter条件)</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"bool"</span>: {</span><br><span class="line">      <span class="attr">"filter"</span>: {</span><br><span class="line">        <span class="attr">"range"</span>: {</span><br><span class="line">          <span class="attr">"balance"</span>: {</span><br><span class="line">            <span class="attr">"gte"</span>: <span class="string">"10000"</span>,</span><br><span class="line">            <span class="attr">"lte"</span>: <span class="string">"20000"</span></span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>term</li>
+</ul>
+<p>和match一样。匹配某个属性的值。</p>
+<p><strong>全文检索字段用match，其他非text字段匹配用term。</strong></p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>:{</span><br><span class="line">    <span class="attr">"term"</span>:{</span><br><span class="line">      <span class="attr">"age"</span>: <span class="string">"28"</span>		<span class="comment">//像age这样的int类型字段就可以使用term来检索</span></span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Aggregation（执行聚合）"><a href="#Aggregation（执行聚合）" class="headerlink" title="Aggregation（执行聚合）"></a>Aggregation（执行聚合）</h4><blockquote>
+<p>聚合提供了从数据中分组和提取数据的能力。</p>
+<p>最简单的聚合方法大致等于SQL <code>Group by</code>和SQL<code>聚合函数</code>。</p>
+<p>在elasticsearch中，执行搜索返回this（命中结果），并且同时返回聚合结果，把以响应中的所有hits（命中结果）分隔开的能力。</p>
+<p>这是非常强大且有效的，你可以执行查询和多个聚合，并且在一次使用中得到各自的（任何一个的）返回结果，使用一次简洁和简化的API啦<strong>避免网络往返</strong>。</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>:{</span><br><span class="line">    <span class="attr">"match"</span>:{</span><br><span class="line">      <span class="attr">"address"</span>: <span class="string">"mill"</span>			<span class="comment">//匹配address中有mill的匹配项</span></span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"aggs"</span>: {						<span class="comment">//在上面的查询基础上进行聚合</span></span><br><span class="line">    <span class="attr">"ageAgg"</span>: {					<span class="comment">//给聚合的方法起个名字</span></span><br><span class="line">      <span class="attr">"terms"</span>: {				<span class="comment">//看值的可能性分布</span></span><br><span class="line">        <span class="attr">"field"</span>: <span class="string">"age"</span>,			<span class="comment">//聚合分析年龄</span></span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">10</span>				<span class="comment">//只显示10个数</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">"ageAvg"</span>:{</span><br><span class="line">      <span class="attr">"avg"</span>: {					<span class="comment">//查query结果中age的平均值</span></span><br><span class="line">        <span class="attr">"field"</span>: <span class="string">"age"</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">"balanceAvg"</span>:{</span><br><span class="line">      <span class="attr">"avg"</span>: {					<span class="comment">//查query结果中balance的平均值</span></span><br><span class="line">        <span class="attr">"field"</span>: <span class="string">"balance"</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>复杂子聚合</p>
+<p>查出所有年龄分布，并且这些年龄段中<strong>M的平均薪资和F的平均薪资以及这个年龄段的总体平均薪资</strong></p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>: {</span><br><span class="line">    <span class="attr">"match_all"</span>: {}</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"aggs"</span>: {</span><br><span class="line">    <span class="attr">"ageAgg"</span>: {</span><br><span class="line">      "terms": {  #  看age分布</span><br><span class="line">        "field": "age",</span><br><span class="line">        "size": 100</span><br><span class="line">      },</span><br><span class="line">      "aggs": { # 子聚合</span><br><span class="line">        "genderAgg": {</span><br><span class="line">          "terms": { # 看gender分布</span><br><span class="line">            "field": "gender.keyword" 	#文本字段应该用.keyword</span><br><span class="line">          },</span><br><span class="line">          "aggs": { # 子聚合</span><br><span class="line">            "balanceAvg": {</span><br><span class="line">              "avg": { # 男性的平均</span><br><span class="line">                "field": "balance"</span><br><span class="line">              }</span><br><span class="line">            }</span><br><span class="line">          }</span><br><span class="line">        },</span><br><span class="line">        "ageBalanceAvg": {</span><br><span class="line">          "avg": { #age分布的平均（男女）</span><br><span class="line">            "field": "balance"</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  "size": 0</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Mapping映射"><a href="#Mapping映射" class="headerlink" title="Mapping映射"></a>Mapping映射</h4><blockquote>
+<p>映射定义文档如何被存储检索的</p>
+</blockquote>
+<p><strong>ES6.0后移除了Type类型字样，所有文档都存放在索引下</strong></p>
+<p><strong>所以下面的东西看看就好，了解一下就行了，ES6后就不建议给数据加类型了</strong></p>
+<blockquote>
+<p>查看bank的mapping信息</p>
+<p>GET bank/mapping</p>
+</blockquote>
+<ul>
+<li>创建并指定映射</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">PUT /my_index</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"mappings"</span>: {</span><br><span class="line">    <span class="attr">"properties"</span>: {</span><br><span class="line">      <span class="attr">"age"</span>: {</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"integer"</span></span><br><span class="line">      },</span><br><span class="line">      <span class="attr">"email"</span>: {</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"keyword"</span> # email类型指定为keyword</span><br><span class="line">      },</span><br><span class="line">      <span class="attr">"name"</span>: {</span><br><span class="line">        <span class="attr">"type"</span>: <span class="string">"text"</span> # 全文检索。保存时候分词，检索时候进行分词匹配</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>输出</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"acknowledged"</span> : <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"shards_acknowledged"</span> : <span class="literal">true</span>,</span><br><span class="line">  <span class="attr">"index"</span> : <span class="string">"my_index"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>添加映射</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">PUT /my_index/_mapping</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"properties"</span>: {</span><br><span class="line">    <span class="attr">"employee-id"</span>: {</span><br><span class="line">      <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">      <span class="attr">"index"</span>: <span class="literal">false</span> 		#表示字段不能被检索。只是一个冗余字段</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>更新映射</li>
+</ul>
+<p><strong>对于已经存在的字段映射，我们不能更新。更新必须创建新的索引，进行数据迁移。</strong></p>
+<p><strong>数据迁移</strong></p>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">POST _reindex``//迁移前要把新索引建立好</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"source"</span>:{</span><br><span class="line">      <span class="attr">"index"</span>:<span class="string">"twitter"</span>			<span class="comment">//老索引</span></span><br><span class="line">   },</span><br><span class="line">  <span class="attr">"dest"</span>:{</span><br><span class="line">      <span class="attr">"index"</span>:<span class="string">"new_twitters"</span>	<span class="comment">//搬家到新索引</span></span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h4><p>一个tokenizer（分词器）接收一个字符流，将之分割为独立的<code>tokens</code>（<strong>词元</strong>，通常是独立的单词），然后输出tokens流。</p>
+<p>elasticsearch提供了很多<strong>内置的分词器</strong>（标准分词器），可以用来构建custom analyzers（自定义分词器）。</p>
+<blockquote>
+<p>standard tokenizer标准分词器</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"analyzer"</span>: <span class="string">"standard"</span>,</span><br><span class="line">  <span class="attr">"text"</span>: <span class="string">"The 2 Brown-Foxes bone."</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>结果</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"tokens"</span> : [</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"the"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">3</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"&lt;ALPHANUM&gt;"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">0</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"2"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">4</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"&lt;NUM&gt;"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">1</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"brown"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">6</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">11</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"&lt;ALPHANUM&gt;"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">2</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"foxes"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">12</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">17</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"&lt;ALPHANUM&gt;"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">3</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"bone"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">18</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">22</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"&lt;ALPHANUM&gt;"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">4</span></span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="ik分词器（中文分词器）"><a href="#ik分词器（中文分词器）" class="headerlink" title="ik分词器（中文分词器）"></a>ik分词器（中文分词器）</h5><p>所有的语言分词，默认使用的都是“Standard Analyzer”</p>
+<p>但是这些分词器针对于中文的分词，并不友好。为此需要安装中文的分词器。</p>
+<blockquote>
+<p>ik分词器地址：</p>
+<p><a href="https://github.com/medcl/elasticsearch-analysis-ik/releases">https://github.com/medcl/elasticsearch-analysis-ik/releases</a></p>
+</blockquote>
+<p>在前面安装的elasticsearch时，我们已经将elasticsearch容器的“<code>/usr/share/elasticsearch/plugins</code>”目录，映射到宿主机的“ <code>/mydata/elasticsearch/plugins</code>”目录下</p>
+<p>所以比较方便的做法就是下载“<code>/elasticsearch-analysis-ik-7.4.2.zip</code>”文件，然后<strong>解压到该文件夹</strong>下即可。安装完毕后，需要重启elasticsearch容器。</p>
+<blockquote>
+<p>yum install wget        #安装wget</p>
+<p>wget <a href="https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip">https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v7.4.2/elasticsearch-analysis-ik-7.4.2.zip</a>    #安装ik分词器</p>
+<p>unzip elasticsearch-analysis-ik-7.4.2.zip -d /mydata/elasticsearch/plugins/ik/    #解压</p>
+<p>chmod -R 777 ik/        #改权限</p>
+<p>docker restart elasticsearch        #重启es</p>
+</blockquote>
+<blockquote>
+<p>测试一下ik分词器装好了没有</p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">{</span><br><span class="line">  "analyzer": "ik_smart",		#智能分词</span><br><span class="line">  "text": "我是中国人"			#对这段话进行分词</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>结果</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"tokens"</span> : [</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"我"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"CN_CHAR"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">0</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"是"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"CN_CHAR"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">1</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"中国人"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"CN_WORD"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">2</span></span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>自定义扩展词库</li>
+</ul>
+<blockquote>
+<p>比如我们要将尚硅谷作为一个词</p>
+<p>修改/usr/share/elasticsearch/plugins/ik/config中的IKAnalyzer.cfg.xml</p>
+<p>需要配置nginx进行使用，在/mydata/nginx/html/es中创建fenci.txt</p>
+<p>在里面创建自己想要别匹配的值</p>
+<p><strong>配置好了后要记得重启es</strong></p>
+</blockquote>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="meta-keyword">properties</span> <span class="meta-keyword">SYSTEM</span> <span class="meta-string">"http://java.sun.com/dtd/properties.dtd"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">properties</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">comment</span>&gt;</span>IK Analyzer 扩展配置<span class="tag">&lt;/<span class="name">comment</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--用户可以在这里配置自己的扩展字典 --&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_dict"</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">	 <span class="comment">&lt;!--用户可以在这里配置自己的扩展停止词字典--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"ext_stopwords"</span>&gt;</span><span class="tag">&lt;/<span class="name">entry</span>&gt;</span></span><br><span class="line">	<span class="comment">&lt;!--用户可以在这里配置远程扩展字典 --&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--远程的词库--&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">entry</span> <span class="attr">key</span>=<span class="string">"remote_ext_dict"</span>&gt;</span>http://IP地址/es/fenci.txt<span class="tag">&lt;/<span class="name">entry</span>&gt;</span> </span><br><span class="line">	<span class="comment">&lt;!--用户可以在这里配置远程扩展停止词字典--&gt;</span></span><br><span class="line">	<span class="comment">&lt;!-- &lt;entry key="remote_ext_stopwords"&gt;words_location&lt;/entry&gt; --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">properties</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>测试自定义词库是否生效</li>
+</ul>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">POST _analyze</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"analyzer"</span>: <span class="string">"ik_smart"</span>,</span><br><span class="line">  <span class="attr">"text"</span>: <span class="string">"乔碧萝殿下"</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>结果</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">{</span><br><span class="line">  <span class="attr">"tokens"</span> : [</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"乔碧萝"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">0</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">3</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"CN_WORD"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">0</span></span><br><span class="line">    },</span><br><span class="line">    {</span><br><span class="line">      <span class="attr">"token"</span> : <span class="string">"殿下"</span>,</span><br><span class="line">      <span class="attr">"start_offset"</span> : <span class="number">3</span>,</span><br><span class="line">      <span class="attr">"end_offset"</span> : <span class="number">5</span>,</span><br><span class="line">      <span class="attr">"type"</span> : <span class="string">"CN_WORD"</span>,</span><br><span class="line">      <span class="attr">"position"</span> : <span class="number">1</span></span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h3 id="补充安装nginx"><a href="#补充安装nginx" class="headerlink" title="补充安装nginx"></a>补充安装nginx</h3><ol>
+<li>随便启动一个nginx实例，只是为了复制出配置</li>
+</ol>
+<blockquote>
+<p>docker run -p 80:80 –name nginx -d nginx:1.10</p>
+</blockquote>
+<ol start="2">
+<li>将容器内的配置文件拷贝到当前目录</li>
+</ol>
+<blockquote>
+<p>docker container cp nginx:/etc/nginx .</p>
+</blockquote>
+<ol start="3">
+<li>修改文件名称</li>
+</ol>
+<blockquote>
+<p>mv nginx conf        #把这个conf移动到/mydata/nginx</p>
+</blockquote>
+<ol start="4">
+<li>终止源容器</li>
+</ol>
+<blockquote>
+<p>docker stop nginx</p>
+</blockquote>
+<ol start="5">
+<li>执行命令删除原容器</li>
+</ol>
+<blockquote>
+<p>docker rm nginx</p>
+</blockquote>
+<ol start="6">
+<li>创建新的nginx，执行以下命令</li>
+</ol>
+<blockquote>
+<p>docker run -p 80:80 –name nginx \</p>
+<p>-v /mydata/nginx/html:/usr/share/nginx/html \</p>
+<p>-v /mydata/nginx/logs:/var/log/nginx \</p>
+<p>-v /mydata/nginx/conf:/etc/nginx \</p>
+<p>-d nginx:1.10 </p>
+</blockquote>
+<h3 id="整合ES"><a href="#整合ES" class="headerlink" title="整合ES"></a>整合ES</h3><blockquote>
+<p>ES是一个中间件，在项目中起到全文检索的功能</p>
+</blockquote>
+<p>java操作es有两种方式</p>
+<h4 id="1）9300-TCP"><a href="#1）9300-TCP" class="headerlink" title="1）9300: TCP"></a>1）9300: TCP</h4><ul>
+<li><p>spring-data-elasticsearch:transport-api.jar;</p>
+<ul>
+<li>springboot版本不同，ransport-api.jar不同，不能适配es版本</li>
+<li>7.x已经不建议使用，8以后就要废弃</li>
+</ul>
+</li>
+</ul>
+<h4 id="2）9200-HTTP"><a href="#2）9200-HTTP" class="headerlink" title="2）9200: HTTP"></a>2）9200: HTTP</h4><p>有诸多包</p>
+<ul>
+<li>jestClient: 非官方，更新慢；</li>
+<li>RestTemplate：模拟HTTP请求，ES很多操作需要自己封装，麻烦；</li>
+<li>HttpClient：同上；</li>
+<li><code>Elasticsearch-Rest-Client</code>：官方RestClient，封装了ES操作，API层次分明，上手简单；</li>
+</ul>
+<p>最终选择Elasticsearch-Rest-Client（elasticsearch-rest-high-level-client）</p>
+<p><a href="https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html">https://www.elastic.co/guide/en/elasticsearch/client/java-rest/current/java-rest-high.html</a></p>
+<p>创建项目gulimall-search</p>
+<p>选择依赖web，但不要在里面选择es</p>
+<h5 id="导入依赖"><a href="#导入依赖" class="headerlink" title="导入依赖"></a>导入依赖</h5><p>这里的版本要和服务器安装的ES版本匹配。</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.elasticsearch.client<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>elasticsearch-rest-high-level-client<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>7.4.2<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>导入gulimall-common（common中有nacos的依赖）</p>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;com.hong.gulimall&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;gulimall-common&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>注册到nacos配置中心</p>
+<ol>
+<li>配置文件</li>
+</ol>
+<figure class="highlight properties"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">spring.cloud.nacos.discovery.server-addr</span>=<span class="string">127.0.0.1:8848</span></span><br><span class="line"><span class="meta">spring.application.name</span>=<span class="string">gulimall-search</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li>@EnableDiscoveryClient</li>
+</ol>
+</blockquote>
+<h5 id="编写配置"><a href="#编写配置" class="headerlink" title="编写配置"></a>编写配置</h5><p>创建配置类GuliESConfig.class，主要是给容器中注入一个RestHighLevelClient</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GuliESConfig</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ES的通用设置</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> RequestOptions COMMON_OPTIONS;</span><br><span class="line">    <span class="keyword">static</span> {</span><br><span class="line">        RequestOptions.Builder builder = RequestOptions.DEFAULT.toBuilder();</span><br><span class="line"><span class="comment">//        builder.addHeader("Authorization", "Bearer " + TOKEN);</span></span><br><span class="line"><span class="comment">//        builder.setHttpAsyncResponseConsumerFactory(</span></span><br><span class="line"><span class="comment">//                new HttpAsyncResponseConsumerFactory</span></span><br><span class="line"><span class="comment">//                        .HeapBufferedResponseConsumerFactory(30 * 1024 * 1024 * 1024));</span></span><br><span class="line">        COMMON_OPTIONS = builder.build();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@Bean</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RestHighLevelClient <span class="title">esRestClient</span><span class="params">()</span></span>{</span><br><span class="line">        RestHighLevelClient client = <span class="keyword">new</span> RestHighLevelClient(</span><br><span class="line">                RestClient.builder(</span><br><span class="line">                        <span class="keyword">new</span> HttpHost(<span class="string">"IP地址"</span>, <span class="number">9200</span>, <span class="string">"http"</span>))</span><br><span class="line">        );</span><br><span class="line">        <span class="keyword">return</span> client;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="测试类测试"><a href="#测试类测试" class="headerlink" title="测试类测试"></a>测试类测试</h5><ul>
+<li>测试存储数据到ES</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">indexData</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line"><span class="comment">// 设置索引</span></span><br><span class="line">IndexRequest indexRequest = <span class="keyword">new</span> IndexRequest (<span class="string">"users"</span>);</span><br><span class="line">indexRequest.id(<span class="string">"1"</span>);</span><br><span class="line"></span><br><span class="line">User user = <span class="keyword">new</span> User();</span><br><span class="line">user.setUserName(<span class="string">"张三"</span>);</span><br><span class="line">user.setAge(<span class="number">20</span>);</span><br><span class="line">user.setGender(<span class="string">"男"</span>);</span><br><span class="line">String jsonString = JSON.toJSONString(user);</span><br><span class="line"></span><br><span class="line"><span class="comment">//设置要保存的内容，指定数据和类型</span></span><br><span class="line">indexRequest.source(jsonString, XContentType.JSON);</span><br><span class="line"></span><br><span class="line"><span class="comment">//执行创建索引和保存数据</span></span><br><span class="line"><span class="comment">//保存方式分为同步和异步，异步方式多了个listener回调,这里的保存方式为同步方式</span></span><br><span class="line">IndexResponse index = client.index(indexRequest, GulimallElasticSearchConfig.COMMON_OPTIONS);</span><br><span class="line"></span><br><span class="line">System.out.println(index);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>复杂查询测试</li>
+</ul>
+<blockquote>
+<p>我们想向ES中发送该查询语句</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">GET bank/_search</span><br><span class="line">{</span><br><span class="line">  <span class="attr">"query"</span>:{</span><br><span class="line">    <span class="attr">"match"</span>:{</span><br><span class="line">      <span class="attr">"address"</span>: <span class="string">"mill"</span></span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  <span class="attr">"aggs"</span>: {</span><br><span class="line">    <span class="attr">"ageAgg"</span>: {</span><br><span class="line">      <span class="attr">"terms"</span>: {</span><br><span class="line">        <span class="attr">"field"</span>: <span class="string">"age"</span>,</span><br><span class="line">        <span class="attr">"size"</span>: <span class="number">10</span></span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    <span class="attr">"balanceAvg"</span>:{</span><br><span class="line">      <span class="attr">"avg"</span>: {</span><br><span class="line">        <span class="attr">"field"</span>: <span class="string">"balance"</span></span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">searchData</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">        <span class="comment">//1.创建检索请求</span></span><br><span class="line">        SearchRequest searchRequest = <span class="keyword">new</span> SearchRequest();</span><br><span class="line">        <span class="comment">//指定索引</span></span><br><span class="line">        searchRequest.indices(<span class="string">"bank"</span>);</span><br><span class="line">        <span class="comment">//指定DSL,检索条件</span></span><br><span class="line">        SearchSourceBuilder sourceBuilder = <span class="keyword">new</span> SearchSourceBuilder();</span><br><span class="line">        <span class="comment">//构造检索条件</span></span><br><span class="line">        <span class="comment">//匹配address中有mill的数据</span></span><br><span class="line">        sourceBuilder.query(QueryBuilders.matchQuery(<span class="string">"address"</span>, <span class="string">"mill"</span>));</span><br><span class="line">        <span class="comment">//执行聚合</span></span><br><span class="line">        <span class="comment">//按照年龄的值分布进行聚合</span></span><br><span class="line">        TermsAggregationBuilder ageAgg = AggregationBuilders.terms(<span class="string">"ageAgg"</span>).field(<span class="string">"age"</span>).size(<span class="number">10</span>);</span><br><span class="line">        sourceBuilder.aggregation(ageAgg);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//按照薪资的平均值分布进行聚合</span></span><br><span class="line">        AvgAggregationBuilder balanceAvg = AggregationBuilders.avg(<span class="string">"balanceAvg"</span>).field(<span class="string">"balance"</span>);</span><br><span class="line">        sourceBuilder.aggregation(balanceAvg);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">"检索条件"</span> + sourceBuilder.toString());</span><br><span class="line">        searchRequest.source(sourceBuilder);</span><br><span class="line">        <span class="comment">//2. 执行检索,拿到响应</span></span><br><span class="line">        SearchResponse searchResponse = client.search(searchRequest, GuliESConfig.COMMON_OPTIONS);</span><br><span class="line">        <span class="comment">//3. 分析结果 searchResponse</span></span><br><span class="line">        System.out.println(searchResponse.toString());</span><br><span class="line">    	<span class="comment">//获取所有查到的数据</span></span><br><span class="line">        SearchHits hits = searchResponse.getHits();</span><br><span class="line">        SearchHit[] searchHits = hits.getHits();</span><br><span class="line">        <span class="keyword">for</span> (SearchHit hit : searchHits) {</span><br><span class="line">            String string = hit.getSourceAsString();</span><br><span class="line">            <span class="comment">//Account类是hit中的source通过json工具生成javabean封装在测试类中</span></span><br><span class="line">            Account account = JSON.parseObject(string, Account.class);</span><br><span class="line">            System.out.println(<span class="string">"account:"</span> + account);</span><br><span class="line">        }</span><br><span class="line">    	<span class="comment">//3.2 获取这次检索到的分析信息</span></span><br><span class="line">        Aggregations aggregations = searchResponse.getAggregations();</span><br><span class="line">        <span class="comment">//ageAgg是term聚合，所以可以放心的转成terms类型</span></span><br><span class="line">        Terms ageAgg1 = aggregations.get(<span class="string">"ageAgg"</span>);</span><br><span class="line">        <span class="keyword">for</span> (Terms.Bucket bucket : ageAgg1.getBuckets()) {</span><br><span class="line">            String keyAsString = bucket.getKeyAsString();</span><br><span class="line">            System.out.println(<span class="string">"年龄："</span> + keyAsString);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//balanceAvg是Avg聚合，所以转成Avg（可以通过Ctrl+H来查看类继承关系）</span></span><br><span class="line">        Avg balanceAvg1 = aggregations.get(<span class="string">"balanceAvg"</span>);</span><br><span class="line">        System.out.println(<span class="string">"平均薪资："</span> + balanceAvg1.getValue());</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="分析商品在es中如何存储"><a href="#分析商品在es中如何存储" class="headerlink" title="分析商品在es中如何存储"></a>分析商品在es中如何存储</h4><p>分析：商品上架在es中是存sku还是spu？</p>
+<ul>
+<li>1）、检索的时候输入名字，是需要按照sku的title进行全文检索的</li>
+<li>2）、检素使用商品规格，规格是spu的公共属性，每个spu是一样的</li>
+<li>3）、按照分类id进去的都是直接列出spu的，还可以切换。</li>
+<li>4〕、我们如果将sku的全量信息保存到es中（包括spu属性〕就太多字段了</li>
+</ul>
+<h5 id="在ES中加入mapping"><a href="#在ES中加入mapping" class="headerlink" title="在ES中加入mapping"></a>在ES中加入mapping</h5><blockquote>
+<p>最终选用的模型</p>
+</blockquote>
+<figure class="highlight json"><table><tbody><tr><td class="code"><pre><span class="line">PUT product</span><br><span class="line">{</span><br><span class="line">    <span class="attr">"mappings"</span>:{</span><br><span class="line">        <span class="attr">"properties"</span>: {</span><br><span class="line">            <span class="attr">"skuId"</span>:{</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"spuId"</span>:{</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"skuTitle"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"text"</span>,</span><br><span class="line">                <span class="attr">"analyzer"</span>: <span class="string">"ik_smart"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"skuPrice"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"skuImg"</span>:{</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"index"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"doc_values"</span>: <span class="literal">false</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"saleCount"</span>:{</span><br><span class="line">                <span class="attr">"type"</span>:<span class="string">"long"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"hasStock"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"boolean"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"hotScore"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"brandId"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"catalogId"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"brandName"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"index"</span>: <span class="literal">false</span>,			<span class="comment">//表示不可被检索</span></span><br><span class="line">                <span class="attr">"doc_values"</span>: <span class="literal">false</span>		<span class="comment">//表示不可被聚合，es就不会维护一些聚合的信息</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"brandImg"</span>:{</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                 <span class="attr">"index"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"doc_values"</span>: <span class="literal">false</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"catalogName"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                <span class="attr">"index"</span>: <span class="literal">false</span>,</span><br><span class="line">                <span class="attr">"doc_values"</span>: <span class="literal">false</span></span><br><span class="line">            },</span><br><span class="line">            <span class="attr">"attrs"</span>: {</span><br><span class="line">                <span class="attr">"type"</span>: <span class="string">"nested"</span>,		<span class="comment">//嵌入式的</span></span><br><span class="line">                <span class="attr">"properties"</span>: {</span><br><span class="line">                    <span class="attr">"attrId"</span>: {</span><br><span class="line">                        <span class="attr">"type"</span>: <span class="string">"long"</span></span><br><span class="line">                    },</span><br><span class="line">                    <span class="attr">"attrName"</span>: {</span><br><span class="line">                        <span class="attr">"type"</span>: <span class="string">"keyword"</span>,</span><br><span class="line">                        <span class="attr">"index"</span>: <span class="literal">false</span>,</span><br><span class="line">                        <span class="attr">"doc_values"</span>: <span class="literal">false</span></span><br><span class="line">                    },</span><br><span class="line">                    <span class="attr">"attrValue"</span>: {</span><br><span class="line">                        <span class="attr">"type"</span>: <span class="string">"keyword"</span></span><br><span class="line">                    }</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><strong>冗余存储的字段：不用来检索，也不用来分析，节省空间</strong></p>
+<p><strong>Tips: nested是干嘛的</strong></p>
+<p>数组类型的对象会被扁平化处理**(对象的每个属性都会分别存储到一起)**</p>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">user.name=["aaa","bbb"]</span><br><span class="line">user.addr=["ccc","ddd"]</span><br><span class="line">可以错误检索到{aaa,ddd}</span><br></pre></td></tr></tbody></table></figure>
+<p>数组的扁平化处理会使检索能检索到本身不存在的数据</p>
+<p>为了解决这个问题，就采用了嵌入式属性nested</p>
+<p>数组里是对象时用嵌入式属性（不是对象无需用嵌入式属性）</p>
+<h2 id="商品上架功能"><a href="#商品上架功能" class="headerlink" title="商品上架功能"></a>商品上架功能</h2><p>商品上架需要在es中保存spu信息并更新spu的状态信息</p>
+<p>由于<code>SpuInfoEntity</code>与索引的数据模型并不对应，所以我们要建立专门的vo进行数据传输</p>
+<p>我们在common模块中进行创建（product组装好数据后还要传给search服务进行上架）</p>
+<blockquote>
+<p>gulimall-common.to.es.SkuEsModule</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SkuEsModule</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> Long skuId;</span><br><span class="line">    <span class="keyword">private</span> Long spuId;</span><br><span class="line">    <span class="keyword">private</span> String skuTitle;</span><br><span class="line">    <span class="keyword">private</span> BigDecimal skuPrice;</span><br><span class="line">    <span class="keyword">private</span> String skuImg;</span><br><span class="line">    <span class="keyword">private</span> Long saleCount;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> hasStock;</span><br><span class="line">    <span class="keyword">private</span> Long hotScore;</span><br><span class="line">    <span class="keyword">private</span> Long brandId;</span><br><span class="line">    <span class="keyword">private</span> Long catalogId;</span><br><span class="line">    <span class="keyword">private</span> String brandName;</span><br><span class="line">    <span class="keyword">private</span> String brandImg;</span><br><span class="line">    <span class="keyword">private</span> String catalogName;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Attrs&gt; attrs;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Attrs</span></span>{</span><br><span class="line">        <span class="keyword">private</span> Long attrId;</span><br><span class="line">        <span class="keyword">private</span> String attrName;</span><br><span class="line">        <span class="keyword">private</span> String attrValue;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Controller</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 商品上架</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="meta">@PostMapping("/{spuId}/up")</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> R <span class="title">spuUp</span><span class="params">(<span class="meta">@PathVariable("spuId")</span> Long spuId)</span></span>{</span><br><span class="line">    spuInfoService.up(spuId);</span><br><span class="line">    <span class="keyword">return</span> R.ok();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Service</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">up</span><span class="params">(Long spuId)</span> </span>{</span><br><span class="line">    <span class="comment">//1、查出当前spuId对应的所有sku信息,品牌的名字</span></span><br><span class="line">    List&lt;SkuInfoEntity&gt; skuInfoEntities = skuInfoService.getSkusBySpuId(spuId);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//4、查出当前sku的所有可以被用来检索的规格属性</span></span><br><span class="line">    List&lt;ProductAttrValueEntity&gt; baseAttrs = attrValueService.baseAttrListforspu(spuId);</span><br><span class="line"></span><br><span class="line">    List&lt;Long&gt; attrIds = baseAttrs.stream().map(attr -&gt; {</span><br><span class="line">        <span class="keyword">return</span> attr.getAttrId();</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    List&lt;Long&gt; searchAttrIds = attrService.selectSearchAttrs(attrIds);</span><br><span class="line">    <span class="comment">//转换为Set集合</span></span><br><span class="line">    Set&lt;Long&gt; idSet = searchAttrIds.stream().collect(Collectors.toSet());</span><br><span class="line"></span><br><span class="line">    List&lt;SkuEsModel.Attrs&gt; attrsList = baseAttrs.stream().filter(item -&gt; {</span><br><span class="line">        <span class="keyword">return</span> idSet.contains(item.getAttrId());</span><br><span class="line">    }).map(item -&gt; {</span><br><span class="line">        SkuEsModel.Attrs attrs = <span class="keyword">new</span> SkuEsModel.Attrs();</span><br><span class="line">        BeanUtils.copyProperties(item, attrs);</span><br><span class="line">        <span class="keyword">return</span> attrs;</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    List&lt;Long&gt; skuIdList = skuInfoEntities.stream()</span><br><span class="line">            .map(SkuInfoEntity::getSkuId)</span><br><span class="line">            .collect(Collectors.toList());</span><br><span class="line">    <span class="comment">//1、发送远程调用，库存系统查询是否有库存</span></span><br><span class="line">    Map&lt;Long, Boolean&gt; stockMap = <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        R skuHasStock = wareFeignService.getSkusHasStock(skuIdList);</span><br><span class="line">        <span class="comment">//</span></span><br><span class="line">        TypeReference&lt;List&lt;SkuHasStockVo&gt;&gt; typeReference = <span class="keyword">new</span> TypeReference&lt;List&lt;SkuHasStockVo&gt;&gt;() {};</span><br><span class="line">        stockMap = skuHasStock.getData(typeReference).stream()</span><br><span class="line">                .collect(Collectors.toMap(SkuHasStockVo::getSkuId, item -&gt; item.getHasStock()));</span><br><span class="line">    } <span class="keyword">catch</span> (Exception e) {</span><br><span class="line">        log.error(<span class="string">"库存服务查询异常：原因{}"</span>,e);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2、封装每个sku的信息</span></span><br><span class="line">    Map&lt;Long, Boolean&gt; finalStockMap = stockMap;</span><br><span class="line">    List&lt;SkuEsModel&gt; collect = skuInfoEntities.stream().map(sku -&gt; {</span><br><span class="line">        <span class="comment">//组装需要的数据</span></span><br><span class="line">        SkuEsModel esModel = <span class="keyword">new</span> SkuEsModel();</span><br><span class="line">        esModel.setSkuPrice(sku.getPrice());</span><br><span class="line">        esModel.setSkuImg(sku.getSkuDefaultImg());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置库存信息</span></span><br><span class="line">        <span class="keyword">if</span> (finalStockMap == <span class="keyword">null</span>) {</span><br><span class="line">            esModel.setHasStock(<span class="keyword">true</span>);</span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            esModel.setHasStock(finalStockMap.get(sku.getSkuId()));</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="comment">//TODO 2、热度评分。0</span></span><br><span class="line">        esModel.setHotScore(<span class="number">0L</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3、查询品牌和分类的名字信息</span></span><br><span class="line">        BrandEntity brandEntity = brandService.getById(sku.getBrandId());</span><br><span class="line">        esModel.setBrandName(brandEntity.getName());</span><br><span class="line">        esModel.setBrandId(brandEntity.getBrandId());</span><br><span class="line">        esModel.setBrandImg(brandEntity.getLogo());</span><br><span class="line"></span><br><span class="line">        CategoryEntity categoryEntity = categoryService.getById(sku.getCatelogId());</span><br><span class="line">        esModel.setCatelogId(categoryEntity.getCatId());</span><br><span class="line">        esModel.setCatelogName(categoryEntity.getName());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//设置检索属性</span></span><br><span class="line">        esModel.setAttrs(attrsList);</span><br><span class="line"></span><br><span class="line">        BeanUtils.copyProperties(sku,esModel);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> esModel;</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 5、将数据发给es进行保存：gulimall-search</span></span><br><span class="line">    R r = searchFeignService.productStatusUp(collect);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (r.getCode() == <span class="number">0</span>) {</span><br><span class="line">        <span class="comment">//远程调用成功</span></span><br><span class="line">        <span class="comment">// 6、修改当前spu的状态</span></span><br><span class="line">        <span class="keyword">this</span>.baseMapper.updateSpuStatus(spuId, ProductConstant.StatusEnum.SPU_UP.getCode());</span><br><span class="line">    } <span class="keyword">else</span> {</span><br><span class="line">        <span class="comment">//远程调用失败</span></span><br><span class="line">        <span class="comment">// 7、重复调用？接口幂等性:重试机制</span></span><br><span class="line">         <span class="comment">/**</span></span><br><span class="line"><span class="comment">         * 远程调用失败怎么办？</span></span><br><span class="line"><span class="comment">         * feign调用流程</span></span><br><span class="line"><span class="comment">         * 1. 构造请求数据，将对象转为json</span></span><br><span class="line"><span class="comment">         * 2. 发送请求进行执行（执行成功会解码响应数据）</span></span><br><span class="line"><span class="comment">         * 3. 执行请求会有重试机制</span></span><br><span class="line"><span class="comment">         */</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>调用方法汇总</p>
+<ol>
+<li>getSkusBySpuId（）：通过spuId查询出skusList</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;SkuInfoEntity&gt; <span class="title">getSkusBySpuId</span><span class="params">(Long spuId)</span> </span>{</span><br><span class="line">    List&lt;SkuInfoEntity&gt; list = <span class="keyword">this</span>.list(</span><br><span class="line">            <span class="keyword">new</span> QueryWrapper&lt;SkuInfoEntity&gt;().eq(<span class="string">"spu_id"</span>, spuId));</span><br><span class="line">    <span class="keyword">return</span> list;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li>baseAttrListforspu()：通过spuId查询出sku的基本属性</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;ProductAttrValueEntity&gt; <span class="title">baseAttrListforspu</span><span class="params">(Long spuId)</span> </span>{</span><br><span class="line">    List&lt;ProductAttrValueEntity&gt; entities = <span class="keyword">this</span>.baseMapper.selectList(</span><br><span class="line">            <span class="keyword">new</span> QueryWrapper&lt;ProductAttrValueEntity&gt;().eq(<span class="string">"spu_id"</span>, spuId));</span><br><span class="line">    <span class="keyword">return</span> entities;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="3">
+<li>selectSearchAttrs()：在指定的集合id中挑出检索属性</li>
+</ol>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;Long&gt; <span class="title">selectSearchAttrs</span><span class="params">(List&lt;Long&gt; attrIds)</span> </span>{</span><br><span class="line">    <span class="comment">//select attr_id from pms_attr where attr_id in(?) and search_type = 1</span></span><br><span class="line">    <span class="keyword">return</span> baseMapper.selectSearchAttrIds(attrIds);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="4">
+<li>updateSpuStatus()：修改spu状态        dao层方法</li>
+</ol>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">update</span> <span class="attr">id</span>=<span class="string">"updateSpuStatus"</span>&gt;</span></span><br><span class="line">    update pms_spu_info set publish_status = #{code},</span><br><span class="line">    update_time = now() where id = #{spuId}</span><br><span class="line"><span class="tag">&lt;/<span class="name">update</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<p>此外还有两个远程调用的方法</p>
+<blockquote>
+<ol>
+<li>wareFeignService.getSkusHasStock()        //要在feign包中建WareFeignService</li>
+</ol>
+<ul>
+<li>Controller        </li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@PostMapping("/hasstock")</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> R <span class="title">getSkusHasStock</span><span class="params">(<span class="meta">@RequestBody</span> List&lt;Long&gt; skuIds)</span></span>{</span><br><span class="line">    List&lt;SkuHasStockVo&gt; vos =wareSkuService.getSkusHasStock(skuIds);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> R.ok().setData(vos);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>getSkusHasStock()</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;SkuHasStockVo&gt; <span class="title">getSkusHasStock</span><span class="params">(List&lt;Long&gt; skuIds)</span> </span>{</span><br><span class="line">    List&lt;SkuHasStockVo&gt; collect = skuIds.stream().map(skuId -&gt; {</span><br><span class="line">        SkuHasStockVo vo = <span class="keyword">new</span> SkuHasStockVo();</span><br><span class="line">        <span class="comment">//查询当前sku的总库存量</span></span><br><span class="line">        Long count = baseMapper.getSkuStock(skuId);</span><br><span class="line">        vo.setSkuId(skuId);</span><br><span class="line">        vo.setHasStock(count==<span class="keyword">null</span>?<span class="keyword">false</span>:count&gt;<span class="number">0</span>);</span><br><span class="line">        <span class="keyword">return</span> vo;</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line">    <span class="keyword">return</span> collect;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>getSkuStock()</li>
+</ul>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">select</span> <span class="attr">id</span>=<span class="string">"getSkuStock"</span> <span class="attr">resultType</span>=<span class="string">"java.lang.Long"</span>&gt;</span></span><br><span class="line">    select sum(stock-stock_locked) from wms_ware_sku where sku_id=#{skuId}</span><br><span class="line"><span class="tag">&lt;/<span class="name">select</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li>searchFeignService.productStatusUp()    //将数据发送给gulimall-search进行保存</li>
+</ol>
+<ul>
+<li>Controller.ElasticSearchSaveController</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//上架商品</span></span><br><span class="line"><span class="meta">@PostMapping("/product")</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> R <span class="title">productStatusUp</span><span class="params">(<span class="meta">@RequestBody</span> List&lt;SkuEsModel&gt; skuEsModels)</span></span>{</span><br><span class="line">    <span class="keyword">boolean</span> b = <span class="keyword">false</span>;</span><br><span class="line">    <span class="keyword">try</span>{</span><br><span class="line">        b = productSaveService.productStatusUp(skuEsModels);</span><br><span class="line">    }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">        log.error(<span class="string">"ElasticSearchSaveController商品上架错误：{}"</span>, e);</span><br><span class="line">        <span class="keyword">return</span> R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">if</span>(!b){</span><br><span class="line">        <span class="keyword">return</span> R.ok();</span><br><span class="line">    }<span class="keyword">else</span>{</span><br><span class="line">        <span class="keyword">return</span> R.error(BizCodeEnum.PRODUCT_UP_EXCEPTION.getCode(), BizCodeEnum.PRODUCT_UP_EXCEPTION.getMsg());</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<ul>
+<li>productStatusUp()：</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">productStatusUp</span><span class="params">(List&lt;SkuEsModel&gt; skuEsModels)</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">    <span class="comment">//1.在es中建立索引，建立号映射关系（doc/json/product-mapping.json）</span></span><br><span class="line">    <span class="comment">//2. 在ES中保存这些数据</span></span><br><span class="line">    BulkRequest bulkRequest = <span class="keyword">new</span> BulkRequest();</span><br><span class="line">    <span class="keyword">for</span> (SkuEsModel skuEsModel : skuEsModels) {</span><br><span class="line">        <span class="comment">//构造保存请求</span></span><br><span class="line">        IndexRequest indexRequest = <span class="keyword">new</span> IndexRequest(EsConstant.PRODUCT_INDEX);</span><br><span class="line">        indexRequest.id(skuEsModel.getSkuId().toString());</span><br><span class="line">        String jsonString = JSON.toJSONString(skuEsModel);</span><br><span class="line">        indexRequest.source(jsonString, XContentType.JSON);</span><br><span class="line">        bulkRequest.add(indexRequest);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    BulkResponse bulk = esRestClient.bulk(bulkRequest, GuliESConfig.COMMON_OPTIONS);</span><br><span class="line"></span><br><span class="line">    <span class="comment">//如果批量错误</span></span><br><span class="line">    <span class="keyword">boolean</span> hasFailures = bulk.hasFailures();</span><br><span class="line"></span><br><span class="line">    List&lt;String&gt; collect = Arrays.asList(bulk.getItems()).stream().map(item -&gt; {</span><br><span class="line">        <span class="keyword">return</span> item.getId();</span><br><span class="line">    }).collect(Collectors.toList());</span><br><span class="line"></span><br><span class="line">    log.info(<span class="string">"商品上架完成：{}"</span>,collect);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> hasFailures;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<ul>
+<li>修改R方法（添加两个方法）</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> R <span class="title">setData</span><span class="params">(Object data)</span> </span>{</span><br><span class="line">	put(<span class="string">"data"</span>,data);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用fastjson进行反序列化</span></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getData</span><span class="params">(TypeReference&lt;T&gt; typeReference)</span> </span>{</span><br><span class="line">	Object data = get(<span class="string">"data"</span>);	<span class="comment">//默认是map</span></span><br><span class="line">	String jsonString = JSON.toJSONString(data);</span><br><span class="line">	T t = JSON.parseObject(jsonString, typeReference);</span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">//利用fastjson进行反序列化</span></span><br><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">getData</span><span class="params">(String key,TypeReference&lt;T&gt; typeReference)</span> </span>{</span><br><span class="line">	Object data = get(key);	<span class="comment">//默认是map</span></span><br><span class="line">	String jsonString = JSON.toJSONString(data);</span><br><span class="line">	T t = JSON.parseObject(jsonString, typeReference);</span><br><span class="line">	<span class="keyword">return</span> t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h2 id="商城系统首页"><a href="#商城系统首页" class="headerlink" title="商城系统首页"></a>商城系统首页</h2><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210227171054340.png" alt="image-20210227171054340" style="zoom:50%;">
+
+<p>我们把静态资源放在nginx中：</p>
+<ol>
+<li>在product项目中导入thymeleaf</li>
+</ol>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-starter-thymeleaf&lt;/artifactId&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+<ol start="2">
+<li>把高级篇的首页资源，index文件夹复制到static文件夹，index.html复制到templates中</li>
+<li>配置thymeleaf</li>
+</ol>
+<figure class="highlight properties"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">spring.thymeleaf.cache</span>: <span class="string">false		#关闭默认缓存</span></span><br><span class="line"><span class="meta">spring.thymeleaf.suffix</span>: <span class="string">.html</span></span><br><span class="line"><span class="meta">spring.thymeleaf.prefix</span>: <span class="string">classpath:/templates/</span></span><br></pre></td></tr></tbody></table></figure>
+<ol start="4">
+<li>建web包进行web开发</li>
+</ol>
+<p>原来的controller是前后分离对接手机等访问的，所以可以改成app，对接app应用</p>
+<p>所有的rest接口从app包提供，所有的controller从web提供</p>
+<h3 id="页面跳转功能"><a href="#页面跳转功能" class="headerlink" title="页面跳转功能"></a>页面跳转功能</h3><blockquote>
+<p>我们可以引入热部署方便调试网页</p>
+<ol>
+<li>引入依赖</li>
+</ol>
+<figure class="highlight"><table><tbody><tr><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;</span><br><span class="line">    &lt;optional&gt;true&lt;/optional&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+<ol start="2">
+<li>每次修改后用Ctrl+F9重新编译一下就修改了</li>
+</ol>
+</blockquote>
+<h4 id="一级渲染数据"><a href="#一级渲染数据" class="headerlink" title="一级渲染数据"></a>一级渲染数据</h4><ul>
+<li>web.IndexController</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@GetMapping({"/","/index.html"})</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">indexPage</span><span class="params">(Model model)</span></span>{   <span class="comment">//页面开发就可以传入一个model，是springMVC提供的一个接口</span></span><br><span class="line">    <span class="comment">//todo 1.查出所有的1级分类</span></span><br><span class="line">    List&lt;CategoryEntity&gt; categoryEntities = categoryService.getLevel1Categories();</span><br><span class="line">    model.addAttribute(<span class="string">"categories"</span>, categoryEntities);</span><br><span class="line">    <span class="comment">//suffix: .html</span></span><br><span class="line">    <span class="comment">//prefix: classpath:/templates/</span></span><br><span class="line">    <span class="comment">//我们返回一个逻辑视图,那么视图解析器进行拼串， prefix + 返回值 + suffix</span></span><br><span class="line">    <span class="keyword">return</span> <span class="string">"index"</span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>getLevel1Categories()</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> List&lt;CategoryEntity&gt; <span class="title">getLevel1Categories</span><span class="params">()</span> </span>{</span><br><span class="line">    List&lt;CategoryEntity&gt; categoryEntities = baseMapper.selectList(</span><br><span class="line">            <span class="keyword">new</span> QueryWrapper&lt;CategoryEntity&gt;().eq(<span class="string">"parent_cid"</span>, <span class="number">0</span>));</span><br><span class="line">    <span class="keyword">return</span> categoryEntities;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>index.html</li>
+</ul>
+<figure class="highlight html"><table><tbody><tr><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span> <span class="attr">th:each</span>=<span class="string">"category : ${categories}"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">class</span>=<span class="string">"header_main_left_a"</span> <span class="attr">th:attr</span>=<span class="string">"ctg-data=${category.catId}"</span>&gt;</span><span class="tag">&lt;<span class="name">b</span> <span class="attr">th:text</span>=<span class="string">"${category.name}"</span>&gt;</span>家用电器<span class="tag">&lt;/<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="二级三级分类数据"><a href="#二级三级分类数据" class="headerlink" title="二级三级分类数据"></a>二级三级分类数据</h4><ul>
+<li>Catelog2Vo</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="meta">@AllArgsConstructor</span></span><br><span class="line"><span class="meta">@NoArgsConstructor</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Catelog2Vo</span> </span>{</span><br><span class="line">    <span class="keyword">private</span> String catelog1Id;           <span class="comment">//1级父分类id</span></span><br><span class="line">    <span class="keyword">private</span> List&lt;Catelog3Vo&gt; catelog3List;  <span class="comment">//三级子分类</span></span><br><span class="line">    <span class="keyword">private</span> String id;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    </span><br><span class="line">    <span class="meta">@NoArgsConstructor</span></span><br><span class="line">    <span class="meta">@AllArgsConstructor</span></span><br><span class="line">    <span class="meta">@Data</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Catelog3Vo</span></span>{</span><br><span class="line">        <span class="keyword">private</span> String catelog2Id;  <span class="comment">//父分类，2级分类id</span></span><br><span class="line">        <span class="keyword">private</span> String id;</span><br><span class="line">        <span class="keyword">private</span> String name;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>修改catalogLoader.js</li>
+</ul>
+<figure class="highlight js"><table><tbody><tr><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>{</span><br><span class="line">    $.getJSON(<span class="string">"index/catelog.json"</span>,<span class="function"><span class="keyword">function</span> (<span class="params">data</span>) </span>{</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>Controller</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//index//catelog.json</span></span><br><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@GetMapping("/index/catelog.json")</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, List&lt;Catelog2Vo&gt;&gt; getCatelogJson(){     <span class="comment">//将返回的值以json的格式写出去</span></span><br><span class="line">    Map&lt;String, List&lt;Catelog2Vo&gt;&gt; catelogJson = categoryService.getCatelogJson();</span><br><span class="line">    <span class="keyword">return</span> catelogJson;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>getCatelogJson()</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, List&lt;Catelog2Vo&gt;&gt; getCatelogJson() {</span><br><span class="line">    <span class="comment">//1. 查出所有1级分类</span></span><br><span class="line">    List&lt;CategoryEntity&gt; level1Categories = getLevel1Categories();</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2. 封装数据</span></span><br><span class="line">    Map&lt;String, List&lt;Catelog2Vo&gt;&gt; parent_cid = level1Categories.stream().collect(Collectors.toMap(k -&gt; k.getCatId().toString(), v -&gt; {</span><br><span class="line">        <span class="comment">//1). 每一个的一级分类，查到这个一级分类的所有二级分类</span></span><br><span class="line">        List&lt;CategoryEntity&gt; categoryEntities = baseMapper.selectList(</span><br><span class="line">                <span class="keyword">new</span> QueryWrapper&lt;CategoryEntity&gt;().eq(<span class="string">"parent_cid"</span>, v.getCatId()));</span><br><span class="line">        <span class="comment">//2). 封装上面的结果</span></span><br><span class="line">        List&lt;Catelog2Vo&gt; catelog2Vos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (categoryEntities != <span class="keyword">null</span>) {</span><br><span class="line">            catelog2Vos = categoryEntities.stream().map(l2 -&gt; {</span><br><span class="line">                Catelog2Vo catelog2Vo =</span><br><span class="line">                        <span class="keyword">new</span> Catelog2Vo(v.getCatId().toString(), <span class="keyword">null</span>, l2.getCatId().toString(), l2.getName());</span><br><span class="line">                <span class="comment">//1. 找当前二级分类的三级分类封装成vo</span></span><br><span class="line">                List&lt;CategoryEntity&gt; level3Catelog = baseMapper.selectList(</span><br><span class="line">                        <span class="keyword">new</span> QueryWrapper&lt;CategoryEntity&gt;().eq(<span class="string">"parent_cid"</span>, l2.getCatId()));</span><br><span class="line">                <span class="keyword">if</span>(level3Catelog!=<span class="keyword">null</span>){</span><br><span class="line">                    List&lt;Catelog2Vo.Catelog3Vo&gt; catelog3Vos = level3Catelog.stream().map(l3 -&gt; {</span><br><span class="line">                        <span class="comment">//2. 封装成指定格式</span></span><br><span class="line">                        Catelog2Vo.Catelog3Vo catelog3Vo =</span><br><span class="line">                                <span class="keyword">new</span> Catelog2Vo.Catelog3Vo(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());</span><br><span class="line">                        <span class="keyword">return</span> catelog3Vo;</span><br><span class="line">                    }).collect(Collectors.toList());</span><br><span class="line">                    catelog2Vo.setCatelog3List(catelog3Vos);</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">return</span> catelog2Vo;</span><br><span class="line">            }).collect(Collectors.toList());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> catelog2Vos;</span><br><span class="line">    }));</span><br><span class="line">    <span class="keyword">return</span> parent_cid;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h2 id="nginx"><a href="#nginx" class="headerlink" title="nginx"></a>nginx</h2><h3 id="Nginx配置文件"><a href="#Nginx配置文件" class="headerlink" title="Nginx配置文件"></a>Nginx配置文件</h3><p>nginx.conf：</p>
+<ul>
+<li>全局块：配置影响nginx全局的指令。如：用户组，nginx进程pid存放路径，日志存放路径，配置文件引入，允许生成worker process故障等</li>
+<li>events块：配置影响 Nginx 服务器与用户的网络连接，常用的设置包括是否开启对多 work process下的网络连接进行序列化，是否允许同时接收多个网络连接，选取哪种事件驱动模型来处理连接请求，每个 word process 可以同时支持的最大连接数等。</li>
+<li>http块：<ul>
+<li>http全局块：配置的指令包括文件引入、MIME-TYPE 定义、日志自定义、连接超时时间、单链接请求数上限等。错误页面等</li>
+<li>server块：这块和虚拟主机有密切关系，虚拟主机从用户角度看，和一台独立的硬件主机是完全一样的。每个 http 块可以包括多个 server 块，而每个 server 块就相当于一个虚拟主机。<ul>
+<li>location1：配置请求的路由，以及各种页面的处理情况</li>
+<li>location2</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="搭建域名访问环境"><a href="#搭建域名访问环境" class="headerlink" title="搭建域名访问环境"></a>搭建域名访问环境</h3><ul>
+<li>SwitchHosts设置gulimall地址</li>
+</ul>
+<figure class="highlight text"><table><tbody><tr><td class="code"><pre><span class="line">#gulimall</span><br><span class="line">服务器IP（虚拟机IP） gulimall.com</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>让nginx帮我们进行反向代理，所有来自原gulimall.com的请求，都转到商品服务</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line"><span class="built_in">cd</span> /mydata/nginx/conf/conf.d</span><br><span class="line">cp default.conf gulimall.conf</span><br><span class="line">vim gulimall.conf</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>改gulimall.conf的两个地方</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">server_name  gulimall.com;</span><br><span class="line">location / {</span><br><span class="line">	proxy_set_header Host $host;</span><br><span class="line">	proxy_pass http://gulimall;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>改nginx.conf</li>
+</ul>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">upstream gulimall{</span><br><span class="line">	server 本机IP:88</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>改网关的转发路径</li>
+</ul>
+<figure class="highlight yaml"><table><tbody><tr><td class="code"><pre><span class="line"><span class="bullet">-</span> <span class="attr">id:</span> <span class="string">gulimall_hosts</span></span><br><span class="line">  <span class="comment">#lb：表示负载均衡</span></span><br><span class="line">  <span class="attr">uri:</span> <span class="string">lb://gulimall-product</span></span><br><span class="line">  <span class="attr">predicates:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="string">Host=**.gulimall.com</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>重启docker的nginx</li>
+</ul>
+<h2 id="压力测试"><a href="#压力测试" class="headerlink" title="压力测试"></a>压力测试</h2><p>压力测试考察当前软硬件环境下系统所能承受的最大负荷并帮助找出系统瓶颈所在。</p>
+<p>使用压力测试，我们有希望找到很多种其他测试方法更难发现的错误。</p>
+<p>有两种错误类型是：<strong>内存泄漏，并发与同步；</strong></p>
+<h4 id="我们为什么要对jvm做优化？"><a href="#我们为什么要对jvm做优化？" class="headerlink" title="我们为什么要对jvm做优化？"></a>我们为什么要对jvm做优化？</h4><p>在本地开发环境中我们很少会遇到需要对jvm进行优化的需求，但是到了生产环境，我们可能将有下面的需求：</p>
+<p>运行的应用“卡住了”，日志不输出，程序没有反应<br>服务器的CPU负载突然升高<br>在多线程应用下，如何分配线程的数量？<br>……</p>
+<p>因此，我们需要对JVM有更深入的学习，分析解决在生产环境中所遇到的各种棘手的问题。</p>
+<h3 id="JMeter"><a href="#JMeter" class="headerlink" title="JMeter"></a>JMeter</h3><ul>
+<li>下载</li>
+</ul>
+<blockquote>
+<p><a href="https://jmeter.apache.org/download_jmeter.cgi">https://jmeter.apache.org/download_jmeter.cgi</a></p>
+</blockquote>
+<ul>
+<li>打开</li>
+</ul>
+<blockquote>
+<p>打开/bin/jmeter.bat</p>
+</blockquote>
+<ul>
+<li>创建线程组</li>
+</ul>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210301170404725.png" alt="image-20210301170404725" style="zoom:50%;">
+
+<ul>
+<li><p>添加取样器（HTTP请求）</p>
+</li>
+<li><p>添加监听器（查看结果树，汇总报告，聚合报告）</p>
+</li>
+</ul>
+<h4 id="Jmeter-Address-Already-in-use错误解决"><a href="#Jmeter-Address-Already-in-use错误解决" class="headerlink" title="Jmeter Address Already in use错误解决"></a>Jmeter Address Already in use错误解决</h4><p><strong>报错原因：</strong></p>
+<p>1、windows系统为了保护本机，限制了其他机器到本机的连接数.</p>
+<p>2、Windows提供给TCP/IP链接的端口为1024-5000，并且要4分钟才会循环回收他们。就导致在短时间内跑大量的请求时将端口占满了</p>
+<p><strong>解决方案</strong></p>
+<blockquote>
+<p>修改操作系统注册表<br>1、打开注册表：运行-regedit<br>2、直接输入找到HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\TCPIP\Parameters<br>3、右击Parameters新建 DWORD32值，name：TcpTimedWaitDelay，value：30（十进制） ——&gt; 设置为30秒回收（默认240）<br>4、新建 DWORD值，name：MaxUserPort，value：65534（十进制） ——&gt; 设置最大连接数65534<br>注意：修改时先选择十进制，再填写数字。<br>5、重启系统</p>
+</blockquote>
+<h4 id="jmeter测试"><a href="#jmeter测试" class="headerlink" title="jmeter测试"></a>jmeter测试</h4><h5 id=""><a href="#" class="headerlink" title=""></a></h5><h3 id="Jconsole、JvisualVM"><a href="#Jconsole、JvisualVM" class="headerlink" title="Jconsole、JvisualVM"></a>Jconsole、JvisualVM</h3><p>要打开直接在控制台输入jconsole或者jvisualvm就可以打开</p>
+<p>这两个工具是用来对jvm进行实时监控的。</p>
+<h4 id="jvisualvm"><a href="#jvisualvm" class="headerlink" title="jvisualvm"></a>jvisualvm</h4><blockquote>
+<p>推荐使用jvisualvm</p>
+</blockquote>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210301232544523.png" alt="image-20210301232544523" style="zoom:67%;">
+
+<p>运行状态：</p>
+<ul>
+<li>运行：正在运行</li>
+<li>休眠：sleep</li>
+<li>等待：wait</li>
+<li>驻留：线程池里面的空闲线程</li>
+<li>监视：阻塞的线程，正在等待锁</li>
+</ul>
+<p>要监控GC，安装插件：工具-插件。**(visual GC)**</p>
+<blockquote>
+<p>如果遇到更新插件报错，就去<a href="https://visualvm.github.io/pluginscenters.html">https://visualvm.github.io/pluginscenters.html</a></p>
+<p>找到匹配jdk版本的插件中心进行更改</p>
+</blockquote>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210301232833225.png" alt="image-20210301232833225" style="zoom:67%;">
+
+
+
+<blockquote>
+<p>老师的压测性能</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>压测内容</th>
+<th>压测线程数</th>
+<th>吞吐量/s</th>
+<th>90%响应时间</th>
+<th>99%响应时间</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Nginx</td>
+<td>50</td>
+<td>2335</td>
+<td>11</td>
+<td>994</td>
+</tr>
+<tr>
+<td>Gateway</td>
+<td>50</td>
+<td>10367</td>
+<td>8</td>
+<td>31</td>
+</tr>
+<tr>
+<td>简单服务</td>
+<td>50</td>
+<td>11341</td>
+<td>8</td>
+<td>17</td>
+</tr>
+<tr>
+<td>首页一级渲染页面</td>
+<td>50</td>
+<td>270(db,thymeleaf)</td>
+<td>267</td>
+<td>365</td>
+</tr>
+<tr>
+<td>首页渲染（开缓存）</td>
+<td>50</td>
+<td>290</td>
+<td>251</td>
+<td>365</td>
+</tr>
+<tr>
+<td>首页渲染（开缓存、关日志、优化数据库）</td>
+<td>50</td>
+<td>700</td>
+<td>105</td>
+<td>183</td>
+</tr>
+<tr>
+<td>三级分类数据获取</td>
+<td>50</td>
+<td>2/s(db) /8(加索引)</td>
+<td>…</td>
+<td>…</td>
+</tr>
+<tr>
+<td>三级分类数据获取（优化业务逻辑）</td>
+<td>50</td>
+<td>112</td>
+<td>571</td>
+<td>896</td>
+</tr>
+<tr>
+<td>三级分类数据获取（使用redis）</td>
+<td>50</td>
+<td>411</td>
+<td>153</td>
+<td>217</td>
+</tr>
+<tr>
+<td>首页全量数据获取</td>
+<td>50</td>
+<td>7(静态资源)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>首页全量数据获取（动静分离）</td>
+<td>50</td>
+<td>11</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>首页全量数据获取(动静分离+jvm调整)</td>
+<td>50</td>
+<td>15</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Nginx+Gateway</td>
+<td>50</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>网关+简单服务</td>
+<td>50</td>
+<td>3124</td>
+<td>30</td>
+<td>125</td>
+</tr>
+<tr>
+<td>全链路</td>
+<td>50</td>
+<td>790</td>
+<td>88</td>
+<td>310</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>优化数据库的操作：</p>
+<p><strong>在数据库中的pms_category表中给parent_cid字段加上索引</strong></p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210302152056787.png" alt="image-20210302152056787" style="zoom:50%;">
+</blockquote>
+<blockquote>
+<p>结论：</p>
+<ol>
+<li>中间件越多，性能损失越大，大多都损失在网络交互上：</li>
+</ol>
+<blockquote>
+<ul>
+<li>业务功能优化：<ul>
+<li>DB（MySQL优化）</li>
+<li>thymeleaf渲染速度（在测试时候关闭缓存，在上线的时候要打开缓存）</li>
+<li>静态资源（Nginx动静分离）动态资源nginx会转发给网关，静态资源放在nginx里面</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+</blockquote>
+<ul>
+<li>nginx动静分离</li>
+</ul>
+<ol>
+<li><p>以后将所有项目的静态资源都放在nginx里面</p>
+<p>​    规则：/static/***所有请求都由nginx直接返回</p>
+<p>在/mydata/nginx/html中新建一个文件夹static，将index文件放进去，并删除本地文件</p>
+</li>
+<li><p>改变index.html中的所有连接</p>
+</li>
+</ol>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210302200625883.png" alt="image-20210302200625883" style="zoom:50%;">
+
+<p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210302200714526.png" alt="image-20210302200714526" style="zoom: 50%;"><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210302200752779.png" alt="image-20210302200752779"></p>
+<p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210302200752779.png" alt="image-20210302200752779"></p>
+<ol start="3">
+<li>修改nginx中的gulimall.conf（添上这一段）</li>
+</ol>
+<figure class="highlight plain"><table><tbody><tr><td class="code"><pre><span class="line">location /static/ {			</span><br><span class="line">		root /usr/share/nginx/html;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>jvm内存大小调整</li>
+</ul>
+<blockquote>
+<p>在之前项目中，我们将jvm内存大小设置成： -Xmx100m</p>
+<p>这里我们将jvm调整成</p>
+<p>-Xmx1024m -Xms1024m -Xmn512m</p>
+</blockquote>
+<ul>
+<li>改造三级分类Service，将多次查询变为一次查询</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> Map&lt;String, List&lt;Catelog2Vo&gt;&gt; getCatelogJson() {</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    将数据库的多次查询变为一次</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    List&lt;CategoryEntity&gt; selectList = baseMapper.selectList(<span class="keyword">null</span>);</span><br><span class="line">    <span class="comment">//1. 查出所有1级分类</span></span><br><span class="line">    List&lt;CategoryEntity&gt; level1Categories = getParent_cid(selectList, <span class="number">0L</span>);</span><br><span class="line">    <span class="comment">//2. 封装数据</span></span><br><span class="line">    Map&lt;String, List&lt;Catelog2Vo&gt;&gt; parent_cid = level1Categories.stream().collect(Collectors.toMap(k -&gt; k.getCatId().toString(), v -&gt; {</span><br><span class="line">        <span class="comment">//1). 每一个的一级分类，查到这个一级分类的所有二级分类</span></span><br><span class="line">        List&lt;CategoryEntity&gt; categoryEntities = getParent_cid(selectList, v.getParentCid());</span><br><span class="line">        <span class="comment">//2). 封装上面的结果</span></span><br><span class="line">        List&lt;Catelog2Vo&gt; catelog2Vos = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">if</span> (categoryEntities != <span class="keyword">null</span>) {</span><br><span class="line">            catelog2Vos = categoryEntities.stream().map(l2 -&gt; {</span><br><span class="line">                Catelog2Vo catelog2Vo =</span><br><span class="line">                        <span class="keyword">new</span> Catelog2Vo(v.getCatId().toString(), <span class="keyword">null</span>, l2.getCatId().toString(), l2.getName());</span><br><span class="line">                <span class="comment">//1. 找当前二级分类的三级分类封装成vo</span></span><br><span class="line">                List&lt;CategoryEntity&gt; level3Catelog = getParent_cid(selectList, l2.getCatId());</span><br><span class="line">                <span class="keyword">if</span>(level3Catelog!=<span class="keyword">null</span>){</span><br><span class="line">                    List&lt;Catelog2Vo.Catelog3Vo&gt; catelog3Vos = level3Catelog.stream().map(l3 -&gt; {</span><br><span class="line">                        <span class="comment">//2. 封装成指定格式</span></span><br><span class="line">                        Catelog2Vo.Catelog3Vo catelog3Vo =</span><br><span class="line">                                <span class="keyword">new</span> Catelog2Vo.Catelog3Vo(l2.getCatId().toString(), l3.getCatId().toString(), l3.getName());</span><br><span class="line">                        <span class="keyword">return</span> catelog3Vo;</span><br><span class="line">                    }).collect(Collectors.toList());</span><br><span class="line">                    catelog2Vo.setCatelog3List(catelog3Vos);</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">return</span> catelog2Vo;</span><br><span class="line">            }).collect(Collectors.toList());</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> catelog2Vos;</span><br><span class="line">    }));</span><br><span class="line">    <span class="keyword">return</span> parent_cid;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">private</span> List&lt;CategoryEntity&gt; <span class="title">getParent_cid</span><span class="params">(List&lt;CategoryEntity&gt; selectList, Long parent_cid)</span> </span>{</span><br><span class="line">    List&lt;CategoryEntity&gt; collect = selectList.stream().filter(item -&gt; item.getParentCid() == parent_cid).collect(Collectors.toList());</span><br><span class="line">    <span class="keyword">return</span> collect;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//return baseMapper.selectList(new QueryWrapper&lt;CategoryEntity&gt;().eq("parent_cid", v.getCatId()));</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+]]></content>
       <categories>
         <category>面试</category>
       </categories>
