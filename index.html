@@ -190,6 +190,133 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-title-link" itemprop="url">guli-shop高级篇3</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-04-06 17:14:06" itemprop="dateCreated datePublished" datetime="2021-04-06T17:14:06+08:00">2021-04-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-05 15:46:34" itemprop="dateModified" datetime="2021-05-05T15:46:34+08:00">2021-05-05</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-meta-item leancloud_visitors" data-flag-title="guli-shop高级篇3" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="异步复习"><a href="#异步复习" class="headerlink" title="异步复习"></a>异步复习</h3><h4 id="初始化线程方式"><a href="#初始化线程方式" class="headerlink" title="初始化线程方式"></a>初始化线程方式</h4><ol>
+<li><p>继承Thread</p>
+</li>
+<li><p>实现Runnable接口</p>
+</li>
+<li><p>实现Callable接口</p>
+</li>
+<li><p>线程池</p>
+</li>
+</ol>
+<h4 id="异步编排"><a href="#异步编排" class="headerlink" title="异步编排"></a>异步编排</h4><p>由于笔记记录与学习时间过于久远，仅仅只记录了异步编排的过程（P210)</p>
+<blockquote>
+<p>SkuInfoServiceImpl</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SkuItemVo <span class="title">item</span><span class="params">(<span class="keyword">long</span> skuId)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>{</span><br><span class="line">    SkuItemVo skuItemVo = <span class="keyword">new</span> SkuItemVo();</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;SkuInfoEntity&gt; infoFuture = CompletableFuture.supplyAsync(() -&gt; {</span><br><span class="line">        <span class="comment">//1. Sku基本信息获取 pws_sku_info</span></span><br><span class="line">        SkuInfoEntity info = getById(skuId);</span><br><span class="line">        skuItemVo.setInfo(info);</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; saleAttrFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//3. 获取spu的销售属性组</span></span><br><span class="line">        List&lt;SkuItemSaleAttrVo&gt; saleAttrVos = skuSaleAttrValueService.getSaleAttrsBySpuId(res.getSpuId());</span><br><span class="line">        skuItemVo.setSaleAttr(saleAttrVos);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; descFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//4. 获取spu的介绍</span></span><br><span class="line">        SpuInfoDescEntity infoDescEntity = spuInfoDescService.getById(res.getSpuId());</span><br><span class="line">        skuItemVo.setDesp(infoDescEntity);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; baseAttrFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//5. 获取spu的规格参数信息</span></span><br><span class="line">        List&lt;SpuItemAttrGroupVo&gt; attrGroupVos = attrGroupService.getAttrGroupWithAttrsBySpuId(res.getSpuId(), res.getCatelogId());</span><br><span class="line">        skuItemVo.setGroupAttrs(attrGroupVos);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; imageFuture = CompletableFuture.runAsync(() -&gt; {</span><br><span class="line">        <span class="comment">//2. sku的图片信息   pws_sku_images</span></span><br><span class="line">        List&lt;SkuImagesEntity&gt; images = skuImagesService.getImagesBySkuId(skuId);</span><br><span class="line">        skuItemVo.setImages(images);</span><br><span class="line">    }, executor);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//等待所有任务都完成</span></span><br><span class="line">    CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();</span><br><span class="line">    <span class="keyword">return</span> skuItemVo;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>CompletableFuture异步编排功能，主要是对任务进行控制</p>
+<blockquote>
+<p>CompletableFuture.supplyAsync()    //创建一个有返回值的任务放到线程池中</p>
+<p>runAsync()        //无返回值的异步任务</p>
+<p>infoFuture.thenAcceptAsync();        在infoFuture任务执行完后执行该任务（放到线程池中）</p>
+<p>CompletableFuture.allOf()；    //等所有任务完成合并任务</p>
+</blockquote>
+<h3 id="认证服务"><a href="#认证服务" class="headerlink" title="认证服务"></a>认证服务</h3><ol>
+<li>新建模块gulimall-auth-server</li>
+<li>配置nacos参数</li>
+</ol>
+<blockquote>
+<p>Tips:这里遇到一个问题，服务识别不到配置文件bootstrap.properties</p>
+<p>解决方案：删除了spring-cloud-starter-alibaba-nacos-config</p>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B">https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d?#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/16/apache-calcite%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -475,6 +602,125 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">SYN攻击</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:14" itemprop="dateModified" datetime="2021-05-11T21:07:14+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-meta-item leancloud_visitors" data-flag-title="SYN攻击" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>660</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a>SYN攻击</h4><p>有时会被问到了不了解SYN攻击</p>
+<p>写之前，其实并不了解，希望写完之后能够留下一点印象</p>
+<h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>​    SYN泛洪攻击，利用的是TCP的三次握手机制</p>
+<p>​    攻击端利用伪造的IP地址向被攻击端发出请求，服务端的响应请求永远都到不了目的地，服务端会在等待关闭连接的过程中损耗了资源。</p>
+<p>​    如果请求成千上万的话，主机资源将会被耗尽，从而达到攻击的目的</p>
+<blockquote>
+<p>正常的TCP三次握手</p>
+</blockquote>
+<img src="http://p1.pstatp.com/large/pgc-image/37b557063b434769942ca7b9961a943e" alt="黑客基础知识——SYN泛洪攻击原理及防御" style="zoom:67%;">
+
+
+
+<blockquote>
+<p>DOS攻击</p>
+</blockquote>
+<p>攻击方不执行第三次握手，使得server端处于半连接状态</p>
+<h5 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h5><p>①减少SYN重试次数/降低timeout时间</p>
+<p>②增大backlog队列（TCP中有两个backlog队列存放半连接队列和全连接队列）</p>
+<p>其中半连接队列的backlog默认值为2048，全连接队列默认值为128</p>
+<p>③超出处理能力，直接丢弃新来的SYN</p>
+<p>④SYN cookie(等建立起连接在分配数据区，依赖对方使用真实的IP，不然这个方法也不顶用。。)</p>
+<blockquote>
+<p>​    原本tcp协议是在收到syn包时，服务器返回syn+ack包并分配一个专门的数据区来储存tcp连接需要的数据，这就使攻击者有机可乘，可以利用伪造的syn包来消耗服务器的内存空间和半开连接数，这就可以使服务器的内存或者半开连接数耗尽而拒绝服务。</p>
+<p>​    而syn cookie技术是服务器在收到syn包时并不马上分配储存连接的数据区，而是根据这个syn包计算出一个cookie，把这个cookie填入tcp的Sequence Number字段发送syn+ack包，等对方回应ack包时检查回复的Acknowledgment Number字段的合法性，如果合法再分配专门的数据区。</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -706,7 +952,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -720,7 +966,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">线程池2</a>
         </h2>
 
         <div class="post-meta">
@@ -730,14 +976,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-03-03 15:50:06" itemprop="dateCreated datePublished" datetime="2021-03-03T15:50:06+08:00">2021-03-03</time>
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-28 22:46:15" itemprop="dateModified" datetime="2021-03-28T22:46:15+08:00">2021-03-28</time>
+                <time title="修改时间：2021-05-11 21:07:11" itemprop="dateModified" datetime="2021-05-11T21:07:11+08:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -750,7 +996,7 @@
             </span>
 
           
-            <span id="/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="线程池2" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -762,14 +1008,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>16k</span>
+              <span>2.3k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>15 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -781,21 +1027,32 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><p>为了系统性能的提升，我们一般都会将部分数据放入缓存中，加速访问。</p>
-<p>db主要是承担数据的落盘工作</p>
-<p><strong>哪些数据适合放入缓存？</strong></p>
-<ul>
-<li>即时性、数据一致性不高的数据</li>
-<li>访问量大且更新频率不高的数据（读多写少）</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>ThreadPoolExecutor和ThreadPoolTaskExecutor的区别</p>
+<p>有一个需求，需要对日志进行批量的插入到数据库中。数据量多的话，更倾向的选择就是用异步的方式调用DAO方法，批量多线程插入。</p>
+<p>这里就碰到一个问题，使用哪个线程池，本来就只认识ThreadPoolExecutor这个线程池，所以去百度搜有没有相关的代码学习一下。</p>
+<p>没想到有很多的代码是关于ThreadPoolTaskExecutor这个线程池的代码</p>
+<p>所以就简单看看</p>
+<p>首先是<code>ThreadPoolExecutor</code>线程池</p>
+<p>这个线程池是JDK中的线程池类，继承自Executor接口（该接口类似于一个线程池工厂类），里面有execute()方法用来执行线程，线程池会提供一个任务队列，队列中是正在排队的等待线程。</p>
+<p>执行流程加个配图</p>
+<p><img src="https://img-blog.csdnimg.cn/2020030621533867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE2ODAxMA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>然后是<code>ThreadPoolTaskExecutor</code>线程池</p>
+<p>这个线程池是Spring包下的线程池，是Spring为我们提供的线程池类</p>
+<p>我们可以通过配置类进行线程池的注入</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTaskExecutorConfig</span> </span>{</span><br><span class="line">    <span class="meta">@Bean("taskExector")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">taskExector</span><span class="params">()</span> </span>{</span><br><span class="line"> </span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        <span class="keyword">int</span> i = Runtime.getRuntime().availableProcessors();<span class="comment">//获取到服务器的cpu内核</span></span><br><span class="line">        executor.setCorePoolSize(<span class="number">5</span>);<span class="comment">//核心池大小</span></span><br><span class="line">        executor.setMaxPoolSize(<span class="number">100</span>);<span class="comment">//最大线程数</span></span><br><span class="line">        executor.setQueueCapacity(<span class="number">1000</span>);<span class="comment">//队列程度</span></span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">1000</span>);<span class="comment">//线程空闲时间</span></span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"tsak-asyn"</span>);<span class="comment">//线程前缀名称</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());<span class="comment">//配置拒绝策略</span></span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p>区别：</p>
+<p><code>1、ThreadPoolTaskExecutor使用ThreadPoolExecutor并增强，扩展了更多特性</code></p>
+<p><code>2、ThreadPoolTaskExecutor只关注自己增强的部分，任务执行还是ThreadPoolExecutor处理。</code></p>
+<p><code>3、前者spring自己用着爽，后者离开spring我们用ThreadPoolExecutor爽。</code></p>
+<p><code>注意：ThreadPoolTaskExecutor 不会自动创建ThreadPoolExecutor需要手动调initialize才会创建</code></p>
+<p><code>    如果@Bean 就不需手动，会自动InitializingBean的afterPropertiesSet来调initialize</code></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = SpringBootDiscernCollectionApplication.class )</span><span class="comment">//这里是启动类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTest</span> </span>{</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ThreadPoolTaskExecutor threadPoolTaskExecutor;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExecutor</span><span class="params">()</span></span>{</span><br><span class="line">        threadPoolTaskExecutor.execute(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//Thread.sleep(2000)</span></span><br><span class="line">        });</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testThread</span><span class="params">()</span></span>{</span><br><span class="line">        Runnable runnable = <span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line">        runnable.run();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这是写的测试类，不知道为什么用线程池调用的话会爆InterruptException。。</p>
+<p><strong>大师我悟了！！</strong></p>
+<p>报InterruptException的原因是因为单元测试的原因我们的Runnable线程在Sleep的过程中，单元测试其实就跑完了，跑完了它会关闭Tomcat服务器，线程池在察觉到这个单元测试关闭的请求后，会强制线程中断，从而造成InterruptException的异常问题。</p>
+<p>解决方案，在线程外再睡一会儿，给足够的时间让线程sleep。</p>
+
       
     </div>
 
@@ -814,7 +1071,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%871/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -828,7 +1085,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%871/" class="post-title-link" itemprop="url">guli-shop高级篇1</a>
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
         </h2>
 
         <div class="post-meta">
@@ -838,14 +1095,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-02-21 14:20:30" itemprop="dateCreated datePublished" datetime="2021-02-21T14:20:30+08:00">2021-02-21</time>
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-03 19:04:02" itemprop="dateModified" datetime="2021-03-03T19:04:02+08:00">2021-03-03</time>
+                <time title="修改时间：2021-05-11 21:06:58" itemprop="dateModified" datetime="2021-05-11T21:06:58+08:00">2021-05-11</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -858,7 +1115,7 @@
             </span>
 
           
-            <span id="/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%871/" class="post-meta-item leancloud_visitors" data-flag-title="guli-shop高级篇1" title="阅读次数">
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-meta-item leancloud_visitors" data-flag-title="红黑树" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -870,424 +1127,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>30k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>27 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="ElasticSearch"><a href="#ElasticSearch" class="headerlink" title="ElasticSearch"></a>ElasticSearch</h3><p>Elasticsearch 是一个分布式、可扩展、实时的搜索与数据分析引擎。</p>
-<p> <strong>它能从项目一开始就赋予你的数据以搜索、分析和探索的能力</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/02/21/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%871/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/31/Spring%E9%9D%A2%E8%AF%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/31/Spring%E9%9D%A2%E8%AF%95/" class="post-title-link" itemprop="url">Spring面试</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-31 22:47:42" itemprop="dateCreated datePublished" datetime="2021-01-31T22:47:42+08:00">2021-01-31</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:25:23" itemprop="dateModified" datetime="2021-02-21T14:25:23+08:00">2021-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/31/Spring%E9%9D%A2%E8%AF%95/" class="post-meta-item leancloud_visitors" data-flag-title="Spring面试" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>378</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
-<p>在引入IOC后，如下方的图所示软件就接管了这一个过程，对象A和对象B失去了直接关系，当对象A需要对象B时，IOC容器会主动创建一个对象B注入到对象A中。<strong>一切为了解耦</strong></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/31/Spring%E9%9D%A2%E8%AF%95/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/28/guli-shop-study/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/28/guli-shop-study/" class="post-title-link" itemprop="url">guli_shop_study</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-28 21:44:54" itemprop="dateCreated datePublished" datetime="2021-01-28T21:44:54+08:00">2021-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:28:39" itemprop="dateModified" datetime="2021-02-21T14:28:39+08:00">2021-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/28/guli-shop-study/" class="post-meta-item leancloud_visitors" data-flag-title="guli_shop_study" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>8.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>8 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h2><h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><blockquote>
-<p>使用docker进行环境的搭建</p>
-</blockquote>
-<h4 id="1-docker安装mysql"><a href="#1-docker安装mysql" class="headerlink" title="1. docker安装mysql"></a>1. docker安装mysql</h4><blockquote>
-<p>systemctl status docker        #查看docker状态</p>
-<p>docker pull mysql:5.7            #下载mysql5.7</p>
-<p>docker images                        #查看docker下载的镜像</p>
-</blockquote>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/28/guli-shop-study/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/28/guli-shop-study2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/28/guli-shop-study2/" class="post-title-link" itemprop="url">guli_shop_study</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-28 21:44:54" itemprop="dateCreated datePublished" datetime="2021-01-28T21:44:54+08:00">2021-01-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:28:42" itemprop="dateModified" datetime="2021-02-21T14:28:42+08:00">2021-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/28/guli-shop-study2/" class="post-meta-item leancloud_visitors" data-flag-title="guli_shop_study" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>60k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>54 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="商品系统服务"><a href="#商品系统服务" class="headerlink" title="商品系统服务"></a>商品系统服务</h2><p>pms_category：商品分类表</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/28/guli-shop-study2/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/26/Docker%E5%AD%A6%E4%B9%A0/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/26/Docker%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">Docker学习</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-26 17:48:04" itemprop="dateCreated datePublished" datetime="2021-01-26T17:48:04+08:00">2021-01-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:25:18" itemprop="dateModified" datetime="2021-02-21T14:25:18+08:00">2021-02-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/01/26/Docker%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="Docker学习" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.9k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1306,16 +1146,327 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>网上看到的很好的文章</p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/zhangxingeng/p/11236968.html#auto_id_17">https://www.cnblogs.com/zhangxingeng/p/11236968.html#auto_id_17</a></p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/26/Docker%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h5 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h5><ul>
+<li>每个节点是红色或者黑色（非红即黑）</li>
+<li>根节点是黑色（Root黑）</li>
+<li>每一个空叶子节点必须是黑色（NULL黑）</li>
+<li>红色节点的子节点必须是黑色（暴躁红）</li>
+<li>节点中到达任意子节点包含相同数组的黑节点<ul>
+<li>最长路径的节点总数量不会超过最短路径的两倍</li>
+</ul>
+</li>
+</ul>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>putTreeVal（）:插入节点</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">final</span> TreeNode&lt;K,V&gt; <span class="title">putTreeVal</span><span class="params">(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">int</span> h, K k, V v)</span> </span>{</span><br><span class="line">    <span class="comment">// map  当前Hashmap对象</span></span><br><span class="line">    <span class="comment">//tab   Hashmap对象中的table数组</span></span><br><span class="line">    <span class="comment">//h      hash值</span></span><br><span class="line">    <span class="comment">// K     key</span></span><br><span class="line">    <span class="comment">// V     value</span></span><br><span class="line">     Class&lt;?&gt; kc = <span class="keyword">null</span>;</span><br><span class="line">     <span class="keyword">boolean</span> searched = <span class="keyword">false</span>;  	<span class="comment">//标识是否被收索过</span></span><br><span class="line">     TreeNode&lt;K,V&gt; root = (parent != <span class="keyword">null</span>) ? root() : <span class="keyword">this</span>; <span class="comment">// 找到root根节点</span></span><br><span class="line">     <span class="keyword">for</span> (TreeNode&lt;K,V&gt; p = root;;) {	<span class="comment">//从根节点开始遍历循环</span></span><br><span class="line">         <span class="keyword">int</span> dir, ph; K pk;</span><br><span class="line">         <span class="comment">// 根据hash值 判断方向</span></span><br><span class="line">         <span class="keyword">if</span> ((ph = p.hash) &gt; h)</span><br><span class="line">         <span class="comment">// 大于放左侧</span></span><br><span class="line">             dir = -<span class="number">1</span>;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (ph &lt; h)</span><br><span class="line">         <span class="comment">// 小于放右侧</span></span><br><span class="line">             dir = <span class="number">1</span>;</span><br><span class="line">             <span class="comment">// 如果key 相等  直接返回该节点的引用 外边的方法会对其value进行设置</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> ((pk = p.key) == k || (k != <span class="keyword">null</span> &amp;&amp; k.equals(pk)))</span><br><span class="line">             <span class="keyword">return</span> p;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*下面的步骤主要就是当发生冲突 也就是hash相等的时候</span></span><br><span class="line"><span class="comment">* 检验是否有hash相同 并且equals相同的节点。</span></span><br><span class="line"><span class="comment">* 也就是检验该键是否存在与该树上</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//说明进入下面这个判断的条件是 hash相同 但是equal不同</span></span><br><span class="line"><span class="comment">// 没有实现Comparable&lt;C&gt;接口或者 实现该接口 并且 k与pk Comparable比较结果相同</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> ((kc == <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                   (kc = comparableClassFor(k)) == <span class="keyword">null</span>) ||</span><br><span class="line">                  (dir = compareComparables(kc, k, pk)) == <span class="number">0</span>) {</span><br><span class="line">	<span class="comment">//在左右子树递归的寻找 是否有key的hash相同  并且equals相同的节点</span></span><br><span class="line">             <span class="keyword">if</span> (!searched) {</span><br><span class="line">                 TreeNode&lt;K,V&gt; q, ch;</span><br><span class="line">                 searched = <span class="keyword">true</span>;</span><br><span class="line">                 <span class="keyword">if</span> (((ch = p.left) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                      (q = ch.find(h, k, kc)) != <span class="keyword">null</span>) ||</span><br><span class="line">                     ((ch = p.right) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                      (q = ch.find(h, k, kc)) != <span class="keyword">null</span>))</span><br><span class="line">                      <span class="comment">//找到了 就直接返回</span></span><br><span class="line">                     <span class="keyword">return</span> q;</span><br><span class="line">             }</span><br><span class="line">             <span class="comment">//说明红黑树中没有与之equals相等的  那就必须进行插入操作</span></span><br><span class="line">             <span class="comment">//打破平衡的方法的 分出大小 结果 只有-1 1 </span></span><br><span class="line">             dir = tieBreakOrder(k, pk);</span><br><span class="line">         }</span><br><span class="line"><span class="comment">//下列操作进行插入节点</span></span><br><span class="line"><span class="comment">//xp 保存当前节点</span></span><br><span class="line">         TreeNode&lt;K,V&gt; xp = p;</span><br><span class="line">         <span class="comment">//找到要插入节点的位置</span></span><br><span class="line">         <span class="keyword">if</span> ((p = (dir &lt;= <span class="number">0</span>) ? p.left : p.right) == <span class="keyword">null</span>) {</span><br><span class="line">             Node&lt;K,V&gt; xpn = xp.next;</span><br><span class="line">             <span class="comment">//创建出一个新的节点</span></span><br><span class="line">             TreeNode&lt;K,V&gt; x = map.newTreeNode(h, k, v, xpn);</span><br><span class="line">             <span class="keyword">if</span> (dir &lt;= <span class="number">0</span>)</span><br><span class="line">             <span class="comment">//小于父亲节点  新节点放左孩子位置</span></span><br><span class="line">                 xp.left = x;</span><br><span class="line">             <span class="keyword">else</span></span><br><span class="line">             <span class="comment">//大于父亲节点  放右孩子位置</span></span><br><span class="line">                 xp.right = x;</span><br><span class="line">             </span><br><span class="line">             <span class="comment">//维护双链表关系</span></span><br><span class="line">             xp.next = x;</span><br><span class="line">             x.parent = x.prev = xp;</span><br><span class="line">             <span class="keyword">if</span> (xpn != <span class="keyword">null</span>)</span><br><span class="line">                 ((TreeNode&lt;K,V&gt;)xpn).prev = x;</span><br><span class="line">             <span class="comment">//将root移到table数组的i 位置的第一个节点</span></span><br><span class="line">             <span class="comment">//插入操作过红黑树之后 重新调整平衡。</span></span><br><span class="line">             moveRootToFront(tab, balanceInsertion(root, x));</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         }</span><br><span class="line">     }</span><br><span class="line"> }</span><br><span class="line">             </span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="简单来说"><a href="#简单来说" class="headerlink" title="简单来说"></a><strong>简单来说</strong></h5><blockquote>
+<p>1、从root节点开始寻找 如果目标 k.hash 小于 当前节点的 hash ,那么到左树寻找，大于那么从右树寻找。如果找到key相同并且equals相同的节点 p 那就直接返回。<br>2、如果hash相同 但是equal不同 进而通过Comparable接口，进行比较，如果比较的结果如果还是相等，则在左右子树递归的寻找是否有与要插入的key equals相同的元素。如果有那么直接return返回。<br>（也即是没实现Comparable接口，大小由hash判定。实现了，则由Comparable接口的比较方法判定）<br>3、如果遍历完所有的节点 并未找到equals相同的节点。那就需要插入该新节点。必须分出大小，所以通过执行tieBreakOrder方法，该方法的返回值是-1，1。如果是-1则插入到左边节点，1就插入到右边节点。<br>4、插入完成之后，需要重新移动root节点 到table数组的i位置的第一个节点上 并且需重新平衡红黑树。</p>
+</blockquote>
+<h4 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h4><p>balanceInsertion（）方法</p>
+<h5 id="左旋右旋"><a href="#左旋右旋" class="headerlink" title="左旋右旋"></a>左旋右旋</h5><p><img src="https://upload-images.jianshu.io/upload_images/7779607-4e69d9fa7aa2cd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/585/format/webp" alt="img"></p>
+<p>其实每次重新插入节点，就要进行染色，平衡</p>
+<p>新节点默认颜色是红色的，因为红色不会影响路径上黑色节点的数量，保持性质5。</p>
+<p>然后根据性质进行染色，通过左旋右旋进行平衡</p>
+<p>染色可以参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96e652ccf720">https://www.jianshu.com/p/96e652ccf720</a></p>
+<blockquote>
+<p>例子：插入 10,20,15,30,5,8</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7779607-7be2473819858601.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/959/format/webp" alt="img"></p>
+</blockquote>
+<h4 id="链表转红黑树"><a href="#链表转红黑树" class="headerlink" title="链表转红黑树"></a>链表转红黑树</h4><p>感觉就是跟红黑树插入节点的过程差不多。。</p>
+<p>转换的条件：容量&gt;=64，长度&gt;=8</p>
+<h4 id="红黑树链化"><a href="#红黑树链化" class="headerlink" title="红黑树链化"></a>红黑树链化</h4><p>一般在扩容时才能退化成链表</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//退化链表的临界值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1、扩容时如果是红黑树结构会执行split方法</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">	((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">split</span><span class="params">(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab, <span class="keyword">int</span> index, <span class="keyword">int</span> bit)</span> </span>{</span><br><span class="line">	<span class="comment">//生成 low 和 high 两个红黑树</span></span><br><span class="line">    TreeNode&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">    TreeNode&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//lc是low树的元素个数，hc是high数的。</span></span><br><span class="line">    <span class="keyword">int</span> lc = <span class="number">0</span>, hc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//把红黑树中的结点依次添加到 low 和 high 两颗红黑树中</span></span><br><span class="line">    <span class="comment">//还是依靠 (e.hash &amp; bit) == 0 的位运算来判断属于哪颗树，bit是传过来的旧数组下标</span></span><br><span class="line">    <span class="keyword">for</span> (TreeNode&lt;K,V&gt; e = b, next; e != <span class="keyword">null</span>; e = next) {</span><br><span class="line">    	......</span><br><span class="line">        <span class="keyword">if</span> ((e.hash &amp; bit) == <span class="number">0</span>) {</span><br><span class="line">        	<span class="comment">//添加到 loHead</span></span><br><span class="line">        	......</span><br><span class="line">            ++lc;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">        	<span class="comment">//添加到 hiHead</span></span><br><span class="line">        	......</span><br><span class="line">            ++hc;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (loHead != <span class="keyword">null</span>) {</span><br><span class="line">		<span class="comment">//如果low树的元素个数小于等于6，退化成链表</span></span><br><span class="line">		<span class="comment">//并插入到新数组 tab[index] 的位置上，index是当前红黑树所在旧数组坐标</span></span><br><span class="line">    	<span class="keyword">if</span> (lc &lt;= UNTREEIFY_THRESHOLD)</span><br><span class="line">        	tab[index] = loHead.untreeify(map);</span><br><span class="line">    	<span class="keyword">else</span> {</span><br><span class="line">	       	 tab[index] = loHead;</span><br><span class="line">        	<span class="keyword">if</span> (hiHead != <span class="keyword">null</span>) <span class="comment">// (else is already treeified)</span></span><br><span class="line">            	loHead.treeify(tab);</span><br><span class="line">    		}</span><br><span class="line">		}</span><br><span class="line">	<span class="keyword">if</span> (hiHead != <span class="keyword">null</span>) {</span><br><span class="line">		<span class="comment">//如果high树的元素个数小于等于6，退化成链表</span></span><br><span class="line">		<span class="comment">//并插入到新数组 tab[index + bit] 的位置上，index是当前红黑树所在旧数组坐标，bit是旧数组长度</span></span><br><span class="line">    	<span class="keyword">if</span> (hc &lt;= UNTREEIFY_THRESHOLD)</span><br><span class="line">        	tab[index + bit] = hiHead.untreeify(map);</span><br><span class="line">    	<span class="keyword">else</span> {</span><br><span class="line">        	tab[index + bit] = hiHead;</span><br><span class="line">        	<span class="keyword">if</span> (loHead != <span class="keyword">null</span>)</span><br><span class="line">            	hiHead.treeify(tab);</span><br><span class="line">    	}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ol>
+<li><p>扩容时如果是红黑树结构会执行红黑树的 split( ) 方法</p>
+</li>
+<li><p>split 方法中会初始化生成 loHead 和 hiHead 两个红黑树的头结点（之后会用 low 和 high 表示）<br>lc 和 hc 分别为 low 和 high 的元素个数，初始化为0</p>
+</li>
+<li><p>把红黑树中的结点依次添加到 low 和 high 两颗红黑树中，依靠 (e.hash &amp; bit) == 0 的位运算来判断属于哪颗树，bit是传过来的旧数组下标。每颗树元素的增加都会使对应的 lc 或 hc 自增1。</p>
+</li>
+<li><p>生成完 low 和 high 两颗红黑树后，如果对应的元素个数 lc，hc 小于等于6，退化成链表，否则维持红黑树形态。</p>
+</li>
+<li><p>low树插入到新数组 tab[index] 的位置上，index是当前红黑树所在旧数组坐标；high树插入到新数组 tab[index + bit] 的位置上，bit是旧数组长度。</p>
+</li>
+</ol>
+<p>资料来源：</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43732955/article/details/96860816">https://blog.csdn.net/weixin_43732955/article/details/96860816</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62409998">https://zhuanlan.zhihu.com/p/62409998</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96e652ccf720">https://www.jianshu.com/p/96e652ccf720</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45369827/article/details/114930945">https://blog.csdn.net/qq_45369827/article/details/114930945</a></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">常见算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:11" itemprop="dateModified" datetime="2021-05-11T21:07:11+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="常见算法" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><p>原理：相邻两两元素进行比较，不断重复</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bubbleSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="comment">//非空检测</span></span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>) <span class="keyword">return</span> array;</span><br><span class="line">    <span class="comment">//冒泡是稳定的，所以O（n^2）,两轮for循环</span></span><br><span class="line">    <span class="keyword">int</span> n = array.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; i &lt; n - <span class="number">1</span> - i; i++){</span><br><span class="line">            <span class="keyword">if</span>(array[j] &gt; array[j+<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">int</span> temp = array[j];</span><br><span class="line">                array[j] = array[j+<span class="number">1</span>];</span><br><span class="line">                array[j+<span class="number">1</span>] = temp;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最佳：O(n)：传的刚好是有序数组，一轮过去啥都没换</p>
+<p>最差: O(n^2)</p>
+<p>平均：O（n^2）</p>
+<h3 id="选排"><a href="#选排" class="headerlink" title="选排"></a>选排</h3><p>原理：先选在排，和开头或结尾的数据位置对换</p>
+<p>先找出最小(最大)，放到有序数组的开头(结尾)</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] SelectionSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++){</span><br><span class="line">        <span class="comment">//定义一个最小的target</span></span><br><span class="line">        <span class="keyword">int</span> min_target = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length; j++){</span><br><span class="line">            <span class="keyword">if</span>(array[min_target] &gt; array[j]){</span><br><span class="line">                min_target = j;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">int</span> temp = array[min_target];</span><br><span class="line">        array[min_target] = array[i];</span><br><span class="line">        array[i] = temp; </span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<p>稳定：都是O(n^2)</p>
+<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>原理：取头数，作为有序数组第一位，然后后面插入从后往前</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] InsertSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="comment">//当前元素</span></span><br><span class="line">    <span class="keyword">int</span> current;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++){</span><br><span class="line">        <span class="comment">//从第二位开始了，第一位默认为开头,</span></span><br><span class="line">        <span class="comment">//把array[i+1]的值存起来了</span></span><br><span class="line">        current = array[i + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">//已排元素的下标</span></span><br><span class="line">        <span class="keyword">int</span> preIndex = i;</span><br><span class="line">        <span class="keyword">while</span>(array[preIndex] &gt; current &amp;&amp; preIndex &gt;= <span class="number">0</span>){</span><br><span class="line">            array[preIndex + <span class="number">1</span>] = array[preIndex];</span><br><span class="line">            preIndex--;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//当碰到一个比我还小的数，那我就排在它后面</span></span><br><span class="line">        array[preIndex + <span class="number">1</span>] = current;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最佳O（n）</p>
+<p>最差O（n^2）</p>
+<p>平均O（n^2）</p>
+<h2 id="Shell-Sort"><a href="#Shell-Sort" class="headerlink" title="Shell Sort"></a>Shell Sort</h2><p>原理:改进版的插入排序，引入gap元素</p>
+<p>gap = length / 2;</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] ShellSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">int</span> len = array.length;</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">int</span> temp, gap = len/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(gap &gt; <span class="number">0</span>){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = gap; i &lt; len; i++){</span><br><span class="line">            <span class="comment">//后面的元素</span></span><br><span class="line">            temp = array[i];</span><br><span class="line">            <span class="comment">//前面的元素</span></span><br><span class="line">            <span class="keyword">int</span> preIndex = i - gap;</span><br><span class="line">            <span class="keyword">while</span>(array[preIndex] &gt; temp] &amp;&amp; preIndex &gt;= <span class="number">0</span>){</span><br><span class="line">                array[preIndex + gap] = array[preIndex];</span><br><span class="line">                preIndex -= gap;</span><br><span class="line">            }</span><br><span class="line">            array[preIndex + gap] = temp;</span><br><span class="line">        }</span><br><span class="line">        gap /= <span class="number">2</span>; </span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>O(log n ^2)</p>
+<h3 id="归并排序-稳定"><a href="#归并排序-稳定" class="headerlink" title="归并排序(稳定)"></a>归并排序(稳定)</h3><p>原理：分组排序的算法，感觉主要就是一种<strong>思想</strong>（分治法）</p>
+<p>你把大数组分成小数组，小数组用的其他算法进行排序，最后再合并成一个大数组</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] MergeSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length &lt; <span class="number">2</span>) <span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">int</span> mid = array.length / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span>[] left = Arrays.copyOfRange(array, <span class="number">0</span>, mid);</span><br><span class="line">    <span class="keyword">int</span>[] right = Arrays.copyOfRange(array, mid, array.length);</span><br><span class="line">	<span class="keyword">return</span> merge(MergeSort(left), MergeSort(right));</span><br><span class="line">}</span><br><span class="line"><span class="comment">//对两个有序数组进行合并</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] merge(<span class="keyword">int</span>[] left, <span class="keyword">int</span>[] right){</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[left.length + right.length];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> index = <span class="number">0</span>, i = <span class="number">0</span>, j = <span class="number">0</span>; index &lt; result.length; index++){</span><br><span class="line">        <span class="keyword">if</span>(i &gt; left.length){</span><br><span class="line">            result[index] = right[j++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(j &gt; right.length){</span><br><span class="line">            result[index] = left[i++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(left[i] &gt; right[j]){</span><br><span class="line">            result[index] = right[j++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            result[index] = left[i++];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>最佳O(N)</p>
+<p><strong>最差O（NlogN）</strong></p>
+<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>原理：（递归）</p>
+<ol>
+<li><p>从数列中挑一个元素作为“基准”（pivot）</p>
+</li>
+<li><p>一般的就是把pivot作为temp，维护两个指针</p>
+<p>然后，前面找小于pivot的数，后面找大于pivot的数，进行交换</p>
+<p><img src="https://img-blog.csdn.net/20150810105908580" alt="这里写图片描述"></p>
+</li>
+</ol>
+<p>3.重复递归</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 快排的具体实现方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//这个方法只维护了一个指针</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>{</span><br><span class="line">    <span class="comment">//从start-end中随机找一个基准数，也是一道面试题</span></span><br><span class="line">    <span class="comment">//如何从start-&gt;end中随机找一个数</span></span><br><span class="line">    <span class="keyword">int</span> pivot = (<span class="keyword">int</span>)(Math.random()*(end-start+<span class="number">1</span>)+start);</span><br><span class="line">    <span class="comment">//维护的唯一指针，作用是用来分割pivot左右的数的</span></span><br><span class="line">        <span class="comment">//[0,smallIndex]的是&lt;= pivot; [smallIndex+1, end]的是 &gt;= pivot</span></span><br><span class="line">    <span class="keyword">int</span> smallIndex = start - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//把pivot移到end处，方便遍历</span></span><br><span class="line">    swap(array, pivot, end);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; i++){</span><br><span class="line">        <span class="keyword">if</span>(array[i] &lt;= array[end]){</span><br><span class="line">        <span class="comment">//小于无事发生</span></span><br><span class="line">         	smallIndex++;</span><br><span class="line">            <span class="comment">//碰到了大于的数了，开始处理</span></span><br><span class="line">            <span class="comment">//不好的地方就是，一旦出现第一个大于pivot的数，这个if就要一直处理</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; smallIndex){</span><br><span class="line">                swap(array, i , smallIndex);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//其实这就是pivot的位置，感觉很巧妙</span></span><br><span class="line">    <span class="keyword">return</span> smallIndex;   </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*	交换方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> temp = array[start];</span><br><span class="line">    array[start] = array[end];</span><br><span class="line">    array[end] = temp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*	QuickSort</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//默认start = 0 ,end = array.length,如果有要求具体位置的快排的话也可以</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] QuickSort(<span class="keyword">int</span>[] array<span class="comment">/*, int start, int end*/</span>){</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> end = array.length;</span><br><span class="line">    <span class="keyword">if</span>(array.length &lt; <span class="number">1</span> || start &lt; <span class="number">0</span> || end &gt;= array.length || start &gt; end){</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//分割点，求出来的，通过快排方法</span></span><br><span class="line">    <span class="keyword">int</span> smallIndex = partition(array, start, end);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//递归</span></span><br><span class="line">    <span class="keyword">if</span>(smallIndex &lt; end)</span><br><span class="line">        QuickSort(array, smallIndex+<span class="number">1</span>, end);</span><br><span class="line">    <span class="keyword">if</span>(smallIndex &gt; start)</span><br><span class="line">        QuickSort(array, start, smallIndex);</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最佳：O（nlogn）</p>
+<p>最差：O（n^2）</p>
+<p>平均：O（nlogn）</p>
+<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201128143005449.png" alt="image-20201128143005449" style="zoom:80%;">
+
+<p>原理：</p>
+<ol>
+<li>先把无序数组构建成大堆顶（此时序列的最大值就是堆顶的根节点）</li>
+<li>将根节点和末尾元素交换，则末尾元素成最大值</li>
+<li>将剩余的n-1元素重构成一个新的大堆顶，并重复上面的过程</li>
+</ol>
+<p><strong>一般升序用大堆顶，降序用小堆顶</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//堆排序主函数</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] HeapSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">int</span> len = array.length;</span><br><span class="line">    <span class="keyword">if</span>(len &lt; <span class="number">1</span>)<span class="keyword">return</span> array;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1.构建一个最大堆</span></span><br><span class="line">    buildMaxHeap(array);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.循环堆首位，调整最大值</span></span><br><span class="line">    <span class="keyword">while</span>(len &gt; <span class="number">0</span>){</span><br><span class="line">        swap(array, <span class="number">0</span> ,len - <span class="number">1</span>);</span><br><span class="line">        len--;</span><br><span class="line">        adjustHeap(array, <span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//建立最大堆的方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>{</span><br><span class="line">    <span class="comment">//从最后一个非叶子节点开始向上构建最大堆</span></span><br><span class="line">    <span class="comment">//for循环</span></span><br><span class="line">    <span class="comment">//这里的i传的是最深的根节点的位置序列值</span></span><br><span class="line">    <span class="comment">//比如上图中的数组长度为8，最深的根节点就是8/2-1=3</span></span><br><span class="line">    <span class="comment">//在平衡二叉树中，0-3全都是根节点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = (len/<span class="number">2</span>-<span class="number">1</span>); i &gt;= <span class="number">0</span>; i--){</span><br><span class="line">        adjustHeap(array, i);</span><br><span class="line">    }</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//调整最大值的方法</span></span><br><span class="line"><span class="comment">//传的i是最深的根节点！</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> i )</span></span>{</span><br><span class="line">    <span class="comment">//先声明一个最大指针</span></span><br><span class="line">    <span class="keyword">int</span> maxIndex = i;</span><br><span class="line">    <span class="comment">//对于左节点，如果左子树大于父节点，那么就将最大指针指向左子树</span></span><br><span class="line">    <span class="keyword">if</span>(i * <span class="number">2</span> &lt; len &amp;&amp; array[i*<span class="number">2</span>] &gt; array[maxIndex])</span><br><span class="line">        maxIndex = i*<span class="number">2</span> ;</span><br><span class="line">    <span class="comment">//对于右节点，如果右子树大于父节点，那么就将最大指针指向右子树</span></span><br><span class="line">    <span class="keyword">if</span>(i * <span class="number">2</span> + <span class="number">1</span> &lt; len &amp;&amp; array[i*<span class="number">2</span> + <span class="number">1</span>] &gt; array[maxIndex])</span><br><span class="line">        maxIndex = i*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(maxIndex != i){</span><br><span class="line">        swap(array,maxIndex,i);</span><br><span class="line">        adjustHeap(array,maxIndex);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找了个看得懂的版本，我人晕了</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> []arr)</span></span>{</span><br><span class="line">        <span class="comment">//1.构建大顶堆</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=arr.length/<span class="number">2</span>-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">            <span class="comment">//从第一个非叶子结点从下至上，从右至左调整结构</span></span><br><span class="line">            adjustHeap(arr,i,arr.length);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//2.调整堆结构+交换堆顶元素与末尾元素</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=arr.length-<span class="number">1</span>;j&gt;<span class="number">0</span>;j--){</span><br><span class="line">            swap(arr,<span class="number">0</span>,j);<span class="comment">//将堆顶元素与末尾元素进行交换</span></span><br><span class="line">            adjustHeap(arr,<span class="number">0</span>,j);<span class="comment">//重新对堆进行调整</span></span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span> []arr,<span class="keyword">int</span> i,<span class="keyword">int</span> length)</span></span>{</span><br><span class="line">        <span class="comment">//i是第一个非叶子节点</span></span><br><span class="line">        <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">        <span class="comment">//从i结点的左子结点开始，也就是2i+1处开始</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i*<span class="number">2</span> + <span class="number">1</span>; j &lt; length; j = j*<span class="number">2</span> + <span class="number">1</span>){</span><br><span class="line">            <span class="comment">//如果左子结点小于右子结点，k指向右子结点</span></span><br><span class="line">        <span class="keyword">if</span>(j+<span class="number">1</span> &lt;length &amp;&amp; arr[j] &lt; arr[j+<span class="number">1</span>]){</span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）</span></span><br><span class="line">        <span class="keyword">if</span>(arr[j] &gt;temp){</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            i = j;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        }</span><br><span class="line">        arr[i] = temp;<span class="comment">//将temp值放到最终的位置</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 交换元素</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> a</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> b</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> []arr,<span class="keyword">int</span> a ,<span class="keyword">int</span> b)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> temp=arr[a];</span><br><span class="line">        arr[a] = arr[b];</span><br><span class="line">        arr[b] = temp;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-title-link" itemprop="url">API接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:12" itemprop="dateModified" datetime="2021-05-11T21:07:12+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-meta-item leancloud_visitors" data-flag-title="API接口" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近在做一个稽核项目，是SQLServer数据库的</p>
+<p>给定响应的json和请求的json，要求从数据库中抓相关数据并返回</p>
+<p>举个栗子：</p>
+<p>Controller层：用于请求接受和响应返回层</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = "/OpenApi/pageQueryEnpass", method = RequestMethod.POST)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function">RespPageEntity&lt;Object&gt; <span class="title">api</span><span class="params">(<span class="meta">@RequestBody</span> <span class="meta">@Valid</span> ReqPage&lt;ReqPageEnpassResult&gt; param, BindingResult bindingResult)</span> </span>{</span><br><span class="line">     <span class="comment">//Service根据传入的请求，返回所需的数据列表</span></span><br><span class="line">    List&lt;RespPageEnpassResult&gt; tableDataList = pageEnpassService.queryListByRequest(param);</span><br><span class="line">    <span class="keyword">return</span> RespPageEntity.success4tableData(param,tableDataList);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>RespPageEntity对象（根据json对象制定），响应的对象结构</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RespPageEntity</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> RespHeader header;</span><br><span class="line">   <span class="keyword">private</span> RespPage pager;</span><br><span class="line">   <span class="keyword">private</span> T body;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;根据tableData的形式返回内容&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;E&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> pager</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> tableData</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">RespPageEntity&lt;Object&gt; <span class="title">success4tableData</span><span class="params">(ReqPage&lt;?&gt; param , E tableData)</span></span>{</span><br><span class="line">      RespPage pager = <span class="keyword">new</span> RespPage();</span><br><span class="line">      pager.setPageIndex(param.getPageIndex());</span><br><span class="line">      pager.setPageSize(param.getPageSize());</span><br><span class="line">      RespPageBody&lt;E&gt; body = <span class="keyword">new</span> RespPageBody&lt;E&gt;();</span><br><span class="line">      body.setTableData(tableData);</span><br><span class="line">      RespPageEntity&lt;Object&gt; entity = <span class="keyword">new</span> RespPageEntity&lt;Object&gt;();</span><br><span class="line">      entity.setHeader(RespHeader.success);</span><br><span class="line">      entity.setPager(pager);</span><br><span class="line">      entity.setBody(body);</span><br><span class="line">      <span class="keyword">return</span> entity;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>ReqPage对象（请求的对象结构）</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage</span>&lt;<span class="title">T</span>&gt;</span>{</span><br><span class="line">   <span class="comment">/** 分页大小 **/</span></span><br><span class="line">   <span class="meta">@Max(1000)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageSize;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 分页号 **/</span></span><br><span class="line">   <span class="meta">@Min(1)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageIndex;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 请求条件 **/</span></span><br><span class="line">   <span class="meta">@Valid</span></span><br><span class="line">   <span class="keyword">private</span> T condition;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>Serviceimpl（方法的实现类）</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageEnpassServiceImpl</span> <span class="keyword">implements</span> <span class="title">PageEnpassService</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PageEnpassDao pageEnpassDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;RespPageEnpassResult&gt; <span class="title">queryListByRequest</span><span class="params">(ReqPage&lt;ReqPageEnpassResult&gt; param)</span> </span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将请求参数封装成Map</span></span><br><span class="line">        Map&lt;String, Object&gt; maps = ReqPage2MapUtil.ReqPage2Map(param);</span><br><span class="line">        <span class="comment">//将参数封装成where的sql字符串</span></span><br><span class="line">        String condition = Param2ConditionUtil.param2ConditionWithTime(maps, <span class="string">"entime"</span>, Contanst.SP_PARAM);</span><br><span class="line">        maps.put(<span class="string">"strWhere"</span>, condition);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用dao层服务，根据传入的Condition查询得到List&lt;TableData&gt;</span></span><br><span class="line">        ArrayList&lt;PageEnpassPO&gt; tableDataList = pageEnpassDao.queryPageByRequest(maps);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据库查询出来的EnpassPO进行属性对拷，进行封装后返回</span></span><br><span class="line">        List&lt;RespPageEnpassResult&gt; collect = tableDataList.stream().map((pageEnpassPO) -&gt; {</span><br><span class="line">            RespPageEnpassResult respPageEnpassResult = <span class="keyword">new</span> RespPageEnpassResult();</span><br><span class="line">            <span class="comment">//spring的对象拷贝源数据在前，目标数据在后</span></span><br><span class="line">            BeanUtils.copyProperties(pageEnpassPO, respPageEnpassResult);</span><br><span class="line">            <span class="comment">//PO的时间是Date类型，返回类型是String类型</span></span><br><span class="line">            	                       respPageEnpassResult.setEnTime(DateTool.getDateTimeStr(pageEnpassPO.getEnTime()));</span><br><span class="line">            respPageEnpassResult.setInsertTime(DateTool.getDateTimeStr(pageEnpassPO.getInsertTime()));</span><br><span class="line">            <span class="keyword">return</span> respPageEnpassResult;</span><br><span class="line">        }).collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">return</span> collect;</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*	将请求参数封装成Map</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage2MapUtil</span> </span>{</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">ReqPage2Map</span><span class="params">(ReqPage&lt;?&gt; param)</span> </span>{</span><br><span class="line">      Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      <span class="keyword">if</span>(param!=<span class="keyword">null</span>) {</span><br><span class="line">         map.put(<span class="string">"pageSize"</span>, param.getPageSize());</span><br><span class="line">           map.put(<span class="string">"pageIndex"</span>, param.getPageIndex());</span><br><span class="line">           Object condition = param.getCondition();</span><br><span class="line">           <span class="keyword">if</span>(condition!=<span class="keyword">null</span>) {</span><br><span class="line">              Map&lt;String, Object&gt; others =  getObjectToMap(condition);</span><br><span class="line">              map.putAll(others);</span><br><span class="line">           }</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> map;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Param2ConditionUtil</span> </span>{</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 单引号 **/</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> SINGLE_MARK = <span class="string">'\''</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> BLANK = <span class="string">' '</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AND = <span class="string">"AND"</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String GT = <span class="string">"&gt;="</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LT = <span class="string">"&lt;="</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;请求参数封装where需要的条件&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> params</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> exps</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">param2Condition</span><span class="params">(Map&lt;String, Object&gt; params , String... exps)</span> </span>{</span><br><span class="line">      Set&lt;String&gt; expSet = <span class="keyword">new</span> HashSet&lt;String&gt;(Arrays.asList(exps));</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      Iterator&lt;String&gt; itor = params.keySet().iterator();</span><br><span class="line">      <span class="keyword">while</span>(itor.hasNext()) {</span><br><span class="line">         String key = itor.next();</span><br><span class="line">         <span class="keyword">if</span>(!expSet.contains(key)) {</span><br><span class="line">            Object value = params.get(key);</span><br><span class="line">            <span class="keyword">if</span>(value!=<span class="keyword">null</span>) {</span><br><span class="line">               String val = value.toString();</span><br><span class="line">               <span class="keyword">if</span>(!isNum(value)) {</span><br><span class="line">                  val = SINGLE_MARK + val + SINGLE_MARK;</span><br><span class="line">               }</span><br><span class="line">               sb.append(AND).append(BLANK).append(key).append(<span class="string">"="</span>).append(val).append(BLANK);</span><br><span class="line">            }</span><br><span class="line">         }</span><br><span class="line">      }</span><br><span class="line">      String condition = sb.toString();</span><br><span class="line">      <span class="keyword">if</span>(condition.startsWith(AND)) {</span><br><span class="line">         condition = condition.substring(AND.length());</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> condition;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>dao层调用存储结构（切记要加大括号！）</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"queryPageByRequest"</span> resultType=<span class="string">"com.hong.ssm.po.PageEnpassPO"</span> parameterType=<span class="string">"map"</span> statementType=<span class="string">"CALLABLE"</span> timeout=<span class="string">"30"</span>&gt;</span><br><span class="line">        {call [dbo].[存储结构名] (</span><br><span class="line">            #{startTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{endTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{strWhere,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{pageSize,mode=IN,jdbcType=INTEGER},</span><br><span class="line">            #{pageIndex,mode=IN,jdbcType=INTEGER}</span><br><span class="line">        )}</span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>EnpassPO和RespEnpassResult略</p>
+
       
     </div>
 
@@ -1333,7 +1484,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1399,7 +1550,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">16</span>
+          <span class="site-state-item-count">33</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1448,12 +1599,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">149k</span>
+    <span title="站点总字数">202k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">2:15</span>
+    <span title="站点阅读时长">3:04</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
