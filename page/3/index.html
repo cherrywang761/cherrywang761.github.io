@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">进程同步机制</a>
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-title-link" itemprop="url">红黑树</a>
         </h2>
 
         <div class="post-meta">
@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:10" itemprop="dateModified" datetime="2021-05-11T21:07:10+08:00">2021-05-11</time>
+                <time title="修改时间：2021-05-13 20:03:21" itemprop="dateModified" datetime="2021-05-13T20:03:21+08:00">2021-05-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -234,7 +234,7 @@
             </span>
 
           
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="进程同步机制" title="阅读次数">
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%A2%E9%BB%91%E6%A0%91/" class="post-meta-item leancloud_visitors" data-flag-title="红黑树" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -246,14 +246,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1.3k</span>
+              <span>4.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>4 分钟</span>
             </span>
 
         </div>
@@ -265,67 +265,62 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="进程同步机制"><a href="#进程同步机制" class="headerlink" title="进程同步机制"></a>进程同步机制</h2><p>进程同步就是说不同的进程之间传递信息。它是一组编程接口，让程序员来协调进程，使之能够相互通信</p>
-<p>进程通信（IPC）</p>
-<img src="https://img-blog.csdn.net/20180817140424264?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NTI1Mzg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" style="zoom:80%;">
-
-<p>键相当于IPC的外部名，标识符相当于IPC的内部名，IPC=内核对象（进程通信是靠内核对象沟通的）</p>
-<h3 id="IPC的目的"><a href="#IPC的目的" class="headerlink" title="IPC的目的"></a>IPC的目的</h3><h4 id="网络socket"><a href="#网络socket" class="headerlink" title="网络socket"></a>网络socket</h4><p>一般在TCP/IP通信中比较常见，是OS提供给程序用来与TCP/IP协议交互的接口，socket套接字，两个程序进行网络通信时，通信连接的端点就可以理解为两个socket</p>
-<p>socket表现形式    IP：端口</p>
-<p>程序交互=进程交互，程序的执行过程相当于进程从创建到运行到消亡的这么一个过程</p>
-<p>网络的进程通信中是十分常见的</p>
-<p>socket适用于同一主机不同进程间的通信（模块之间feign调用）和不同主机进程间的全双工网络通信。。</p>
-<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>管道分为三种，传输数据都是无类型的，根据FIFO机制</p>
-<ul>
-<li>匿名管道：也叫普通管道：PIPE：两个限制：1.只能父子进程，兄弟进程通信 2. 半双工通信，数据只能单向传输（对讲机）</li>
-<li>命令流管道：进行了优化，它是全双工通信（电话），但是第一个限制没有解除</li>
-<li>命名管道：FIFO，两个限制都解除了</li>
+          <h3 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h3><h5 id="特性"><a href="#特性" class="headerlink" title="特性"></a>特性</h5><ul>
+<li>每个节点是红色或者黑色（非红即黑）</li>
+<li>根节点是黑色（Root黑）</li>
+<li>每一个空叶子节点必须是黑色（NULL黑）</li>
+<li>红色节点的子节点必须是黑色（暴躁红）</li>
+<li>节点中到达任意子节点包含相同数组的黑节点<ul>
+<li>最长路径的节点总数量不会超过最短路径的两倍</li>
 </ul>
-<p>一般就是喜欢拿匿名管道和命名管道做比较</p>
-<ol>
-<li>匿名管道是在内存中的（fork），但是命名管道是在文件系统中的，它是关联了一个路径，以FIFO文件形式存储在文件系统中的，设备文件，所以它打开要用open()才能打开，而且可能阻塞</li>
-<li>匿名管道用pipe函数创建打开，命名函数用mkfifo函数创建，open打开</li>
-</ol>
-<img src="https://img-blog.csdn.net/20180930143508803?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fa291/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" style="zoom:50%;">
+</li>
+</ul>
+<h4 id="插入"><a href="#插入" class="headerlink" title="插入"></a>插入</h4><p>putTreeVal（）:插入节点</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br></pre></td><td class="code"><pre><span class="line"> <span class="function"><span class="keyword">final</span> TreeNode&lt;K,V&gt; <span class="title">putTreeVal</span><span class="params">(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab,</span></span></span><br><span class="line"><span class="function"><span class="params">                                <span class="keyword">int</span> h, K k, V v)</span> </span>{</span><br><span class="line">    <span class="comment">// map  当前Hashmap对象</span></span><br><span class="line">    <span class="comment">//tab   Hashmap对象中的table数组</span></span><br><span class="line">    <span class="comment">//h      hash值</span></span><br><span class="line">    <span class="comment">// K     key</span></span><br><span class="line">    <span class="comment">// V     value</span></span><br><span class="line">     Class&lt;?&gt; kc = <span class="keyword">null</span>;</span><br><span class="line">     <span class="keyword">boolean</span> searched = <span class="keyword">false</span>;  	<span class="comment">//标识是否被收索过</span></span><br><span class="line">     TreeNode&lt;K,V&gt; root = (parent != <span class="keyword">null</span>) ? root() : <span class="keyword">this</span>; <span class="comment">// 找到root根节点</span></span><br><span class="line">     <span class="keyword">for</span> (TreeNode&lt;K,V&gt; p = root;;) {	<span class="comment">//从根节点开始遍历循环</span></span><br><span class="line">         <span class="keyword">int</span> dir, ph; K pk;</span><br><span class="line">         <span class="comment">// 根据hash值 判断方向</span></span><br><span class="line">         <span class="keyword">if</span> ((ph = p.hash) &gt; h)</span><br><span class="line">         <span class="comment">// 大于放左侧</span></span><br><span class="line">             dir = -<span class="number">1</span>;</span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> (ph &lt; h)</span><br><span class="line">         <span class="comment">// 小于放右侧</span></span><br><span class="line">             dir = <span class="number">1</span>;</span><br><span class="line">             <span class="comment">// 如果key 相等  直接返回该节点的引用 外边的方法会对其value进行设置</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> ((pk = p.key) == k || (k != <span class="keyword">null</span> &amp;&amp; k.equals(pk)))</span><br><span class="line">             <span class="keyword">return</span> p;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*下面的步骤主要就是当发生冲突 也就是hash相等的时候</span></span><br><span class="line"><span class="comment">* 检验是否有hash相同 并且equals相同的节点。</span></span><br><span class="line"><span class="comment">* 也就是检验该键是否存在与该树上</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//说明进入下面这个判断的条件是 hash相同 但是equal不同</span></span><br><span class="line"><span class="comment">// 没有实现Comparable&lt;C&gt;接口或者 实现该接口 并且 k与pk Comparable比较结果相同</span></span><br><span class="line">         <span class="keyword">else</span> <span class="keyword">if</span> ((kc == <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                   (kc = comparableClassFor(k)) == <span class="keyword">null</span>) ||</span><br><span class="line">                  (dir = compareComparables(kc, k, pk)) == <span class="number">0</span>) {</span><br><span class="line">	<span class="comment">//在左右子树递归的寻找 是否有key的hash相同  并且equals相同的节点</span></span><br><span class="line">             <span class="keyword">if</span> (!searched) {</span><br><span class="line">                 TreeNode&lt;K,V&gt; q, ch;</span><br><span class="line">                 searched = <span class="keyword">true</span>;</span><br><span class="line">                 <span class="keyword">if</span> (((ch = p.left) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                      (q = ch.find(h, k, kc)) != <span class="keyword">null</span>) ||</span><br><span class="line">                     ((ch = p.right) != <span class="keyword">null</span> &amp;&amp;</span><br><span class="line">                      (q = ch.find(h, k, kc)) != <span class="keyword">null</span>))</span><br><span class="line">                      <span class="comment">//找到了 就直接返回</span></span><br><span class="line">                     <span class="keyword">return</span> q;</span><br><span class="line">             }</span><br><span class="line">             <span class="comment">//说明红黑树中没有与之equals相等的  那就必须进行插入操作</span></span><br><span class="line">             <span class="comment">//打破平衡的方法的 分出大小 结果 只有-1 1 </span></span><br><span class="line">             dir = tieBreakOrder(k, pk);</span><br><span class="line">         }</span><br><span class="line"><span class="comment">//下列操作进行插入节点</span></span><br><span class="line"><span class="comment">//xp 保存当前节点</span></span><br><span class="line">         TreeNode&lt;K,V&gt; xp = p;</span><br><span class="line">         <span class="comment">//找到要插入节点的位置</span></span><br><span class="line">         <span class="keyword">if</span> ((p = (dir &lt;= <span class="number">0</span>) ? p.left : p.right) == <span class="keyword">null</span>) {</span><br><span class="line">             Node&lt;K,V&gt; xpn = xp.next;</span><br><span class="line">             <span class="comment">//创建出一个新的节点</span></span><br><span class="line">             TreeNode&lt;K,V&gt; x = map.newTreeNode(h, k, v, xpn);</span><br><span class="line">             <span class="keyword">if</span> (dir &lt;= <span class="number">0</span>)</span><br><span class="line">             <span class="comment">//小于父亲节点  新节点放左孩子位置</span></span><br><span class="line">                 xp.left = x;</span><br><span class="line">             <span class="keyword">else</span></span><br><span class="line">             <span class="comment">//大于父亲节点  放右孩子位置</span></span><br><span class="line">                 xp.right = x;</span><br><span class="line">             </span><br><span class="line">             <span class="comment">//维护双链表关系</span></span><br><span class="line">             xp.next = x;</span><br><span class="line">             x.parent = x.prev = xp;</span><br><span class="line">             <span class="keyword">if</span> (xpn != <span class="keyword">null</span>)</span><br><span class="line">                 ((TreeNode&lt;K,V&gt;)xpn).prev = x;</span><br><span class="line">             <span class="comment">//将root移到table数组的i 位置的第一个节点</span></span><br><span class="line">             <span class="comment">//插入操作过红黑树之后 重新调整平衡。</span></span><br><span class="line">             moveRootToFront(tab, balanceInsertion(root, x));</span><br><span class="line">             <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">         }</span><br><span class="line">     }</span><br><span class="line"> }</span><br><span class="line">             </span><br></pre></td></tr></tbody></table></figure>
 
-<p>管道也是文件嘛，大小4096字节，管道满则写阻塞，管道空则读阻塞</p>
-<h3 id="系统IPC"><a href="#系统IPC" class="headerlink" title="系统IPC"></a>系统IPC</h3><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>消息队列遵循FIFO原则</p>
-<p>一个系统最多3636个消息队列</p>
-<p>每个消息队列最多可以装8196字节</p>
-<p>一个消息队列所有消息最多可以存放16384个字节</p>
-<p>一般应用上我们用消息队列发送数据，用信号量进行进程的同步控制</p>
-<p>和管道区别：1. 数据有无类型，管道无类型，所以FIFO机制，消息队列有类型，所以可以设优先级机制</p>
-<ol start="2">
-<li>读数据的顺序，管道先来先读，消息队列有优先级机制</li>
-</ol>
-<h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4><p>临界资源：同一时刻，只能被同一进程访问的共享资源</p>
-<p>临界区：访问临界资源的代码</p>
-<p>信号量其实就是一个计数器：记录临界资源能够被多少进程同时访问</p>
-<p>一般是用在进程通信方面，或者说同一进程不同线程的同步方法</p>
-<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><blockquote>
-<p>shmget（）开辟共享内存</p>
-<p>shmdt()    断开进程和共享内存的链接</p>
-<p>shmctl()    删除共享内存</p>
-<p>没有连接就会删除，删除后就不会有连接（连接不上）</p>
+
+<h5 id="简单来说"><a href="#简单来说" class="headerlink" title="简单来说"></a><strong>简单来说</strong></h5><blockquote>
+<p>1、从root节点开始寻找 如果目标 k.hash 小于 当前节点的 hash ,那么到左树寻找，大于那么从右树寻找。如果找到key相同并且equals相同的节点 p 那就直接返回。<br>2、如果hash相同 但是equal不同 进而通过Comparable接口，进行比较，如果比较的结果如果还是相等，则在左右子树递归的寻找是否有与要插入的key equals相同的元素。如果有那么直接return返回。<br>（也即是没实现Comparable接口，大小由hash判定。实现了，则由Comparable接口的比较方法判定）<br>3、如果遍历完所有的节点 并未找到equals相同的节点。那就需要插入该新节点。必须分出大小，所以通过执行tieBreakOrder方法，该方法的返回值是-1，1。如果是-1则插入到左边节点，1就插入到右边节点。<br>4、插入完成之后，需要重新移动root节点 到table数组的i位置的第一个节点上 并且需重新平衡红黑树。</p>
 </blockquote>
-<p>共享内存是最快的IPC方式，它其实就是映射一段能被其他进程访问的内存。</p>
-<p>这个内存是由一个进程创建的，但是其他进程也可以访问。</p>
-<p>之所以快是因为不需要客户进程和服务器进程之间进行赋值</p>
-<p>共享内存唯一要特别注意的就是同步问题了，所以在这里使用信号量进行共享内存的进程同步是非常常见的。</p>
-<p>共享内存只需要两次拷贝，而比如管道，消息队列这些内核对象执行系统调用，都需要4次拷贝</p>
-<p>消息队列4次拷贝：</p>
+<h4 id="平衡"><a href="#平衡" class="headerlink" title="平衡"></a>平衡</h4><p>balanceInsertion（）方法</p>
+<h5 id="左旋右旋"><a href="#左旋右旋" class="headerlink" title="左旋右旋"></a>左旋右旋</h5><p><img src="https://upload-images.jianshu.io/upload_images/7779607-4e69d9fa7aa2cd64.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/585/format/webp" alt="img"></p>
+<p>其实每次重新插入节点，就要进行染色，平衡</p>
+<p>新节点默认颜色是红色的，因为红色不会影响路径上黑色节点的数量，保持性质5。</p>
+<p>然后根据性质进行染色，通过左旋右旋进行平衡</p>
+<p>染色可以参考<a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96e652ccf720">https://www.jianshu.com/p/96e652ccf720</a></p>
+<blockquote>
+<p>例子：插入 10,20,15,30,5,8</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/7779607-7be2473819858601.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/959/format/webp" alt="img"></p>
+</blockquote>
+<h4 id="链表转红黑树"><a href="#链表转红黑树" class="headerlink" title="链表转红黑树"></a>链表转红黑树</h4><p>感觉就是跟红黑树插入节点的过程差不多。。</p>
+<p>转换的条件：容量&gt;=64，长度&gt;=8</p>
+<h4 id="红黑树链化"><a href="#红黑树链化" class="headerlink" title="红黑树链化"></a>红黑树链化</h4><p>一般在扩容时才能退化成链表</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//退化链表的临界值</span></span><br><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> UNTREEIFY_THRESHOLD = <span class="number">6</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">//1、扩容时如果是红黑树结构会执行split方法</span></span><br><span class="line"><span class="keyword">else</span> <span class="keyword">if</span> (e <span class="keyword">instanceof</span> TreeNode)</span><br><span class="line">	((TreeNode&lt;K,V&gt;)e).split(<span class="keyword">this</span>, newTab, j, oldCap);</span><br><span class="line">	</span><br><span class="line"><span class="function"><span class="keyword">final</span> <span class="keyword">void</span> <span class="title">split</span><span class="params">(HashMap&lt;K,V&gt; map, Node&lt;K,V&gt;[] tab, <span class="keyword">int</span> index, <span class="keyword">int</span> bit)</span> </span>{</span><br><span class="line">	<span class="comment">//生成 low 和 high 两个红黑树</span></span><br><span class="line">    TreeNode&lt;K,V&gt; loHead = <span class="keyword">null</span>, loTail = <span class="keyword">null</span>;</span><br><span class="line">    TreeNode&lt;K,V&gt; hiHead = <span class="keyword">null</span>, hiTail = <span class="keyword">null</span>;</span><br><span class="line">    <span class="comment">//lc是low树的元素个数，hc是high数的。</span></span><br><span class="line">    <span class="keyword">int</span> lc = <span class="number">0</span>, hc = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//把红黑树中的结点依次添加到 low 和 high 两颗红黑树中</span></span><br><span class="line">    <span class="comment">//还是依靠 (e.hash &amp; bit) == 0 的位运算来判断属于哪颗树，bit是传过来的旧数组下标</span></span><br><span class="line">    <span class="keyword">for</span> (TreeNode&lt;K,V&gt; e = b, next; e != <span class="keyword">null</span>; e = next) {</span><br><span class="line">    	......</span><br><span class="line">        <span class="keyword">if</span> ((e.hash &amp; bit) == <span class="number">0</span>) {</span><br><span class="line">        	<span class="comment">//添加到 loHead</span></span><br><span class="line">        	......</span><br><span class="line">            ++lc;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">        	<span class="comment">//添加到 hiHead</span></span><br><span class="line">        	......</span><br><span class="line">            ++hc;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">if</span> (loHead != <span class="keyword">null</span>) {</span><br><span class="line">		<span class="comment">//如果low树的元素个数小于等于6，退化成链表</span></span><br><span class="line">		<span class="comment">//并插入到新数组 tab[index] 的位置上，index是当前红黑树所在旧数组坐标</span></span><br><span class="line">    	<span class="keyword">if</span> (lc &lt;= UNTREEIFY_THRESHOLD)</span><br><span class="line">        	tab[index] = loHead.untreeify(map);</span><br><span class="line">    	<span class="keyword">else</span> {</span><br><span class="line">	       	 tab[index] = loHead;</span><br><span class="line">        	<span class="keyword">if</span> (hiHead != <span class="keyword">null</span>) <span class="comment">// (else is already treeified)</span></span><br><span class="line">            	loHead.treeify(tab);</span><br><span class="line">    		}</span><br><span class="line">		}</span><br><span class="line">	<span class="keyword">if</span> (hiHead != <span class="keyword">null</span>) {</span><br><span class="line">		<span class="comment">//如果high树的元素个数小于等于6，退化成链表</span></span><br><span class="line">		<span class="comment">//并插入到新数组 tab[index + bit] 的位置上，index是当前红黑树所在旧数组坐标，bit是旧数组长度</span></span><br><span class="line">    	<span class="keyword">if</span> (hc &lt;= UNTREEIFY_THRESHOLD)</span><br><span class="line">        	tab[index + bit] = hiHead.untreeify(map);</span><br><span class="line">    	<span class="keyword">else</span> {</span><br><span class="line">        	tab[index + bit] = hiHead;</span><br><span class="line">        	<span class="keyword">if</span> (loHead != <span class="keyword">null</span>)</span><br><span class="line">            	hiHead.treeify(tab);</span><br><span class="line">    	}</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 <ol>
-<li>用户buffer -&gt; kernel</li>
-<li>kernel -&gt; 内存</li>
-<li>内存 -&gt; kernel</li>
-<li>kernel -&gt; 用户buffer</li>
+<li><p>扩容时如果是红黑树结构会执行红黑树的 split( ) 方法</p>
+</li>
+<li><p>split 方法中会初始化生成 loHead 和 hiHead 两个红黑树的头结点（之后会用 low 和 high 表示）<br>lc 和 hc 分别为 low 和 high 的元素个数，初始化为0</p>
+</li>
+<li><p>把红黑树中的结点依次添加到 low 和 high 两颗红黑树中，依靠 (e.hash &amp; bit) == 0 的位运算来判断属于哪颗树，bit是传过来的旧数组下标。每颗树元素的增加都会使对应的 lc 或 hc 自增1。</p>
+</li>
+<li><p>生成完 low 和 high 两颗红黑树后，如果对应的元素个数 lc，hc 小于等于6，退化成链表，否则维持红黑树形态。</p>
+</li>
+<li><p>low树插入到新数组 tab[index] 的位置上，index是当前红黑树所在旧数组坐标；high树插入到新数组 tab[index + bit] 的位置上，bit是旧数组长度。</p>
+</li>
 </ol>
-<p>共享内存2次：</p>
-<ol>
-<li>用户空间 -&gt; 内存</li>
-<li>内存 -&gt; 用户空间</li>
-</ol>
-<p>、</p>
+<p>资料来源：</p>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43732955/article/details/96860816">https://blog.csdn.net/weixin_43732955/article/details/96860816</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/62409998">https://zhuanlan.zhihu.com/p/62409998</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/96e652ccf720">https://www.jianshu.com/p/96e652ccf720</a></p>
+</blockquote>
+<blockquote>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_45369827/article/details/114930945">https://blog.csdn.net/qq_45369827/article/details/114930945</a></p>
+</blockquote>
 
       
     </div>
@@ -1076,7 +1071,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1090,7 +1085,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/" class="post-title-link" itemprop="url">算法动态规划篇</a>
+            <a href="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/" class="post-title-link" itemprop="url">算法数组</a>
         </h2>
 
         <div class="post-meta">
@@ -1100,14 +1095,14 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-01-21 11:00:15" itemprop="dateCreated datePublished" datetime="2021-01-21T11:00:15+08:00">2021-01-21</time>
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:25:14" itemprop="dateModified" datetime="2021-02-21T14:25:14+08:00">2021-02-21</time>
+                <time title="修改时间：2021-05-13 19:45:12" itemprop="dateModified" datetime="2021-05-13T19:45:12+08:00">2021-05-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1120,7 +1115,7 @@
             </span>
 
           
-            <span id="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法动态规划篇" title="阅读次数">
+            <span id="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法数组" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1132,7 +1127,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>710</span>
+              <span>1.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1151,21 +1146,34 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="初识动态规划"><a href="#初识动态规划" class="headerlink" title="初识动态规划"></a>初识动态规划</h3><p>动态规划的基本思想通俗来说就是求原问题的最优解，组合子问题最优解，进而得到原问题的最优解</p>
-<p>某个问题是否能应用动态规划，通常需要三个条件</p>
-<ul>
-<li>最优子结构</li>
-<li>无后续性</li>
-<li>重复子问题</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//如果全是负的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果全是正的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果有正有负，要最大乘积也是两负+一正</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">return</span> Math.max(nums[length-<span class="number">1</span>] * nums[length-<span class="number">2</span>] * nums[length-<span class="number">3</span>], nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length-<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="2-Leetcode-989-数组形式的整数加减法（简单题）"><a href="#2-Leetcode-989-数组形式的整数加减法（简单题）" class="headerlink" title="2. Leetcode 989 数组形式的整数加减法（简单题）"></a>2. Leetcode 989 数组形式的整数加减法（简单题）</h4><p>给定非负整数 <code>X</code> 的数组形式 <code>A</code>，返回整数 <code>X+K</code> 的数组形式。</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210122230456222.png" alt="image-20210122230456222" style="zoom:80%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addToArrayForm</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> K)</span> </span>{</span><br><span class="line">        <span class="comment">//返回List，创建一个List</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; --i){</span><br><span class="line">            <span class="comment">//从最后一位开始计算</span></span><br><span class="line">            <span class="keyword">int</span> sum = A[i] + K % <span class="number">10</span>;</span><br><span class="line">            K /= <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//满10进1</span></span><br><span class="line">            <span class="keyword">if</span>(sum &gt;= <span class="number">10</span>){</span><br><span class="line">                K++;</span><br><span class="line">                sum -= <span class="number">10</span>;</span><br><span class="line">            }</span><br><span class="line">            res.add(sum);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//如果K整数的位数比X的大</span></span><br><span class="line">        <span class="keyword">for</span>(; K &gt; <span class="number">0</span>; K/=<span class="number">10</span>){</span><br><span class="line">            res.add(K % <span class="number">10</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//反转列表</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）"><a href="#3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）" class="headerlink" title="3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）"></a>3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210126112627183.png" alt="image-20210126112627183" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(<span class="keyword">int</span>[][] dominoes)</span> </span>{</span><br><span class="line">        <span class="comment">//定义一个用来存储对应数字数量的数组</span></span><br><span class="line">        <span class="comment">//2维数组不超过100</span></span><br><span class="line">        <span class="keyword">int</span>[] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dominoes.length; i++){</span><br><span class="line">            <span class="keyword">int</span> m = dominoes[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> n = dominoes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="comment">//排序，一律按照从小到大排序（51--&gt;15) </span></span><br><span class="line">            <span class="keyword">int</span> k = m &gt; n ? m * <span class="number">10</span> + n : n * <span class="number">10</span> + m;</span><br><span class="line">            map[k]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//进行统计</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">100</span>; i++){</span><br><span class="line">            <span class="comment">// 根据组合数公式 C_n^2 = (n * (n - 1)) / 2 计算等价骨牌能够组成的组合数，再求和</span></span><br><span class="line">            res += map[i] *(map[i] - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="4-Leetcode-724-寻找数组的中心索引"><a href="#4-Leetcode-724-寻找数组的中心索引" class="headerlink" title="4. Leetcode 724 寻找数组的中心索引"></a>4. Leetcode 724 寻找数组的中心索引</h4><p>数组 中心索引 是数组的一个索引，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果数组不存在中心索引，返回 -1 。如果数组有多个中心索引，应该返回最靠近左边的那一个。</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210128232432201.png" alt="image-20210128232432201" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//两次遍历，第一次遍历算出数组全部元素相加的数</span></span><br><span class="line">        <span class="comment">//第二次遍历进行中心索引的判断</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums){</span><br><span class="line">            sum += num;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            index += nums[i];</span><br><span class="line">            <span class="comment">//(11+6) * 2 - 6 = 11 * 2 + 6 = prefix + suffix + index </span></span><br><span class="line">            <span class="keyword">if</span>(index * <span class="number">2</span> - nums[i] == sum){</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
       
     </div>
 
@@ -1184,7 +1192,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1198,7 +1206,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/" class="post-title-link" itemprop="url">算法贪心篇</a>
+            <a href="/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">全局异常处理</a>
         </h2>
 
         <div class="post-meta">
@@ -1208,27 +1216,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-01-20 15:23:28" itemprop="dateCreated datePublished" datetime="2021-01-20T15:23:28+08:00">2021-01-20</time>
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:28:53" itemprop="dateModified" datetime="2021-02-21T14:28:53+08:00">2021-02-21</time>
+                <time title="修改时间：2021-05-13 19:16:25" itemprop="dateModified" datetime="2021-05-13T19:16:25+08:00">2021-05-13</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
 
           
-            <span id="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法贪心篇" title="阅读次数">
+            <span id="/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="全局异常处理" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1240,14 +1239,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>302</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -1259,15 +1258,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
+          <p>一般项目中都会写一个全局的异常处理</p>
+<p>用@ControllerAdvice标记全局异常处理的类</p>
+<p><strong>@ControllerAdvice</strong><br>这是一个增强的 Controller标签。使用这个 ControllerAdvice，可以实现三个方面的功能：</p>
+<ol>
+<li>全局异常处理</li>
+<li>设置全局变量，也就是设置完，每个接口能获取到整个参数</li>
+<li>数据预处理</li>
+</ol>
+<p>举栗说明</p>
+<p>我们新建一个GlobalControllerAdvice的全局异常类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一定要加@ControllerAdvice注解才能收集Controller中的方法异常</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalControllerAdvice</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 收集所有异常，进行统一异常处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//Spring的@ExceptionHandler可以用来统一处理方法抛出的异常</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = Exception.class)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function">ResponseDto <span class="title">exceptionHandler</span><span class="params">(HttpServletRequest request, Exception e)</span></span>{</span><br><span class="line">        ResponseDto dto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        dto.setErrorCode(<span class="number">1001</span>);</span><br><span class="line">        dto.setMessage(<span class="string">"Exception: "</span> + e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> dto;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 收集空指针异常，进行统一处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = NullPointerException.class)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function">ResponseDto <span class="title">exceptionHandler</span><span class="params">(HttpServletRequest request, NullPointerException e)</span></span>{</span><br><span class="line">        ResponseDto dto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        dto.setErrorCode(<span class="number">1002</span>);</span><br><span class="line">        dto.setMessage(<span class="string">"Exception: "</span> + e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> dto;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>编写测试Controller类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value = "/test")</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionController</span> </span>{</span><br><span class="line">    <span class="meta">@RequestMapping(value = "/index")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"/index"</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异常报错</span></span><br><span class="line"><span class="comment">     * 访问路径：http://127.0.0.1:8090/test/exception</span></span><br><span class="line"><span class="comment">     * 自己try_catch的结果：{"message": "NoEnterGlobalException" }</span></span><br><span class="line"><span class="comment">     * 最后返回结果： {"errorCode": 1001,"message": "Exception:4"}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//try_catch内部捕获异常，不会走全局异常处理</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">	<span class="comment">//内部没有异常捕获，检测到Controller中存在异常就会被@ControllerAdvice注解捕获异常</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  空指针异常报错</span></span><br><span class="line"><span class="comment">     *  访问路径：http://127.0.0.1:8090/test/nullPointException</span></span><br><span class="line"><span class="comment">     *  不走全局处理类结果：{"message": "NoEnterGlobalNullPointException" }</span></span><br><span class="line"><span class="comment">     *  最后返回结果：{"message":"Exception: null","errorCode":1002}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            object.toString();</span><br><span class="line">        }<span class="keyword">catch</span> (NullPointerException e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        object.toString();</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
       
     </div>
 
@@ -1351,7 +1357,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1400,12 +1406,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">202k</span>
+    <span title="站点总字数">206k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:04</span>
+    <span title="站点阅读时长">3:08</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/20/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/RPC/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,7 +204,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/01/20/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/" class="post-title-link" itemprop="url">算法整理1</a>
+            <a href="/2021/01/23/RPC/" class="post-title-link" itemprop="url">RPC框架</a>
         </h2>
 
         <div class="post-meta">
@@ -214,27 +214,18 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-01-20 15:23:28" itemprop="dateCreated datePublished" datetime="2021-01-20T15:23:28+08:00">2021-01-20</time>
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-02-21 14:28:59" itemprop="dateModified" datetime="2021-02-21T14:28:59+08:00">2021-02-21</time>
+                <time title="修改时间：2021-05-13 19:15:49" itemprop="dateModified" datetime="2021-05-13T19:15:49+08:00">2021-05-13</time>
               </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
-                </span>
-            </span>
 
           
-            <span id="/2021/01/20/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法整理1" title="阅读次数">
+            <span id="/2021/01/23/RPC/" class="post-meta-item leancloud_visitors" data-flag-title="RPC框架" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -265,10 +256,288 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4>
+          <h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
+<ul>
+<li>对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。）</li>
+<li>对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。</li>
+<li>提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）</li>
+</ul>
+<p>而随着集中式架构向分布式架构进行转变，应用系统之间的服务调用于通讯问题成为了首要解决的需求。</p>
+<p>所以RPC站了出来，它就是用来让分布式应用更加简单的。它让调本地方法和调其他模块的方法在外表上看起来是一样的。。（<strong>RPC 框架需提供一种透明调用机制让使用者不必显式的区分本地调用和远程调用。</strong>）</p>
+<blockquote>
+<p>RPC 的全称是 Remote Procedure Call 是一种<strong>进程间通信</strong>方式。 它允许程序调用另一个进程上（通常是共享网络的另一台机器上）的过程或函数，而<strong>不用程序员显式编码这个远程调用的细节</strong>。</p>
+</blockquote>
+<p>RPC解决三件事（公平，公平，还是tm的公平）</p>
+<ul>
+<li>进程间通讯</li>
+<li>提供和本地方法调用一样的调用机制</li>
+<li>屏蔽程序员对远程调用的细节实现</li>
+</ul>
+<h4 id="进程通信问题"><a href="#进程通信问题" class="headerlink" title="进程通信问题"></a>进程通信问题</h4><p>​    对于分布式环境，RPC能够帮助我们解决不同服务器之间的通信及数据传输问题（能够做好方法调用到数据的转换，然后借助网络进行数据传递的内部转换）</p>
+<p>​    rpc客户端向rpc服务端发起远程服务调用。</p>
+<blockquote>
+<p>通过请求的封装，参数的封装，序列化，编码，约定协议传输，解析请求，处理请求，封装返回消息数据，再进行返回数据的序列化， 编码，再通过网络返回给客户端</p>
+</blockquote>
+<p>上述的操作，都需要进行封装，屏蔽远程调用的细节</p>
+<p>什么样的内容封装才能让我们觉得像以本地调用方式调用远程服务呢？</p>
+<p>显而易见：代理</p>
+<p>代理有两种方式</p>
+<ul>
+<li>jdk动态代理（接口代理）</li>
+<li>cglib代理（子类代理）</li>
+</ul>
+<p>RPC还是倾向于动态代理，尽管字节码方式高效强大，但是动态代理易于维护</p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>rpc需要对远程调用内部细节封装，主要由以下几个方面</p>
+<ul>
+<li>序列码</li>
+<li>编解码</li>
+<li>协议</li>
+<li>网络</li>
+</ul>
+<p>从发起远程调用——&gt;接受数据返回结果，过程如下：</p>
+<ol>
+<li>client以本地调用方式调用服务</li>
+<li>client stub（客户端存根）接受调用负责将方法参数组装成能够进行网络传输的消息体</li>
+<li>client stub 找到服务地址，将消息发送给服务端</li>
+<li>server stub（服务端存根）接收到消息后进行解码</li>
+<li>server stub根据解码结果调用本地服务</li>
+<li>本地服务执行将结果返回给server stub</li>
+<li>server stub将返回结果打包成消息体发送给消费方</li>
+<li>client stub接受信息并解码</li>
+<li>client stub将结果传输给client，消费方得到最终结果</li>
+</ol>
+<p>RPC框架相当于封装了step2-step8这些步骤，对外只暴露client和client stub沟通的接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+<h4 id="进一步的拆解"><a href="#进一步的拆解" class="headerlink" title="进一步的拆解"></a>进一步的拆解</h4><blockquote>
+<p>基本的形式要记住，记住方便理解</p>
+</blockquote>
+<img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe94c7fd4edb39?imageView2/0/w/1280/h/960/ignore-error/1" alt="img" style="zoom:150%;">
+
+
+
+<p>​    RPC 服务端通过 RpcServer 去暴露服务接口，而客户端通过 RpcClient 去获取服务接口。</p>
+<p>​    客户端像调用本地方法一样去调用远程接口方法，RPC 框架提供接口的代理实现，实际的调用将委托给代理 RpcProxy。</p>
+<p>​    代理封装调用信息并将调用转交给 RpcInvoker 去实际执行。</p>
+<p>​    在客户端的 RpcInvoker 通过连接器 RpcConnector 去维持与服务端的通道 RpcChannel，并使用 RpcProtocol 执行协议编码（encode）并将编码后的请求消息通过通道发送给服务端。</p>
+<p>​    RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用 RpcProtocol 执行协议解码（decode）。</p>
+<p>​    解码后的调用信息传递给 RpcProcessor 去控制处理调用过程，最后再委托调用给 RpcInvoker 去实际执行并返回调用结果。</p>
+<ul>
+<li>RpcServer（生产者接口）</li>
+<li>RpcClient（消费者接口）</li>
+<li>RpcProxy（代理服务）</li>
+<li>RpcProtocol（编解码服务）</li>
+<li>网络连接器</li>
+</ul>
+<blockquote>
+<p>RPC与MQ比较</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe963722bccc10?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/" class="post-title-link" itemprop="url">算法动态规划篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-21 11:00:15" itemprop="dateCreated datePublished" datetime="2021-01-21T11:00:15+08:00">2021-01-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-21 14:25:14" itemprop="dateModified" datetime="2021-02-21T14:25:14+08:00">2021-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法动态规划篇" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>710</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="初识动态规划"><a href="#初识动态规划" class="headerlink" title="初识动态规划"></a>初识动态规划</h3><p>动态规划的基本思想通俗来说就是求原问题的最优解，组合子问题最优解，进而得到原问题的最优解</p>
+<p>某个问题是否能应用动态规划，通常需要三个条件</p>
+<ul>
+<li>最优子结构</li>
+<li>无后续性</li>
+<li>重复子问题</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/01/20/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/#more" rel="contents">
+              <a class="btn" href="/2021/01/21/%E7%AE%97%E6%B3%95%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E7%AF%87/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/" class="post-title-link" itemprop="url">算法贪心篇</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-20 15:23:28" itemprop="dateCreated datePublished" datetime="2021-01-20T15:23:28+08:00">2021-01-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-02-21 14:28:53" itemprop="dateModified" datetime="2021-02-21T14:28:53+08:00">2021-02-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="url" rel="index"><span itemprop="name">算法</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/" class="post-meta-item leancloud_visitors" data-flag-title="算法贪心篇" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>302</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -565,7 +834,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">33</span>
+          <span class="site-state-item-count">35</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -614,12 +883,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">202k</span>
+    <span title="站点总字数">206k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:04</span>
+    <span title="站点阅读时长">3:08</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
