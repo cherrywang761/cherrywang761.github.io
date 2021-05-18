@@ -190,6 +190,440 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-05-17 23:15:37" itemprop="dateCreated datePublished" datetime="2021-05-17T23:15:37+08:00">2021-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-15 00:10:49" itemprop="dateModified" datetime="2021-05-15T00:10:49+08:00">2021-05-15</time>
+              </span>
+
+          
+            <span id="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</p>
+<blockquote>
+<p>对象流：将对象转换为二进制流byte[]，我们可以对二进制流进行读写操作，流数据也可以在网络中进行传输。</p>
+</blockquote>
+<p>实现方式：</p>
+<ul>
+<li>类实现Serializable接口（标记接口，只是一个单纯的标记而已，说明这个类是可以被序列化的）<strong>（不想序列化的字段可以用transient修饰）</strong></li>
+<li>实现Externalizable接口（是Serializable接口的子类，transient无效）</li>
+<li>我们可以使用一个输出流（<code>FileOutputStream</code>构造一个<code>ObjectOutputStream</code>对象）来承载序列化后的对象，并用<code>ObjectOutputStream</code>对象的<code>writeObject(Object obj)</code>方法可以将obj对象写出（存到磁盘中，保存起来了)，想恢复的话可以使用输入流</li>
+</ul>
+<blockquote>
+<p>虽然实现Externalizable接口能带来一定的性能提升，但由于实现ExternaLizable接口导致了编程复杂度的增加，所以大部分时候都是采用实现Serializable接口方式来实现序列化。</p>
+</blockquote>
+<blockquote>
+<p>什么时候使用序列化？</p>
+</blockquote>
+<ol>
+<li>对象序列化可以实现分布式对象</li>
+</ol>
+<p>应用场景：RMI(远程方法调用)，要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象一样。</p>
+<p>RPC的话应该就要序列化，远程调用还可以用json来传数据。。</p>
+<ol start="2">
+<li>java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据</li>
+</ol>
+<p>这样子就可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递数据。</p>
+<p>此外序列化可以进行对象的“深复制’’,<strong>复制对象本身及引用的对象本身</strong>。序列化一个对象可能得到整个对象序列。</p>
+<p>简而言之序列化作用：</p>
+<p><strong>对象、文件、数据有许多不同的格式，很难统一保存和传输，但是都序列化转成字节流后，就都是同样的形式了，可以使用通用的格式保存或传输。想恢复直接反序列化恢复即可， 这样对象还是对象，文件还是文件。</strong></p>
+<p><strong>当两个JVM（进程）在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。</strong></p>
+<ul>
+<li><code>所有涉及到数据传输或者存储的类，严格意义上来说都要加上序列化ID，这也是一种良好的编程习惯</code>。</li>
+</ul>
+<h5 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h5><p>序列化运行时使用一个称为 serialVersionUID 的版本号与每个可序列化类相关联，该序列号在反序列化过程中用于验证序列化对象的发送者和接收者是否为该对象加载了与序列化兼容的类。为它赋予明确的值。显式地定义serialVersionUID有两种用途：</p>
+<p>在某些场合，希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有相同的serialVersionUID；</p>
+<p>在某些场合，不希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有不同的serialVersionUID。</p>
+<blockquote>
+<p>Tips: 一般人员的密码信息等属性需要标识不被序列化。防止网络传输被窃取，特别是web程序。</p>
+</blockquote>
+<blockquote>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://blog.csdn.net/tree_ifconfig/article/details/82766587">https://blog.csdn.net/tree_ifconfig/article/details/82766587</a></p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop-HDFS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/17/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop-HDFS/" class="post-title-link" itemprop="url">Hadoop-HDFS</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-17 09:52:48 / 修改时间：23:13:39" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%AD%A6%E4%B9%A0%E8%B7%AF%E5%BE%84/" itemprop="url" rel="index"><span itemprop="name">学习路径</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/17/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop-HDFS/" class="post-meta-item leancloud_visitors" data-flag-title="Hadoop-HDFS" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.9k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Hadoop分布式文件系统——HDFS（转载）"><a href="#Hadoop分布式文件系统——HDFS（转载）" class="headerlink" title="Hadoop分布式文件系统——HDFS（转载）"></a>Hadoop分布式文件系统——HDFS（转载）</h1><nav>
+<a href="#一介绍">一、介绍</a><br>
+<a href="#二HDFS-设计原理">二、HDFS 设计原理</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#21-HDFS-架构">2.1 HDFS 架构</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#22-文件系统命名空间">2.2 文件系统命名空间</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#23-数据复制">2.3 数据复制</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#24-数据复制的实现原理">2.4 数据复制的实现原理</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#25--副本的选择">2.5  副本的选择</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#26-架构的稳定性">2.6 架构的稳定性</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-心跳机制和重新复制">1. 心跳机制和重新复制</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-数据的完整性">2. 数据的完整性</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3元数据的磁盘故障">3.元数据的磁盘故障</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="#4支持快照">4.支持快照</a><br>
+<a href="#三HDFS-的特点">三、HDFS 的特点</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#31-高容错">3.1 高容错</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#32-高吞吐量">3.2 高吞吐量</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33--大文件支持">3.3  大文件支持</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#33-简单一致性模型">3.3 简单一致性模型</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#34-跨平台移植性">3.4 跨平台移植性</a><br>
+<a href="#附图解HDFS存储原理">附：图解HDFS存储原理</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#1-HDFS写数据原理">1. HDFS写数据原理</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br>
+</nav>
+
+
+
+<h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p><strong>HDFS</strong> （<strong>Hadoop Distributed File System</strong>）是 Hadoop 下的分布式文件系统，具有高容错、高吞吐量等特性，可以部署在低成本的硬件上。</p>
+<h2 id="二、HDFS-设计原理"><a href="#二、HDFS-设计原理" class="headerlink" title="二、HDFS 设计原理"></a>二、HDFS 设计原理</h2><div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfsarchitecture.png"> </div>
+
+<h3 id="2-1-HDFS-架构"><a href="#2-1-HDFS-架构" class="headerlink" title="2.1 HDFS 架构"></a>2.1 HDFS 架构</h3><p>HDFS 遵循主/从架构，由单个 NameNode(NN) 和多个 DataNode(DN) 组成：</p>
+<ul>
+<li><strong>NameNode</strong> : 负责执行有关 <code>文件系统命名空间</code> 的操作，例如打开，关闭、重命名文件和目录等。它同时还负责集群元数据的存储，记录着文件中各个数据块的位置信息。</li>
+<li><strong>DataNode</strong>：负责提供来自文件系统客户端的读写请求，执行块的创建，删除等操作。</li>
+</ul>
+<h3 id="2-2-文件系统命名空间"><a href="#2-2-文件系统命名空间" class="headerlink" title="2.2 文件系统命名空间"></a>2.2 文件系统命名空间</h3><p>HDFS 的 <code>文件系统命名空间</code> 的层次结构与大多数文件系统类似 (如 Linux)， 支持目录和文件的创建、移动、删除和重命名等操作，支持配置用户和访问权限，但不支持硬链接和软连接。<code>NameNode</code> 负责维护文件系统名称空间，记录对名称空间或其属性的任何更改。</p>
+<h3 id="2-3-数据复制"><a href="#2-3-数据复制" class="headerlink" title="2.3 数据复制"></a>2.3 数据复制</h3><p>由于 Hadoop 被设计运行在廉价的机器上，这意味着硬件是不可靠的，为了保证容错性，HDFS 提供了数据复制机制。HDFS 将每一个文件存储为一系列<strong>块</strong>，每个块由多个副本来保证容错，块的大小和复制因子可以自行配置<strong>（默认情况下，块大小是 128M，默认复制因子是 3）</strong>。</p>
+<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfsdatanodes.png"> </div>
+
+<h3 id="2-4-数据复制的实现原理"><a href="#2-4-数据复制的实现原理" class="headerlink" title="2.4 数据复制的实现原理"></a>2.4 数据复制的实现原理</h3><p>大型的 HDFS 实例在通常分布在多个机架的多台服务器上，不同机架上的两台服务器之间通过交换机进行通讯。在大多数情况下，同一机架中的服务器间的网络带宽大于不同机架中的服务器之间的带宽。因此 HDFS 采用机架感知副本放置策略，对于常见情况，当复制因子为 3 时，HDFS 的放置策略是：</p>
+<p>在写入程序位于 <code>datanode</code> 上时，就优先将写入文件的一个副本放置在该 <code>datanode</code> 上，否则放在随机 <code>datanode</code> 上。之后在另一个远程机架上的任意一个节点上放置另一个副本，并在该机架上的另一个节点上放置最后一个副本。此策略可以减少机架间的写入流量，从而提高写入性能。</p>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-机架.png"> </div>
+
+<p>如果复制因子大于 3，则随机确定第 4 个和之后副本的放置位置，同时保持每个机架的副本数量低于上限，上限值通常为 <code>（（复制系数 - 1）/机架数量） + 2</code>，需要注意的是不允许同一个 <code>dataNode</code> 上具有同一个块的多个副本。</p>
+<h3 id="2-5-副本的选择"><a href="#2-5-副本的选择" class="headerlink" title="2.5  副本的选择"></a>2.5  副本的选择</h3><p>为了最大限度地减少带宽消耗和读取延迟，HDFS 在执行读取请求时，优先读取距离读取器最近的副本。如果在与读取器节点相同的机架上存在副本，则优先选择该副本。如果 HDFS 群集跨越多个数据中心，则优先选择本地数据中心上的副本。</p>
+<h3 id="2-6-架构的稳定性"><a href="#2-6-架构的稳定性" class="headerlink" title="2.6 架构的稳定性"></a>2.6 架构的稳定性</h3><h4 id="1-心跳机制和重新复制"><a href="#1-心跳机制和重新复制" class="headerlink" title="1. 心跳机制和重新复制"></a>1. 心跳机制和重新复制</h4><p>每个 DataNode 定期向 NameNode 发送心跳消息，如果超过指定时间没有收到心跳消息，则将 DataNode 标记为死亡。NameNode 不会将任何新的 IO 请求转发给标记为死亡的 DataNode，也不会再使用这些 DataNode 上的数据。 由于数据不再可用，可能会导致某些块的复制因子小于其指定值，NameNode 会跟踪这些块，并在必要的时候进行重新复制。</p>
+<h4 id="2-数据的完整性"><a href="#2-数据的完整性" class="headerlink" title="2. 数据的完整性"></a>2. 数据的完整性</h4><p>由于存储设备故障等原因，存储在 DataNode 上的数据块也会发生损坏。为了避免读取到已经损坏的数据而导致错误，HDFS 提供了数据完整性校验机制来保证数据的完整性，具体操作如下：</p>
+<p>当客户端创建 HDFS 文件时，它会计算文件的每个块的 <code>校验和</code>，并将 <code>校验和</code> 存储在同一 HDFS 命名空间下的单独的隐藏文件中。当客户端检索文件内容时，它会验证从每个 DataNode 接收的数据是否与存储在关联校验和文件中的 <code>校验和</code> 匹配。如果匹配失败，则证明数据已经损坏，此时客户端会选择从其他 DataNode 获取该块的其他可用副本。</p>
+<h4 id="3-元数据的磁盘故障"><a href="#3-元数据的磁盘故障" class="headerlink" title="3.元数据的磁盘故障"></a>3.元数据的磁盘故障</h4><p><code>FsImage</code> 和 <code>EditLog</code> 是 HDFS 的核心数据，这些数据的意外丢失可能会导致整个 HDFS 服务不可用。为了避免这个问题，可以配置 NameNode 使其支持 <code>FsImage</code> 和 <code>EditLog</code> 多副本同步，这样 <code>FsImage</code> 或 <code>EditLog</code> 的任何改变都会引起每个副本 <code>FsImage</code> 和 <code>EditLog</code> 的同步更新。</p>
+<h4 id="4-支持快照"><a href="#4-支持快照" class="headerlink" title="4.支持快照"></a>4.支持快照</h4><p>快照支持在特定时刻存储数据副本，在数据意外损坏时，可以通过回滚操作恢复到健康的数据状态。</p>
+<h2 id="三、HDFS-的特点"><a href="#三、HDFS-的特点" class="headerlink" title="三、HDFS 的特点"></a>三、HDFS 的特点</h2><h3 id="3-1-高容错"><a href="#3-1-高容错" class="headerlink" title="3.1 高容错"></a>3.1 高容错</h3><p>由于 HDFS 采用数据的多副本方案，所以部分硬件的损坏不会导致全部数据的丢失。</p>
+<h3 id="3-2-高吞吐量"><a href="#3-2-高吞吐量" class="headerlink" title="3.2 高吞吐量"></a>3.2 高吞吐量</h3><p>HDFS 设计的重点是支持高吞吐量的数据访问，而不是低延迟的数据访问。</p>
+<h3 id="3-3-大文件支持"><a href="#3-3-大文件支持" class="headerlink" title="3.3  大文件支持"></a>3.3  大文件支持</h3><p>HDFS 适合于大文件的存储，文档的大小应该是是 GB 到 TB 级别的。</p>
+<h3 id="3-3-简单一致性模型"><a href="#3-3-简单一致性模型" class="headerlink" title="3.3 简单一致性模型"></a>3.3 简单一致性模型</h3><p>HDFS 更适合于一次写入多次读取 (write-once-read-many) 的访问模型。支持将内容追加到文件末尾，但不支持数据的随机访问，不能从文件任意位置新增数据。</p>
+<h3 id="3-4-跨平台移植性"><a href="#3-4-跨平台移植性" class="headerlink" title="3.4 跨平台移植性"></a>3.4 跨平台移植性</h3><p>HDFS 具有良好的跨平台移植性，这使得其他大数据计算框架都将其作为数据持久化存储的首选方案。</p>
+<h2 id="附：图解HDFS存储原理"><a href="#附：图解HDFS存储原理" class="headerlink" title="附：图解HDFS存储原理"></a>附：图解HDFS存储原理</h2><blockquote>
+<p>说明：以下图片引用自博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hudiefenmu/article/details/37655491">翻译经典 HDFS 原理讲解漫画</a></p>
+</blockquote>
+<h3 id="1-HDFS写数据原理"><a href="#1-HDFS写数据原理" class="headerlink" title="1. HDFS写数据原理"></a>1. HDFS写数据原理</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-1.jpg"> </div>
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-2.jpg"> </div>
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-3.jpg"> </div>
+
+
+
+<h3 id="2-HDFS读数据原理"><a href="#2-HDFS读数据原理" class="headerlink" title="2. HDFS读数据原理"></a>2. HDFS读数据原理</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-read-1.jpg"> </div>
+
+
+
+<h3 id="3-HDFS故障类型和其检测方法"><a href="#3-HDFS故障类型和其检测方法" class="headerlink" title="3. HDFS故障类型和其检测方法"></a>3. HDFS故障类型和其检测方法</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-1.jpg"> </div>
+
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-2.jpg"> </div>
+
+
+
+<p><strong>第二部分：读写故障的处理</strong></p>
+<p><img src="https://img-blog.csdnimg.cn/20190423153858430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1FldmVyeTY3OA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p><strong>第三部分：DataNode 故障处理</strong></p>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-4.jpg"> </div>
+
+
+
+<p><strong>副本布局策略</strong>：</p>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-5.jpg"> </div>
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
+<li><a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">Apache Hadoop 2.9.2 &gt; HDFS Architecture</a></li>
+<li>Tom White . hadoop 权威指南 [M] . 清华大学出版社 . 2017.</li>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hudiefenmu/article/details/37655491">翻译经典 HDFS 原理讲解漫画</a></li>
+</ol>
+<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"> </div>
+
+
+
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">红黑树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-17 09:52:48 / 修改时间：23:15:06" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="红黑树" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>862</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="大端系统和小端系统"><a href="#大端系统和小端系统" class="headerlink" title="大端系统和小端系统"></a>大端系统和小端系统</h3><h4 id="为什么会存在大小端系统？"><a href="#为什么会存在大小端系统？" class="headerlink" title="为什么会存在大小端系统？"></a>为什么会存在大小端系统？</h4><p>计算机系统中，每个地址单元对应一个字节（8bit），一种数据类型的数据对象可能占用若干字节。对于这些对象，我们需要建立两个规则：</p>
+<ul>
+<li>该对象的地址是什么？</li>
+<li>内存中是如何排序这些对象字节的</li>
+</ul>
+<p>这也就是常说的字节序和比特序问题。字节序和比特序一般是一致的，要么都是大端，要么都是小端。</p>
+<h4 id="什么是大端小端？"><a href="#什么是大端小端？" class="headerlink" title="什么是大端小端？"></a>什么是大端小端？</h4><p>大端：低位（字节/比特）放在高地址中，高位（字节/比特）放在低地址中。</p>
+<blockquote>
+<p>数据低位字节内容放在高地址处，高位字节内容放在低地址处。举例 int 类型在32位或者64位的Windows系统中都是占4个字节，也就是 4*8=32 位。储存 int a=1 在大端系统中，如下图所示。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200330165032875.png" alt="图1"></p>
+</blockquote>
+<p>小端：低位（字节/比特）放在低地址中，高位（字节/比特）放在高地址中。</p>
+<blockquote>
+<p>数据低位字节内容放在低地址处，高危字节内容放在高地址处。举例，还是 int a=1在小端系统，如下图所示。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020033016555898.png" alt="图2"></p>
+</blockquote>
+<h5 id="优势，劣势："><a href="#优势，劣势：" class="headerlink" title="优势，劣势："></a>优势，劣势：</h5><blockquote>
+<p>小端模式 ：强制转换数据不需要调整字节内容，1、2、4字节的存储方式一样。</p>
+<p>大端模式 ：符号位的判定固定为第一个字节，容易判断正负。</p>
+</blockquote>
+<p>一般操作系统都是小端模式；而通讯协议是大端模式；<strong>java和平台无关，默认是大端模式</strong></p>
+<p>常见的cpu的大小端：<br>大端：PowerPC、IBM、Sun<br>小端：x86<br>ARM既可以工作在大端模式，也可以工作在小端模式</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0x12345678</span>;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        DataOutputStream dos = <span class="keyword">new</span> DataOutputStream(baos);</span><br><span class="line">        dos.writeInt(a);</span><br><span class="line">        <span class="keyword">byte</span>[] b = baos.toByteArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">4</span>;i++){</span><br><span class="line">            System.out.println(Integer.toHexString(b[i]));</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -716,169 +1150,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">close()和shutdown()</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:13" itemprop="dateModified" datetime="2021-05-11T21:07:13+08:00">2021-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-meta-item leancloud_visitors" data-flag-title="close()和shutdown()" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
-<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
-<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
-<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
-<p>举个栗子：</p>
-<ol>
-<li>服务器收到一个客户端请求</li>
-</ol>
-<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
-
-
-
-<ol start="2">
-<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol start="3">
-<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
-<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>close函数是用来关闭套接字的</p>
-<p>成功返回0，失败返回-1</p>
-<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
-<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
-<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
-<p>如上图，在第二步中，connfd和listenfd都为2</p>
-<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
-<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
-<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
-<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>成功返回0，失败返回-1</p>
-<p>该函数的行为依赖howto参数的值</p>
-<ul>
-<li>SHUT_RD（读关闭）</li>
-</ul>
-<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
-<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
-<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_WR（写关闭）</li>
-</ul>
-<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
-<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
-<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_RDWR</li>
-</ul>
-<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
-<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
-<ul>
-<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
-</li>
-<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
-</li>
-<li><p>其实就是半双工和全双工的区别</p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -967,237 +1238,6 @@
 <h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
 <p>或者就是</p>
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">OS问题通俗版</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-15 16:57:28" itemprop="dateModified" datetime="2021-03-15T16:57:28+08:00">2021-03-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="OS问题通俗版" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="1-操作系统概念"><a href="#1-操作系统概念" class="headerlink" title="1. 操作系统概念"></a>1. 操作系统概念</h2><p>OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死）</p>
-<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>内核决定程序在什么时候对硬件操作多久</p>
-<p>内核其实就是完成了对硬件的抽象，给一些硬件API让你调</p>
-<p>这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。</p>
-<ol>
-<li><p><strong>内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。</strong></p>
-</li>
-<li><p><strong>内核连接硬件和程序的桥梁，决定OS的性能和稳定性。</strong></p>
-</li>
-</ol>
-<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ol>
-<li>cpu是运算核心（core）+控制核心（Control Unit），可以称之为计算机的大脑</li>
-<li>CPU主要包括控制器+运算器</li>
-<li>CPU根本任务是执行指令，一串串0，1序列</li>
-</ol>
-<h3 id="CPU与Kernel"><a href="#CPU与Kernel" class="headerlink" title="CPU与Kernel"></a>CPU与Kernel</h3><p><img src="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png" alt="操作系统的基本概念"></p>
-<ol>
-<li>Kernel属于OS层面，CPU属于硬件层面</li>
-<li>CPU提供运算，处理各种指令，Kernel屏蔽了对硬件的操作，提供四种管理。</li>
-</ol>
-<h2 id="2-同步异步，阻塞非阻塞"><a href="#2-同步异步，阻塞非阻塞" class="headerlink" title="2. 同步异步，阻塞非阻塞"></a>2. 同步异步，阻塞非阻塞</h2><h3 id="2-1-同步异步"><a href="#2-1-同步异步" class="headerlink" title="2.1 同步异步"></a>2.1 同步异步</h3><p>同步和异步关注的是<strong>消息通信机制</strong> (synchronous communication/ asynchronous communication)</p>
-<p>同步：就是在发出一个调用时，在没有得到结果之前，该调用就不返回。（一直等直到要到值为止）<br>换句话说，就是由<strong>调用者</strong>主动等待这个调用的结果。(等到它返回值为止)</p>
-<p>异步：调用在发出之后，这个调用就直接返回了，所以没有返回结果。</p>
-<p>换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在<em>调用</em>发出后，<em>被调用者</em>通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
-<p>区别：<strong>调用者</strong>需不需要等待处理结果，<strong>被调用者</strong>是否会有回调等机制通知调用者返回结果（针对于被调用者）</p>
-<p>举例：打电话问书店老板有没有《操作系统》这本书，如果是同步通信机制，老板会说<strong>你等等，我查一下</strong></p>
-<p>如果是异步通信机制，老板会说你等等，我查一下等会告诉你，<strong>然后把电话挂了</strong></p>
-<h3 id="2-2-阻塞非阻塞"><a href="#2-2-阻塞非阻塞" class="headerlink" title="2.2 阻塞非阻塞"></a>2.2 阻塞非阻塞</h3><p>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></p>
-<p>阻塞：阻塞就是发起一个请求，调用者一直等待请求结果返回，当前线程挂起</p>
-<p>非阻塞：非阻塞就是发起一个请求，被调用者不用一直等待结果返回。</p>
-<p>你打电话问书店老板有没有《分布式系统》这本书，你如果是阻塞式调用，你会一直把自己“挂起”，直到得到这本书有没有的结果，如果是非阻塞式调用，你不管老板有没有告诉你，你自己先一边去玩了， 当然你也要偶尔过几分钟check一下老板有没有返回结果。</p>
-<h2 id="3-BIO-AIO-NIO"><a href="#3-BIO-AIO-NIO" class="headerlink" title="3. BIO,AIO,NIO"></a>3. BIO,AIO,NIO</h2><p>先了解一下套接字的概念：</p>
-<p>套接字（socket）：操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。</p>
-<p>Socket(套接字)可以看成是两个网络应用程序进行通信时，各自通信连接中的端点。</p>
-<p>socket 的表现方式  <strong>IP:端口</strong></p>
-<h3 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h3><p>同步阻塞的IO模型</p>
-<p>一连接一线程，有连接请求就要启动一个线程来处理，</p>
-<p>​    客户端发送请求后，先咨询服务端是否有线程相应，如果没有则会一直等待或者遭到拒绝请求</p>
-<p>​    如果有的话，客户端会线程会等待请求结束后才继续执行。</p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步阻塞.gif"></p>
-<p>线程不必要开销问题可以通过线程池改善</p>
-<p><strong>select的好处是它可以同时监听多个句柄，提高并发量</strong></p>
-<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>同步非阻塞IO模型</p>
-<p>一个请求一个线程</p>
-<p><img src="http://images2015.cnblogs.com/blog/37237/201512/37237-20151222220329015-207666376.png" alt="img"></p>
-<p>​    NIO就是，当一个连接创建后，不需要对应一个线程，该连接会被注册到多路复用器上，所以的连接只需要一个线程就可以搞定</p>
-<p>​    当这个线程中的多路复用器进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式。</p>
-<p>​    适合连接数多且连接短。</p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\同步非阻塞.gif"></p>
-<h3 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h3><p>异步非阻塞IO模型</p>
-<p>一个有效请求一个线程</p>
-<p>客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理</p>
-<p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了<strong>，程序没有进行实际的读写</strong></p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步非阻塞.gif"></p>
-<p>三种IO的使用场景</p>
-<ul>
-<li>BIO方式适用于<strong>连接数目比较小且固定的架构</strong>，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</li>
-<li>NIO方式适用于<strong>连接数目多且连接比较短（轻操作）的架构</strong>，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</li>
-<li>AIO方式使用于<strong>连接数目多且连接比较长（重操作）的架构</strong>，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
-</ul>
-<h2 id="4-操作系统基本特性"><a href="#4-操作系统基本特性" class="headerlink" title="4. 操作系统基本特性"></a>4. 操作系统基本特性</h2><h3 id="并发性"><a href="#并发性" class="headerlink" title="并发性"></a>并发性</h3><ul>
-<li>并发图</li>
-</ul>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并发图.webp"></p>
-<p>多个事件<strong>在同一时间间隔内发生</strong>（宏观上是并发的，微观串行）</p>
-<ul>
-<li>并行图</li>
-</ul>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并行图.webp"></p>
-<p>多个事件<strong>在同一时刻发生</strong></p>
-<p>并行需要硬件支持，多核驱动啊什么的CPU</p>
-<h3 id="共享性"><a href="#共享性" class="headerlink" title="共享性"></a>共享性</h3><p>系统资源可供系统多个并发进程共同使用（资源共享）</p>
-<ul>
-<li>互斥共享方式（互斥锁，独占资源，比如说打印机）</li>
-<li>同时访问方式（磁盘）</li>
-</ul>
-<h3 id="虚拟性"><a href="#虚拟性" class="headerlink" title="虚拟性"></a>虚拟性</h3><p>虚拟技术把一个物理实体转换为多个逻辑实体</p>
-<p>两种技术：时分复用、空分复用</p>
-<p>空分复用：虚拟技术把物理内存抽象为地址空间，进程拥有各自的地址空间，地址空间的页被映射到物理内存中，当用到一个没有在物理内存的页，会执行页面置换算法，将该也置换到内存中。</p>
-<p>时分复用：时间片轮转法</p>
-<h3 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h3><p>在多道程序环境下允许多个进程并发执行，但只有进程在获得所需的资源后方能执行。</p>
-<h2 id="5-用户态系统态"><a href="#5-用户态系统态" class="headerlink" title="5. 用户态系统态"></a>5. 用户态系统态</h2><p>根据进程访问资源的特点，可分为两个级别：</p>
-<ul>
-<li>用户态：用户态运行的程序可以直接读取用户程序的数据</li>
-<li>系统态：几乎可以访问计算机的任何资源</li>
-</ul>
-<p>一般程序都是在用户态，如果要调用系统资源就需要系统调用</p>
-<ul>
-<li>为什么划分两态？</li>
-</ul>
-<blockquote>
-<p>因为有些指令是十分危险的，如果使用不当，可能造成程序崩溃</p>
-</blockquote>
-<h3 id="用户态切换到内存态的方式"><a href="#用户态切换到内存态的方式" class="headerlink" title="用户态切换到内存态的方式"></a>用户态切换到内存态的方式</h3><ol>
-<li>系统调用</li>
-</ol>
-<blockquote>
-<p>系统调用是OS为应用程序提供能够访问到内核态的资源接口</p>
-</blockquote>
-<ol start="2">
-<li>异常</li>
-</ol>
-<blockquote>
-<p>CPU执行程序时，发生了某些不可知的异常。于是程序进入到处理该异常的内核程序中</p>
-</blockquote>
-<ol start="3">
-<li>硬件设备的中断</li>
-</ol>
-<blockquote>
-<p>硬件完成用户请求后会发送中断给CPU，CPU会暂停执行下一条指令，转而执行与中断信号对应的应用程序。转换过程涉及到用户态到内核态的转换</p>
-</blockquote>
-<h2 id="6-程序进程协程"><a href="#6-程序进程协程" class="headerlink" title="6. 程序进程协程"></a>6. 程序进程协程</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>是系统资源分配和调度的基本单位</p>
-<p>是程序的一次执行过程，是系统运行程序的基本单位</p>
-<p>系统运行一个程序就是一个进程从创建，运行到消亡的过程</p>
-<p>程序段，相关的数据段和PCB三部分便构成了进程实体。</p>
-<blockquote>
-<p>PCB:进程控制块，一般在内存中，所谓的进程的创建和销毁都是对PCB的操作。（动态特征的集中反映）</p>
-</blockquote>
-<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>线程是比进程更小的一个单位，是独立调度和分派的基本单位</p>
-<p>一个进程在其执行过程可以产生多个线程</p>
-<p>引入线程的原因是为了减少程序在并发执行过程中的时空开销</p>
-<h3 id="线程进程区别"><a href="#线程进程区别" class="headerlink" title="线程进程区别"></a>线程进程区别</h3><ol>
-<li><p>同类的线程共享进程的堆和方法区资源。但是线程本身有程序计数器，虚拟机栈，本地方法栈。所以线程在上下文切换的开销小</p>
-</li>
-<li><p>进程是独立的，同一进程内的线程可能互相干扰。</p>
-</li>
-<li><p>进程是OS的范畴，可以并发，线程更像是并行；线程执行开销小，不利于资源的管理和保护。</p>
-</li>
-<li><p>线程内可以通过读写进程内数据进行通信，进程通信需要依靠IPC</p>
-</li>
-</ol>
-<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p><strong>本质上是一种用户态的轻量级线程</strong></p>
-<p>线程==内核态线程</p>
-<p>协程==用户态线程</p>
-<p>协程和线程关系</p>
-<p>N:1    N个线程绑定一个协程</p>
-<p>1:1    </p>
-
       
     </div>
 
@@ -1362,214 +1402,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%97%AE%E9%A2%98/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%97%AE%E9%A2%98/" class="post-title-link" itemprop="url">线程池1</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:12" itemprop="dateModified" datetime="2021-05-11T21:07:12+08:00">2021-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%97%AE%E9%A2%98/" class="post-meta-item leancloud_visitors" data-flag-title="线程池1" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.2k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="为什么用线程池？"><a href="#为什么用线程池？" class="headerlink" title="为什么用线程池？"></a>为什么用线程池？</h3><ul>
-<li>降低资源消耗<ul>
-<li>通过重复利用已经创建好的线程降低线程的创建和销毁带来的消耗</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>提高响应速度<ul>
-<li>因为线程池中的线程数没有超过线程池的最大上限时，有的线程处于等待分配任务的状态，当任务来时无需创建新的线程就能执行</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>提高线程的可管理性<ul>
-<li>线程池会根据当前系统特点对池内的线程进行优化处理，减少创建和销毁线程带来的系统开销。</li>
-<li>无限的创建和销毁线程不仅消耗系统资源，还降低系统的稳定性，使用线程池进行统一管理。</li>
-</ul>
-</li>
-</ul>
-<p>1000个线程，CPU时间片对1000线程轮转效率高还是对200个线程轮转效率高?</p>
-<h4 id="Executor提供的线程池？"><a href="#Executor提供的线程池？" class="headerlink" title="Executor提供的线程池？"></a>Executor提供的线程池？</h4><ul>
-<li>FixThreadPool</li>
-</ul>
-<p>这是一个可以设置固定大小的线程池，超过线程数的任务会被放置在一个队列中，队列的大小是Intger.MAX_VALUE。</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newFixedThreadPool</span><span class="params">(<span class="keyword">int</span> nThreads)</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(nThreads, nThreads,		<span class="comment">//core=max=n</span></span><br><span class="line">                                  <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>SingleThreadPool</li>
-</ul>
-<p>单线程线程池，线程池中线程数量为一个，但是和FixThreadPool一样，任务队列的大小也为Integer.MAX_VALUE</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newSingleThreadExecutor</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> FinalizableDelegatedExecutorService</span><br><span class="line">        (<span class="keyword">new</span> ThreadPoolExecutor(<span class="number">1</span>, <span class="number">1</span>,			<span class="comment">//core=max=1</span></span><br><span class="line">                                <span class="number">0L</span>, TimeUnit.MILLISECONDS,</span><br><span class="line">                                <span class="keyword">new</span> LinkedBlockingQueue&lt;Runnable&gt;()));</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>CacheThreadPool</li>
-</ul>
-<p>可缓存的线程池，线程池中的线程数量为Integer.MAX_VULUE，为了避免说线程数量过多的影响，当空闲线程数大于任务数，然后空闲线程闲置时间&gt;60s,就会自动结束空闲的线程，回收内存</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ExecutorService <span class="title">newCachedThreadPool</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ThreadPoolExecutor(<span class="number">0</span>, Integer.MAX_VALUE,		<span class="comment">//core=0,所有线程都可回收</span></span><br><span class="line">                                  <span class="number">60L</span>, TimeUnit.SECONDS,</span><br><span class="line">                                  <span class="keyword">new</span> SynchronousQueue&lt;Runnable&gt;());</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>ScheduleThreadPool</li>
-</ul>
-<p>创建一个线程大小无限的线程池，该线程池支持定时和周期性的执行任务需求（虽然大小无线，但仍然要指定大小）</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ScheduledThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                                   ThreadFactory threadFactory)</span> </span>{</span><br><span class="line">    <span class="keyword">super</span>(corePoolSize, Integer.MAX_VALUE, <span class="number">0</span>, NANOSECONDS,	<span class="comment">//core=n, </span></span><br><span class="line">          <span class="keyword">new</span> DelayedWorkQueue(), threadFactory);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<blockquote>
-<p>一般都不会用这四个线程池</p>
-<p>前两个线程池因为任务队列是Integer.MAX_VULUE,所以当请求数量过大时，可能堆积大量请求，从而导致OOM</p>
-<p>后两个线程池因为线程数量是Integer.MAX_VULUE，可能会创建大量线程，造成OOM</p>
-</blockquote>
-<p>阿里巴巴手册推荐使用ThreadPoolExecutor构造方法实现线程池</p>
-<p>其实没有什么不同，就是ThreadPoolExecutor创建的线程池，线程数量有限，超出的任务会存放在任务队列，任务队列也是有限的，当任务队列也满了，就会执行拒绝策略</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ThreadPoolExecutor(<span class="keyword">int</span> corePoolSize,				<span class="comment">//核心线程数</span></span><br><span class="line">                          <span class="keyword">int</span> maximumPoolSize,		<span class="comment">//最大线程数</span></span><br><span class="line">                          <span class="keyword">long</span> keepAliveTime,		<span class="comment">//最大存活时间</span></span><br><span class="line">                          TimeUnit unit,			<span class="comment">//时间单位</span></span><br><span class="line">                          BlockingQueue&lt;Runnable&gt; workQueue,	<span class="comment">//阻塞队列</span></span><br><span class="line">                          ThreadFactory threadFactory,			<span class="comment">//线程工厂</span></span><br><span class="line">                          RejectedExecutionHandler handler)		<span class="comment">//拒绝策略</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>线程执行过程：</p>
-<ol>
-<li>创建线程池，创建之初就初始化了线程固定的核心线程数</li>
-<li><ol>
-<li>任务进来，如果核心线程满了，就会把任务抛到阻塞队列中等待，核心线程空闲了会直接去阻塞队列中取任务。</li>
-<li>如果核心线程满了，那么线程池就会逐渐扩大线程数量，最大不超过maximumPoolSize.</li>
-<li>如果到达了最大线程，后面没有任务进来了，那么任务执行完，max-core的数量的线程空闲时间超过keepAliveTime就会被清除掉</li>
-<li>如果还有任务进来，那么多的任务会执行拒绝策略。</li>
-</ol>
-</li>
-</ol>
-<p>常见的拒绝策略：</p>
-<ul>
-<li>DiscardOldestPolicy        #丢掉最老的任务</li>
-<li>AbortPolicy                       #直接丢弃进来的任务，抛异常（默认）</li>
-<li>CallerRunsPolicy              #直接执行任务的run方法（同步方式，不另开线程）</li>
-<li>DiscardPolicy                    #丢新来的，不抛异常</li>
-<li>记录日志</li>
-</ul>
-<h4 id="线程池参数"><a href="#线程池参数" class="headerlink" title="线程池参数"></a>线程池参数</h4><p>ThreadPoolExecutor类的构造方法</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ThreadPoolExecutor</span><span class="params">(<span class="keyword">int</span> corePoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">int</span> maximumPoolSize,</span></span></span><br><span class="line"><span class="function"><span class="params">                          <span class="keyword">long</span> keepAliveTime,</span></span></span><br><span class="line"><span class="function"><span class="params">                          TimeUnit unit,</span></span></span><br><span class="line"><span class="function"><span class="params">                          BlockingQueue&lt;Runnable&gt; workQueue,</span></span></span><br><span class="line"><span class="function"><span class="params">                          ThreadFactory threadFactory,</span></span></span><br><span class="line"><span class="function"><span class="params">                          RejectedExecutionHandler handler)</span></span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>corePoolSize：核心线程数，会一直存活的线程即使空闲</li>
-<li>maximumPoolSize：允许最大线程数</li>
-<li>keepAliveTime：线程空闲时间，当空闲时间到这个时间，线程就会退出。</li>
-<li>unit：keepAliveTime的单位</li>
-<li>workQueue：阻塞队列，仅会保存execute方法提交的Runnable任务</li>
-<li>threadFactory：创建新线程的工厂(corePoolSize&lt;maximumPoolSize时可用)</li>
-<li>handler：拒绝策略</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20200603160612412.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3h1OTYyMzM2NDE0,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述"></p>
-<h4 id="BlockingQueue"><a href="#BlockingQueue" class="headerlink" title="BlockingQueue"></a>BlockingQueue</h4><blockquote>
-<p>三种阻塞队列类型</p>
-</blockquote>
-<blockquote>
-<p>ArrayBlockingQueue(int i)：规定大小，FIFO顺序，有界队列</p>
-<p><strong>适用场景：</strong>有助于在使用有限maxPoolSizes时防止资源耗尽，但是难以调控</p>
-</blockquote>
-<blockquote>
-<p>LinkedBlockingQueue（..）:无界队列，若构造时指定大小，生成的BlockingQueue有大小限制</p>
-<p>不指定大小，其大小由Integer.MAX_VALUE来决定。</p>
-<p>其所含的对象是FIFO顺序排序的。</p>
-<p><strong>适用场景：</strong>网页服务器</p>
-</blockquote>
-<blockquote>
-<p>SynchronizedQueue（）:特殊的BlockingQueue，对其的操作必须是放和取交替完成。</p>
-<p><strong>适用场景：直接切换通常需要无限制的maximumPoolSizes，以避免拒绝新提交的任务。</strong></p>
-</blockquote>
-<h4 id="拒绝策略"><a href="#拒绝策略" class="headerlink" title="拒绝策略"></a>拒绝策略</h4><ol>
-<li><strong>AbortPolic</strong>：丢弃任务并抛出拒绝执行异常，这是线程池默认的拒绝策略，核心任务建议用 </li>
-<li><strong>DiscardPolicy</strong>：静默丢弃，不抛异常，无关紧要任务可用</li>
-<li><strong>DiscardOldestPolicy</strong>：丢弃最前面的任务，重新提交被拒绝的任务。喜新厌旧策略，根据业务决定</li>
-<li><strong>CallerRunsPolicy</strong>：由调用线程处理任务。此策略提供简单的反馈控制机制，能够减缓新任务的提交速度。贪心的策略，都不想放弃，对某些场景，可能造成当前线程也阻塞</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1639,20 +1471,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-count">38</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-count">17</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1688,12 +1520,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">206k</span>
+    <span title="站点总字数">211k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:08</span>
+    <span title="站点阅读时长">3:12</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
