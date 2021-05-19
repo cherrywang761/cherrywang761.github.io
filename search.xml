@@ -273,6 +273,37 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringMVC理解</title>
+    <url>/2021/03/12/SpringMVC%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>谈一谈对SpringMVC的认识？</p>
+<a id="more"></a>
+
+<ul>
+<li>概念</li>
+</ul>
+<p>SpringMVC是一个轻量级的开源框架，主要应用于表现层，是基于MVC架构设计的。</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>SpringMVC是单例的，可以设置成多例子</li>
+<li>线程安全</li>
+<li>方法级别的拦截</li>
+<li>接收请求参数的方式是参数绑定。</li>
+<li>携带参数到页面是通过request对象。</li>
+</ol>
+<ul>
+<li><strong>SpringMVC流程</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Spring面试</title>
     <url>/2021/01/31/Spring%E9%9D%A2%E8%AF%95/</url>
     <content><![CDATA[<h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
@@ -426,37 +457,6 @@
       </tags>
   </entry>
   <entry>
-    <title>SpringMVC理解</title>
-    <url>/2021/03/12/SpringMVC%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<p>谈一谈对SpringMVC的认识？</p>
-<a id="more"></a>
-
-<ul>
-<li>概念</li>
-</ul>
-<p>SpringMVC是一个轻量级的开源框架，主要应用于表现层，是基于MVC架构设计的。</p>
-<ul>
-<li>特点</li>
-</ul>
-<ol>
-<li>SpringMVC是单例的，可以设置成多例子</li>
-<li>线程安全</li>
-<li>方法级别的拦截</li>
-<li>接收请求参数的方式是参数绑定。</li>
-<li>携带参数到页面是通过request对象。</li>
-</ol>
-<ul>
-<li><strong>SpringMVC流程</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>SpringMVC</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>guli-shop高级篇3</title>
     <url>/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/</url>
     <content><![CDATA[<h3 id="异步复习"><a href="#异步复习" class="headerlink" title="异步复习"></a>异步复习</h3><h4 id="初始化线程方式"><a href="#初始化线程方式" class="headerlink" title="初始化线程方式"></a>初始化线程方式</h4><ol>
@@ -501,6 +501,11 @@
       </tags>
   </entry>
   <entry>
+    <title>hadoop学习笔记</title>
+    <url>/2021/03/15/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
     <title>全局异常处理</title>
     <url>/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<p>一般项目中都会写一个全局的异常处理</p>
@@ -522,11 +527,6 @@
       <tags>
         <tag>面试</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>hadoop学习笔记</title>
-    <url>/2021/03/15/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>OS问题通俗版</title>
@@ -722,42 +722,22 @@
       </tags>
   </entry>
   <entry>
-    <title>算法数组</title>
-    <url>/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/</url>
-    <content><![CDATA[<h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
+    <title>算法贪心篇</title>
+    <url>/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/</url>
+    <content><![CDATA[<h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
+<a id="more"></a>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210124232215087.png" alt="image-20210124232215087" style="zoom:80%;">
 
 
 
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//如果全是负的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果全是正的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果有正有负，要最大乘积也是两负+一正</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">return</span> Math.max(nums[length-<span class="number">1</span>] * nums[length-<span class="number">2</span>] * nums[length-<span class="number">3</span>], nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length-<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="2-Leetcode-989-数组形式的整数加减法（简单题）"><a href="#2-Leetcode-989-数组形式的整数加减法（简单题）" class="headerlink" title="2. Leetcode 989 数组形式的整数加减法（简单题）"></a>2. Leetcode 989 数组形式的整数加减法（简单题）</h4><p>给定非负整数 <code>X</code> 的数组形式 <code>A</code>，返回整数 <code>X+K</code> 的数组形式。</p>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210122230456222.png" alt="image-20210122230456222" style="zoom:80%;">
-
-
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addToArrayForm</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> K)</span> </span>{</span><br><span class="line">        <span class="comment">//返回List，创建一个List</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; --i){</span><br><span class="line">            <span class="comment">//从最后一位开始计算</span></span><br><span class="line">            <span class="keyword">int</span> sum = A[i] + K % <span class="number">10</span>;</span><br><span class="line">            K /= <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//满10进1</span></span><br><span class="line">            <span class="keyword">if</span>(sum &gt;= <span class="number">10</span>){</span><br><span class="line">                K++;</span><br><span class="line">                sum -= <span class="number">10</span>;</span><br><span class="line">            }</span><br><span class="line">            res.add(sum);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//如果K整数的位数比X的大</span></span><br><span class="line">        <span class="keyword">for</span>(; K &gt; <span class="number">0</span>; K/=<span class="number">10</span>){</span><br><span class="line">            res.add(K % <span class="number">10</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//反转列表</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<h4 id="3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）"><a href="#3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）" class="headerlink" title="3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）"></a>3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210126112627183.png" alt="image-20210126112627183" style="zoom:80%;">
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(<span class="keyword">int</span>[][] dominoes)</span> </span>{</span><br><span class="line">        <span class="comment">//定义一个用来存储对应数字数量的数组</span></span><br><span class="line">        <span class="comment">//2维数组不超过100</span></span><br><span class="line">        <span class="keyword">int</span>[] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dominoes.length; i++){</span><br><span class="line">            <span class="keyword">int</span> m = dominoes[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> n = dominoes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="comment">//排序，一律按照从小到大排序（51--&gt;15) </span></span><br><span class="line">            <span class="keyword">int</span> k = m &gt; n ? m * <span class="number">10</span> + n : n * <span class="number">10</span> + m;</span><br><span class="line">            map[k]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//进行统计</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">100</span>; i++){</span><br><span class="line">            <span class="comment">// 根据组合数公式 C_n^2 = (n * (n - 1)) / 2 计算等价骨牌能够组成的组合数，再求和</span></span><br><span class="line">            res += map[i] *(map[i] - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<h4 id="4-Leetcode-724-寻找数组的中心索引"><a href="#4-Leetcode-724-寻找数组的中心索引" class="headerlink" title="4. Leetcode 724 寻找数组的中心索引"></a>4. Leetcode 724 寻找数组的中心索引</h4><p>数组 中心索引 是数组的一个索引，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
-<p>如果数组不存在中心索引，返回 -1 。如果数组有多个中心索引，应该返回最靠近左边的那一个。</p>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210128232432201.png" alt="image-20210128232432201" style="zoom:80%;">
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//两次遍历，第一次遍历算出数组全部元素相加的数</span></span><br><span class="line">        <span class="comment">//第二次遍历进行中心索引的判断</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums){</span><br><span class="line">            sum += num;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            index += nums[i];</span><br><span class="line">            <span class="comment">//(11+6) * 2 - 6 = 11 * 2 + 6 = prefix + suffix + index </span></span><br><span class="line">            <span class="keyword">if</span>(index * <span class="number">2</span> - nums[i] == sum){</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] &lt;= nums[i - <span class="number">1</span>]){</span><br><span class="line">                start = i;    </span><br><span class="line">            }</span><br><span class="line">            ans = Math.max(ans, i-start + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>面试</tag>
-        <tag>数组</tag>
+        <tag>贪心算法</tag>
       </tags>
   </entry>
   <entry>
@@ -801,22 +781,42 @@
       </tags>
   </entry>
   <entry>
-    <title>算法贪心篇</title>
-    <url>/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/</url>
-    <content><![CDATA[<h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
-<a id="more"></a>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210124232215087.png" alt="image-20210124232215087" style="zoom:80%;">
+    <title>算法数组</title>
+    <url>/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/</url>
+    <content><![CDATA[<h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
 
 
 
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] &lt;= nums[i - <span class="number">1</span>]){</span><br><span class="line">                start = i;    </span><br><span class="line">            }</span><br><span class="line">            ans = Math.max(ans, i-start + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//如果全是负的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果全是正的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果有正有负，要最大乘积也是两负+一正</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">return</span> Math.max(nums[length-<span class="number">1</span>] * nums[length-<span class="number">2</span>] * nums[length-<span class="number">3</span>], nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length-<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="2-Leetcode-989-数组形式的整数加减法（简单题）"><a href="#2-Leetcode-989-数组形式的整数加减法（简单题）" class="headerlink" title="2. Leetcode 989 数组形式的整数加减法（简单题）"></a>2. Leetcode 989 数组形式的整数加减法（简单题）</h4><p>给定非负整数 <code>X</code> 的数组形式 <code>A</code>，返回整数 <code>X+K</code> 的数组形式。</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210122230456222.png" alt="image-20210122230456222" style="zoom:80%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addToArrayForm</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> K)</span> </span>{</span><br><span class="line">        <span class="comment">//返回List，创建一个List</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; --i){</span><br><span class="line">            <span class="comment">//从最后一位开始计算</span></span><br><span class="line">            <span class="keyword">int</span> sum = A[i] + K % <span class="number">10</span>;</span><br><span class="line">            K /= <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//满10进1</span></span><br><span class="line">            <span class="keyword">if</span>(sum &gt;= <span class="number">10</span>){</span><br><span class="line">                K++;</span><br><span class="line">                sum -= <span class="number">10</span>;</span><br><span class="line">            }</span><br><span class="line">            res.add(sum);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//如果K整数的位数比X的大</span></span><br><span class="line">        <span class="keyword">for</span>(; K &gt; <span class="number">0</span>; K/=<span class="number">10</span>){</span><br><span class="line">            res.add(K % <span class="number">10</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//反转列表</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）"><a href="#3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）" class="headerlink" title="3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）"></a>3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）</h4><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210126112627183.png" alt="image-20210126112627183" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(<span class="keyword">int</span>[][] dominoes)</span> </span>{</span><br><span class="line">        <span class="comment">//定义一个用来存储对应数字数量的数组</span></span><br><span class="line">        <span class="comment">//2维数组不超过100</span></span><br><span class="line">        <span class="keyword">int</span>[] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dominoes.length; i++){</span><br><span class="line">            <span class="keyword">int</span> m = dominoes[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> n = dominoes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="comment">//排序，一律按照从小到大排序（51--&gt;15) </span></span><br><span class="line">            <span class="keyword">int</span> k = m &gt; n ? m * <span class="number">10</span> + n : n * <span class="number">10</span> + m;</span><br><span class="line">            map[k]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//进行统计</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">100</span>; i++){</span><br><span class="line">            <span class="comment">// 根据组合数公式 C_n^2 = (n * (n - 1)) / 2 计算等价骨牌能够组成的组合数，再求和</span></span><br><span class="line">            res += map[i] *(map[i] - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="4-Leetcode-724-寻找数组的中心索引"><a href="#4-Leetcode-724-寻找数组的中心索引" class="headerlink" title="4. Leetcode 724 寻找数组的中心索引"></a>4. Leetcode 724 寻找数组的中心索引</h4><p>数组 中心索引 是数组的一个索引，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果数组不存在中心索引，返回 -1 。如果数组有多个中心索引，应该返回最靠近左边的那一个。</p>
+<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210128232432201.png" alt="image-20210128232432201" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//两次遍历，第一次遍历算出数组全部元素相加的数</span></span><br><span class="line">        <span class="comment">//第二次遍历进行中心索引的判断</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums){</span><br><span class="line">            sum += num;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            index += nums[i];</span><br><span class="line">            <span class="comment">//(11+6) * 2 - 6 = 11 * 2 + 6 = prefix + suffix + index </span></span><br><span class="line">            <span class="keyword">if</span>(index * <span class="number">2</span> - nums[i] == sum){</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
       <categories>
         <category>算法</category>
       </categories>
       <tags>
         <tag>面试</tag>
-        <tag>贪心算法</tag>
+        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -847,7 +847,7 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br>
 </nav>
 
-
+<a id="more"></a>
 
 <h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p><strong>HDFS</strong> （<strong>Hadoop Distributed File System</strong>）是 Hadoop 下的分布式文件系统，具有高容错、高吞吐量等特性，可以部署在低成本的硬件上。</p>
 <h2 id="二、HDFS-设计原理"><a href="#二、HDFS-设计原理" class="headerlink" title="二、HDFS 设计原理"></a>二、HDFS 设计原理</h2><div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfsarchitecture.png"> </div>
@@ -968,9 +968,6 @@
       <categories>
         <category>面试</category>
       </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
   </entry>
   <entry>
     <title>AQS</title>
@@ -1248,6 +1245,112 @@
       </tags>
   </entry>
   <entry>
+    <title>ThreadLocal</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
+    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
+<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
+<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
+<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
+<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
+<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
+<li>set方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>get方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>remove方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
+</blockquote>
+<ul>
+<li>initialValue方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>返回该线程局部变量的初始值</p>
+</blockquote>
+<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
+<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
+<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
+<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
+<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
+<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
+</ul>
+<p>Tips: Object和T的区别？</p>
+<blockquote>
+<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
+</blockquote>
+<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
+<p>举个例子：抗日上下线</p>
+<blockquote>
+<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
+</blockquote>
+<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
+<p><strong>（1）key 使用强引用</strong></p>
+<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
+<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
+<p><strong>（2）key 使用弱引</strong></p>
+<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
+<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
+<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
+<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
+<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
+<li>当需要存储线程私有变量的时候。</li>
+<li>当需要实现线程安全的变量时。</li>
+<li>当需要减少线程资源竞争的时候。</li>
+</ul>
+<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
+<blockquote>
+<p>String name = “cherrywang”;</p>
+<p>User cherrywang = new User();</p>
+</blockquote>
+<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
+<p>可达性分析结果不可达，则GC时会回收</p>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
+<p>当JVM内存不足，才会被垃圾回收器回收</p>
+<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
+<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
+<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
+<p><strong>虚引用必须和引用队列一起使用</strong></p>
+<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
+<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
+<p>它有机会让跟踪的对象“复活”</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IOC与AOP</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Spring%E7%9A%84IOC%E5%92%8CAOP/</url>
     <content><![CDATA[<p>IOC</p>
@@ -1432,154 +1535,8 @@
       </tags>
   </entry>
   <entry>
-    <title>ThreadLocal</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
-    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
-<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
-<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
-<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
-<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
-<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
-<li>set方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>get方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>remove方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
-</blockquote>
-<ul>
-<li>initialValue方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>返回该线程局部变量的初始值</p>
-</blockquote>
-<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
-<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
-<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
-<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
-<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
-<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
-</ul>
-<p>Tips: Object和T的区别？</p>
-<blockquote>
-<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
-</blockquote>
-<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
-<p>举个例子：抗日上下线</p>
-<blockquote>
-<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
-</blockquote>
-<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
-<p><strong>（1）key 使用强引用</strong></p>
-<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
-<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
-<p><strong>（2）key 使用弱引</strong></p>
-<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
-<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
-<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
-<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
-<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
-<li>当需要存储线程私有变量的时候。</li>
-<li>当需要实现线程安全的变量时。</li>
-<li>当需要减少线程资源竞争的时候。</li>
-</ul>
-<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
-<blockquote>
-<p>String name = “cherrywang”;</p>
-<p>User cherrywang = new User();</p>
-</blockquote>
-<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
-<p>可达性分析结果不可达，则GC时会回收</p>
-<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
-<p>当JVM内存不足，才会被垃圾回收器回收</p>
-<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
-<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
-<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
-<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
-<p><strong>虚引用必须和引用队列一起使用</strong></p>
-<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
-<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
-<p>它有机会让跟踪的对象“复活”</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>红黑树</title>
-    <url>/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/</url>
-    <content><![CDATA[<h3 id="大端系统和小端系统"><a href="#大端系统和小端系统" class="headerlink" title="大端系统和小端系统"></a>大端系统和小端系统</h3><h4 id="为什么会存在大小端系统？"><a href="#为什么会存在大小端系统？" class="headerlink" title="为什么会存在大小端系统？"></a>为什么会存在大小端系统？</h4><p>计算机系统中，每个地址单元对应一个字节（8bit），一种数据类型的数据对象可能占用若干字节。对于这些对象，我们需要建立两个规则：</p>
-<ul>
-<li>该对象的地址是什么？</li>
-<li>内存中是如何排序这些对象字节的</li>
-</ul>
-<p>这也就是常说的字节序和比特序问题。字节序和比特序一般是一致的，要么都是大端，要么都是小端。</p>
-<h4 id="什么是大端小端？"><a href="#什么是大端小端？" class="headerlink" title="什么是大端小端？"></a>什么是大端小端？</h4><p>大端：低位（字节/比特）放在高地址中，高位（字节/比特）放在低地址中。</p>
-<blockquote>
-<p>数据低位字节内容放在高地址处，高位字节内容放在低地址处。举例 int 类型在32位或者64位的Windows系统中都是占4个字节，也就是 4*8=32 位。储存 int a=1 在大端系统中，如下图所示。</p>
-<p><img src="https://img-blog.csdnimg.cn/20200330165032875.png" alt="图1"></p>
-</blockquote>
-<p>小端：低位（字节/比特）放在低地址中，高位（字节/比特）放在高地址中。</p>
-<blockquote>
-<p>数据低位字节内容放在低地址处，高危字节内容放在高地址处。举例，还是 int a=1在小端系统，如下图所示。</p>
-<p><img src="https://img-blog.csdnimg.cn/2020033016555898.png" alt="图2"></p>
-</blockquote>
-<h5 id="优势，劣势："><a href="#优势，劣势：" class="headerlink" title="优势，劣势："></a>优势，劣势：</h5><blockquote>
-<p>小端模式 ：强制转换数据不需要调整字节内容，1、2、4字节的存储方式一样。</p>
-<p>大端模式 ：符号位的判定固定为第一个字节，容易判断正负。</p>
-</blockquote>
-<p>一般操作系统都是小端模式；而通讯协议是大端模式；<strong>java和平台无关，默认是大端模式</strong></p>
-<p>常见的cpu的大小端：<br>大端：PowerPC、IBM、Sun<br>小端：x86<br>ARM既可以工作在大端模式，也可以工作在小端模式</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0x12345678</span>;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        DataOutputStream dos = <span class="keyword">new</span> DataOutputStream(baos);</span><br><span class="line">        dos.writeInt(a);</span><br><span class="line">        <span class="keyword">byte</span>[] b = baos.toByteArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">4</span>;i++){</span><br><span class="line">            System.out.println(Integer.toHexString(b[i]));</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
-
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title></title>
-    <url>/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+    <title>序列化与反序列化</title>
+    <url>/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
     <content><![CDATA[<p>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</p>
 <blockquote>
 <p>对象流：将对象转换为二进制流byte[]，我们可以对二进制流进行读写操作，流数据也可以在网络中进行传输。</p>
@@ -1622,6 +1579,52 @@
 <p>参考文章：<a href="https://blog.csdn.net/tree_ifconfig/article/details/82766587">https://blog.csdn.net/tree_ifconfig/article/details/82766587</a></p>
 </blockquote>
 ]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>网络通信</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>红黑树</title>
+    <url>/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/</url>
+    <content><![CDATA[<h3 id="大端系统和小端系统"><a href="#大端系统和小端系统" class="headerlink" title="大端系统和小端系统"></a>大端系统和小端系统</h3><h4 id="为什么会存在大小端系统？"><a href="#为什么会存在大小端系统？" class="headerlink" title="为什么会存在大小端系统？"></a>为什么会存在大小端系统？</h4><p>计算机系统中，每个地址单元对应一个字节（8bit），一种数据类型的数据对象可能占用若干字节。对于这些对象，我们需要建立两个规则：</p>
+<ul>
+<li>该对象的地址是什么？</li>
+<li>内存中是如何排序这些对象字节的</li>
+</ul>
+<p>这也就是常说的字节序和比特序问题。字节序和比特序一般是一致的，要么都是大端，要么都是小端。</p>
+<h4 id="什么是大端小端？"><a href="#什么是大端小端？" class="headerlink" title="什么是大端小端？"></a>什么是大端小端？</h4><p>大端：低位（字节/比特）放在高地址中，高位（字节/比特）放在低地址中。</p>
+<blockquote>
+<p>数据低位字节内容放在高地址处，高位字节内容放在低地址处。举例 int 类型在32位或者64位的Windows系统中都是占4个字节，也就是 4*8=32 位。储存 int a=1 在大端系统中，如下图所示。</p>
+<p><img src="https://img-blog.csdnimg.cn/20200330165032875.png" alt="图1"></p>
+</blockquote>
+<p>小端：低位（字节/比特）放在低地址中，高位（字节/比特）放在高地址中。</p>
+<blockquote>
+<p>数据低位字节内容放在低地址处，高危字节内容放在高地址处。举例，还是 int a=1在小端系统，如下图所示。</p>
+<p><img src="https://img-blog.csdnimg.cn/2020033016555898.png" alt="图2"></p>
+</blockquote>
+<h5 id="优势，劣势："><a href="#优势，劣势：" class="headerlink" title="优势，劣势："></a>优势，劣势：</h5><blockquote>
+<p>小端模式 ：强制转换数据不需要调整字节内容，1、2、4字节的存储方式一样。</p>
+<p>大端模式 ：符号位的判定固定为第一个字节，容易判断正负。</p>
+</blockquote>
+<p>一般操作系统都是小端模式；而通讯协议是大端模式；<strong>java和平台无关，默认是大端模式</strong></p>
+<p>常见的cpu的大小端：<br>大端：PowerPC、IBM、Sun<br>小端：x86<br>ARM既可以工作在大端模式，也可以工作在小端模式</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">test2</span><span class="params">()</span> <span class="keyword">throws</span> IOException </span>{</span><br><span class="line">        <span class="comment">// TODO Auto-generated method stub</span></span><br><span class="line">        <span class="keyword">int</span> a = <span class="number">0x12345678</span>;</span><br><span class="line">        ByteArrayOutputStream baos = <span class="keyword">new</span> ByteArrayOutputStream();</span><br><span class="line">        DataOutputStream dos = <span class="keyword">new</span> DataOutputStream(baos);</span><br><span class="line">        dos.writeInt(a);</span><br><span class="line">        <span class="keyword">byte</span>[] b = baos.toByteArray();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>;i&lt;<span class="number">4</span>;i++){</span><br><span class="line">            System.out.println(Integer.toHexString(b[i]));</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+
+
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
   </entry>
   <entry>
     <title>排查CPU高负载问题</title>
@@ -1983,78 +1986,6 @@
       </tags>
   </entry>
   <entry>
-    <title>进程同步机制</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h2 id="进程同步机制"><a href="#进程同步机制" class="headerlink" title="进程同步机制"></a>进程同步机制</h2><p>进程同步就是说不同的进程之间传递信息。它是一组编程接口，让程序员来协调进程，使之能够相互通信</p>
-<p>进程通信（IPC）</p>
-<img src="https://img-blog.csdn.net/20180817140424264?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NTI1Mzg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" style="zoom:80%;">
-
-<p>键相当于IPC的外部名，标识符相当于IPC的内部名，IPC=内核对象（进程通信是靠内核对象沟通的）</p>
-<h3 id="IPC的目的"><a href="#IPC的目的" class="headerlink" title="IPC的目的"></a>IPC的目的</h3><h4 id="网络socket"><a href="#网络socket" class="headerlink" title="网络socket"></a>网络socket</h4><p>一般在TCP/IP通信中比较常见，是OS提供给程序用来与TCP/IP协议交互的接口，socket套接字，两个程序进行网络通信时，通信连接的端点就可以理解为两个socket</p>
-<p>socket表现形式    IP：端口</p>
-<p>程序交互=进程交互，程序的执行过程相当于进程从创建到运行到消亡的这么一个过程</p>
-<p>网络的进程通信中是十分常见的</p>
-<p>socket适用于同一主机不同进程间的通信（模块之间feign调用）和不同主机进程间的全双工网络通信。。</p>
-<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>管道分为三种，传输数据都是无类型的，根据FIFO机制</p>
-<ul>
-<li>匿名管道：也叫普通管道：PIPE：两个限制：1.只能父子进程，兄弟进程通信 2. 半双工通信，数据只能单向传输（对讲机）</li>
-<li>命令流管道：进行了优化，它是全双工通信（电话），但是第一个限制没有解除</li>
-<li>命名管道：FIFO，两个限制都解除了</li>
-</ul>
-<p>一般就是喜欢拿匿名管道和命名管道做比较</p>
-<ol>
-<li>匿名管道是在内存中的（fork），但是命名管道是在文件系统中的，它是关联了一个路径，以FIFO文件形式存储在文件系统中的，设备文件，所以它打开要用open()才能打开，而且可能阻塞</li>
-<li>匿名管道用pipe函数创建打开，命名函数用mkfifo函数创建，open打开</li>
-</ol>
-<img src="https://img-blog.csdn.net/20180930143508803?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fa291/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" style="zoom:50%;">
-
-<p>管道也是文件嘛，大小4096字节，管道满则写阻塞，管道空则读阻塞</p>
-<h3 id="系统IPC"><a href="#系统IPC" class="headerlink" title="系统IPC"></a>系统IPC</h3><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>消息队列遵循FIFO原则</p>
-<p>一个系统最多3636个消息队列</p>
-<p>每个消息队列最多可以装8196字节</p>
-<p>一个消息队列所有消息最多可以存放16384个字节</p>
-<p>一般应用上我们用消息队列发送数据，用信号量进行进程的同步控制</p>
-<p>和管道区别：1. 数据有无类型，管道无类型，所以FIFO机制，消息队列有类型，所以可以设优先级机制</p>
-<ol start="2">
-<li>读数据的顺序，管道先来先读，消息队列有优先级机制</li>
-</ol>
-<h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4><p>临界资源：同一时刻，只能被同一进程访问的共享资源</p>
-<p>临界区：访问临界资源的代码</p>
-<p>信号量其实就是一个计数器：记录临界资源能够被多少进程同时访问</p>
-<p>一般是用在进程通信方面，或者说同一进程不同线程的同步方法</p>
-<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><blockquote>
-<p>shmget（）开辟共享内存</p>
-<p>shmdt()    断开进程和共享内存的链接</p>
-<p>shmctl()    删除共享内存</p>
-<p>没有连接就会删除，删除后就不会有连接（连接不上）</p>
-</blockquote>
-<p>共享内存是最快的IPC方式，它其实就是映射一段能被其他进程访问的内存。</p>
-<p>这个内存是由一个进程创建的，但是其他进程也可以访问。</p>
-<p>之所以快是因为不需要客户进程和服务器进程之间进行赋值</p>
-<p>共享内存唯一要特别注意的就是同步问题了，所以在这里使用信号量进行共享内存的进程同步是非常常见的。</p>
-<p>共享内存只需要两次拷贝，而比如管道，消息队列这些内核对象执行系统调用，都需要4次拷贝</p>
-<p>消息队列4次拷贝：</p>
-<ol>
-<li>用户buffer -&gt; kernel</li>
-<li>kernel -&gt; 内存</li>
-<li>内存 -&gt; kernel</li>
-<li>kernel -&gt; 用户buffer</li>
-</ol>
-<p>共享内存2次：</p>
-<ol>
-<li>用户空间 -&gt; 内存</li>
-<li>内存 -&gt; 用户空间</li>
-</ol>
-<p>、</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>线程池1</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h3 id="为什么用线程池？"><a href="#为什么用线程池？" class="headerlink" title="为什么用线程池？"></a>为什么用线程池？</h3><ul>
@@ -2177,6 +2108,163 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>进程同步机制</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="进程同步机制"><a href="#进程同步机制" class="headerlink" title="进程同步机制"></a>进程同步机制</h2><p>进程同步就是说不同的进程之间传递信息。它是一组编程接口，让程序员来协调进程，使之能够相互通信</p>
+<p>进程通信（IPC）</p>
+<img src="https://img-blog.csdn.net/20180817140424264?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzE5NTI1Mzg5/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="img" style="zoom:80%;">
+
+<p>键相当于IPC的外部名，标识符相当于IPC的内部名，IPC=内核对象（进程通信是靠内核对象沟通的）</p>
+<h3 id="IPC的目的"><a href="#IPC的目的" class="headerlink" title="IPC的目的"></a>IPC的目的</h3><h4 id="网络socket"><a href="#网络socket" class="headerlink" title="网络socket"></a>网络socket</h4><p>一般在TCP/IP通信中比较常见，是OS提供给程序用来与TCP/IP协议交互的接口，socket套接字，两个程序进行网络通信时，通信连接的端点就可以理解为两个socket</p>
+<p>socket表现形式    IP：端口</p>
+<p>程序交互=进程交互，程序的执行过程相当于进程从创建到运行到消亡的这么一个过程</p>
+<p>网络的进程通信中是十分常见的</p>
+<p>socket适用于同一主机不同进程间的通信（模块之间feign调用）和不同主机进程间的全双工网络通信。。</p>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道"></a>管道</h4><p>管道分为三种，传输数据都是无类型的，根据FIFO机制</p>
+<ul>
+<li>匿名管道：也叫普通管道：PIPE：两个限制：1.只能父子进程，兄弟进程通信 2. 半双工通信，数据只能单向传输（对讲机）</li>
+<li>命令流管道：进行了优化，它是全双工通信（电话），但是第一个限制没有解除</li>
+<li>命名管道：FIFO，两个限制都解除了</li>
+</ul>
+<p>一般就是喜欢拿匿名管道和命名管道做比较</p>
+<ol>
+<li>匿名管道是在内存中的（fork），但是命名管道是在文件系统中的，它是关联了一个路径，以FIFO文件形式存储在文件系统中的，设备文件，所以它打开要用open()才能打开，而且可能阻塞</li>
+<li>匿名管道用pipe函数创建打开，命名函数用mkfifo函数创建，open打开</li>
+</ol>
+<img src="https://img-blog.csdn.net/20180930143508803?watermark/2/text/aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2NzZG5fa291/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" alt="在这里插入图片描述" style="zoom:50%;">
+
+<p>管道也是文件嘛，大小4096字节，管道满则写阻塞，管道空则读阻塞</p>
+<h3 id="系统IPC"><a href="#系统IPC" class="headerlink" title="系统IPC"></a>系统IPC</h3><h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>消息队列遵循FIFO原则</p>
+<p>一个系统最多3636个消息队列</p>
+<p>每个消息队列最多可以装8196字节</p>
+<p>一个消息队列所有消息最多可以存放16384个字节</p>
+<p>一般应用上我们用消息队列发送数据，用信号量进行进程的同步控制</p>
+<p>和管道区别：1. 数据有无类型，管道无类型，所以FIFO机制，消息队列有类型，所以可以设优先级机制</p>
+<ol start="2">
+<li>读数据的顺序，管道先来先读，消息队列有优先级机制</li>
+</ol>
+<h4 id="信号量"><a href="#信号量" class="headerlink" title="信号量"></a>信号量</h4><p>临界资源：同一时刻，只能被同一进程访问的共享资源</p>
+<p>临界区：访问临界资源的代码</p>
+<p>信号量其实就是一个计数器：记录临界资源能够被多少进程同时访问</p>
+<p>一般是用在进程通信方面，或者说同一进程不同线程的同步方法</p>
+<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><blockquote>
+<p>shmget（）开辟共享内存</p>
+<p>shmdt()    断开进程和共享内存的链接</p>
+<p>shmctl()    删除共享内存</p>
+<p>没有连接就会删除，删除后就不会有连接（连接不上）</p>
+</blockquote>
+<p>共享内存是最快的IPC方式，它其实就是映射一段能被其他进程访问的内存。</p>
+<p>这个内存是由一个进程创建的，但是其他进程也可以访问。</p>
+<p>之所以快是因为不需要客户进程和服务器进程之间进行赋值</p>
+<p>共享内存唯一要特别注意的就是同步问题了，所以在这里使用信号量进行共享内存的进程同步是非常常见的。</p>
+<p>共享内存只需要两次拷贝，而比如管道，消息队列这些内核对象执行系统调用，都需要4次拷贝</p>
+<p>消息队列4次拷贝：</p>
+<ol>
+<li>用户buffer -&gt; kernel</li>
+<li>kernel -&gt; 内存</li>
+<li>内存 -&gt; kernel</li>
+<li>kernel -&gt; 用户buffer</li>
+</ol>
+<p>共享内存2次：</p>
+<ol>
+<li>用户空间 -&gt; 内存</li>
+<li>内存 -&gt; 用户空间</li>
+</ol>
+<p>、</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程通信方式</title>
+    <url>/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h4 id="如何让两个线程按顺序执行？"><a href="#如何让两个线程按顺序执行？" class="headerlink" title="如何让两个线程按顺序执行？"></a>如何让两个线程按顺序执行？</h4><p>想要让A先执行完后，再让B执行</p>
+<blockquote>
+<p>普通的new两个线程，无法控制先后顺序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testThread</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"A"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNum</span><span class="params">(String threadName)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i++ &lt; <span class="number">3</span>){</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">            System.out.println(threadName + <span class="string">" print: "</span> + i);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>这样子处理显然无法让A,B有顺序的执行。</p>
+<p>如果希望B在A执行完后才执行，可以使用thread.join()方法</p>
+<blockquote>
+<p>在线程B中添加让步方法join()</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">try</span>{</span><br><span class="line">                    A.join();	<span class="comment">//B给A让步</span></span><br><span class="line">                }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>B print: 1<br>A print: 1<br>B print: 2<br>A print: 2<br>A print: 3<br>B print: 3</p>
+</blockquote>
+<h5 id="线程通信方式其一：join"><a href="#线程通信方式其一：join" class="headerlink" title="线程通信方式其一：join()"></a>线程通信方式其一：join()</h5><h4 id="如何让线程以有序方式相交？"><a href="#如何让线程以有序方式相交？" class="headerlink" title="如何让线程以有序方式相交？"></a>如何让线程以有序方式相交？</h4><p>如果现在我们希望B在A打印完1之后立即开始打印1，2，3，然后A继续打印2，3呢</p>
+<p>这就需要更加细粒度的锁进行控制了，可以使用object.lock()和object.notify()的优势</p>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"A 1"</span>);</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                 <span class="comment">//调用lock.wait()使它进入等待状态的方法,移交对锁的控制</span></span><br><span class="line">                        lock.wait();</span><br><span class="line">                    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"A 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"A 3"</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"B 1"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 3"</span>);</span><br><span class="line">                <span class="comment">//调用该lock.notify()方法唤醒正在等待的A</span></span><br><span class="line">                    lock.notify();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>A 1<br>B 1<br>B 2<br>B 3<br>A 2<br>A 3</p>
+</blockquote>
+<h5 id="线程通信方式其二：object的lock-和notify-方法"><a href="#线程通信方式其二：object的lock-和notify-方法" class="headerlink" title="线程通信方式其二：object的lock()和notify()方法"></a>线程通信方式其二：object的lock()和notify()方法</h5><h4 id="在A-B-C都完成同步执行后，执行D"><a href="#在A-B-C都完成同步执行后，执行D" class="headerlink" title="在A,B,C都完成同步执行后，执行D"></a>在A,B,C都完成同步执行后，执行D</h4><p>前面说过如果有先后顺序，可以使用thread.join()方法，但是如果想让多个线程同步执行，最后在执行D，如何实现？</p>
+<p><code>Tips：普通使用thread.join()会让ABC顺序执行，起不到同步作用。</code></p>
+<p>三个线程同步运行，当三个线程全部完成运行后，D才开始运行</p>
+<p>这里我们可以使用<code>CountdownLatch</code>计数器功能</p>
+<ol>
+<li>创建一个定时器，设置一个初始值</li>
+<li>countDownLatch.await()进入等待状态，直到计时器变为0</li>
+<li>countDownLatch.countDown()在其他线程调用该方法，使计数器减一</li>
+<li>当计数器为0，countDownLatch.await()等待线程中方法将立即退出并执行方法</li>
+</ol>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> workers = <span class="number">3</span>;</span><br><span class="line">    CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(workers);</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(<span class="string">"D is waiting for other three workers"</span>);</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">           <span class="comment">//await()方法会检测计数值是否为0了，不是就继续等待</span></span><br><span class="line">                countDownLatch.await();</span><br><span class="line">                System.out.println(<span class="string">"All done, D starts working"</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }).start();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> threadName = <span class="string">'A'</span>; threadName &lt;= <span class="string">'C'</span>; threadName++){</span><br><span class="line">        <span class="keyword">final</span> String tN = String.valueOf(threadName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(tN + <span class="string">" is working"</span>);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(tN + <span class="string">"finished"</span>);</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>D is waiting for other three workers<br>C is working<br>A is working<br>B is working<br>Cfinished<br>Bfinished<br>Afinished<br>All done, D starts working</p>
+</blockquote>
+<p><strong>因此，CountDownLatch适用于一个线程需要等待多个线程的情况。</strong></p>
+<h5 id="线程通信方式其三：CountDownLatch计数器"><a href="#线程通信方式其三：CountDownLatch计数器" class="headerlink" title="线程通信方式其三：CountDownLatch计数器"></a>线程通信方式其三：CountDownLatch计数器</h5><h4 id="三个跑步者准备跑步"><a href="#三个跑步者准备跑步" class="headerlink" title="三个跑步者准备跑步"></a>三个跑步者准备跑步</h4><p>三个跑步者，在各自准备好了开跑。</p>
+<p>这里三个线程A,B,C需要分别进行准备，然后在三个人都准备好后开始同时运行。如何实现？</p>
+<p><strong>CountDownLatch用于计数下降，完成计数后的实施者是主线程，具有不可重复性。所以只有一个线程的一个await()会被响应。</strong></p>
+<p><strong>CyclicBarrier的下一步动作实施者还是“其他线程”本身，具有往复多次实施动作的特点。我们这里可以使用它来实现。</strong></p>
+<ol>
+<li>首先创建一个公共对象CyclicBarrier，并设置同时等待的线程数</li>
+<li>这些线程会开始同时进行准备，准备好后要等待其他人完成准备工作，所以要调用cyclicBarrier.await()方法来等待其他人</li>
+<li>当所有人都调用cyclicBarrier.await()方法时，意味着都准备好了，那么这些线程将开始同时执行。</li>
+</ol>
+<p>实现代码如下</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    CyclicBarrier cyclicBarrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">3</span>);</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> runnerName = <span class="string">'A'</span>; runnerName &lt;= <span class="string">'C'</span>; runnerName++){</span><br><span class="line">        <span class="keyword">final</span> String rN = String.valueOf(runnerName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="comment">//模拟不同的准备时间</span></span><br><span class="line">                <span class="keyword">long</span> prepareTime = random.nextInt(<span class="number">10000</span>) + <span class="number">100</span>;</span><br><span class="line">                System.out.println(rN + <span class="string">"is preparing for time:"</span> + prepareTime);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(prepareTime);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    System.out.println(rN + <span class="string">"is prepared, waiting for others"</span>);</span><br><span class="line">                    <span class="comment">//这个线程已经准备好了就要调用await()方法表示它准备好了</span></span><br><span class="line">                    cyclicBarrier.await();</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                } <span class="keyword">catch</span> (BrokenBarrierException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(rN + <span class="string">"Starts running"</span>);</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>Bis preparing for time:626<br>Cis preparing for time:812<br>Ais preparing for time:914<br>Bis prepared, waiting for others<br>Cis prepared, waiting for others<br>Ais prepared, waiting for others<br>AStarts running<br>BStarts running<br>CStarts running</p>
+</blockquote>
+<h5 id="线程通信方式其四：CyclicBarrier-信号量"><a href="#线程通信方式其四：CyclicBarrier-信号量" class="headerlink" title="线程通信方式其四：CyclicBarrier 信号量"></a>线程通信方式其四：CyclicBarrier 信号量</h5><h4 id="子线程将结果返回到主线程"><a href="#子线程将结果返回到主线程" class="headerlink" title="子线程将结果返回到主线程"></a>子线程将结果返回到主线程</h4><p>在开发中，我们会遇到需要fork子进程执行一些耗时任务，执行完后将结果返回给主线程，那么如何具体实现呢?</p>
+<p><strong>需要返回结果，显然需要使用Callable接口来实现</strong></p>
+<p>Callable通常会和FutureTask结合使用</p>
+<p>例如我们希望子线程计算1到100的总和，计算完毕后将结果返回给主线程，具体的代码如下：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    Callable&lt;Integer&gt; callable = <span class="keyword">new</span> Callable&lt;Integer&gt;(){</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">            System.out.println(<span class="string">"Task starts"</span>);</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//线程执行1加到100</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++){</span><br><span class="line">                result += i;</span><br><span class="line">            }</span><br><span class="line">            System.out.println(<span class="string">"Task finished and return result"</span>);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line">    <span class="comment">//通过FutureTask拿到callable的返回值</span></span><br><span class="line">    FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(callable);</span><br><span class="line">    <span class="comment">//子线程直接去跑</span></span><br><span class="line">    <span class="keyword">new</span> Thread(futureTask).start();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        System.out.println(<span class="string">"Before futureTask.get()"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Result:"</span> + futureTask.get());</span><br><span class="line">        System.out.println(<span class="string">"After futureTask.get()"</span>);</span><br><span class="line">    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }<span class="keyword">catch</span> (ExecutionException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Before futureTask.get()<br>Task starts<br>Task finished and return result<br>Result:5050<br>After futureTask.get()</p>
+</blockquote>
+<p>主线程调用futureTask.get()方法时，会阻塞主线程。</p>
+<p>子线程Callable开始在内部执行并返回操作结果，通过get()方法获取结果后，主线程结束阻塞，继续运行</p>
+<blockquote>
+<p>Tips: 在这里，我们可以了解到FutureTask和Callable可以直接在主线程中获得子线程的结果，但是它们会阻塞主线程。当然，如果您不想阻塞主线程，可以考虑使用ExecutorService将FutureTask线程放入线程池来管理执行。</p>
+</blockquote>
+<p><strong>转载链接：<a href="https://juejin.cn/post/6963265870151811103">https://juejin.cn/post/6963265870151811103</a></strong></p>
+<p>（主要是手打代码熟悉这些方法的调用过程）</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>并发</tag>
       </tags>
   </entry>
   <entry>

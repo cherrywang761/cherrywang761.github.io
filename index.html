@@ -190,7 +190,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -204,7 +204,169 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">未命名</a>
+            <a href="/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">线程通信方式</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-05-19 09:52:48 / 修改时间：23:52:20" itemprop="dateCreated datePublished" datetime="2021-05-19T09:52:48+08:00">2021-05-19</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="线程通信方式" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>5.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>5 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="如何让两个线程按顺序执行？"><a href="#如何让两个线程按顺序执行？" class="headerlink" title="如何让两个线程按顺序执行？"></a>如何让两个线程按顺序执行？</h4><p>想要让A先执行完后，再让B执行</p>
+<blockquote>
+<p>普通的new两个线程，无法控制先后顺序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testThread</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"A"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNum</span><span class="params">(String threadName)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i++ &lt; <span class="number">3</span>){</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">            System.out.println(threadName + <span class="string">" print: "</span> + i);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>这样子处理显然无法让A,B有顺序的执行。</p>
+<p>如果希望B在A执行完后才执行，可以使用thread.join()方法</p>
+<blockquote>
+<p>在线程B中添加让步方法join()</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">try</span>{</span><br><span class="line">                    A.join();	<span class="comment">//B给A让步</span></span><br><span class="line">                }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>B print: 1<br>A print: 1<br>B print: 2<br>A print: 2<br>A print: 3<br>B print: 3</p>
+</blockquote>
+<h5 id="线程通信方式其一：join"><a href="#线程通信方式其一：join" class="headerlink" title="线程通信方式其一：join()"></a>线程通信方式其一：join()</h5><h4 id="如何让线程以有序方式相交？"><a href="#如何让线程以有序方式相交？" class="headerlink" title="如何让线程以有序方式相交？"></a>如何让线程以有序方式相交？</h4><p>如果现在我们希望B在A打印完1之后立即开始打印1，2，3，然后A继续打印2，3呢</p>
+<p>这就需要更加细粒度的锁进行控制了，可以使用object.lock()和object.notify()的优势</p>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"A 1"</span>);</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                 <span class="comment">//调用lock.wait()使它进入等待状态的方法,移交对锁的控制</span></span><br><span class="line">                        lock.wait();</span><br><span class="line">                    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"A 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"A 3"</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"B 1"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 3"</span>);</span><br><span class="line">                <span class="comment">//调用该lock.notify()方法唤醒正在等待的A</span></span><br><span class="line">                    lock.notify();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>A 1<br>B 1<br>B 2<br>B 3<br>A 2<br>A 3</p>
+</blockquote>
+<h5 id="线程通信方式其二：object的lock-和notify-方法"><a href="#线程通信方式其二：object的lock-和notify-方法" class="headerlink" title="线程通信方式其二：object的lock()和notify()方法"></a>线程通信方式其二：object的lock()和notify()方法</h5><h4 id="在A-B-C都完成同步执行后，执行D"><a href="#在A-B-C都完成同步执行后，执行D" class="headerlink" title="在A,B,C都完成同步执行后，执行D"></a>在A,B,C都完成同步执行后，执行D</h4><p>前面说过如果有先后顺序，可以使用thread.join()方法，但是如果想让多个线程同步执行，最后在执行D，如何实现？</p>
+<p><code>Tips：普通使用thread.join()会让ABC顺序执行，起不到同步作用。</code></p>
+<p>三个线程同步运行，当三个线程全部完成运行后，D才开始运行</p>
+<p>这里我们可以使用<code>CountdownLatch</code>计数器功能</p>
+<ol>
+<li>创建一个定时器，设置一个初始值</li>
+<li>countDownLatch.await()进入等待状态，直到计时器变为0</li>
+<li>countDownLatch.countDown()在其他线程调用该方法，使计数器减一</li>
+<li>当计数器为0，countDownLatch.await()等待线程中方法将立即退出并执行方法</li>
+</ol>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> workers = <span class="number">3</span>;</span><br><span class="line">    CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(workers);</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(<span class="string">"D is waiting for other three workers"</span>);</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">           <span class="comment">//await()方法会检测计数值是否为0了，不是就继续等待</span></span><br><span class="line">                countDownLatch.await();</span><br><span class="line">                System.out.println(<span class="string">"All done, D starts working"</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }).start();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> threadName = <span class="string">'A'</span>; threadName &lt;= <span class="string">'C'</span>; threadName++){</span><br><span class="line">        <span class="keyword">final</span> String tN = String.valueOf(threadName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(tN + <span class="string">" is working"</span>);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(tN + <span class="string">"finished"</span>);</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>D is waiting for other three workers<br>C is working<br>A is working<br>B is working<br>Cfinished<br>Bfinished<br>Afinished<br>All done, D starts working</p>
+</blockquote>
+<p><strong>因此，CountDownLatch适用于一个线程需要等待多个线程的情况。</strong></p>
+<h5 id="线程通信方式其三：CountDownLatch计数器"><a href="#线程通信方式其三：CountDownLatch计数器" class="headerlink" title="线程通信方式其三：CountDownLatch计数器"></a>线程通信方式其三：CountDownLatch计数器</h5><h4 id="三个跑步者准备跑步"><a href="#三个跑步者准备跑步" class="headerlink" title="三个跑步者准备跑步"></a>三个跑步者准备跑步</h4><p>三个跑步者，在各自准备好了开跑。</p>
+<p>这里三个线程A,B,C需要分别进行准备，然后在三个人都准备好后开始同时运行。如何实现？</p>
+<p><strong>CountDownLatch用于计数下降，完成计数后的实施者是主线程，具有不可重复性。所以只有一个线程的一个await()会被响应。</strong></p>
+<p><strong>CyclicBarrier的下一步动作实施者还是“其他线程”本身，具有往复多次实施动作的特点。我们这里可以使用它来实现。</strong></p>
+<ol>
+<li>首先创建一个公共对象CyclicBarrier，并设置同时等待的线程数</li>
+<li>这些线程会开始同时进行准备，准备好后要等待其他人完成准备工作，所以要调用cyclicBarrier.await()方法来等待其他人</li>
+<li>当所有人都调用cyclicBarrier.await()方法时，意味着都准备好了，那么这些线程将开始同时执行。</li>
+</ol>
+<p>实现代码如下</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    CyclicBarrier cyclicBarrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">3</span>);</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> runnerName = <span class="string">'A'</span>; runnerName &lt;= <span class="string">'C'</span>; runnerName++){</span><br><span class="line">        <span class="keyword">final</span> String rN = String.valueOf(runnerName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="comment">//模拟不同的准备时间</span></span><br><span class="line">                <span class="keyword">long</span> prepareTime = random.nextInt(<span class="number">10000</span>) + <span class="number">100</span>;</span><br><span class="line">                System.out.println(rN + <span class="string">"is preparing for time:"</span> + prepareTime);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(prepareTime);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    System.out.println(rN + <span class="string">"is prepared, waiting for others"</span>);</span><br><span class="line">                    <span class="comment">//这个线程已经准备好了就要调用await()方法表示它准备好了</span></span><br><span class="line">                    cyclicBarrier.await();</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                } <span class="keyword">catch</span> (BrokenBarrierException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(rN + <span class="string">"Starts running"</span>);</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>Bis preparing for time:626<br>Cis preparing for time:812<br>Ais preparing for time:914<br>Bis prepared, waiting for others<br>Cis prepared, waiting for others<br>Ais prepared, waiting for others<br>AStarts running<br>BStarts running<br>CStarts running</p>
+</blockquote>
+<h5 id="线程通信方式其四：CyclicBarrier-信号量"><a href="#线程通信方式其四：CyclicBarrier-信号量" class="headerlink" title="线程通信方式其四：CyclicBarrier 信号量"></a>线程通信方式其四：CyclicBarrier 信号量</h5><h4 id="子线程将结果返回到主线程"><a href="#子线程将结果返回到主线程" class="headerlink" title="子线程将结果返回到主线程"></a>子线程将结果返回到主线程</h4><p>在开发中，我们会遇到需要fork子进程执行一些耗时任务，执行完后将结果返回给主线程，那么如何具体实现呢?</p>
+<p><strong>需要返回结果，显然需要使用Callable接口来实现</strong></p>
+<p>Callable通常会和FutureTask结合使用</p>
+<p>例如我们希望子线程计算1到100的总和，计算完毕后将结果返回给主线程，具体的代码如下：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    Callable&lt;Integer&gt; callable = <span class="keyword">new</span> Callable&lt;Integer&gt;(){</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">            System.out.println(<span class="string">"Task starts"</span>);</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//线程执行1加到100</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++){</span><br><span class="line">                result += i;</span><br><span class="line">            }</span><br><span class="line">            System.out.println(<span class="string">"Task finished and return result"</span>);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line">    <span class="comment">//通过FutureTask拿到callable的返回值</span></span><br><span class="line">    FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(callable);</span><br><span class="line">    <span class="comment">//子线程直接去跑</span></span><br><span class="line">    <span class="keyword">new</span> Thread(futureTask).start();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        System.out.println(<span class="string">"Before futureTask.get()"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Result:"</span> + futureTask.get());</span><br><span class="line">        System.out.println(<span class="string">"After futureTask.get()"</span>);</span><br><span class="line">    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }<span class="keyword">catch</span> (ExecutionException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Before futureTask.get()<br>Task starts<br>Task finished and return result<br>Result:5050<br>After futureTask.get()</p>
+</blockquote>
+<p>主线程调用futureTask.get()方法时，会阻塞主线程。</p>
+<p>子线程Callable开始在内部执行并返回操作结果，通过get()方法获取结果后，主线程结束阻塞，继续运行</p>
+<blockquote>
+<p>Tips: 在这里，我们可以了解到FutureTask和Callable可以直接在主线程中获得子线程的结果，但是它们会阻塞主线程。当然，如果您不想阻塞主线程，可以考虑使用ExecutorService将FutureTask线程放入线程池来管理执行。</p>
+</blockquote>
+<p><strong>转载链接：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6963265870151811103">https://juejin.cn/post/6963265870151811103</a></strong></p>
+<p>（主要是手打代码熟悉这些方法的调用过程）</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">序列化与反序列化</a>
         </h2>
 
         <div class="post-meta">
@@ -214,18 +376,27 @@
               </span>
               <span class="post-meta-item-text">发表于</span>
 
-              <time title="创建时间：2021-05-17 23:15:37" itemprop="dateCreated datePublished" datetime="2021-05-17T23:15:37+08:00">2021-05-17</time>
+              <time title="创建时间：2021-05-18 09:52:48" itemprop="dateCreated datePublished" datetime="2021-05-18T09:52:48+08:00">2021-05-18</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-15 00:10:49" itemprop="dateModified" datetime="2021-05-15T00:10:49+08:00">2021-05-15</time>
+                <time title="修改时间：2021-05-19 23:53:11" itemprop="dateModified" datetime="2021-05-19T23:53:11+08:00">2021-05-19</time>
               </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
 
           
-            <span id="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="" title="阅读次数">
+            <span id="/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="序列化与反序列化" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -339,10 +510,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-17 09:52:48 / 修改时间：23:13:39" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
+              <time title="创建时间：2021-05-17 09:52:48" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 23:55:16" itemprop="dateModified" datetime="2021-05-19T23:55:16+08:00">2021-05-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -409,86 +586,14 @@
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#2-HDFS读数据原理">2. HDFS读数据原理</a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#3-HDFS故障类型和其检测方法">3. HDFS故障类型和其检测方法</a><br>
 </nav>
-
-
-
-<h2 id="一、介绍"><a href="#一、介绍" class="headerlink" title="一、介绍"></a>一、介绍</h2><p><strong>HDFS</strong> （<strong>Hadoop Distributed File System</strong>）是 Hadoop 下的分布式文件系统，具有高容错、高吞吐量等特性，可以部署在低成本的硬件上。</p>
-<h2 id="二、HDFS-设计原理"><a href="#二、HDFS-设计原理" class="headerlink" title="二、HDFS 设计原理"></a>二、HDFS 设计原理</h2><div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfsarchitecture.png"> </div>
-
-<h3 id="2-1-HDFS-架构"><a href="#2-1-HDFS-架构" class="headerlink" title="2.1 HDFS 架构"></a>2.1 HDFS 架构</h3><p>HDFS 遵循主/从架构，由单个 NameNode(NN) 和多个 DataNode(DN) 组成：</p>
-<ul>
-<li><strong>NameNode</strong> : 负责执行有关 <code>文件系统命名空间</code> 的操作，例如打开，关闭、重命名文件和目录等。它同时还负责集群元数据的存储，记录着文件中各个数据块的位置信息。</li>
-<li><strong>DataNode</strong>：负责提供来自文件系统客户端的读写请求，执行块的创建，删除等操作。</li>
-</ul>
-<h3 id="2-2-文件系统命名空间"><a href="#2-2-文件系统命名空间" class="headerlink" title="2.2 文件系统命名空间"></a>2.2 文件系统命名空间</h3><p>HDFS 的 <code>文件系统命名空间</code> 的层次结构与大多数文件系统类似 (如 Linux)， 支持目录和文件的创建、移动、删除和重命名等操作，支持配置用户和访问权限，但不支持硬链接和软连接。<code>NameNode</code> 负责维护文件系统名称空间，记录对名称空间或其属性的任何更改。</p>
-<h3 id="2-3-数据复制"><a href="#2-3-数据复制" class="headerlink" title="2.3 数据复制"></a>2.3 数据复制</h3><p>由于 Hadoop 被设计运行在廉价的机器上，这意味着硬件是不可靠的，为了保证容错性，HDFS 提供了数据复制机制。HDFS 将每一个文件存储为一系列<strong>块</strong>，每个块由多个副本来保证容错，块的大小和复制因子可以自行配置<strong>（默认情况下，块大小是 128M，默认复制因子是 3）</strong>。</p>
-<div align="center"> <img width="600px" src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfsdatanodes.png"> </div>
-
-<h3 id="2-4-数据复制的实现原理"><a href="#2-4-数据复制的实现原理" class="headerlink" title="2.4 数据复制的实现原理"></a>2.4 数据复制的实现原理</h3><p>大型的 HDFS 实例在通常分布在多个机架的多台服务器上，不同机架上的两台服务器之间通过交换机进行通讯。在大多数情况下，同一机架中的服务器间的网络带宽大于不同机架中的服务器之间的带宽。因此 HDFS 采用机架感知副本放置策略，对于常见情况，当复制因子为 3 时，HDFS 的放置策略是：</p>
-<p>在写入程序位于 <code>datanode</code> 上时，就优先将写入文件的一个副本放置在该 <code>datanode</code> 上，否则放在随机 <code>datanode</code> 上。之后在另一个远程机架上的任意一个节点上放置另一个副本，并在该机架上的另一个节点上放置最后一个副本。此策略可以减少机架间的写入流量，从而提高写入性能。</p>
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-机架.png"> </div>
-
-<p>如果复制因子大于 3，则随机确定第 4 个和之后副本的放置位置，同时保持每个机架的副本数量低于上限，上限值通常为 <code>（（复制系数 - 1）/机架数量） + 2</code>，需要注意的是不允许同一个 <code>dataNode</code> 上具有同一个块的多个副本。</p>
-<h3 id="2-5-副本的选择"><a href="#2-5-副本的选择" class="headerlink" title="2.5  副本的选择"></a>2.5  副本的选择</h3><p>为了最大限度地减少带宽消耗和读取延迟，HDFS 在执行读取请求时，优先读取距离读取器最近的副本。如果在与读取器节点相同的机架上存在副本，则优先选择该副本。如果 HDFS 群集跨越多个数据中心，则优先选择本地数据中心上的副本。</p>
-<h3 id="2-6-架构的稳定性"><a href="#2-6-架构的稳定性" class="headerlink" title="2.6 架构的稳定性"></a>2.6 架构的稳定性</h3><h4 id="1-心跳机制和重新复制"><a href="#1-心跳机制和重新复制" class="headerlink" title="1. 心跳机制和重新复制"></a>1. 心跳机制和重新复制</h4><p>每个 DataNode 定期向 NameNode 发送心跳消息，如果超过指定时间没有收到心跳消息，则将 DataNode 标记为死亡。NameNode 不会将任何新的 IO 请求转发给标记为死亡的 DataNode，也不会再使用这些 DataNode 上的数据。 由于数据不再可用，可能会导致某些块的复制因子小于其指定值，NameNode 会跟踪这些块，并在必要的时候进行重新复制。</p>
-<h4 id="2-数据的完整性"><a href="#2-数据的完整性" class="headerlink" title="2. 数据的完整性"></a>2. 数据的完整性</h4><p>由于存储设备故障等原因，存储在 DataNode 上的数据块也会发生损坏。为了避免读取到已经损坏的数据而导致错误，HDFS 提供了数据完整性校验机制来保证数据的完整性，具体操作如下：</p>
-<p>当客户端创建 HDFS 文件时，它会计算文件的每个块的 <code>校验和</code>，并将 <code>校验和</code> 存储在同一 HDFS 命名空间下的单独的隐藏文件中。当客户端检索文件内容时，它会验证从每个 DataNode 接收的数据是否与存储在关联校验和文件中的 <code>校验和</code> 匹配。如果匹配失败，则证明数据已经损坏，此时客户端会选择从其他 DataNode 获取该块的其他可用副本。</p>
-<h4 id="3-元数据的磁盘故障"><a href="#3-元数据的磁盘故障" class="headerlink" title="3.元数据的磁盘故障"></a>3.元数据的磁盘故障</h4><p><code>FsImage</code> 和 <code>EditLog</code> 是 HDFS 的核心数据，这些数据的意外丢失可能会导致整个 HDFS 服务不可用。为了避免这个问题，可以配置 NameNode 使其支持 <code>FsImage</code> 和 <code>EditLog</code> 多副本同步，这样 <code>FsImage</code> 或 <code>EditLog</code> 的任何改变都会引起每个副本 <code>FsImage</code> 和 <code>EditLog</code> 的同步更新。</p>
-<h4 id="4-支持快照"><a href="#4-支持快照" class="headerlink" title="4.支持快照"></a>4.支持快照</h4><p>快照支持在特定时刻存储数据副本，在数据意外损坏时，可以通过回滚操作恢复到健康的数据状态。</p>
-<h2 id="三、HDFS-的特点"><a href="#三、HDFS-的特点" class="headerlink" title="三、HDFS 的特点"></a>三、HDFS 的特点</h2><h3 id="3-1-高容错"><a href="#3-1-高容错" class="headerlink" title="3.1 高容错"></a>3.1 高容错</h3><p>由于 HDFS 采用数据的多副本方案，所以部分硬件的损坏不会导致全部数据的丢失。</p>
-<h3 id="3-2-高吞吐量"><a href="#3-2-高吞吐量" class="headerlink" title="3.2 高吞吐量"></a>3.2 高吞吐量</h3><p>HDFS 设计的重点是支持高吞吐量的数据访问，而不是低延迟的数据访问。</p>
-<h3 id="3-3-大文件支持"><a href="#3-3-大文件支持" class="headerlink" title="3.3  大文件支持"></a>3.3  大文件支持</h3><p>HDFS 适合于大文件的存储，文档的大小应该是是 GB 到 TB 级别的。</p>
-<h3 id="3-3-简单一致性模型"><a href="#3-3-简单一致性模型" class="headerlink" title="3.3 简单一致性模型"></a>3.3 简单一致性模型</h3><p>HDFS 更适合于一次写入多次读取 (write-once-read-many) 的访问模型。支持将内容追加到文件末尾，但不支持数据的随机访问，不能从文件任意位置新增数据。</p>
-<h3 id="3-4-跨平台移植性"><a href="#3-4-跨平台移植性" class="headerlink" title="3.4 跨平台移植性"></a>3.4 跨平台移植性</h3><p>HDFS 具有良好的跨平台移植性，这使得其他大数据计算框架都将其作为数据持久化存储的首选方案。</p>
-<h2 id="附：图解HDFS存储原理"><a href="#附：图解HDFS存储原理" class="headerlink" title="附：图解HDFS存储原理"></a>附：图解HDFS存储原理</h2><blockquote>
-<p>说明：以下图片引用自博客：<a target="_blank" rel="noopener" href="https://blog.csdn.net/hudiefenmu/article/details/37655491">翻译经典 HDFS 原理讲解漫画</a></p>
-</blockquote>
-<h3 id="1-HDFS写数据原理"><a href="#1-HDFS写数据原理" class="headerlink" title="1. HDFS写数据原理"></a>1. HDFS写数据原理</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-1.jpg"> </div>
-
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-2.jpg"> </div>
-
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-write-3.jpg"> </div>
-
-
-
-<h3 id="2-HDFS读数据原理"><a href="#2-HDFS读数据原理" class="headerlink" title="2. HDFS读数据原理"></a>2. HDFS读数据原理</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-read-1.jpg"> </div>
-
-
-
-<h3 id="3-HDFS故障类型和其检测方法"><a href="#3-HDFS故障类型和其检测方法" class="headerlink" title="3. HDFS故障类型和其检测方法"></a>3. HDFS故障类型和其检测方法</h3><div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-1.jpg"> </div>
-
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-2.jpg"> </div>
-
-
-
-<p><strong>第二部分：读写故障的处理</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20190423153858430.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1FldmVyeTY3OA==,size_16,color_FFFFFF,t_70" alt="img"></p>
-<p><strong>第三部分：DataNode 故障处理</strong></p>
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-4.jpg"> </div>
-
-
-
-<p><strong>副本布局策略</strong>：</p>
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/hdfs-tolerance-5.jpg"> </div>
-
-
-
-<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ol>
-<li><a target="_blank" rel="noopener" href="http://hadoop.apache.org/docs/stable/hadoop-project-dist/hadoop-hdfs/HdfsDesign.html">Apache Hadoop 2.9.2 &gt; HDFS Architecture</a></li>
-<li>Tom White . hadoop 权威指南 [M] . 清华大学出版社 . 2017.</li>
-<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/hudiefenmu/article/details/37655491">翻译经典 HDFS 原理讲解漫画</a></li>
-</ol>
-<div align="center"> <img src="https://gitee.com/heibaiying/BigData-Notes/raw/master/pictures/weixin-desc.png"> </div>
-
-
-
-
-
-
-
-
-
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/05/17/%E5%A4%A7%E6%95%B0%E6%8D%AE/Hadoop-HDFS/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -530,10 +635,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-17 09:52:48 / 修改时间：23:15:06" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
+              <time title="创建时间：2021-05-17 09:52:48" itemprop="dateCreated datePublished" datetime="2021-05-17T09:52:48+08:00">2021-05-17</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 23:55:27" itemprop="dateModified" datetime="2021-05-19T23:55:27+08:00">2021-05-19</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1036,7 +1147,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1050,7 +1161,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/" class="post-title-link" itemprop="url">AQS</a>
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/" class="post-title-link" itemprop="url">JMM</a>
         </h2>
 
         <div class="post-meta">
@@ -1067,7 +1178,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:13" itemprop="dateModified" datetime="2021-05-11T21:07:13+08:00">2021-05-11</time>
+                <time title="修改时间：2021-05-13 20:03:22" itemprop="dateModified" datetime="2021-05-13T20:03:22+08:00">2021-05-13</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1080,7 +1191,7 @@
             </span>
 
           
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/" class="post-meta-item leancloud_visitors" data-flag-title="AQS" title="阅读次数">
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/" class="post-meta-item leancloud_visitors" data-flag-title="JMM" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1092,14 +1203,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>504</span>
+              <span>3.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>3 分钟</span>
             </span>
 
         </div>
@@ -1111,133 +1222,124 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AbstractQueuedSynchronizer    队列同步器</p>
-<p>是一个用来构建锁和同步器的框架</p>
-<p>AQS可以构建大量广泛的同步器</p>
-<p>常见：</p>
-<p>ReentrantLock</p>
-<p>CyclicBarrier</p>
-<p>Semaphore</p>
-<p>FutureTask</p>
-<p>CountDownLatch</p>
-<p>Condition</p>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>如果共享资源空闲，有线程试图获取该资源，就会将该线程设为有效的工作线程。</p>
-<p>如果共享资源被占用，那么就需要一套线程阻塞等待以及唤醒时锁分配机制，该机制是AQS中的CLH队列锁（双端虚拟队列）实现的。</p>
-<p>CLH：一个虚拟双向队列（不存在队列实例，仅有节点相连）</p>
-<p><strong>AQS将每条请求共享资源的线程封装成CLH中的Node节点来实现锁的分配</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state;</span><br><span class="line"><span class="comment">//共享变量，使用volatile修饰保证线程可见性</span></span><br></pre></td></tr></tbody></table></figure>
-<p>AQS通过int成员变量表示同步状态，内置FIFO队列完成资源线程的排队工作。</p>
-<p>AQS使用CAS对同步状态进行原子操作实现state的更改</p>
-<h4 id="两种共享方式"><a href="#两种共享方式" class="headerlink" title="两种共享方式"></a>两种共享方式</h4><h5 id="Exclusive（独占）"><a href="#Exclusive（独占）" class="headerlink" title="Exclusive（独占）"></a>Exclusive（独占）</h5><p>只有一个线程能执行，如ReentrantLock。可分为公平锁和非公平锁</p>
-<p>公平锁：先到先得锁</p>
-<p>非公平锁：无视顺序直接抢锁，谁先抢到就是谁的</p>
+          <h3 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h3><blockquote>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8a58d8335270">https://www.jianshu.com/p/8a58d8335270</a></p>
+</blockquote>
+<h5 id="jmm是什么？"><a href="#jmm是什么？" class="headerlink" title="jmm是什么？"></a>jmm是什么？</h5><blockquote>
+<p>讲述jmm的背景</p>
+<p>原来CPU和内存差不多，后来CPU快了，就增加了工作内存（寄存器和高速缓存）多核并发缓存架构</p>
+</blockquote>
+<blockquote>
+<p>jmm解决的问题？</p>
+<p>为了解决硬件和操作系统的差异</p>
+</blockquote>
+<img src="https://upload-images.jianshu.io/upload_images/4222138-49df5535c55287c4.png?imageMogr2/auto-orient/strip|imageView2/2/w/562/format/webp" alt="img" style="zoom:50%;">
 
-      
-    </div>
+<h5 id="jmm的各部分是干嘛的"><a href="#jmm的各部分是干嘛的" class="headerlink" title="jmm的各部分是干嘛的"></a>jmm的各部分是干嘛的</h5><p>分为主内存，工作内存和java线程</p>
+<p>主内存是公用的，一般主内存就是我们所说的物理内存，然后我们一般是不对主内存直接修改的</p>
+<p>如果每次java线程的更改都直接操作主内存，那么性能影响是比较大的。</p>
+<p>为了解决这个问题，工作内存就出现了，工作内存就是我们所说的寄存器和高速缓存。</p>
+<p>java线程对变量的操作，会在工作内存中进行操作，不能去直接操作主内存</p>
+<p>但是这样子我们能感觉到肯定会有线程不安全的问题。</p>
+<h5 id="如何解决线程不安全的问题？"><a href="#如何解决线程不安全的问题？" class="headerlink" title="如何解决线程不安全的问题？"></a>如何解决线程不安全的问题？</h5><p>回答这个问题前，我们必须先知道</p>
+<p>JMM针对于内存，设定了8个指令</p>
+<ul>
+<li>lock</li>
+<li>unlock</li>
+</ul>
+<p>作用于主内存，是否将一个变量标识为内存独占</p>
+<ul>
+<li>read</li>
+<li>load</li>
+</ul>
+<p>作用于工作内存，read就是从主内存get数据，load就相当于将主内存数据set到工作内存中</p>
+<ul>
+<li>use：使用</li>
+<li>assign：赋值</li>
+</ul>
+<p>作用于工作内存，use把工作内存的变量传给执行引擎，assign从执行引擎接收到的值放入到工作内存的变量副本中</p>
+<ul>
+<li>store</li>
+<li>write</li>
+</ul>
+<p>作用于主内存，store将工作内存的数据传送到主内存中，write就是将传送到主内存中的数据写入到主内存中</p>
+<p>JMM对这八个命令指定了很多规则，但是一般都是按照<strong>happen-before规则</strong>进行执行的。</p>
+<h4 id="JMM的模型特征"><a href="#JMM的模型特征" class="headerlink" title="JMM的模型特征"></a>JMM的模型特征</h4><h5 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h5><p>JMM保证上面说的8个交互操作指令都是具有原子性的</p>
+<p>但是有例外就是，JMM允许虚拟机把没有volatile修饰的64位数据拆分成两个32位数据来进行操作。</p>
+<p>其实就是单个指令是具有原子性的，但是多个指令在整体上是没有原子性的。</p>
+<p>解决方案：1. 用原子类    2.synchronzied互斥锁。</p>
+<p>原子类内部实现是CAS （自旋锁），乐观锁</p>
+<p>synchronized内部实现是monitor锁，是悲观锁</p>
+<h5 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h5><p>可见性就是说一个线程修改了值，能够让其他线程知道并修改</p>
+<p>JMM实现的途径是变量修改后会将新值同步到主内存中，在变量读取前从主内存中刷新变量的值来实现可见性</p>
+<p>实现可见性的方案：</p>
+<ul>
+<li>volatile关键字</li>
+</ul>
+<blockquote>
+<p>volatile关键字的两个作用，一个是保证变量的可见性，一个是防止指令重排序</p>
+<p>保证变量可见性：一个变量，被volatile修饰，就意味着线程的本地内存是无效的，当java线程更改该变量，会直接将新值更新到主内存中；其他线程读取该变量时，也会从主内存中直接读取（因为本地内存没有呀）</p>
+</blockquote>
+<ul>
+<li>synchronzied</li>
+</ul>
+<blockquote>
+<p>unlock操作之前，必须把变量值同步到主内存中</p>
+</blockquote>
+<ul>
+<li>final关键字</li>
+</ul>
+<blockquote>
+<p>final关键字初始化完成，且没有发生this逃逸，其他线程就能看见final修饰的值</p>
+</blockquote>
+<h5 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h5><p>在单线程环境下，程序永远会“有序的”执行，即：线程内表现为串行语义。但是在多线程环境下，程序会出现“乱序”。</p>
+<p>这是因为，JMM允许编译器和处理器对指令进行重排序，本意是为了提高效率，但是在多线程并发的情况下，有可能影响并发执行的正确性</p>
+<p>解决方案：</p>
+<ul>
+<li>volatile关键字</li>
+</ul>
+<blockquote>
+<p>volatie的另一个作用，禁止指令重排序，它是通过添加<strong>内存屏障</strong>的方式来禁止指令重拍序的。</p>
+<p>重排序时，不能把后面的指令放到内存屏障前。</p>
+</blockquote>
+<ul>
+<li>synchronized</li>
+</ul>
+<blockquote>
+<p>它通过加锁，让一段代码只能由一个线程来执行。</p>
+</blockquote>
+<p>这两个区别就是，synchronized可以修饰一段代码，或者一个方法。但是volatile只能修饰一个变量。</p>
+<h3 id="线程通信方式"><a href="#线程通信方式" class="headerlink" title="线程通信方式"></a>线程通信方式</h3><h5 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h5><p>该关键字有两个特性，一：可见性；二：禁止指令重排序</p>
+<p>其中可见性就是让线程之间进行通信，两个原则保证线程可见性</p>
+<ul>
+<li><strong>所有volatile修饰的变量一旦被某个线程更改，必须立即刷新到主内存</strong></li>
+<li><strong>所有volatile修饰的变量在使用之前必须重新读取主内存的值</strong></li>
+</ul>
+<h5 id="等待通知机制"><a href="#等待通知机制" class="headerlink" title="等待通知机制"></a>等待通知机制</h5><p>等待通知机制是通过wait和notify方法来实现的</p>
+<p>wait()：当线程调用wait方法，<strong>会释放当前的锁</strong>，然后让出CPU，进入等待状态</p>
+<p>notify()：唤醒沉睡的线程（不会释放锁）</p>
+<p><strong>wait要配合synchronized一起使用，如果没有synchronized会报错</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSync</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="comment">// 定义一个锁对象</span></span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        List&lt;String&gt;  list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">// 实现线程A</span></span><br><span class="line">        Thread threadA = <span class="keyword">new</span> Thread(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (lock) {</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) {</span><br><span class="line">                    list.add(<span class="string">"abc"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"线程A向list中添加一个元素，此时list中的元素个数为："</span> + list.size());</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                    } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">if</span> (list.size() == <span class="number">5</span>)</span><br><span class="line">                        lock.notify();<span class="comment">// 唤醒B线程</span></span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="comment">// 实现线程B</span></span><br><span class="line">        Thread threadB = <span class="keyword">new</span> Thread(() -&gt; {</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) {</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) {</span><br><span class="line">                    <span class="keyword">if</span> (list.size() != <span class="number">5</span>) {</span><br><span class="line">                        <span class="keyword">try</span> {</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"线程B收到通知，开始执行自己的业务..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="comment">//　需要先启动线程B</span></span><br><span class="line">        threadB.start();</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 再启动线程A</span></span><br><span class="line">        threadA.start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<img src="https://img-blog.csdnimg.cn/20190112154820961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppc3VhbmppMTIzMDY=,size_16,color_FFFFFF,t_70" alt="img" style="zoom:50%;">
 
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
 
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
+<p>既然wait和notify配合synchronized使用能够实现,当然用 ReentrantLock 结合 Condition也可以完成;</p>
+<h5 id="join（）"><a href="#join（）" class="headerlink" title="join（）"></a>join（）</h5><p>退让方法</p>
+<p>当线程A调用另一个线程B的join方法时，当前线程A阻塞等待线程B执行完毕才能继续执行</p>
+<p>相当于A退让了，让B先进行</p>
+<p>所以join的好处能够保证线程的执行顺序，但是如果调用线程的join方法其实已经失去了并行的意义</p>
+<p>虽然存在多个线程，但是本质上还是串行的</p>
+<p>最后join的实现其实是基于等待通知机制的。</p>
+<h4 id="两种工具类"><a href="#两种工具类" class="headerlink" title="两种工具类"></a>两种工具类</h4><h5 id="JUC工具类CountDownLatch"><a href="#JUC工具类CountDownLatch" class="headerlink" title="JUC工具类CountDownLatch"></a>JUC工具类CountDownLatch</h5><p>使用一个计数器进行实现。计数器初始值为线程的数量。</p>
+<p>当每一个线程完成自己任务后，计数器的值就会减一。</p>
+<p><strong>当计数器的值为0时，表示所有的线程都已经完成一些任务，然后在CountDownLatch上等待的线程就可以恢复执行接下来的任务。</strong></p>
+<p>CountDownLatch典型用法：1、某一线程在开始运行前等待n个线程执行完毕。将CountDownLatch的计数器初始化为new CountDownLatch(n)，每当一个任务线程执行完毕，就将计数器减1 countdownLatch.countDown()，当计数器的值变为0时，在CountDownLatch上await()的线程就会被唤醒。一个典型应用场景就是启动一个服务时，主线程需要等待多个组件加载完毕，之后再继续执行。</p>
+<h5 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h5><p>它是一个线程工具类，所有的方法都是静态方法，可以让线程在任意位置阻塞，也可以在任意位置唤醒。</p>
+<p>它的内部其实两类主要的方法：<strong>park（停车阻塞线程）和unpark（启动唤醒线程）。</strong></p>
+<p>（1）wait和notify都是Object中的方法,在调用这两个方法前必须先获得锁对象，但是park不需要获取某个对象的锁就可以锁住线程。</p>
+<p>（2）notify只能随机选择一个线程唤醒，无法唤醒指定的线程，unpark却可以唤醒一个指定的线程。</p>
 
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-title-link" itemprop="url">类加载机制</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:11" itemprop="dateModified" datetime="2021-05-11T21:07:11+08:00">2021-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/" class="post-meta-item leancloud_visitors" data-flag-title="类加载机制" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>465</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
-<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象</p>
-<p>首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader</p>
-<p>类加载器一般分为三层（三种）</p>
-<p>Bootstrap Class Loader：引导类加载器，是最顶层的</p>
-<p>Extension Class Loader: 拓展类加载器，Boostrap的子类</p>
-<p>最底下的是Application Class  Loader:系统类加载器</p>
-<p>类加载器也多嘛，所以有个双亲委派的这种机制，就是说</p>
-<p>如果我要加载一个类(.java)，那么我默认是用Application类加载器来加载的，</p>
-<p>但是我不直接加载，我会往上抛给我的父类，Extension类加载器，如果它能够加载，它会继续上抛，直到super构造器进行加载，如果不能够加载，就会回调到最后一个能加载该类的加载器进行加载。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
-<p>或者就是</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>
       
     </div>
 
@@ -1471,7 +1573,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-count">39</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1484,7 +1586,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">17</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1520,12 +1622,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">211k</span>
+    <span title="站点总字数">217k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:12</span>
+    <span title="站点阅读时长">3:17</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
