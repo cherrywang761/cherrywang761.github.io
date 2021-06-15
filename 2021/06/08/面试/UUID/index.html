@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="UUID今天看到掘金的一篇文章，感觉又学到了丰富的知识 为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)  摘要：  自增id做索引和uuid做索引对比自增id做索引MySQL中推荐使用自增id（auto_increment)作主键索引 因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。 当达到最大填充因子时候（innodb默认的最大填充因子是页大小的15&#x2F;1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="UUID">
+<meta property="og:url" content="https://cherrywang761.github.io/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/index.html">
+<meta property="og:site_name" content="Nonbioclock">
+<meta property="og:description" content="UUID今天看到掘金的一篇文章，感觉又学到了丰富的知识 为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)  摘要：  自增id做索引和uuid做索引对比自增id做索引MySQL中推荐使用自增id（auto_increment)作主键索引 因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。 当达到最大填充因子时候（innodb默认的最大填充因子是页大小的15&#x2F;1">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113029931-1621355504.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20191218103707559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhaXRfZm9yX2V2YQ==,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113030834-1060222235.jpg">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113031695-1349347128.png">
+<meta property="og:image" content="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113032271-1519023118.png">
+<meta property="article:published_time" content="2021-06-08T13:44:54.000Z">
+<meta property="article:modified_time" content="2021-06-15T13:23:44.999Z">
+<meta property="article:author" content="CherryWang761">
+<meta property="article:tag" content="学习经历">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+
+<link rel="canonical" href="https://cherrywang761.github.io/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>UUID | Nonbioclock</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nonbioclock</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">没有生物钟的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          UUID
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-08 21:44:54" itemprop="dateCreated datePublished" datetime="2021-06-08T21:44:54+08:00">2021-06-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-15 21:23:44" itemprop="dateModified" datetime="2021-06-15T21:23:44+08:00">2021-06-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">数据库知识</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/" class="post-meta-item leancloud_visitors" data-flag-title="UUID" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><p>今天看到掘金的一篇文章，感觉又学到了丰富的知识</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6911555489067171853#heading-9">为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)</a></p>
+<blockquote>
+<p>摘要：</p>
+</blockquote>
+<h4 id="自增id做索引和uuid做索引对比"><a href="#自增id做索引和uuid做索引对比" class="headerlink" title="自增id做索引和uuid做索引对比"></a>自增id做索引和uuid做索引对比</h4><h5 id="自增id做索引"><a href="#自增id做索引" class="headerlink" title="自增id做索引"></a>自增id做索引</h5><p>MySQL中推荐使用自增id（auto_increment)作主键索引</p>
+<p>因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。</p>
+<p>当达到最大填充因子时候<strong>（innodb默认的最大填充因子是页大小的15/16，留1/16的空间用作修改使用)</strong></p>
+<p>①当满了15/16后，下一条记录就会写入新的页中，一旦数据以auto_increment的方式顺序加载，主键页也会以近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</p>
+<p>②新插入的行一定会在原有的最大数据行的下一行，mysql的定位和寻址速度很快，不会为计算新行的位置做出额外消耗</p>
+<p>③减少了页分裂和碎片的产生</p>
+<h5 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h5><p>因为uuid相对顺序是无规律的，新的值不一定比之前的值都要大，所以innodb无法做到总是把新行插入到索引的最后，而是需要为新行寻找新的合适的位置从而分配新空间。</p>
+<p>该过程需要很多额外的操作：</p>
+<p>①写入的目标页很可能已经刷新到磁盘上并且从缓存上移除；亦或者可能还没有加载到缓存中，innodb在插入之前需要先找到该页，并从磁盘读取目标页到内存中，将导致非常多的随机IO</p>
+<p>②因为写入是乱序的，innodb不得不频繁的做页分裂操作，以便为新的行分配空间，页分裂导致移动大量数据。</p>
+<p>③频繁的页分裂，页会变得稀疏且被不规则填充，最终会出现数据碎片</p>
+<p>此外往往将随机值（uuid和雪花id）载入到聚簇索引后，需要做一次optimeize table来重建表并优化页的填充，又要耗费一定时间。</p>
+<h5 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h5><p>① 别人能轻易的爬取你的数据库信息，根据你数据库的自增id获取到你的业务增长信息。</p>
+<p>②对于高并发情况，innodb在按主键进行插入时会造成明显的锁争用，主键的上界会成为争抢的热点，所有的插入都发生在这里，并发插入会导致间隙锁竞争</p>
+<p>③auto_increment锁机制会造成自增锁的抢夺，有一定性能损失。</p>
+<h4 id="UUID使用场景"><a href="#UUID使用场景" class="headerlink" title="UUID使用场景"></a>UUID使用场景</h4><p>uuid即通用唯一识别码，由32位的16进制数字构成</p>
+<p>UUID的作用就是让分布式系统中的所有元素都能有唯一的辨识信息，这样就不需要考虑数据库创建时的名称重复问题。</p>
+<p>UUID的缺陷就是在于生成的结果串会比较长。而且无规律，此外上文中也提到了相关的缺陷。</p>
+<p>使用场景：</p>
+<ol>
+<li>会话session使用UUID做token</li>
+<li>Redis的防误删会使用UUID</li>
+<li>图片视频等多媒体数据不需要有序性情况存储可以使用UUID</li>
+</ol>
+<h4 id="页分裂与索引合并"><a href="#页分裂与索引合并" class="headerlink" title="页分裂与索引合并"></a>页分裂与索引合并</h4><p>在没接触到该知识点时，我也不知道什么是页分裂。。</p>
+<p>所以干脆一起写在这里</p>
+<blockquote>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ZhuChangwu/p/14041410.html">https://www.cnblogs.com/ZhuChangwu/p/14041410.html</a></p>
+</blockquote>
+<p><strong>InnoDB从磁盘读取数据的最小单位是数据页</strong></p>
+<blockquote>
+<p>MySQL数据存储基本格式</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h5 id="数据页"><a href="#数据页" class="headerlink" title="数据页"></a>数据页</h5><blockquote>
+<p>数据页的基本样式</p>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113029931-1621355504.png" alt="img"></p>
+<blockquote>
+<ul>
+<li>FIleHeader 文件头：记录页的通用信息，比如上下页的页号，页类型，所有的数据页其实是一个双链表</li>
+<li>PageHeader 页头：记录本页存储记录的状态信息，比如本页记录数量，槽数量</li>
+<li>Infimum + supremum 最小与最大记录，是虚拟记录</li>
+<li>User Records 真正存数据的地方：以链表的形式存储一条条行记录</li>
+<li>Free Space 存数据空间中尚未使用的区域</li>
+<li>Page Directory 页目录：页中某些记录的相对位置，用于提升查询效率</li>
+<li>File Trailer 文件尾：刷盘时校验页是否完整</li>
+</ul>
+</blockquote>
+<h6 id="User-Records"><a href="#User-Records" class="headerlink" title="User Records"></a>User Records</h6><p>一开始其实是没有user records这个空间的。当插入第一条数据的时候，会从free space空间分出出一个空间到user records，当所有空间全部用完就会再去申请一个新的页使用。</p>
+<p>user record空间是一个<strong>单链表</strong>。链表中的各个节点是按照<strong>主键值从小到大的顺序</strong>进行连接起来的。</p>
+<h6 id="Page-Directory"><a href="#Page-Directory" class="headerlink" title="Page Directory"></a>Page Directory</h6><p>如果我们要在一个页中查找指定的一条记录。除了从头遍历user records还有更高效的方法吗?</p>
+<p>Page Directory就为这种情况提供了解决方案</p>
+<blockquote>
+<p>innoDB会将一个页中的所有记录划分成若干个组，每个组4-8个记录。</p>
+<p><strong>将每个组最后一个记录相对于第一个记录的地址偏移量</strong>提取出来存放在页中叫做Page Direcotry的数组中，数组的元素就是这些<strong>地址偏移量</strong>，也叫做槽</p>
+<p>所以在页中根据主键查找记录是很快的</p>
+<ol>
+<li>二分法确定该记录所在的槽，并找到该槽所在分组中主键值最小的那条记录。</li>
+<li>通过next_record属性遍历单链表找到记录。</li>
+</ol>
+<p>Tips: 二分法是对Page Directory<strong>数组</strong>的，而user records单链表只能是逐步遍历</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20191218103707559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhaXRfZm9yX2V2YQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>MySQL的设定中，一个表空间内的一组连续的数据页为一个extent（区），默认区的大小为1MB，一个区有64个页，每个数据页大小为16KB（16*64=1024）</p>
+<p>一组数据区 = 256个数据区</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113030834-1060222235.jpg" alt="img"></p>
+<h5 id="数据页分裂问题"><a href="#数据页分裂问题" class="headerlink" title="数据页分裂问题"></a>数据页分裂问题</h5><p>假设你现在已经有两个数据页了。并且你正在往第二个数据页中写数据。</p>
+<p>关于B+Tree，你肯定知道B+Tree中的叶子结点之间是通过双向链表关联起来的。</p>
+<p>在InnoDB索引的设定中，要求主键索引是递增的，这样在构建索引树的时候才更加方便。你可以脑补一下。如果按1、2、3…递增的顺序给你这些数。是不是很方便的构建一棵树。然后你可以自由自在的在这棵树上玩二分查找。</p>
+<p>那假设你自定义了主键索引，而且你自定义的这个主键索引并不一定是自增的。</p>
+<p>那就有可能出现下面这种情况 如下图：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113031695-1349347128.png" alt="img"></p>
+<blockquote>
+<p>假设上图中的id就是你自定义的不会自增的主键</p>
+</blockquote>
+<p>然后随着你将数据写入。就导致后一个数据页中的所有行并不一定比前一个数据页中的行的id大。</p>
+<p>这时就会触发页分裂的逻辑。</p>
+<p>页分裂的目的就是保证：后一个数据页中的所有行主键值比前一个数据页中主键值大。</p>
+<p>经过分裂调整，可以得到下面的这张图。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113032271-1519023118.png" alt="img"></p>
+<h5 id="页合并"><a href="#页合并" class="headerlink" title="页合并"></a>页合并</h5><blockquote>
+<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
+</blockquote>
+<p>在MySQL中，当你删除了一行记录是，实际上记录并没有被物理删除，记录只是被标记（flaged）为删除并且它的空间变成允许其他记录声明访问。</p>
+<p>当需要插入数据id正好在这个标记点，就会复用这个空闲空间。</p>
+<p>当该页中删除的记录达到<code>MERGE_THRESHOLD</code><strong>(合并的阈值，默认页体积的50%)</strong>,InnoDB会开始寻找最靠近的页（前后页），如果看看相邻两个数据页利用率是否低于MERGE_THERSHOLD,如果都很小，系统就会将两个页合并以优化空间使用。</p>
+<p>合并操作后，前一页保留之前的数据并且获得另一个页的数据，另一个页将变成一个空页，可以容纳新数据。</p>
+<blockquote>
+<p>Tips1: update操作如果让页中数据体积达到类似的阈值点，同样会进行页合并的操作。</p>
+<p>即页合并的操作主要看相邻页的利用率如何。</p>
+<p><strong>所以常常说MySQL记录的删除和插入都可能会造成空闲空间的增加。</strong></p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\06\08\MySQL\UUID\" rel="bookmark">UUID</a></div>
+    </li>
+  </ul>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%AD%A6%E4%B9%A0%E7%BB%8F%E5%8E%86/" rel="tag"><i class="fa fa-tag"></i> 学习经历</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/08/MySQL/UUID/" rel="prev" title="UUID">
+      <i class="fa fa-chevron-left"></i> UUID
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/" rel="next" title="钩子函数">
+      钩子函数 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#UUID"><span class="nav-number">1.</span> <span class="nav-text">UUID</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%87%AA%E5%A2%9Eid%E5%81%9A%E7%B4%A2%E5%BC%95%E5%92%8Cuuid%E5%81%9A%E7%B4%A2%E5%BC%95%E5%AF%B9%E6%AF%94"><span class="nav-number">1.1.</span> <span class="nav-text">自增id做索引和uuid做索引对比</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E8%87%AA%E5%A2%9Eid%E5%81%9A%E7%B4%A2%E5%BC%95"><span class="nav-number">1.1.1.</span> <span class="nav-text">自增id做索引</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8uuid%E7%9A%84%E7%B4%A2%E5%BC%95%E5%86%85%E9%83%A8%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用uuid的索引内部结构</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E8%87%AA%E5%A2%9Eid%E7%9A%84%E7%BC%BA%E7%82%B9"><span class="nav-number">1.1.3.</span> <span class="nav-text">使用自增id的缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UUID%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="nav-number">1.2.</span> <span class="nav-text">UUID使用场景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%A1%B5%E5%88%86%E8%A3%82%E4%B8%8E%E7%B4%A2%E5%BC%95%E5%90%88%E5%B9%B6"><span class="nav-number">1.3.</span> <span class="nav-text">页分裂与索引合并</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A1%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">数据页</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#User-Records"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">User Records</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Page-Directory"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">Page Directory</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A1%B5%E5%88%86%E8%A3%82%E9%97%AE%E9%A2%98"><span class="nav-number">1.3.2.</span> <span class="nav-text">数据页分裂问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%A1%B5%E5%90%88%E5%B9%B6"><span class="nav-number">1.3.3.</span> <span class="nav-text">页合并</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CherryWang761</p>
+  <div class="site-description" itemprop="description">一个技术交流的平台</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CherryWang761</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">238k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:37</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"SEubJA0iXoCFhEtdun7BlYhh-gzGzoHsz","app_key":"zR78UlxNAiCsY7wCRsktXobq","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
