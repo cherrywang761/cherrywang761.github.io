@@ -28,20 +28,20 @@
 <meta property="og:site_name" content="Nonbioclock">
 <meta property="og:description" content="1. 数组和链表的区别是什么，数组和链表在内存里是否是连续的，为什么数组可以用索引直接取数？数组和链表是两种基本的数据类型（都属于线性表），但是在内存存储上的表现并不一样，都有各自的特点">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115195934692.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115195934692.png">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20181105181728652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvc2hpbWF4aWFvMQ==,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115230657766.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115230657766.png">
 <meta property="og:image" content="https://images2018.cnblogs.com/blog/1043143/201806/1043143-20180626004222951-1996840383.jpg">
 <meta property="og:image" content="https://img-blog.csdnimg.cn/20200408125143437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RjOTc5OTA3NDYx,size_16,color_FFFFFF,t_70">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201117165859936.png">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201117165936743.png">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210328181206316.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201117165859936.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201117165936743.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210328181206316.png">
 <meta property="article:published_time" content="2021-01-16T12:53:27.000Z">
 <meta property="article:modified_time" content="2021-03-28T14:46:11.370Z">
 <meta property="article:author" content="CherryWang761">
 <meta property="article:tag" content="面试">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115195934692.png">
+<meta name="twitter:image" content="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20201115195934692.png">
 
 <link rel="canonical" href="https://cherrywang761.github.io/2021/01/16/Java%E5%9F%BA%E7%A1%80/">
 
@@ -331,7 +331,7 @@
 </li>
 </ol>
 <h3 id="3-hashmap底层"><a href="#3-hashmap底层" class="headerlink" title="3. hashmap底层"></a>3. hashmap底层</h3><p><strong>（get方法比较两key是怎么比较的）</strong></p>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115195934692.png" alt="image-20201115195934692" style="zoom: 25%;">
+<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115195934692.png" alt="image-20201115195934692" style="zoom: 25%;">
 
 <p>JDK8以前，hashmap是由<strong>数组+链表</strong>组成的数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。</p>
 <p>JDK8后，在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树，以减少搜索时间。</p>
@@ -353,7 +353,7 @@
 
 
 <h5 id="散列的过程"><a href="#散列的过程" class="headerlink" title="散列的过程"></a>散列的过程</h5><p>向hashmap插入数据，要确定在hashbucket中的位置：</p>
-<p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115230657766.png" alt="image-20201115230657766"></p>
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115230657766.png" alt="image-20201115230657766"></p>
 <blockquote>
 <p>hashCode()：该方法用于返回字符串的哈希码。</p>
 <p>hashcode: 又叫哈希码，表示key在hash表中的位置</p>
@@ -390,12 +390,12 @@
 <p>node无next：说明没有发生hash冲突，根据新表的tablesize计算出在新表中的位置，然后存放过去就可以了</p>
 <p>node+链表：next不是null，说明发生hash冲突，先复制bucket，然后需要在当前slot保存这个链表，把这个链表拆分成两个链表，分别是一个高位表和一个低位表。根据(e.hash&amp;oldCap)是否等于0来判断是在高位表还是在地位表。</p>
 <p><strong>低位表：(e.hash&amp;oldCap) == 0:</strong></p>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165859936.png" alt="image-20201117165859936" style="zoom:80%;">
+<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165859936.png" alt="image-20201117165859936" style="zoom:80%;">
 
 
 
 <p><strong>高位表：(e.hash &amp; oldCap) != 0:</strong></p>
-<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165936743.png" alt="image-20201117165936743" style="zoom:80%;">
+<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165936743.png" alt="image-20201117165936743" style="zoom:80%;">
 
 
 
@@ -479,7 +479,7 @@
 <p>封装</p>
 <p>多态</p>
 <ol>
-<li><p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210328181206316.png" alt="image-20210328181206316"></p>
+<li><p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210328181206316.png" alt="image-20210328181206316"></p>
 </li>
 </ol>
 <p>2. </p>
@@ -502,10 +502,10 @@
       <div class="popular-posts-title"><a href="\2021\01\21\算法动态规划篇\" rel="bookmark">算法动态规划篇</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\01\20\算法贪心篇\" rel="bookmark">算法贪心篇</a></div>
+      <div class="popular-posts-title"><a href="\2021\01\23\算法并查集篇\" rel="bookmark">算法并查集篇</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\01\23\算法并查集篇\" rel="bookmark">算法并查集篇</a></div>
+      <div class="popular-posts-title"><a href="\2021\01\23\算法数组篇\" rel="bookmark">算法数组</a></div>
     </li>
   </ul>
 

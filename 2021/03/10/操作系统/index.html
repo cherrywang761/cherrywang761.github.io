@@ -29,12 +29,12 @@
 <meta property="og:description" content="1. 操作系统概念OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死） Kernel内核决定程序在什么时候对硬件操作多久 内核其实就是完成了对硬件的抽象，给一些硬件API让你调 这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。  内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。  内核连接硬件和程序的桥梁，决定OS">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png">
-<meta property="og:image" content="c:/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步阻塞.gif">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步阻塞.gif">
 <meta property="og:image" content="http://images2015.cnblogs.com/blog/37237/201512/37237-20151222220329015-207666376.png">
-<meta property="og:image" content="c:/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/同步非阻塞.gif">
-<meta property="og:image" content="c:/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步非阻塞.gif">
-<meta property="og:image" content="c:/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并发图.webp">
-<meta property="og:image" content="c:/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并行图.webp">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/同步非阻塞.gif">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步非阻塞.gif">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并发图.webp">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并行图.webp">
 <meta property="article:published_time" content="2021-03-10T01:52:48.000Z">
 <meta property="article:modified_time" content="2021-03-15T08:57:28.643Z">
 <meta property="article:author" content="CherryWang761">
@@ -314,7 +314,7 @@
 <p>一连接一线程，有连接请求就要启动一个线程来处理，</p>
 <p>​    客户端发送请求后，先咨询服务端是否有线程相应，如果没有则会一直等待或者遭到拒绝请求</p>
 <p>​    如果有的话，客户端会线程会等待请求结束后才继续执行。</p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步阻塞.gif"></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步阻塞.gif"></p>
 <p>线程不必要开销问题可以通过线程池改善</p>
 <p><strong>select的好处是它可以同时监听多个句柄，提高并发量</strong></p>
 <h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>同步非阻塞IO模型</p>
@@ -323,12 +323,12 @@
 <p>​    NIO就是，当一个连接创建后，不需要对应一个线程，该连接会被注册到多路复用器上，所以的连接只需要一个线程就可以搞定</p>
 <p>​    当这个线程中的多路复用器进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式。</p>
 <p>​    适合连接数多且连接短。</p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\同步非阻塞.gif"></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\同步非阻塞.gif"></p>
 <h3 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h3><p>异步非阻塞IO模型</p>
 <p>一个有效请求一个线程</p>
 <p>客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理</p>
 <p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了<strong>，程序没有进行实际的读写</strong></p>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步非阻塞.gif"></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步非阻塞.gif"></p>
 <p>三种IO的使用场景</p>
 <ul>
 <li>BIO方式适用于<strong>连接数目比较小且固定的架构</strong>，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</li>
@@ -338,12 +338,12 @@
 <h2 id="4-操作系统基本特性"><a href="#4-操作系统基本特性" class="headerlink" title="4. 操作系统基本特性"></a>4. 操作系统基本特性</h2><h3 id="并发性"><a href="#并发性" class="headerlink" title="并发性"></a>并发性</h3><ul>
 <li>并发图</li>
 </ul>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并发图.webp"></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并发图.webp"></p>
 <p>多个事件<strong>在同一时间间隔内发生</strong>（宏观上是并发的，微观串行）</p>
 <ul>
 <li>并行图</li>
 </ul>
-<p><img src="C:\Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并行图.webp"></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并行图.webp"></p>
 <p>多个事件<strong>在同一时刻发生</strong></p>
 <p>并行需要硬件支持，多核驱动啊什么的CPU</p>
 <h3 id="共享性"><a href="#共享性" class="headerlink" title="共享性"></a>共享性</h3><p>系统资源可供系统多个并发进程共同使用（资源共享）</p>
@@ -422,7 +422,7 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\03\10\面试\排查CPU高负载问题+epoll\" rel="bookmark">排查CPU高负载问题</a></div>
+      <div class="popular-posts-title"><a href="\2021\03\10\面试\数据库知识点之游标存储结构\" rel="bookmark">游标存储结构</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2021\03\10\面试\AQS\" rel="bookmark">AQS</a></div>
@@ -434,7 +434,7 @@
       <div class="popular-posts-title"><a href="\2021\03\10\面试\Socket中close（）和shutdown（）的区别\" rel="bookmark">close()和shutdown()</a></div>
     </li>
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\03\10\面试\ThreadLocal\" rel="bookmark">ThreadLocal</a></div>
+      <div class="popular-posts-title"><a href="\2021\03\10\面试\Spring的IOC和AOP\" rel="bookmark">IOC与AOP</a></div>
     </li>
   </ul>
 
@@ -451,8 +451,8 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" rel="prev" title="API接口">
-      <i class="fa fa-chevron-left"></i> API接口
+    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/" rel="prev" title="游标存储结构">
+      <i class="fa fa-chevron-left"></i> 游标存储结构
     </a></div>
       <div class="post-nav-item">
     <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/synchronized/" rel="next" title="synchronized">

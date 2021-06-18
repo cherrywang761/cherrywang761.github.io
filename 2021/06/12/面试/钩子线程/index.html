@@ -28,16 +28,16 @@
 <meta property="og:site_name" content="Nonbioclock">
 <meta property="og:description" content="钩子线程 参考文章：https:&#x2F;&#x2F;www.zhihu.com&#x2F;search?type&#x3D;content&amp;q&#x3D;java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0  钩子线程一般在并发编程中会使用 当JVM进程中没有活跃的非守护进程时（程序执行完了），或者受到系统的中断信号，JVM进程便会退出，而在JVM进程退出前，hook线程就会启动做系统最后的一些辅助性的工作">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002449448.png">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002833040.png">
-<meta property="og:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614003624735.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002449448.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002833040.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614003624735.png">
 <meta property="og:image" content="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155490317738185">
 <meta property="article:published_time" content="2021-06-12T13:44:54.000Z">
 <meta property="article:modified_time" content="2021-06-15T13:23:05.090Z">
 <meta property="article:author" content="CherryWang761">
 <meta property="article:tag" content="多线程">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002449448.png">
+<meta name="twitter:image" content="https://cherrywang761.github.io/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210614002449448.png">
 
 <link rel="canonical" href="https://cherrywang761.github.io/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/">
 
@@ -308,9 +308,9 @@
 <p>A: 传入参数是通过new Thread()创建的线程对象，<strong>在Java进程调用exit()时，会调用该线程对象的start()方法将其运行起来</strong>，所以不要手工先启动了。</p>
 </blockquote>
 <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>源码中有个ApplicationShutdownHooks类，该类用于跟踪和运行在用户层面注的钩子函数</p>
-<p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002449448.png" alt="image-20210614002449448"></p>
+<p><img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002449448.png" alt="image-20210614002449448"></p>
 <ul>
-<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数<img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002833040.png" alt="image-20210614002833040"></p>
+<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数<img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002833040.png" alt="image-20210614002833040"></p>
 </li>
 <li><p>该类的内部还维护了一个<code>IdentityHashMap</code>，用于存放hook信息，可以通过add()方法来添加，程序中定义的回调线程都放在这里了。</p>
 </li>
@@ -321,7 +321,7 @@
 <li><p>循环中的一个hook对象就是由ApplicationShutdownHooks的匿名块定义的，因此会调用ApplicationShutdownHooks类的run()方法，再调用它的runHooks()方法，runHooks()如图所示：</p>
 </li>
 </ul>
-<p><img src="C:\Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614003624735.png" alt="image-20210614003624735"></p>
+<p><img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614003624735.png" alt="image-20210614003624735"></p>
 <p>从该方法中取出所有的thread，然后启动所有线程，最后通过join()方法等待各个线程结束动作。看源码发现每个hook都有一个线程处理，所以是并发的，不<strong>是串行执行的</strong></p>
 <ul>
 <li><code>Runtime.getRuntime().removeShutdownHook</code>用于删除一个钩子线程。</li>

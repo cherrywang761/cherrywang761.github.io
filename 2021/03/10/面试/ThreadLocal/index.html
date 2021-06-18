@@ -28,14 +28,14 @@
 <meta property="og:site_name" content="Nonbioclock">
 <meta property="og:description" content="ThreadLocal是什么ThreadLocal为解决多线程并发提供了另一种思路 传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是一种时间换空间的方式， ​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面 ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322135647982.png">
-<meta property="og:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322142147916.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322135647982.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322142147916.png">
 <meta property="article:published_time" content="2021-03-10T01:52:48.000Z">
 <meta property="article:modified_time" content="2021-05-11T13:07:10.269Z">
 <meta property="article:author" content="CherryWang761">
 <meta property="article:tag" content="操作系统">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="c:/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322135647982.png">
+<meta name="twitter:image" content="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users/Administrator/AppData/Roaming/Typora/typora-user-images/image-20210322135647982.png">
 
 <link rel="canonical" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/">
 
@@ -326,7 +326,7 @@
 <h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
 
 
-<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
+<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
 <p><strong>（1）key 使用强引用</strong></p>
 <p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
 <p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
@@ -358,7 +358,7 @@
 <h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
 <p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
 <figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
+<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
 <h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
 <p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
 <p><strong>虚引用必须和引用队列一起使用</strong></p>
@@ -375,7 +375,7 @@
   <div class="popular-posts-header">相关文章</div>
   <ul class="popular-posts">
     <li class="popular-posts-item">
-      <div class="popular-posts-title"><a href="\2021\03\10\面试\排查CPU高负载问题+epoll\" rel="bookmark">排查CPU高负载问题</a></div>
+      <div class="popular-posts-title"><a href="\2021\03\10\面试\数据库知识点之游标存储结构\" rel="bookmark">游标存储结构</a></div>
     </li>
     <li class="popular-posts-item">
       <div class="popular-posts-title"><a href="\2021\03\10\操作系统\" rel="bookmark">OS问题通俗版</a></div>
@@ -404,12 +404,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Spring%E7%9A%84IOC%E5%92%8CAOP/" rel="prev" title="IOC与AOP">
-      <i class="fa fa-chevron-left"></i> IOC与AOP
+    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" rel="prev" title="进程同步机制">
+      <i class="fa fa-chevron-left"></i> 进程同步机制
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" rel="next" title="close()和shutdown()">
-      close()和shutdown() <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Spring%E7%9A%84IOC%E5%92%8CAOP/" rel="next" title="IOC与AOP">
+      IOC与AOP <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
