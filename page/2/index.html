@@ -190,133 +190,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-title-link" itemprop="url">guli-shop高级篇3</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-04-06 17:14:06" itemprop="dateCreated datePublished" datetime="2021-04-06T17:14:06+08:00">2021-04-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-05 15:46:34" itemprop="dateModified" datetime="2021-05-05T15:46:34+08:00">2021-05-05</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-meta-item leancloud_visitors" data-flag-title="guli-shop高级篇3" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.1k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>2 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="异步复习"><a href="#异步复习" class="headerlink" title="异步复习"></a>异步复习</h3><h4 id="初始化线程方式"><a href="#初始化线程方式" class="headerlink" title="初始化线程方式"></a>初始化线程方式</h4><ol>
-<li><p>继承Thread</p>
-</li>
-<li><p>实现Runnable接口</p>
-</li>
-<li><p>实现Callable接口</p>
-</li>
-<li><p>线程池</p>
-</li>
-</ol>
-<h4 id="异步编排"><a href="#异步编排" class="headerlink" title="异步编排"></a>异步编排</h4><p>由于笔记记录与学习时间过于久远，仅仅只记录了异步编排的过程（P210)</p>
-<blockquote>
-<p>SkuInfoServiceImpl</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> SkuItemVo <span class="title">item</span><span class="params">(<span class="keyword">long</span> skuId)</span> <span class="keyword">throws</span> ExecutionException, InterruptedException </span>{</span><br><span class="line">    SkuItemVo skuItemVo = <span class="keyword">new</span> SkuItemVo();</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;SkuInfoEntity&gt; infoFuture = CompletableFuture.supplyAsync(() -&gt; {</span><br><span class="line">        <span class="comment">//1. Sku基本信息获取 pws_sku_info</span></span><br><span class="line">        SkuInfoEntity info = getById(skuId);</span><br><span class="line">        skuItemVo.setInfo(info);</span><br><span class="line">        <span class="keyword">return</span> info;</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; saleAttrFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//3. 获取spu的销售属性组</span></span><br><span class="line">        List&lt;SkuItemSaleAttrVo&gt; saleAttrVos = skuSaleAttrValueService.getSaleAttrsBySpuId(res.getSpuId());</span><br><span class="line">        skuItemVo.setSaleAttr(saleAttrVos);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; descFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//4. 获取spu的介绍</span></span><br><span class="line">        SpuInfoDescEntity infoDescEntity = spuInfoDescService.getById(res.getSpuId());</span><br><span class="line">        skuItemVo.setDesp(infoDescEntity);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; baseAttrFuture = infoFuture.thenAcceptAsync((res) -&gt; {</span><br><span class="line">        <span class="comment">//5. 获取spu的规格参数信息</span></span><br><span class="line">        List&lt;SpuItemAttrGroupVo&gt; attrGroupVos = attrGroupService.getAttrGroupWithAttrsBySpuId(res.getSpuId(), res.getCatelogId());</span><br><span class="line">        skuItemVo.setGroupAttrs(attrGroupVos);</span><br><span class="line">    }, executor);</span><br><span class="line"></span><br><span class="line">    CompletableFuture&lt;Void&gt; imageFuture = CompletableFuture.runAsync(() -&gt; {</span><br><span class="line">        <span class="comment">//2. sku的图片信息   pws_sku_images</span></span><br><span class="line">        List&lt;SkuImagesEntity&gt; images = skuImagesService.getImagesBySkuId(skuId);</span><br><span class="line">        skuItemVo.setImages(images);</span><br><span class="line">    }, executor);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//等待所有任务都完成</span></span><br><span class="line">    CompletableFuture.allOf(saleAttrFuture, descFuture, baseAttrFuture, imageFuture).get();</span><br><span class="line">    <span class="keyword">return</span> skuItemVo;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>CompletableFuture异步编排功能，主要是对任务进行控制</p>
-<blockquote>
-<p>CompletableFuture.supplyAsync()    //创建一个有返回值的任务放到线程池中</p>
-<p>runAsync()        //无返回值的异步任务</p>
-<p>infoFuture.thenAcceptAsync();        在infoFuture任务执行完后执行该任务（放到线程池中）</p>
-<p>CompletableFuture.allOf()；    //等所有任务完成合并任务</p>
-</blockquote>
-<h3 id="认证服务"><a href="#认证服务" class="headerlink" title="认证服务"></a>认证服务</h3><ol>
-<li>新建模块gulimall-auth-server</li>
-<li>配置nacos参数</li>
-</ol>
-<blockquote>
-<p>Tips:这里遇到一个问题，服务识别不到配置文件bootstrap.properties</p>
-<p>解决方案：删除了spring-cloud-starter-alibaba-nacos-config</p>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B">https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d?#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B</a></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/16/apache-calcite%E5%AD%A6%E4%B9%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -602,458 +475,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">SYN攻击</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:14" itemprop="dateModified" datetime="2021-05-11T21:07:14+08:00">2021-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-meta-item leancloud_visitors" data-flag-title="SYN攻击" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>660</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a>SYN攻击</h4><p>有时会被问到了不了解SYN攻击</p>
-<p>写之前，其实并不了解，希望写完之后能够留下一点印象</p>
-<h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>​    SYN泛洪攻击，利用的是TCP的三次握手机制</p>
-<p>​    攻击端利用伪造的IP地址向被攻击端发出请求，服务端的响应请求永远都到不了目的地，服务端会在等待关闭连接的过程中损耗了资源。</p>
-<p>​    如果请求成千上万的话，主机资源将会被耗尽，从而达到攻击的目的</p>
-<blockquote>
-<p>正常的TCP三次握手</p>
-</blockquote>
-<img src="http://p1.pstatp.com/large/pgc-image/37b557063b434769942ca7b9961a943e" alt="黑客基础知识——SYN泛洪攻击原理及防御" style="zoom:67%;">
-
-
-
-<blockquote>
-<p>DOS攻击</p>
-</blockquote>
-<p>攻击方不执行第三次握手，使得server端处于半连接状态</p>
-<h5 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h5><p>①减少SYN重试次数/降低timeout时间</p>
-<p>②增大backlog队列（TCP中有两个backlog队列存放半连接队列和全连接队列）</p>
-<p>其中半连接队列的backlog默认值为2048，全连接队列默认值为128</p>
-<p>③超出处理能力，直接丢弃新来的SYN</p>
-<p>④SYN cookie(等建立起连接在分配数据区，依赖对方使用真实的IP，不然这个方法也不顶用。。)</p>
-<blockquote>
-<p>​    原本tcp协议是在收到syn包时，服务器返回syn+ack包并分配一个专门的数据区来储存tcp连接需要的数据，这就使攻击者有机可乘，可以利用伪造的syn包来消耗服务器的内存空间和半开连接数，这就可以使服务器的内存或者半开连接数耗尽而拒绝服务。</p>
-<p>​    而syn cookie技术是服务器在收到syn包时并不马上分配储存连接的数据区，而是根据这个syn包计算出一个cookie，把这个cookie填入tcp的Sequence Number字段发送syn+ack包，等对方回应ack包时检查回复的Acknowledgment Number字段的合法性，如果合法再分配专门的数据区。</p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-title-link" itemprop="url">API接口</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-19 23:52:43" itemprop="dateModified" datetime="2021-05-19T23:52:43+08:00">2021-05-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-meta-item leancloud_visitors" data-flag-title="API接口" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>4.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>4 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>最近在做一个稽核项目，是SQLServer数据库的</p>
-<p>给定响应的json和请求的json，要求从数据库中抓相关数据并返回</p>
-<p>举个栗子：</p>
-<p>Controller层：用于请求接受和响应返回层</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = "/OpenApi/pageQueryEnpass", method = RequestMethod.POST)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function">RespPageEntity&lt;Object&gt; <span class="title">api</span><span class="params">(<span class="meta">@RequestBody</span> <span class="meta">@Valid</span> ReqPage&lt;ReqPageEnpassResult&gt; param, BindingResult bindingResult)</span> </span>{</span><br><span class="line">     <span class="comment">//Service根据传入的请求，返回所需的数据列表</span></span><br><span class="line">    List&lt;RespPageEnpassResult&gt; tableDataList = pageEnpassService.queryListByRequest(param);</span><br><span class="line">    <span class="keyword">return</span> RespPageEntity.success4tableData(param,tableDataList);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>RespPageEntity对象（根据json对象制定），响应的对象结构</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RespPageEntity</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> RespHeader header;</span><br><span class="line">   <span class="keyword">private</span> RespPage pager;</span><br><span class="line">   <span class="keyword">private</span> T body;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;根据tableData的形式返回内容&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;E&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> pager</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> tableData</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">RespPageEntity&lt;Object&gt; <span class="title">success4tableData</span><span class="params">(ReqPage&lt;?&gt; param , E tableData)</span></span>{</span><br><span class="line">      RespPage pager = <span class="keyword">new</span> RespPage();</span><br><span class="line">      pager.setPageIndex(param.getPageIndex());</span><br><span class="line">      pager.setPageSize(param.getPageSize());</span><br><span class="line">      RespPageBody&lt;E&gt; body = <span class="keyword">new</span> RespPageBody&lt;E&gt;();</span><br><span class="line">      body.setTableData(tableData);</span><br><span class="line">      RespPageEntity&lt;Object&gt; entity = <span class="keyword">new</span> RespPageEntity&lt;Object&gt;();</span><br><span class="line">      entity.setHeader(RespHeader.success);</span><br><span class="line">      entity.setPager(pager);</span><br><span class="line">      entity.setBody(body);</span><br><span class="line">      <span class="keyword">return</span> entity;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>ReqPage对象（请求的对象结构）</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage</span>&lt;<span class="title">T</span>&gt;</span>{</span><br><span class="line">   <span class="comment">/** 分页大小 **/</span></span><br><span class="line">   <span class="meta">@Max(1000)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageSize;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 分页号 **/</span></span><br><span class="line">   <span class="meta">@Min(1)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageIndex;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 请求条件 **/</span></span><br><span class="line">   <span class="meta">@Valid</span></span><br><span class="line">   <span class="keyword">private</span> T condition;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>Serviceimpl（方法的实现类）</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageEnpassServiceImpl</span> <span class="keyword">implements</span> <span class="title">PageEnpassService</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PageEnpassDao pageEnpassDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;RespPageEnpassResult&gt; <span class="title">queryListByRequest</span><span class="params">(ReqPage&lt;ReqPageEnpassResult&gt; param)</span> </span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将请求参数封装成Map</span></span><br><span class="line">        Map&lt;String, Object&gt; maps = ReqPage2MapUtil.ReqPage2Map(param);</span><br><span class="line">        <span class="comment">//将参数封装成where的sql字符串</span></span><br><span class="line">        String condition = Param2ConditionUtil.param2ConditionWithTime(maps, <span class="string">"entime"</span>, Contanst.SP_PARAM);</span><br><span class="line">        maps.put(<span class="string">"strWhere"</span>, condition);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用dao层服务，根据传入的Condition查询得到List&lt;TableData&gt;</span></span><br><span class="line">        ArrayList&lt;PageEnpassPO&gt; tableDataList = pageEnpassDao.queryPageByRequest(maps);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据库查询出来的EnpassPO进行属性对拷，进行封装后返回</span></span><br><span class="line">        List&lt;RespPageEnpassResult&gt; collect = tableDataList.stream().map((pageEnpassPO) -&gt; {</span><br><span class="line">            RespPageEnpassResult respPageEnpassResult = <span class="keyword">new</span> RespPageEnpassResult();</span><br><span class="line">            <span class="comment">//spring的对象拷贝源数据在前，目标数据在后</span></span><br><span class="line">            BeanUtils.copyProperties(pageEnpassPO, respPageEnpassResult);</span><br><span class="line">            <span class="comment">//PO的时间是Date类型，返回类型是String类型</span></span><br><span class="line">            	                       respPageEnpassResult.setEnTime(DateTool.getDateTimeStr(pageEnpassPO.getEnTime()));</span><br><span class="line">            respPageEnpassResult.setInsertTime(DateTool.getDateTimeStr(pageEnpassPO.getInsertTime()));</span><br><span class="line">            <span class="keyword">return</span> respPageEnpassResult;</span><br><span class="line">        }).collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">return</span> collect;</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*	将请求参数封装成Map</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage2MapUtil</span> </span>{</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">ReqPage2Map</span><span class="params">(ReqPage&lt;?&gt; param)</span> </span>{</span><br><span class="line">      Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      <span class="keyword">if</span>(param!=<span class="keyword">null</span>) {</span><br><span class="line">         map.put(<span class="string">"pageSize"</span>, param.getPageSize());</span><br><span class="line">           map.put(<span class="string">"pageIndex"</span>, param.getPageIndex());</span><br><span class="line">           Object condition = param.getCondition();</span><br><span class="line">           <span class="keyword">if</span>(condition!=<span class="keyword">null</span>) {</span><br><span class="line">              Map&lt;String, Object&gt; others =  getObjectToMap(condition);</span><br><span class="line">              map.putAll(others);</span><br><span class="line">           }</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> map;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Param2ConditionUtil</span> </span>{</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 单引号 **/</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> SINGLE_MARK = <span class="string">'\''</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> BLANK = <span class="string">' '</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AND = <span class="string">"AND"</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String GT = <span class="string">"&gt;="</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LT = <span class="string">"&lt;="</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;请求参数封装where需要的条件&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> params</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> exps</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">param2Condition</span><span class="params">(Map&lt;String, Object&gt; params , String... exps)</span> </span>{</span><br><span class="line">      Set&lt;String&gt; expSet = <span class="keyword">new</span> HashSet&lt;String&gt;(Arrays.asList(exps));</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      Iterator&lt;String&gt; itor = params.keySet().iterator();</span><br><span class="line">      <span class="keyword">while</span>(itor.hasNext()) {</span><br><span class="line">         String key = itor.next();</span><br><span class="line">         <span class="keyword">if</span>(!expSet.contains(key)) {</span><br><span class="line">            Object value = params.get(key);</span><br><span class="line">            <span class="keyword">if</span>(value!=<span class="keyword">null</span>) {</span><br><span class="line">               String val = value.toString();</span><br><span class="line">               <span class="keyword">if</span>(!isNum(value)) {</span><br><span class="line">                  val = SINGLE_MARK + val + SINGLE_MARK;</span><br><span class="line">               }</span><br><span class="line">               sb.append(AND).append(BLANK).append(key).append(<span class="string">"="</span>).append(val).append(BLANK);</span><br><span class="line">            }</span><br><span class="line">         }</span><br><span class="line">      }</span><br><span class="line">      String condition = sb.toString();</span><br><span class="line">      <span class="keyword">if</span>(condition.startsWith(AND)) {</span><br><span class="line">         condition = condition.substring(AND.length());</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> condition;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>dao层调用存储结构（切记要加大括号！）</p>
-<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"queryPageByRequest"</span> resultType=<span class="string">"com.hong.ssm.po.PageEnpassPO"</span> parameterType=<span class="string">"map"</span> statementType=<span class="string">"CALLABLE"</span> timeout=<span class="string">"30"</span>&gt;</span><br><span class="line">        {call [dbo].[存储结构名] (</span><br><span class="line">            #{startTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{endTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{strWhere,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{pageSize,mode=IN,jdbcType=INTEGER},</span><br><span class="line">            #{pageIndex,mode=IN,jdbcType=INTEGER}</span><br><span class="line">        )}</span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>EnpassPO和RespEnpassResult略</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/" class="post-title-link" itemprop="url">JMM</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-13 20:03:22" itemprop="dateModified" datetime="2021-05-13T20:03:22+08:00">2021-05-13</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/JMM/" class="post-meta-item leancloud_visitors" data-flag-title="JMM" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>3.4k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="JMM"><a href="#JMM" class="headerlink" title="JMM"></a>JMM</h3><blockquote>
-<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/8a58d8335270">https://www.jianshu.com/p/8a58d8335270</a></p>
-</blockquote>
-<h5 id="jmm是什么？"><a href="#jmm是什么？" class="headerlink" title="jmm是什么？"></a>jmm是什么？</h5><blockquote>
-<p>讲述jmm的背景</p>
-<p>原来CPU和内存差不多，后来CPU快了，就增加了工作内存（寄存器和高速缓存）多核并发缓存架构</p>
-</blockquote>
-<blockquote>
-<p>jmm解决的问题？</p>
-<p>为了解决硬件和操作系统的差异</p>
-</blockquote>
-<img src="https://upload-images.jianshu.io/upload_images/4222138-49df5535c55287c4.png?imageMogr2/auto-orient/strip|imageView2/2/w/562/format/webp" alt="img" style="zoom:50%;">
-
-<h5 id="jmm的各部分是干嘛的"><a href="#jmm的各部分是干嘛的" class="headerlink" title="jmm的各部分是干嘛的"></a>jmm的各部分是干嘛的</h5><p>分为主内存，工作内存和java线程</p>
-<p>主内存是公用的，一般主内存就是我们所说的物理内存，然后我们一般是不对主内存直接修改的</p>
-<p>如果每次java线程的更改都直接操作主内存，那么性能影响是比较大的。</p>
-<p>为了解决这个问题，工作内存就出现了，工作内存就是我们所说的寄存器和高速缓存。</p>
-<p>java线程对变量的操作，会在工作内存中进行操作，不能去直接操作主内存</p>
-<p>但是这样子我们能感觉到肯定会有线程不安全的问题。</p>
-<h5 id="如何解决线程不安全的问题？"><a href="#如何解决线程不安全的问题？" class="headerlink" title="如何解决线程不安全的问题？"></a>如何解决线程不安全的问题？</h5><p>回答这个问题前，我们必须先知道</p>
-<p>JMM针对于内存，设定了8个指令</p>
-<ul>
-<li>lock</li>
-<li>unlock</li>
-</ul>
-<p>作用于主内存，是否将一个变量标识为内存独占</p>
-<ul>
-<li>read</li>
-<li>load</li>
-</ul>
-<p>作用于工作内存，read就是从主内存get数据，load就相当于将主内存数据set到工作内存中</p>
-<ul>
-<li>use：使用</li>
-<li>assign：赋值</li>
-</ul>
-<p>作用于工作内存，use把工作内存的变量传给执行引擎，assign从执行引擎接收到的值放入到工作内存的变量副本中</p>
-<ul>
-<li>store</li>
-<li>write</li>
-</ul>
-<p>作用于主内存，store将工作内存的数据传送到主内存中，write就是将传送到主内存中的数据写入到主内存中</p>
-<p>JMM对这八个命令指定了很多规则，但是一般都是按照<strong>happen-before规则</strong>进行执行的。</p>
-<h4 id="JMM的模型特征"><a href="#JMM的模型特征" class="headerlink" title="JMM的模型特征"></a>JMM的模型特征</h4><h5 id="原子性"><a href="#原子性" class="headerlink" title="原子性"></a>原子性</h5><p>JMM保证上面说的8个交互操作指令都是具有原子性的</p>
-<p>但是有例外就是，JMM允许虚拟机把没有volatile修饰的64位数据拆分成两个32位数据来进行操作。</p>
-<p>其实就是单个指令是具有原子性的，但是多个指令在整体上是没有原子性的。</p>
-<p>解决方案：1. 用原子类    2.synchronzied互斥锁。</p>
-<p>原子类内部实现是CAS （自旋锁），乐观锁</p>
-<p>synchronized内部实现是monitor锁，是悲观锁</p>
-<h5 id="可见性"><a href="#可见性" class="headerlink" title="可见性"></a>可见性</h5><p>可见性就是说一个线程修改了值，能够让其他线程知道并修改</p>
-<p>JMM实现的途径是变量修改后会将新值同步到主内存中，在变量读取前从主内存中刷新变量的值来实现可见性</p>
-<p>实现可见性的方案：</p>
-<ul>
-<li>volatile关键字</li>
-</ul>
-<blockquote>
-<p>volatile关键字的两个作用，一个是保证变量的可见性，一个是防止指令重排序</p>
-<p>保证变量可见性：一个变量，被volatile修饰，就意味着线程的本地内存是无效的，当java线程更改该变量，会直接将新值更新到主内存中；其他线程读取该变量时，也会从主内存中直接读取（因为本地内存没有呀）</p>
-</blockquote>
-<ul>
-<li>synchronzied</li>
-</ul>
-<blockquote>
-<p>unlock操作之前，必须把变量值同步到主内存中</p>
-</blockquote>
-<ul>
-<li>final关键字</li>
-</ul>
-<blockquote>
-<p>final关键字初始化完成，且没有发生this逃逸，其他线程就能看见final修饰的值</p>
-</blockquote>
-<h5 id="有序性"><a href="#有序性" class="headerlink" title="有序性"></a>有序性</h5><p>在单线程环境下，程序永远会“有序的”执行，即：线程内表现为串行语义。但是在多线程环境下，程序会出现“乱序”。</p>
-<p>这是因为，JMM允许编译器和处理器对指令进行重排序，本意是为了提高效率，但是在多线程并发的情况下，有可能影响并发执行的正确性</p>
-<p>解决方案：</p>
-<ul>
-<li>volatile关键字</li>
-</ul>
-<blockquote>
-<p>volatie的另一个作用，禁止指令重排序，它是通过添加<strong>内存屏障</strong>的方式来禁止指令重拍序的。</p>
-<p>重排序时，不能把后面的指令放到内存屏障前。</p>
-</blockquote>
-<ul>
-<li>synchronized</li>
-</ul>
-<blockquote>
-<p>它通过加锁，让一段代码只能由一个线程来执行。</p>
-</blockquote>
-<p>这两个区别就是，synchronized可以修饰一段代码，或者一个方法。但是volatile只能修饰一个变量。</p>
-<h3 id="线程通信方式"><a href="#线程通信方式" class="headerlink" title="线程通信方式"></a>线程通信方式</h3><h5 id="volatile关键字"><a href="#volatile关键字" class="headerlink" title="volatile关键字"></a>volatile关键字</h5><p>该关键字有两个特性，一：可见性；二：禁止指令重排序</p>
-<p>其中可见性就是让线程之间进行通信，两个原则保证线程可见性</p>
-<ul>
-<li><strong>所有volatile修饰的变量一旦被某个线程更改，必须立即刷新到主内存</strong></li>
-<li><strong>所有volatile修饰的变量在使用之前必须重新读取主内存的值</strong></li>
-</ul>
-<h5 id="等待通知机制"><a href="#等待通知机制" class="headerlink" title="等待通知机制"></a>等待通知机制</h5><p>等待通知机制是通过wait和notify方法来实现的</p>
-<p>wait()：当线程调用wait方法，<strong>会释放当前的锁</strong>，然后让出CPU，进入等待状态</p>
-<p>notify()：唤醒沉睡的线程（不会释放锁）</p>
-<p><strong>wait要配合synchronized一起使用，如果没有synchronized会报错</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSync</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="comment">// 定义一个锁对象</span></span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        List&lt;String&gt;  list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="comment">// 实现线程A</span></span><br><span class="line">        Thread threadA = <span class="keyword">new</span> Thread(() -&gt; {</span><br><span class="line">            <span class="keyword">synchronized</span> (lock) {</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">10</span>; i++) {</span><br><span class="line">                    list.add(<span class="string">"abc"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"线程A向list中添加一个元素，此时list中的元素个数为："</span> + list.size());</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                        Thread.sleep(<span class="number">500</span>);</span><br><span class="line">                    } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    <span class="keyword">if</span> (list.size() == <span class="number">5</span>)</span><br><span class="line">                        lock.notify();<span class="comment">// 唤醒B线程</span></span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="comment">// 实现线程B</span></span><br><span class="line">        Thread threadB = <span class="keyword">new</span> Thread(() -&gt; {</span><br><span class="line">            <span class="keyword">while</span> (<span class="keyword">true</span>) {</span><br><span class="line">                <span class="keyword">synchronized</span> (lock) {</span><br><span class="line">                    <span class="keyword">if</span> (list.size() != <span class="number">5</span>) {</span><br><span class="line">                        <span class="keyword">try</span> {</span><br><span class="line">                            lock.wait();</span><br><span class="line">                        } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                            e.printStackTrace();</span><br><span class="line">                        }</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"线程B收到通知，开始执行自己的业务..."</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        <span class="comment">//　需要先启动线程B</span></span><br><span class="line">        threadB.start();</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">        } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">// 再启动线程A</span></span><br><span class="line">        threadA.start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<img src="https://img-blog.csdnimg.cn/20190112154820961.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2ppc3VhbmppMTIzMDY=,size_16,color_FFFFFF,t_70" alt="img" style="zoom:50%;">
-
-
-
-<p>既然wait和notify配合synchronized使用能够实现,当然用 ReentrantLock 结合 Condition也可以完成;</p>
-<h5 id="join（）"><a href="#join（）" class="headerlink" title="join（）"></a>join（）</h5><p>退让方法</p>
-<p>当线程A调用另一个线程B的join方法时，当前线程A阻塞等待线程B执行完毕才能继续执行</p>
-<p>相当于A退让了，让B先进行</p>
-<p>所以join的好处能够保证线程的执行顺序，但是如果调用线程的join方法其实已经失去了并行的意义</p>
-<p>虽然存在多个线程，但是本质上还是串行的</p>
-<p>最后join的实现其实是基于等待通知机制的。</p>
-<h4 id="两种工具类"><a href="#两种工具类" class="headerlink" title="两种工具类"></a>两种工具类</h4><h5 id="JUC工具类CountDownLatch"><a href="#JUC工具类CountDownLatch" class="headerlink" title="JUC工具类CountDownLatch"></a>JUC工具类CountDownLatch</h5><p>使用一个计数器进行实现。计数器初始值为线程的数量。</p>
-<p>当每一个线程完成自己任务后，计数器的值就会减一。</p>
-<p><strong>当计数器的值为0时，表示所有的线程都已经完成一些任务，然后在CountDownLatch上等待的线程就可以恢复执行接下来的任务。</strong></p>
-<p>CountDownLatch典型用法：1、某一线程在开始运行前等待n个线程执行完毕。将CountDownLatch的计数器初始化为new CountDownLatch(n)，每当一个任务线程执行完毕，就将计数器减1 countdownLatch.countDown()，当计数器的值变为0时，在CountDownLatch上await()的线程就会被唤醒。一个典型应用场景就是启动一个服务时，主线程需要等待多个组件加载完毕，之后再继续执行。</p>
-<h5 id="LockSupport"><a href="#LockSupport" class="headerlink" title="LockSupport"></a>LockSupport</h5><p>它是一个线程工具类，所有的方法都是静态方法，可以让线程在任意位置阻塞，也可以在任意位置唤醒。</p>
-<p>它的内部其实两类主要的方法：<strong>park（停车阻塞线程）和unpark（启动唤醒线程）。</strong></p>
-<p>（1）wait和notify都是Object中的方法,在调用这两个方法前必须先获得锁对象，但是park不需要获取某个对象的锁就可以锁住线程。</p>
-<p>（2）notify只能随机选择一个线程唤醒，无法唤醒指定的线程，unpark却可以唤醒一个指定的线程。</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E9%97%AE%E9%A2%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1262,7 +683,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1276,7 +697,129 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">close()和shutdown()</a>
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-title-link" itemprop="url">API接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-19 23:52:43" itemprop="dateModified" datetime="2021-05-19T23:52:43+08:00">2021-05-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/API%E6%8E%A5%E5%8F%A3%E7%BC%96%E5%86%99/" class="post-meta-item leancloud_visitors" data-flag-title="API接口" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.4k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>最近在做一个稽核项目，是SQLServer数据库的</p>
+<p>给定响应的json和请求的json，要求从数据库中抓相关数据并返回</p>
+<p>举个栗子：</p>
+<p>Controller层：用于请求接受和响应返回层</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RequestMapping(value = "/OpenApi/pageQueryEnpass", method = RequestMethod.POST)</span></span><br><span class="line"><span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line"><span class="function">RespPageEntity&lt;Object&gt; <span class="title">api</span><span class="params">(<span class="meta">@RequestBody</span> <span class="meta">@Valid</span> ReqPage&lt;ReqPageEnpassResult&gt; param, BindingResult bindingResult)</span> </span>{</span><br><span class="line">     <span class="comment">//Service根据传入的请求，返回所需的数据列表</span></span><br><span class="line">    List&lt;RespPageEnpassResult&gt; tableDataList = pageEnpassService.queryListByRequest(param);</span><br><span class="line">    <span class="keyword">return</span> RespPageEntity.success4tableData(param,tableDataList);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>RespPageEntity对象（根据json对象制定），响应的对象结构</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">RespPageEntity</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line"></span><br><span class="line">   <span class="keyword">private</span> RespHeader header;</span><br><span class="line">   <span class="keyword">private</span> RespPage pager;</span><br><span class="line">   <span class="keyword">private</span> T body;</span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;根据tableData的形式返回内容&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> &lt;E&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> pager</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> tableData</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="keyword">public</span> <span class="keyword">static</span> &lt;E&gt; <span class="function">RespPageEntity&lt;Object&gt; <span class="title">success4tableData</span><span class="params">(ReqPage&lt;?&gt; param , E tableData)</span></span>{</span><br><span class="line">      RespPage pager = <span class="keyword">new</span> RespPage();</span><br><span class="line">      pager.setPageIndex(param.getPageIndex());</span><br><span class="line">      pager.setPageSize(param.getPageSize());</span><br><span class="line">      RespPageBody&lt;E&gt; body = <span class="keyword">new</span> RespPageBody&lt;E&gt;();</span><br><span class="line">      body.setTableData(tableData);</span><br><span class="line">      RespPageEntity&lt;Object&gt; entity = <span class="keyword">new</span> RespPageEntity&lt;Object&gt;();</span><br><span class="line">      entity.setHeader(RespHeader.success);</span><br><span class="line">      entity.setPager(pager);</span><br><span class="line">      entity.setBody(body);</span><br><span class="line">      <span class="keyword">return</span> entity;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>ReqPage对象（请求的对象结构）</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Data</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage</span>&lt;<span class="title">T</span>&gt;</span>{</span><br><span class="line">   <span class="comment">/** 分页大小 **/</span></span><br><span class="line">   <span class="meta">@Max(1000)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageSize;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 分页号 **/</span></span><br><span class="line">   <span class="meta">@Min(1)</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">int</span> pageIndex;</span><br><span class="line">   </span><br><span class="line">   <span class="comment">/** 请求条件 **/</span></span><br><span class="line">   <span class="meta">@Valid</span></span><br><span class="line">   <span class="keyword">private</span> T condition;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>Serviceimpl（方法的实现类）</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Service</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PageEnpassServiceImpl</span> <span class="keyword">implements</span> <span class="title">PageEnpassService</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Resource</span></span><br><span class="line">    <span class="keyword">private</span> PageEnpassDao pageEnpassDao;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;RespPageEnpassResult&gt; <span class="title">queryListByRequest</span><span class="params">(ReqPage&lt;ReqPageEnpassResult&gt; param)</span> </span>{</span><br><span class="line"></span><br><span class="line">        <span class="comment">//将请求参数封装成Map</span></span><br><span class="line">        Map&lt;String, Object&gt; maps = ReqPage2MapUtil.ReqPage2Map(param);</span><br><span class="line">        <span class="comment">//将参数封装成where的sql字符串</span></span><br><span class="line">        String condition = Param2ConditionUtil.param2ConditionWithTime(maps, <span class="string">"entime"</span>, Contanst.SP_PARAM);</span><br><span class="line">        maps.put(<span class="string">"strWhere"</span>, condition);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//调用dao层服务，根据传入的Condition查询得到List&lt;TableData&gt;</span></span><br><span class="line">        ArrayList&lt;PageEnpassPO&gt; tableDataList = pageEnpassDao.queryPageByRequest(maps);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数据库查询出来的EnpassPO进行属性对拷，进行封装后返回</span></span><br><span class="line">        List&lt;RespPageEnpassResult&gt; collect = tableDataList.stream().map((pageEnpassPO) -&gt; {</span><br><span class="line">            RespPageEnpassResult respPageEnpassResult = <span class="keyword">new</span> RespPageEnpassResult();</span><br><span class="line">            <span class="comment">//spring的对象拷贝源数据在前，目标数据在后</span></span><br><span class="line">            BeanUtils.copyProperties(pageEnpassPO, respPageEnpassResult);</span><br><span class="line">            <span class="comment">//PO的时间是Date类型，返回类型是String类型</span></span><br><span class="line">            	                       respPageEnpassResult.setEnTime(DateTool.getDateTimeStr(pageEnpassPO.getEnTime()));</span><br><span class="line">            respPageEnpassResult.setInsertTime(DateTool.getDateTimeStr(pageEnpassPO.getInsertTime()));</span><br><span class="line">            <span class="keyword">return</span> respPageEnpassResult;</span><br><span class="line">        }).collect(Collectors.toList());</span><br><span class="line">        <span class="keyword">return</span> collect;</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">*	将请求参数封装成Map</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReqPage2MapUtil</span> </span>{</span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Map&lt;String, Object&gt; <span class="title">ReqPage2Map</span><span class="params">(ReqPage&lt;?&gt; param)</span> </span>{</span><br><span class="line">      Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">      <span class="keyword">if</span>(param!=<span class="keyword">null</span>) {</span><br><span class="line">         map.put(<span class="string">"pageSize"</span>, param.getPageSize());</span><br><span class="line">           map.put(<span class="string">"pageIndex"</span>, param.getPageIndex());</span><br><span class="line">           Object condition = param.getCondition();</span><br><span class="line">           <span class="keyword">if</span>(condition!=<span class="keyword">null</span>) {</span><br><span class="line">              Map&lt;String, Object&gt; others =  getObjectToMap(condition);</span><br><span class="line">              map.putAll(others);</span><br><span class="line">           }</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> map;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Param2ConditionUtil</span> </span>{</span><br><span class="line"></span><br><span class="line">   <span class="comment">/** 单引号 **/</span></span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> SINGLE_MARK = <span class="string">'\''</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">char</span> BLANK = <span class="string">' '</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String AND = <span class="string">"AND"</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String GT = <span class="string">"&gt;="</span>;</span><br><span class="line">   <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String LT = <span class="string">"&lt;="</span>;</span><br><span class="line"></span><br><span class="line">   </span><br><span class="line">   </span><br><span class="line">   <span class="comment">/**</span></span><br><span class="line"><span class="comment">    * &lt;p&gt;请求参数封装where需要的条件&lt;/p&gt;</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> params</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> exps</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@return</span></span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> String <span class="title">param2Condition</span><span class="params">(Map&lt;String, Object&gt; params , String... exps)</span> </span>{</span><br><span class="line">      Set&lt;String&gt; expSet = <span class="keyword">new</span> HashSet&lt;String&gt;(Arrays.asList(exps));</span><br><span class="line">      StringBuilder sb = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">      Iterator&lt;String&gt; itor = params.keySet().iterator();</span><br><span class="line">      <span class="keyword">while</span>(itor.hasNext()) {</span><br><span class="line">         String key = itor.next();</span><br><span class="line">         <span class="keyword">if</span>(!expSet.contains(key)) {</span><br><span class="line">            Object value = params.get(key);</span><br><span class="line">            <span class="keyword">if</span>(value!=<span class="keyword">null</span>) {</span><br><span class="line">               String val = value.toString();</span><br><span class="line">               <span class="keyword">if</span>(!isNum(value)) {</span><br><span class="line">                  val = SINGLE_MARK + val + SINGLE_MARK;</span><br><span class="line">               }</span><br><span class="line">               sb.append(AND).append(BLANK).append(key).append(<span class="string">"="</span>).append(val).append(BLANK);</span><br><span class="line">            }</span><br><span class="line">         }</span><br><span class="line">      }</span><br><span class="line">      String condition = sb.toString();</span><br><span class="line">      <span class="keyword">if</span>(condition.startsWith(AND)) {</span><br><span class="line">         condition = condition.substring(AND.length());</span><br><span class="line">      }</span><br><span class="line">      <span class="keyword">return</span> condition;</span><br><span class="line">   }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>dao层调用存储结构（切记要加大括号！）</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&lt;select id=<span class="string">"queryPageByRequest"</span> resultType=<span class="string">"com.hong.ssm.po.PageEnpassPO"</span> parameterType=<span class="string">"map"</span> statementType=<span class="string">"CALLABLE"</span> timeout=<span class="string">"30"</span>&gt;</span><br><span class="line">        {call [dbo].[存储结构名] (</span><br><span class="line">            #{startTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{endTime,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{strWhere,mode=IN,jdbcType=VARCHAR},</span><br><span class="line">            #{pageSize,mode=IN,jdbcType=INTEGER},</span><br><span class="line">            #{pageIndex,mode=IN,jdbcType=INTEGER}</span><br><span class="line">        )}</span><br><span class="line">    &lt;/select&gt;</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>EnpassPO和RespEnpassResult略</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/" class="post-title-link" itemprop="url">AQS</a>
         </h2>
 
         <div class="post-meta">
@@ -1306,7 +849,7 @@
             </span>
 
           
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-meta-item leancloud_visitors" data-flag-title="close()和shutdown()" title="阅读次数">
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/" class="post-meta-item leancloud_visitors" data-flag-title="AQS" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1318,7 +861,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>1k</span>
+              <span>504</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -1337,75 +880,264 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
-<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
-<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
-<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
-<p>举个栗子：</p>
-<ol>
-<li>服务器收到一个客户端请求</li>
-</ol>
-<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
+          <h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AbstractQueuedSynchronizer    队列同步器</p>
+<p>是一个用来构建锁和同步器的框架</p>
+<p>AQS可以构建大量广泛的同步器</p>
+<p>常见：</p>
+<p>ReentrantLock</p>
+<p>CyclicBarrier</p>
+<p>Semaphore</p>
+<p>FutureTask</p>
+<p>CountDownLatch</p>
+<p>Condition</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>如果共享资源空闲，有线程试图获取该资源，就会将该线程设为有效的工作线程。</p>
+<p>如果共享资源被占用，那么就需要一套线程阻塞等待以及唤醒时锁分配机制，该机制是AQS中的CLH队列锁（双端虚拟队列）实现的。</p>
+<p>CLH：一个虚拟双向队列（不存在队列实例，仅有节点相连）</p>
+<p><strong>AQS将每条请求共享资源的线程封装成CLH中的Node节点来实现锁的分配</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state;</span><br><span class="line"><span class="comment">//共享变量，使用volatile修饰保证线程可见性</span></span><br></pre></td></tr></tbody></table></figure>
+<p>AQS通过int成员变量表示同步状态，内置FIFO队列完成资源线程的排队工作。</p>
+<p>AQS使用CAS对同步状态进行原子操作实现state的更改</p>
+<h4 id="两种共享方式"><a href="#两种共享方式" class="headerlink" title="两种共享方式"></a>两种共享方式</h4><h5 id="Exclusive（独占）"><a href="#Exclusive（独占）" class="headerlink" title="Exclusive（独占）"></a>Exclusive（独占）</h5><p>只有一个线程能执行，如ReentrantLock。可分为公平锁和非公平锁</p>
+<p>公平锁：先到先得锁</p>
+<p>非公平锁：无视顺序直接抢锁，谁先抢到就是谁的</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/" class="post-title-link" itemprop="url">线程池2</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:11" itemprop="dateModified" datetime="2021-05-11T21:07:11+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E6%B1%A0%E5%86%8D%E8%A1%A5%E5%85%85/" class="post-meta-item leancloud_visitors" data-flag-title="线程池2" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>ThreadPoolExecutor和ThreadPoolTaskExecutor的区别</p>
+<p>有一个需求，需要对日志进行批量的插入到数据库中。数据量多的话，更倾向的选择就是用异步的方式调用DAO方法，批量多线程插入。</p>
+<p>这里就碰到一个问题，使用哪个线程池，本来就只认识ThreadPoolExecutor这个线程池，所以去百度搜有没有相关的代码学习一下。</p>
+<p>没想到有很多的代码是关于ThreadPoolTaskExecutor这个线程池的代码</p>
+<p>所以就简单看看</p>
+<p>首先是<code>ThreadPoolExecutor</code>线程池</p>
+<p>这个线程池是JDK中的线程池类，继承自Executor接口（该接口类似于一个线程池工厂类），里面有execute()方法用来执行线程，线程池会提供一个任务队列，队列中是正在排队的等待线程。</p>
+<p>执行流程加个配图</p>
+<p><img src="https://img-blog.csdnimg.cn/2020030621533867.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dlaXhpbl80MzE2ODAxMA==,size_16,color_FFFFFF,t_70" alt="img"></p>
+<p>然后是<code>ThreadPoolTaskExecutor</code>线程池</p>
+<p>这个线程池是Spring包下的线程池，是Spring为我们提供的线程池类</p>
+<p>我们可以通过配置类进行线程池的注入</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTaskExecutorConfig</span> </span>{</span><br><span class="line">    <span class="meta">@Bean("taskExector")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ThreadPoolTaskExecutor <span class="title">taskExector</span><span class="params">()</span> </span>{</span><br><span class="line"> </span><br><span class="line">        ThreadPoolTaskExecutor executor = <span class="keyword">new</span> ThreadPoolTaskExecutor();</span><br><span class="line">        <span class="keyword">int</span> i = Runtime.getRuntime().availableProcessors();<span class="comment">//获取到服务器的cpu内核</span></span><br><span class="line">        executor.setCorePoolSize(<span class="number">5</span>);<span class="comment">//核心池大小</span></span><br><span class="line">        executor.setMaxPoolSize(<span class="number">100</span>);<span class="comment">//最大线程数</span></span><br><span class="line">        executor.setQueueCapacity(<span class="number">1000</span>);<span class="comment">//队列程度</span></span><br><span class="line">        executor.setKeepAliveSeconds(<span class="number">1000</span>);<span class="comment">//线程空闲时间</span></span><br><span class="line">        executor.setThreadNamePrefix(<span class="string">"tsak-asyn"</span>);<span class="comment">//线程前缀名称</span></span><br><span class="line">        executor.setRejectedExecutionHandler(<span class="keyword">new</span> ThreadPoolExecutor.AbortPolicy());<span class="comment">//配置拒绝策略</span></span><br><span class="line">        <span class="keyword">return</span> executor;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+<p>区别：</p>
+<p><code>1、ThreadPoolTaskExecutor使用ThreadPoolExecutor并增强，扩展了更多特性</code></p>
+<p><code>2、ThreadPoolTaskExecutor只关注自己增强的部分，任务执行还是ThreadPoolExecutor处理。</code></p>
+<p><code>3、前者spring自己用着爽，后者离开spring我们用ThreadPoolExecutor爽。</code></p>
+<p><code>注意：ThreadPoolTaskExecutor 不会自动创建ThreadPoolExecutor需要手动调initialize才会创建</code></p>
+<p><code>    如果@Bean 就不需手动，会自动InitializingBean的afterPropertiesSet来调initialize</code></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RunWith(SpringJUnit4ClassRunner.class)</span></span><br><span class="line"><span class="meta">@SpringBootTest(classes = SpringBootDiscernCollectionApplication.class )</span><span class="comment">//这里是启动类</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadPoolTest</span> </span>{</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> ThreadPoolTaskExecutor threadPoolTaskExecutor;</span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExecutor</span><span class="params">()</span></span>{</span><br><span class="line">        threadPoolTaskExecutor.execute(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//Thread.sleep(2000)</span></span><br><span class="line">        });</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testThread</span><span class="params">()</span></span>{</span><br><span class="line">        Runnable runnable = <span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e) {</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(System.currentTimeMillis());</span><br><span class="line">            }</span><br><span class="line">        };</span><br><span class="line">        runnable.run();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这是写的测试类，不知道为什么用线程池调用的话会爆InterruptException。。</p>
+<p><strong>大师我悟了！！</strong></p>
+<p>报InterruptException的原因是因为单元测试的原因我们的Runnable线程在Sleep的过程中，单元测试其实就跑完了，跑完了它会关闭Tomcat服务器，线程池在察觉到这个单元测试关闭的请求后，会强制线程中断，从而造成InterruptException的异常问题。</p>
+<p>解决方案，在线程外再睡一会儿，给足够的时间让线程sleep。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-title-link" itemprop="url">SYN攻击</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:14" itemprop="dateModified" datetime="2021-05-11T21:07:14+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/SYN%E6%94%BB%E5%87%BB/" class="post-meta-item leancloud_visitors" data-flag-title="SYN攻击" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>660</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="SYN攻击"><a href="#SYN攻击" class="headerlink" title="SYN攻击"></a>SYN攻击</h4><p>有时会被问到了不了解SYN攻击</p>
+<p>写之前，其实并不了解，希望写完之后能够留下一点印象</p>
+<h5 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h5><p>​    SYN泛洪攻击，利用的是TCP的三次握手机制</p>
+<p>​    攻击端利用伪造的IP地址向被攻击端发出请求，服务端的响应请求永远都到不了目的地，服务端会在等待关闭连接的过程中损耗了资源。</p>
+<p>​    如果请求成千上万的话，主机资源将会被耗尽，从而达到攻击的目的</p>
+<blockquote>
+<p>正常的TCP三次握手</p>
+</blockquote>
+<img src="http://p1.pstatp.com/large/pgc-image/37b557063b434769942ca7b9961a943e" alt="黑客基础知识——SYN泛洪攻击原理及防御" style="zoom:67%;">
 
 
 
-<ol start="2">
-<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol start="3">
-<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
-<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>close函数是用来关闭套接字的</p>
-<p>成功返回0，失败返回-1</p>
-<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
-<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
-<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
-<p>如上图，在第二步中，connfd和listenfd都为2</p>
-<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
-<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
-<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
-<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>成功返回0，失败返回-1</p>
-<p>该函数的行为依赖howto参数的值</p>
-<ul>
-<li>SHUT_RD（读关闭）</li>
-</ul>
-<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
-<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
-<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_WR（写关闭）</li>
-</ul>
-<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
-<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
-<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_RDWR</li>
-</ul>
-<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
-<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
-<ul>
-<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
-</li>
-<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
-</li>
-<li><p>其实就是半双工和全双工的区别</p>
-</li>
-</ul>
+<blockquote>
+<p>DOS攻击</p>
+</blockquote>
+<p>攻击方不执行第三次握手，使得server端处于半连接状态</p>
+<h5 id="解决措施"><a href="#解决措施" class="headerlink" title="解决措施"></a>解决措施</h5><p>①减少SYN重试次数/降低timeout时间</p>
+<p>②增大backlog队列（TCP中有两个backlog队列存放半连接队列和全连接队列）</p>
+<p>其中半连接队列的backlog默认值为2048，全连接队列默认值为128</p>
+<p>③超出处理能力，直接丢弃新来的SYN</p>
+<p>④SYN cookie(等建立起连接在分配数据区，依赖对方使用真实的IP，不然这个方法也不顶用。。)</p>
+<blockquote>
+<p>​    原本tcp协议是在收到syn包时，服务器返回syn+ack包并分配一个专门的数据区来储存tcp连接需要的数据，这就使攻击者有机可乘，可以利用伪造的syn包来消耗服务器的内存空间和半开连接数，这就可以使服务器的内存或者半开连接数耗尽而拒绝服务。</p>
+<p>​    而syn cookie技术是服务器在收到syn包时并不马上分配储存连接的数据区，而是根据这个syn包计算出一个cookie，把这个cookie填入tcp的Sequence Number字段发送syn+ack包，等对方回应ack包时检查回复的Acknowledgment Number字段的合法性，如果合法再分配专门的数据区。</p>
+</blockquote>
 
       
     </div>
@@ -1593,6 +1325,169 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">close()和shutdown()</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-11 21:07:13" itemprop="dateModified" datetime="2021-05-11T21:07:13+08:00">2021-05-11</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-meta-item leancloud_visitors" data-flag-title="close()和shutdown()" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
+<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
+<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
+<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
+<p>举个栗子：</p>
+<ol>
+<li>服务器收到一个客户端请求</li>
+</ol>
+<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
+
+
+
+<ol start="2">
+<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<ol start="3">
+<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
+<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>close函数是用来关闭套接字的</p>
+<p>成功返回0，失败返回-1</p>
+<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
+<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
+<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
+<p>如上图，在第二步中，connfd和listenfd都为2</p>
+<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
+<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
+<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
+<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>成功返回0，失败返回-1</p>
+<p>该函数的行为依赖howto参数的值</p>
+<ul>
+<li>SHUT_RD（读关闭）</li>
+</ul>
+<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
+<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
+<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<ul>
+<li>SHUT_WR（写关闭）</li>
+</ul>
+<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
+<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
+<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<ul>
+<li>SHUT_RDWR</li>
+</ul>
+<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
+<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
+<ul>
+<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
+</li>
+<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
+</li>
+<li><p>其实就是半双工和全双工的区别</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1662,7 +1557,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1711,12 +1606,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">238k</span>
+    <span title="站点总字数">236k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:37</span>
+    <span title="站点阅读时长">3:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>

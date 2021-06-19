@@ -189,6 +189,72 @@
       </tags>
   </entry>
   <entry>
+    <title>SpringMVC理解</title>
+    <url>/2021/03/12/SpringMVC%E7%90%86%E8%A7%A3/</url>
+    <content><![CDATA[<p>谈一谈对SpringMVC的认识？</p>
+<a id="more"></a>
+
+<ul>
+<li>概念</li>
+</ul>
+<p>SpringMVC是一个轻量级的开源框架，主要应用于表现层，是基于MVC架构设计的。</p>
+<ul>
+<li>特点</li>
+</ul>
+<ol>
+<li>SpringMVC是单例的，可以设置成多例子</li>
+<li>线程安全</li>
+<li>方法级别的拦截</li>
+<li>接收请求参数的方式是参数绑定。</li>
+<li>携带参数到页面是通过request对象。</li>
+</ol>
+<ul>
+<li><strong>SpringMVC流程</strong></li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>SpringMVC</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Spring面试</title>
+    <url>/2021/01/31/Spring%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
+<p>在引入IOC后，如下方的图所示软件就接管了这一个过程，对象A和对象B失去了直接关系，当对象A需要对象B时，IOC容器会主动创建一个对象B注入到对象A中。<strong>一切为了解耦</strong></p>
+<a id="more"></a>
+<img src="http://qiniu.xiaoming.net.cn/%E6%9C%AA%E5%BC%95%E5%85%A5IOC.jpg" alt="未引入IOC容器" style="zoom:80%;">
+
+<img src="http://qiniu.xiaoming.net.cn/%E5%BC%95%E5%85%A5IOC.jpg" alt="引入OIC容器" style="zoom:80%;">
+
+
+
+<p><strong>对象A获得对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</strong></p>
+<ul>
+<li>何为控制，控制的是什么</li>
+</ul>
+<blockquote>
+<p>控制的是bean创建，管理的权利，控制bean的整个生命周期</p>
+</blockquote>
+<ul>
+<li>何为反转</li>
+</ul>
+<blockquote>
+<p>把权利由自己控制交给IOC容器控制，就叫做反转</p>
+</blockquote>
+<p>IOC实际上就是个Map(key,value)，Map中存放的是各种对象</p>
+<h4 id="IOC的初始化过程"><a href="#IOC的初始化过程" class="headerlink" title="IOC的初始化过程"></a>IOC的初始化过程</h4><h4 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h4><h4 id="什么是Bean？"><a href="#什么是Bean？" class="headerlink" title="什么是Bean？"></a>什么是Bean？</h4>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>框架</tag>
+        <tag>Spring</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>RPC框架</title>
     <url>/2021/01/23/RPC/</url>
     <content><![CDATA[<h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
@@ -270,72 +336,6 @@
 ]]></content>
       <tags>
         <tag>面试</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Spring面试</title>
-    <url>/2021/01/31/Spring%E9%9D%A2%E8%AF%95/</url>
-    <content><![CDATA[<h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
-<p>在引入IOC后，如下方的图所示软件就接管了这一个过程，对象A和对象B失去了直接关系，当对象A需要对象B时，IOC容器会主动创建一个对象B注入到对象A中。<strong>一切为了解耦</strong></p>
-<a id="more"></a>
-<img src="http://qiniu.xiaoming.net.cn/%E6%9C%AA%E5%BC%95%E5%85%A5IOC.jpg" alt="未引入IOC容器" style="zoom:80%;">
-
-<img src="http://qiniu.xiaoming.net.cn/%E5%BC%95%E5%85%A5IOC.jpg" alt="引入OIC容器" style="zoom:80%;">
-
-
-
-<p><strong>对象A获得对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</strong></p>
-<ul>
-<li>何为控制，控制的是什么</li>
-</ul>
-<blockquote>
-<p>控制的是bean创建，管理的权利，控制bean的整个生命周期</p>
-</blockquote>
-<ul>
-<li>何为反转</li>
-</ul>
-<blockquote>
-<p>把权利由自己控制交给IOC容器控制，就叫做反转</p>
-</blockquote>
-<p>IOC实际上就是个Map(key,value)，Map中存放的是各种对象</p>
-<h4 id="IOC的初始化过程"><a href="#IOC的初始化过程" class="headerlink" title="IOC的初始化过程"></a>IOC的初始化过程</h4><h4 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h4><h4 id="什么是Bean？"><a href="#什么是Bean？" class="headerlink" title="什么是Bean？"></a>什么是Bean？</h4>]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>框架</tag>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>SpringMVC理解</title>
-    <url>/2021/03/12/SpringMVC%E7%90%86%E8%A7%A3/</url>
-    <content><![CDATA[<p>谈一谈对SpringMVC的认识？</p>
-<a id="more"></a>
-
-<ul>
-<li>概念</li>
-</ul>
-<p>SpringMVC是一个轻量级的开源框架，主要应用于表现层，是基于MVC架构设计的。</p>
-<ul>
-<li>特点</li>
-</ul>
-<ol>
-<li>SpringMVC是单例的，可以设置成多例子</li>
-<li>线程安全</li>
-<li>方法级别的拦截</li>
-<li>接收请求参数的方式是参数绑定。</li>
-<li>携带参数到页面是通过request对象。</li>
-</ol>
-<ul>
-<li><strong>SpringMVC流程</strong></li>
-</ul>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>SpringMVC</tag>
       </tags>
   </entry>
   <entry>
@@ -762,6 +762,25 @@
       </tags>
   </entry>
   <entry>
+    <title>算法贪心篇</title>
+    <url>/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/</url>
+    <content><![CDATA[<h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
+<a id="more"></a>
+<img src="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210124232215087.png" alt="image-20210124232215087" style="zoom:80%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] &lt;= nums[i - <span class="number">1</span>]){</span><br><span class="line">                start = i;    </span><br><span class="line">            }</span><br><span class="line">            ans = Math.max(ans, i-start + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>贪心算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>算法数组</title>
     <url>/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/</url>
     <content><![CDATA[<h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
@@ -801,22 +820,114 @@
       </tags>
   </entry>
   <entry>
-    <title>算法贪心篇</title>
-    <url>/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/</url>
-    <content><![CDATA[<h4 id="1-leetcode-674-最长连续递增序列"><a href="#1-leetcode-674-最长连续递增序列" class="headerlink" title="1. leetcode 674 最长连续递增序列"></a>1. leetcode 674 最长连续递增序列</h4><p>给定一个未经排序的整数数组，找到最长且 <strong>连续递增的子序列</strong>，并返回该序列的长度。</p>
-<a id="more"></a>
-<img src="/2021/01/20/%E7%AE%97%E6%B3%95%E8%B4%AA%E5%BF%83%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210124232215087.png" alt="image-20210124232215087" style="zoom:80%;">
-
-
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">findLengthOfLCIS</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="keyword">if</span>(nums.length &lt; <span class="number">1</span>)<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> ans = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            <span class="keyword">if</span>(i &gt; <span class="number">0</span> &amp;&amp; nums[i] &lt;= nums[i - <span class="number">1</span>]){</span><br><span class="line">                start = i;    </span><br><span class="line">            }</span><br><span class="line">            ans = Math.max(ans, i-start + <span class="number">1</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+    <title>UUID</title>
+    <url>/2021/06/08/MySQL/UUID/</url>
+    <content><![CDATA[<h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><p>今天看到掘金的一篇文章，感觉又学到了丰富的知识</p>
+<p><a href="https://juejin.cn/post/6911555489067171853#heading-9">为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)</a></p>
+<blockquote>
+<p>摘要：</p>
+</blockquote>
+<h4 id="自增id做索引和uuid做索引对比"><a href="#自增id做索引和uuid做索引对比" class="headerlink" title="自增id做索引和uuid做索引对比"></a>自增id做索引和uuid做索引对比</h4><h5 id="自增id做索引"><a href="#自增id做索引" class="headerlink" title="自增id做索引"></a>自增id做索引</h5><p>MySQL中推荐使用自增id（auto_increment)作主键索引</p>
+<p>因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。</p>
+<p>当达到最大填充因子时候<strong>（innodb默认的最大填充因子是页大小的15/16，留1/16的空间用作修改使用)</strong></p>
+<p>①当满了15/16后，下一条记录就会写入新的页中，一旦数据以auto_increment的方式顺序加载，主键页也会以近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</p>
+<p>②新插入的行一定会在原有的最大数据行的下一行，mysql的定位和寻址速度很快，不会为计算新行的位置做出额外消耗</p>
+<p>③减少了页分裂和碎片的产生</p>
+<h5 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h5><p>因为uuid相对顺序是无规律的，新的值不一定比之前的值都要大，所以innodb无法做到总是把新行插入到索引的最后，而是需要为新行寻找新的合适的位置从而分配新空间。</p>
+<p>该过程需要很多额外的操作：</p>
+<p>①写入的目标页很可能已经刷新到磁盘上并且从缓存上移除；亦或者可能还没有加载到缓存中，innodb在插入之前需要先找到该页，并从磁盘读取目标页到内存中，将导致非常多的随机IO</p>
+<p>②因为写入是乱序的，innodb不得不频繁的做页分裂操作，以便为新的行分配空间，页分裂导致移动大量数据。</p>
+<p>③频繁的页分裂，页会变得稀疏且被不规则填充，最终会出现数据碎片</p>
+<p>此外往往将随机值（uuid和雪花id）载入到聚簇索引后，需要做一次optimeize table来重建表并优化页的填充，又要耗费一定时间。</p>
+<h5 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h5><p>① 别人能轻易的爬取你的数据库信息，根据你数据库的自增id获取到你的业务增长信息。</p>
+<p>②对于高并发情况，innodb在按主键进行插入时会造成明显的锁争用，主键的上界会成为争抢的热点，所有的插入都发生在这里，并发插入会导致间隙锁竞争</p>
+<p>③auto_increment锁机制会造成自增锁的抢夺，有一定性能损失。</p>
+<h4 id="UUID使用场景"><a href="#UUID使用场景" class="headerlink" title="UUID使用场景"></a>UUID使用场景</h4><p>uuid即通用唯一识别码，由32位的16进制数字构成</p>
+<p>UUID的作用就是让分布式系统中的所有元素都能有唯一的辨识信息，这样就不需要考虑数据库创建时的名称重复问题。</p>
+<p>UUID的缺陷就是在于生成的结果串会比较长。而且无规律，此外上文中也提到了相关的缺陷。</p>
+<p>使用场景：</p>
+<ol>
+<li>会话session使用UUID做token</li>
+<li>Redis的防误删会使用UUID</li>
+<li>图片视频等多媒体数据不需要有序性情况存储可以使用UUID</li>
+</ol>
+<h4 id="页分裂与索引合并"><a href="#页分裂与索引合并" class="headerlink" title="页分裂与索引合并"></a>页分裂与索引合并</h4><p>在没接触到该知识点时，我也不知道什么是页分裂。。</p>
+<p>所以干脆一起写在这里</p>
+<blockquote>
+<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
+<p><a href="https://www.cnblogs.com/ZhuChangwu/p/14041410.html">https://www.cnblogs.com/ZhuChangwu/p/14041410.html</a></p>
+</blockquote>
+<p><strong>InnoDB从磁盘读取数据的最小单位是数据页</strong></p>
+<blockquote>
+<p>MySQL数据存储基本格式</p>
+</blockquote>
+<p><img src="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<h5 id="数据页"><a href="#数据页" class="headerlink" title="数据页"></a>数据页</h5><blockquote>
+<p>数据页的基本样式</p>
+</blockquote>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113029931-1621355504.png" alt="img"></p>
+<blockquote>
+<ul>
+<li>FIleHeader 文件头：记录页的通用信息，比如上下页的页号，页类型，所有的数据页其实是一个双链表</li>
+<li>PageHeader 页头：记录本页存储记录的状态信息，比如本页记录数量，槽数量</li>
+<li>Infimum + supremum 最小与最大记录，是虚拟记录</li>
+<li>User Records 真正存数据的地方：以链表的形式存储一条条行记录</li>
+<li>Free Space 存数据空间中尚未使用的区域</li>
+<li>Page Directory 页目录：页中某些记录的相对位置，用于提升查询效率</li>
+<li>File Trailer 文件尾：刷盘时校验页是否完整</li>
+</ul>
+</blockquote>
+<h6 id="User-Records"><a href="#User-Records" class="headerlink" title="User Records"></a>User Records</h6><p>一开始其实是没有user records这个空间的。当插入第一条数据的时候，会从free space空间分出出一个空间到user records，当所有空间全部用完就会再去申请一个新的页使用。</p>
+<p>user record空间是一个<strong>单链表</strong>。链表中的各个节点是按照<strong>主键值从小到大的顺序</strong>进行连接起来的。</p>
+<h6 id="Page-Directory"><a href="#Page-Directory" class="headerlink" title="Page Directory"></a>Page Directory</h6><p>如果我们要在一个页中查找指定的一条记录。除了从头遍历user records还有更高效的方法吗?</p>
+<p>Page Directory就为这种情况提供了解决方案</p>
+<blockquote>
+<p>innoDB会将一个页中的所有记录划分成若干个组，每个组4-8个记录。</p>
+<p><strong>将每个组最后一个记录相对于第一个记录的地址偏移量</strong>提取出来存放在页中叫做Page Direcotry的数组中，数组的元素就是这些<strong>地址偏移量</strong>，也叫做槽</p>
+<p>所以在页中根据主键查找记录是很快的</p>
+<ol>
+<li>二分法确定该记录所在的槽，并找到该槽所在分组中主键值最小的那条记录。</li>
+<li>通过next_record属性遍历单链表找到记录。</li>
+</ol>
+<p>Tips: 二分法是对Page Directory<strong>数组</strong>的，而user records单链表只能是逐步遍历</p>
+</blockquote>
+<p><img src="https://img-blog.csdnimg.cn/20191218103707559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhaXRfZm9yX2V2YQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p>MySQL的设定中，一个表空间内的一组连续的数据页为一个extent（区），默认区的大小为1MB，一个区有64个页，每个数据页大小为16KB（16*64=1024）</p>
+<p>一组数据区 = 256个数据区</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113030834-1060222235.jpg" alt="img"></p>
+<h5 id="数据页分裂问题"><a href="#数据页分裂问题" class="headerlink" title="数据页分裂问题"></a>数据页分裂问题</h5><p>假设你现在已经有两个数据页了。并且你正在往第二个数据页中写数据。</p>
+<p>关于B+Tree，你肯定知道B+Tree中的叶子结点之间是通过双向链表关联起来的。</p>
+<p>在InnoDB索引的设定中，要求主键索引是递增的，这样在构建索引树的时候才更加方便。你可以脑补一下。如果按1、2、3…递增的顺序给你这些数。是不是很方便的构建一棵树。然后你可以自由自在的在这棵树上玩二分查找。</p>
+<p>那假设你自定义了主键索引，而且你自定义的这个主键索引并不一定是自增的。</p>
+<p>那就有可能出现下面这种情况 如下图：</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113031695-1349347128.png" alt="img"></p>
+<blockquote>
+<p>假设上图中的id就是你自定义的不会自增的主键</p>
+</blockquote>
+<p>然后随着你将数据写入。就导致后一个数据页中的所有行并不一定比前一个数据页中的行的id大。</p>
+<p>这时就会触发页分裂的逻辑。</p>
+<p>页分裂的目的就是保证：后一个数据页中的所有行主键值比前一个数据页中主键值大。</p>
+<p>经过分裂调整，可以得到下面的这张图。</p>
+<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113032271-1519023118.png" alt="img"></p>
+<h5 id="页合并"><a href="#页合并" class="headerlink" title="页合并"></a>页合并</h5><blockquote>
+<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
+</blockquote>
+<p>在MySQL中，当你删除了一行记录是，实际上记录并没有被物理删除，记录只是被标记（flaged）为删除并且它的空间变成允许其他记录声明访问。</p>
+<p>当需要插入数据id正好在这个标记点，就会复用这个空闲空间。</p>
+<p>当该页中删除的记录达到<code>MERGE_THRESHOLD</code><strong>(合并的阈值，默认页体积的50%)</strong>,InnoDB会开始寻找最靠近的页（前后页），如果看看相邻两个数据页利用率是否低于MERGE_THERSHOLD,如果都很小，系统就会将两个页合并以优化空间使用。</p>
+<p>合并操作后，前一页保留之前的数据并且获得另一个页的数据，另一个页将变成一个空页，可以容纳新数据。</p>
+<blockquote>
+<p>Tips1: update操作如果让页中数据体积达到类似的阈值点，同样会进行页合并的操作。</p>
+<p>即页合并的操作主要看相邻页的利用率如何。</p>
+<p><strong>所以常常说MySQL记录的删除和插入都可能会造成空闲空间的增加。</strong></p>
+</blockquote>
 ]]></content>
       <categories>
-        <category>算法</category>
+        <category>数据库知识</category>
+        <category>面试</category>
       </categories>
       <tags>
-        <tag>面试</tag>
-        <tag>贪心算法</tag>
+        <tag>学习经历</tag>
       </tags>
   </entry>
   <entry>
@@ -934,117 +1045,6 @@
       </tags>
   </entry>
   <entry>
-    <title>UUID</title>
-    <url>/2021/06/08/MySQL/UUID/</url>
-    <content><![CDATA[<h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><p>今天看到掘金的一篇文章，感觉又学到了丰富的知识</p>
-<p><a href="https://juejin.cn/post/6911555489067171853#heading-9">为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)</a></p>
-<blockquote>
-<p>摘要：</p>
-</blockquote>
-<h4 id="自增id做索引和uuid做索引对比"><a href="#自增id做索引和uuid做索引对比" class="headerlink" title="自增id做索引和uuid做索引对比"></a>自增id做索引和uuid做索引对比</h4><h5 id="自增id做索引"><a href="#自增id做索引" class="headerlink" title="自增id做索引"></a>自增id做索引</h5><p>MySQL中推荐使用自增id（auto_increment)作主键索引</p>
-<p>因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。</p>
-<p>当达到最大填充因子时候<strong>（innodb默认的最大填充因子是页大小的15/16，留1/16的空间用作修改使用)</strong></p>
-<p>①当满了15/16后，下一条记录就会写入新的页中，一旦数据以auto_increment的方式顺序加载，主键页也会以近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</p>
-<p>②新插入的行一定会在原有的最大数据行的下一行，mysql的定位和寻址速度很快，不会为计算新行的位置做出额外消耗</p>
-<p>③减少了页分裂和碎片的产生</p>
-<h5 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h5><p>因为uuid相对顺序是无规律的，新的值不一定比之前的值都要大，所以innodb无法做到总是把新行插入到索引的最后，而是需要为新行寻找新的合适的位置从而分配新空间。</p>
-<p>该过程需要很多额外的操作：</p>
-<p>①写入的目标页很可能已经刷新到磁盘上并且从缓存上移除；亦或者可能还没有加载到缓存中，innodb在插入之前需要先找到该页，并从磁盘读取目标页到内存中，将导致非常多的随机IO</p>
-<p>②因为写入是乱序的，innodb不得不频繁的做页分裂操作，以便为新的行分配空间，页分裂导致移动大量数据。</p>
-<p>③频繁的页分裂，页会变得稀疏且被不规则填充，最终会出现数据碎片</p>
-<p>此外往往将随机值（uuid和雪花id）载入到聚簇索引后，需要做一次optimeize table来重建表并优化页的填充，又要耗费一定时间。</p>
-<h5 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h5><p>① 别人能轻易的爬取你的数据库信息，根据你数据库的自增id获取到你的业务增长信息。</p>
-<p>②对于高并发情况，innodb在按主键进行插入时会造成明显的锁争用，主键的上界会成为争抢的热点，所有的插入都发生在这里，并发插入会导致间隙锁竞争</p>
-<p>③auto_increment锁机制会造成自增锁的抢夺，有一定性能损失。</p>
-<h4 id="UUID使用场景"><a href="#UUID使用场景" class="headerlink" title="UUID使用场景"></a>UUID使用场景</h4><p>uuid即通用唯一识别码，由32位的16进制数字构成</p>
-<p>UUID的作用就是让分布式系统中的所有元素都能有唯一的辨识信息，这样就不需要考虑数据库创建时的名称重复问题。</p>
-<p>UUID的缺陷就是在于生成的结果串会比较长。而且无规律，此外上文中也提到了相关的缺陷。</p>
-<p>使用场景：</p>
-<ol>
-<li>会话session使用UUID做token</li>
-<li>Redis的防误删会使用UUID</li>
-<li>图片视频等多媒体数据不需要有序性情况存储可以使用UUID</li>
-</ol>
-<h4 id="页分裂与索引合并"><a href="#页分裂与索引合并" class="headerlink" title="页分裂与索引合并"></a>页分裂与索引合并</h4><p>在没接触到该知识点时，我也不知道什么是页分裂。。</p>
-<p>所以干脆一起写在这里</p>
-<blockquote>
-<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
-<p><a href="https://www.cnblogs.com/ZhuChangwu/p/14041410.html">https://www.cnblogs.com/ZhuChangwu/p/14041410.html</a></p>
-</blockquote>
-<p><strong>InnoDB从磁盘读取数据的最小单位是数据页</strong></p>
-<blockquote>
-<p>MySQL数据存储基本格式</p>
-</blockquote>
-<p><img src="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h5 id="数据页"><a href="#数据页" class="headerlink" title="数据页"></a>数据页</h5><blockquote>
-<p>数据页的基本样式</p>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113029931-1621355504.png" alt="img"></p>
-<blockquote>
-<ul>
-<li>FIleHeader 文件头：记录页的通用信息，比如上下页的页号，页类型，所有的数据页其实是一个双链表</li>
-<li>PageHeader 页头：记录本页存储记录的状态信息，比如本页记录数量，槽数量</li>
-<li>Infimum + supremum 最小与最大记录，是虚拟记录</li>
-<li>User Records 真正存数据的地方：以链表的形式存储一条条行记录</li>
-<li>Free Space 存数据空间中尚未使用的区域</li>
-<li>Page Directory 页目录：页中某些记录的相对位置，用于提升查询效率</li>
-<li>File Trailer 文件尾：刷盘时校验页是否完整</li>
-</ul>
-</blockquote>
-<h6 id="User-Records"><a href="#User-Records" class="headerlink" title="User Records"></a>User Records</h6><p>一开始其实是没有user records这个空间的。当插入第一条数据的时候，会从free space空间分出出一个空间到user records，当所有空间全部用完就会再去申请一个新的页使用。</p>
-<p>user record空间是一个<strong>单链表</strong>。链表中的各个节点是按照<strong>主键值从小到大的顺序</strong>进行连接起来的。</p>
-<h6 id="Page-Directory"><a href="#Page-Directory" class="headerlink" title="Page Directory"></a>Page Directory</h6><p>如果我们要在一个页中查找指定的一条记录。除了从头遍历user records还有更高效的方法吗?</p>
-<p>Page Directory就为这种情况提供了解决方案</p>
-<blockquote>
-<p>innoDB会将一个页中的所有记录划分成若干个组，每个组4-8个记录。</p>
-<p><strong>将每个组最后一个记录相对于第一个记录的地址偏移量</strong>提取出来存放在页中叫做Page Direcotry的数组中，数组的元素就是这些<strong>地址偏移量</strong>，也叫做槽</p>
-<p>所以在页中根据主键查找记录是很快的</p>
-<ol>
-<li>二分法确定该记录所在的槽，并找到该槽所在分组中主键值最小的那条记录。</li>
-<li>通过next_record属性遍历单链表找到记录。</li>
-</ol>
-<p>Tips: 二分法是对Page Directory<strong>数组</strong>的，而user records单链表只能是逐步遍历</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20191218103707559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhaXRfZm9yX2V2YQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>MySQL的设定中，一个表空间内的一组连续的数据页为一个extent（区），默认区的大小为1MB，一个区有64个页，每个数据页大小为16KB（16*64=1024）</p>
-<p>一组数据区 = 256个数据区</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113030834-1060222235.jpg" alt="img"></p>
-<h5 id="数据页分裂问题"><a href="#数据页分裂问题" class="headerlink" title="数据页分裂问题"></a>数据页分裂问题</h5><p>假设你现在已经有两个数据页了。并且你正在往第二个数据页中写数据。</p>
-<p>关于B+Tree，你肯定知道B+Tree中的叶子结点之间是通过双向链表关联起来的。</p>
-<p>在InnoDB索引的设定中，要求主键索引是递增的，这样在构建索引树的时候才更加方便。你可以脑补一下。如果按1、2、3…递增的顺序给你这些数。是不是很方便的构建一棵树。然后你可以自由自在的在这棵树上玩二分查找。</p>
-<p>那假设你自定义了主键索引，而且你自定义的这个主键索引并不一定是自增的。</p>
-<p>那就有可能出现下面这种情况 如下图：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113031695-1349347128.png" alt="img"></p>
-<blockquote>
-<p>假设上图中的id就是你自定义的不会自增的主键</p>
-</blockquote>
-<p>然后随着你将数据写入。就导致后一个数据页中的所有行并不一定比前一个数据页中的行的id大。</p>
-<p>这时就会触发页分裂的逻辑。</p>
-<p>页分裂的目的就是保证：后一个数据页中的所有行主键值比前一个数据页中主键值大。</p>
-<p>经过分裂调整，可以得到下面的这张图。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113032271-1519023118.png" alt="img"></p>
-<h5 id="页合并"><a href="#页合并" class="headerlink" title="页合并"></a>页合并</h5><blockquote>
-<p>参考文章：<a href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
-</blockquote>
-<p>在MySQL中，当你删除了一行记录是，实际上记录并没有被物理删除，记录只是被标记（flaged）为删除并且它的空间变成允许其他记录声明访问。</p>
-<p>当需要插入数据id正好在这个标记点，就会复用这个空闲空间。</p>
-<p>当该页中删除的记录达到<code>MERGE_THRESHOLD</code><strong>(合并的阈值，默认页体积的50%)</strong>,InnoDB会开始寻找最靠近的页（前后页），如果看看相邻两个数据页利用率是否低于MERGE_THERSHOLD,如果都很小，系统就会将两个页合并以优化空间使用。</p>
-<p>合并操作后，前一页保留之前的数据并且获得另一个页的数据，另一个页将变成一个空页，可以容纳新数据。</p>
-<blockquote>
-<p>Tips1: update操作如果让页中数据体积达到类似的阈值点，同样会进行页合并的操作。</p>
-<p>即页合并的操作主要看相邻页的利用率如何。</p>
-<p><strong>所以常常说MySQL记录的删除和插入都可能会造成空闲空间的增加。</strong></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>数据库知识</category>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>学习经历</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>钩子函数</title>
     <url>/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/</url>
     <content><![CDATA[<h3 id="钩子线程"><a href="#钩子线程" class="headerlink" title="钩子线程"></a>钩子线程</h3><blockquote>
@@ -1079,7 +1079,10 @@
 <p>A: 传入参数是通过new Thread()创建的线程对象，<strong>在Java进程调用exit()时，会调用该线程对象的start()方法将其运行起来</strong>，所以不要手工先启动了。</p>
 </blockquote>
 <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>源码中有个ApplicationShutdownHooks类，该类用于跟踪和运行在用户层面注的钩子函数</p>
-<p><img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002449448.png" alt="image-20210614002449448"></p>
+<img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/钩子函数图片/ApplicationShutdownHooks.png">
+
+
+
 <ul>
 <li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数<img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002833040.png" alt="image-20210614002833040"></p>
 </li>
@@ -1110,37 +1113,6 @@
       </categories>
       <tags>
         <tag>多线程</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>AQS</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/</url>
-    <content><![CDATA[<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AbstractQueuedSynchronizer    队列同步器</p>
-<p>是一个用来构建锁和同步器的框架</p>
-<p>AQS可以构建大量广泛的同步器</p>
-<p>常见：</p>
-<p>ReentrantLock</p>
-<p>CyclicBarrier</p>
-<p>Semaphore</p>
-<p>FutureTask</p>
-<p>CountDownLatch</p>
-<p>Condition</p>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>如果共享资源空闲，有线程试图获取该资源，就会将该线程设为有效的工作线程。</p>
-<p>如果共享资源被占用，那么就需要一套线程阻塞等待以及唤醒时锁分配机制，该机制是AQS中的CLH队列锁（双端虚拟队列）实现的。</p>
-<p>CLH：一个虚拟双向队列（不存在队列实例，仅有节点相连）</p>
-<p><strong>AQS将每条请求共享资源的线程封装成CLH中的Node节点来实现锁的分配</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state;</span><br><span class="line"><span class="comment">//共享变量，使用volatile修饰保证线程可见性</span></span><br></pre></td></tr></tbody></table></figure>
-<p>AQS通过int成员变量表示同步状态，内置FIFO队列完成资源线程的排队工作。</p>
-<p>AQS使用CAS对同步状态进行原子操作实现state的更改</p>
-<h4 id="两种共享方式"><a href="#两种共享方式" class="headerlink" title="两种共享方式"></a>两种共享方式</h4><h5 id="Exclusive（独占）"><a href="#Exclusive（独占）" class="headerlink" title="Exclusive（独占）"></a>Exclusive（独占）</h5><p>只有一个线程能执行，如ReentrantLock。可分为公平锁和非公平锁</p>
-<p>公平锁：先到先得锁</p>
-<p>非公平锁：无视顺序直接抢锁，谁先抢到就是谁的</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
       </tags>
   </entry>
   <entry>
@@ -1178,6 +1150,37 @@
       <categories>
         <category>面试</category>
       </categories>
+  </entry>
+  <entry>
+    <title>AQS</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/AQS/</url>
+    <content><![CDATA[<h3 id="AQS"><a href="#AQS" class="headerlink" title="AQS"></a>AQS</h3><p>AbstractQueuedSynchronizer    队列同步器</p>
+<p>是一个用来构建锁和同步器的框架</p>
+<p>AQS可以构建大量广泛的同步器</p>
+<p>常见：</p>
+<p>ReentrantLock</p>
+<p>CyclicBarrier</p>
+<p>Semaphore</p>
+<p>FutureTask</p>
+<p>CountDownLatch</p>
+<p>Condition</p>
+<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>如果共享资源空闲，有线程试图获取该资源，就会将该线程设为有效的工作线程。</p>
+<p>如果共享资源被占用，那么就需要一套线程阻塞等待以及唤醒时锁分配机制，该机制是AQS中的CLH队列锁（双端虚拟队列）实现的。</p>
+<p>CLH：一个虚拟双向队列（不存在队列实例，仅有节点相连）</p>
+<p><strong>AQS将每条请求共享资源的线程封装成CLH中的Node节点来实现锁的分配</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">volatile</span> <span class="keyword">int</span> state;</span><br><span class="line"><span class="comment">//共享变量，使用volatile修饰保证线程可见性</span></span><br></pre></td></tr></tbody></table></figure>
+<p>AQS通过int成员变量表示同步状态，内置FIFO队列完成资源线程的排队工作。</p>
+<p>AQS使用CAS对同步状态进行原子操作实现state的更改</p>
+<h4 id="两种共享方式"><a href="#两种共享方式" class="headerlink" title="两种共享方式"></a>两种共享方式</h4><h5 id="Exclusive（独占）"><a href="#Exclusive（独占）" class="headerlink" title="Exclusive（独占）"></a>Exclusive（独占）</h5><p>只有一个线程能执行，如ReentrantLock。可分为公平锁和非公平锁</p>
+<p>公平锁：先到先得锁</p>
+<p>非公平锁：无视顺序直接抢锁，谁先抢到就是谁的</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
   </entry>
   <entry>
     <title>JMM</title>
@@ -1344,86 +1347,6 @@
       </tags>
   </entry>
   <entry>
-    <title>close()和shutdown()</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
-<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
-<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
-<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
-<p>举个栗子：</p>
-<ol>
-<li>服务器收到一个客户端请求</li>
-</ol>
-<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
-
-
-
-<ol start="2">
-<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol start="3">
-<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
-<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>close函数是用来关闭套接字的</p>
-<p>成功返回0，失败返回-1</p>
-<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
-<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
-<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
-<p>如上图，在第二步中，connfd和listenfd都为2</p>
-<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
-<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
-<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
-<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>成功返回0，失败返回-1</p>
-<p>该函数的行为依赖howto参数的值</p>
-<ul>
-<li>SHUT_RD（读关闭）</li>
-</ul>
-<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
-<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
-<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_WR（写关闭）</li>
-</ul>
-<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
-<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
-<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<ul>
-<li>SHUT_RDWR</li>
-</ul>
-<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
-<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
-<ul>
-<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
-</li>
-<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
-</li>
-<li><p>其实就是半双工和全双工的区别</p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IOC与AOP</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Spring%E7%9A%84IOC%E5%92%8CAOP/</url>
     <content><![CDATA[<p>IOC</p>
@@ -1513,103 +1436,77 @@
       </tags>
   </entry>
   <entry>
-    <title>ThreadLocal</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
-    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
-<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
-<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
-<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
-<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
-<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
-<li>set方法</li>
+    <title>close()和shutdown()</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
+<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
+<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
+<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
+<p>举个栗子：</p>
+<ol>
+<li>服务器收到一个客户端请求</li>
+</ol>
+<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
+
+
+
+<ol start="2">
+<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<ol start="3">
+<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
+<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>close函数是用来关闭套接字的</p>
+<p>成功返回0，失败返回-1</p>
+<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
+<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
+<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
+<p>如上图，在第二步中，connfd和listenfd都为2</p>
+<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
+<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
+<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
+<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>成功返回0，失败返回-1</p>
+<p>该函数的行为依赖howto参数的值</p>
+<ul>
+<li>SHUT_RD（读关闭）</li>
 </ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
+<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
+<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
+
 
 
 <ul>
-<li>get方法</li>
+<li>SHUT_WR（写关闭）</li>
 </ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
+<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
+<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
+
 
 
 <ul>
-<li>remove方法</li>
+<li>SHUT_RDWR</li>
 </ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
-</blockquote>
+<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
+<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
 <ul>
-<li>initialValue方法</li>
+<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
+</li>
+<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
+</li>
+<li><p>其实就是半双工和全双工的区别</p>
+</li>
 </ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>返回该线程局部变量的初始值</p>
-</blockquote>
-<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
-<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
-<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
-<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
-<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
-<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
-</ul>
-<p>Tips: Object和T的区别？</p>
-<blockquote>
-<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
-</blockquote>
-<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
-<p>举个例子：抗日上下线</p>
-<blockquote>
-<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
-</blockquote>
-<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
-<p><strong>（1）key 使用强引用</strong></p>
-<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
-<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
-<p><strong>（2）key 使用弱引</strong></p>
-<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
-<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
-<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
-<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
-<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
-<li>当需要存储线程私有变量的时候。</li>
-<li>当需要实现线程安全的变量时。</li>
-<li>当需要减少线程资源竞争的时候。</li>
-</ul>
-<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
-<blockquote>
-<p>String name = “cherrywang”;</p>
-<p>User cherrywang = new User();</p>
-</blockquote>
-<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
-<p>可达性分析结果不可达，则GC时会回收</p>
-<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
-<p>当JVM内存不足，才会被垃圾回收器回收</p>
-<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
-<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
-<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
-<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
-<p><strong>虚引用必须和引用队列一起使用</strong></p>
-<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
-<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
-<p>它有机会让跟踪的对象“复活”</p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -1825,6 +1722,112 @@
       </tags>
   </entry>
   <entry>
+    <title>ThreadLocal</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
+    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
+<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
+<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
+<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
+<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
+<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
+<li>set方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>get方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>remove方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
+</blockquote>
+<ul>
+<li>initialValue方法</li>
+</ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>返回该线程局部变量的初始值</p>
+</blockquote>
+<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
+<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
+<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
+<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
+<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
+<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
+</ul>
+<p>Tips: Object和T的区别？</p>
+<blockquote>
+<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
+</blockquote>
+<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
+<p>举个例子：抗日上下线</p>
+<blockquote>
+<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
+</blockquote>
+<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
+<p><strong>（1）key 使用强引用</strong></p>
+<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
+<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
+<p><strong>（2）key 使用弱引</strong></p>
+<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
+<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
+<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
+<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
+<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
+<li>当需要存储线程私有变量的时候。</li>
+<li>当需要实现线程安全的变量时。</li>
+<li>当需要减少线程资源竞争的时候。</li>
+</ul>
+<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
+<blockquote>
+<p>String name = “cherrywang”;</p>
+<p>User cherrywang = new User();</p>
+</blockquote>
+<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
+<p>可达性分析结果不可达，则GC时会回收</p>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
+<p>当JVM内存不足，才会被垃圾回收器回收</p>
+<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
+<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
+<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
+<p><strong>虚引用必须和引用队列一起使用</strong></p>
+<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
+<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
+<p>它有机会让跟踪的对象“复活”</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>红黑树</title>
     <url>/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/</url>
     <content><![CDATA[<h3 id="大端系统和小端系统"><a href="#大端系统和小端系统" class="headerlink" title="大端系统和小端系统"></a>大端系统和小端系统</h3><h4 id="为什么会存在大小端系统？"><a href="#为什么会存在大小端系统？" class="headerlink" title="为什么会存在大小端系统？"></a>为什么会存在大小端系统？</h4><p>计算机系统中，每个地址单元对应一个字节（8bit），一种数据类型的数据对象可能占用若干字节。对于这些对象，我们需要建立两个规则：</p>
@@ -1865,75 +1868,55 @@
       </tags>
   </entry>
   <entry>
-    <title>游标存储结构</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<p>在进行数据库学习的过程中，知识过于零散，导致在工作中往往对于一些相关内容掌握的不牢甚至是完全忘记了。。</p>
-<p>这里就记录一下数据库的两个知识点：游标和存储结构</p>
-<h4 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h4><p>游标其实就是一种能够能够从多条数据记录的结果集中每次提取一条记录的机制。</p>
-<p>可以把游标看做是C中的指针的作用</p>
-<p>举个栗子：</p>
-<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">当前有三张表A、B、C，其中A和B是一对多关系，B和C是一对多关系，现在需要将B中A表的主键存到C中；</span><br><span class="line">常规思路就是将B中查询出来然后通过一个update语句来更新C表就可以了，但是B表中有2000多条数据，</span><br><span class="line">难道要执行2000多次？显然是不现实的；我们最终的处理方式是写一个存储过程然后通过循环来更新C表，存储过程中查询的方法就可以用到游标的方式</span><br></pre></td></tr></tbody></table></figure>
-<p>cursor是数据库中的一种临时对象，它可以用来存放数据库表的数据行副本，游标虽然能够遍历记录中的所有行，但是每次只能指向一行的值。（也就是说游标提供了逐行操作表中数据的方法）</p>
-<p><strong>常用功能：保存查询结果，以便以后使用。</strong></p>
-<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>1、允许程序对由查询语句select返回的行集合中的每一行执行相同或不同的操作，而不是对整个行集合执行同一个操作。</p>
-<p>2、提供对基于游标位置的表中的行进行删除和更新的能力。</p>
-<p>3、数据库管理系统实质是面向集合的，SQL SERVER中并没有</p>
-<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>游标(cursor)必须在声明处理程序之前被声明，并且变量和条件必须在声明游标或处理程序之前被声明。</p>
-<ol>
-<li><p>声明游标：</p>
-<p><code>declare    游标名称    CURSOR    for    table;</code>(table可以是查询出的任何集合)</p>
-</li>
-<li><p>打开游标：</p>
-<p><code>open    游标名称;</code></p>
-</li>
-<li><p>获取下一行数据：</p>
-<p><code>FETCH    游标名称    into    testrangeid,versionid;</code></p>
-</li>
-<li><p>需要执行的操作（看需求）</p>
-</li>
-<li><p>释放游标：</p>
-<p><code>CLOSE    游标名称；</code></p>
-</li>
-</ol>
-<p>举个栗子（sqlserver）：</p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">--定义变量  </span></span><br><span class="line"><span class="keyword">declare</span> testrangeid <span class="type">BIGINT</span>;  </span><br><span class="line"><span class="keyword">declare</span> versionid <span class="type">BIGINT</span>;   </span><br><span class="line"><span class="keyword">declare</span> done <span class="type">int</span>;  </span><br><span class="line"><span class="comment">--创建游标，并存储数据  </span></span><br><span class="line"><span class="keyword">declare</span> cur_test <span class="keyword">CURSOR</span> <span class="keyword">for</span>   </span><br><span class="line">   <span class="keyword">select</span> id <span class="keyword">as</span> testrangeid,version_id <span class="keyword">as</span> versionid <span class="keyword">from</span> tp_testrange;  </span><br><span class="line"><span class="comment">--在MySql中，造成游标溢出时会引发mysql预定义的NOT FOUND错误，所以在上面使用下面的代码指定了当引发not found错误时定义一个continue 的事件，指定这个事件发生时修改done变量的值。</span></span><br><span class="line"> <span class="keyword">DECLARE</span> CONTINUE HANDLER <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> done<span class="operator">=</span><span class="number">1</span>;   </span><br><span class="line"><span class="comment">--打开游标  </span></span><br><span class="line"><span class="keyword">open</span> cur_test;  </span><br><span class="line"><span class="comment">--执行循环  </span></span><br><span class="line">  posLoop:LOOP  </span><br><span class="line"><span class="comment">--当done=1，即没有数据了，就结束循环  </span></span><br><span class="line">        IF done<span class="operator">=</span><span class="number">1</span> <span class="keyword">THEN</span>    </span><br><span class="line">      LEAVE posLoop;  </span><br><span class="line">    <span class="keyword">END</span> IF;   </span><br><span class="line"><span class="comment">--取游标中的值  </span></span><br><span class="line">    <span class="keyword">FETCH</span>  cur_test <span class="keyword">into</span> testrangeid,versionid;  </span><br><span class="line"><span class="comment">--执行更新操作  </span></span><br><span class="line">    <span class="keyword">update</span> tp_data_execute <span class="keyword">set</span> version_id<span class="operator">=</span>versionid <span class="keyword">where</span> testrange_id <span class="operator">=</span> testrangeid;  </span><br><span class="line">  <span class="keyword">END</span> LOOP posLoop;  </span><br><span class="line"><span class="comment">--释放游标  </span></span><br><span class="line"><span class="keyword">CLOSE</span> cur_test;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span>  </span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>栗子2:</p>
-<p>我们现在要用<code>存储过程</code>做一个功能，统计iphone的总库存是多少，并把总数输出到控制台。</p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">--在windows系统中写存储过程时，如果需要使用declare声明变量，需要添加这个关键字，否则会报错。  </span></span><br><span class="line">delimiter <span class="operator">/</span><span class="operator">/</span>  </span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> if <span class="keyword">exists</span> StatisticStore;  </span><br><span class="line"><span class="comment">--创建StaticticStore存储过程</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> StatisticStore()  </span><br><span class="line"><span class="keyword">BEGIN</span>  </span><br><span class="line">    <span class="comment">--创建接收游标数据的变量  </span></span><br><span class="line">    <span class="keyword">declare</span> c <span class="type">int</span>;  </span><br><span class="line">    <span class="keyword">declare</span> n <span class="type">varchar</span>(<span class="number">20</span>);  </span><br><span class="line">    <span class="comment">--创建总数变量  </span></span><br><span class="line">    <span class="keyword">declare</span> total <span class="type">int</span> <span class="keyword">default</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="comment">--创建结束标志变量  </span></span><br><span class="line">    <span class="keyword">declare</span> done <span class="type">int</span> <span class="keyword">default</span> <span class="literal">false</span>;  </span><br><span class="line">    <span class="comment">--创建游标  </span></span><br><span class="line">    <span class="keyword">declare</span> cur <span class="keyword">cursor</span> <span class="keyword">for</span> <span class="keyword">select</span> name,count <span class="keyword">from</span> store <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">'iphone'</span>;  </span><br><span class="line">    <span class="comment">--指定游标循环结束时的返回值  </span></span><br><span class="line">    <span class="keyword">declare</span> continue HANDLER <span class="keyword">for</span> <span class="keyword">not</span> found <span class="keyword">set</span> done <span class="operator">=</span> <span class="literal">true</span>;  </span><br><span class="line">    <span class="comment">--设置初始值  </span></span><br><span class="line">    <span class="keyword">set</span> total <span class="operator">=</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="comment">--打开游标  </span></span><br><span class="line">    <span class="keyword">open</span> cur;  </span><br><span class="line">    <span class="comment">--开始循环游标里的数据，循环名字随便取</span></span><br><span class="line">    read_loop:loop  </span><br><span class="line">    <span class="comment">--根据游标当前指向的一条数据  </span></span><br><span class="line">    <span class="keyword">fetch</span> cur <span class="keyword">into</span> n,c;  </span><br><span class="line">    <span class="comment">--判断游标的循环是否结束  </span></span><br><span class="line">    if done <span class="keyword">then</span>  </span><br><span class="line">        leave read_loop;    <span class="comment">--跳出游标循环  </span></span><br><span class="line">    <span class="keyword">end</span> if;  </span><br><span class="line">    <span class="comment">--获取一条数据时，将count值进行累加操作，这里可以做任意你想做的操作，  </span></span><br><span class="line">    <span class="keyword">set</span> total <span class="operator">=</span> total <span class="operator">+</span> c;  </span><br><span class="line">    <span class="comment">--结束游标循环  </span></span><br><span class="line">    <span class="keyword">end</span> loop;  </span><br><span class="line">    <span class="comment">--关闭游标  </span></span><br><span class="line">    <span class="keyword">close</span> cur;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">--输出结果  </span></span><br><span class="line">    <span class="keyword">select</span> total;  </span><br><span class="line"><span class="keyword">END</span>;  </span><br><span class="line"><span class="comment">--调用存储过程  </span></span><br><span class="line"><span class="keyword">call</span> StatisticStore();  </span><br></pre></td></tr></tbody></table></figure>
+    <title>序列化与反序列化</title>
+    <url>/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
+    <content><![CDATA[<p>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</p>
 <blockquote>
-<p>有三种方式遍历游标，上述方式为loop遍历方式，其余两种为while和repeat遍历方式</p>
-<p>详情可以参照<a href="https://www.cnblogs.com/loong-hon/p/11003189.html">https://www.cnblogs.com/loong-hon/p/11003189.html</a></p>
+<p>对象流：将对象转换为二进制流byte[]，我们可以对二进制流进行读写操作，流数据也可以在网络中进行传输。</p>
 </blockquote>
-<h4 id="数据库存储结构"><a href="#数据库存储结构" class="headerlink" title="数据库存储结构"></a>数据库存储结构</h4><blockquote>
-<p>数据库中数据虽然是按照行进行存储的，但是数据库的对信息的读取都是以页为单位的，会将这些行所在的页进行加载。（8K？）</p>
-</blockquote>
-<p>数据库的存储结构：</p>
-<img src="https://img-blog.csdnimg.cn/2020102422482697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdtaW5nNTIwbGl3ZWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" style="zoom:80%;">
-
+<p>实现方式：</p>
 <ul>
-<li>段（segment）：不同的数据库对象以不同的段形式存在。比如建表的时候，会自动创建表段，创建表索引的时候，会创建一个索引段。</li>
-<li>区（Extent）：<strong>区在文件系统中是连续的分片空间</strong>，一个区有64个页，因为<strong>InnoDB中的页大小为16K</strong>，所以一个区的大小为1MB<code>（SQLSERVER中一个区64K，一个页8K，一个区有8个页）</code></li>
-<li>页（Page)：与数据库相关的内容会在页结构中</li>
+<li>类实现Serializable接口（标记接口，只是一个单纯的标记而已，说明这个类是可以被序列化的）<strong>（不想序列化的字段可以用transient修饰）</strong></li>
+<li>实现Externalizable接口（是Serializable接口的子类，transient无效）</li>
+<li>我们可以使用一个输出流（<code>FileOutputStream</code>构造一个<code>ObjectOutputStream</code>对象）来承载序列化后的对象，并用<code>ObjectOutputStream</code>对象的<code>writeObject(Object obj)</code>方法可以将obj对象写出（存到磁盘中，保存起来了)，想恢复的话可以使用输入流</li>
 </ul>
-<p>页基本结构：</p>
-<img src="https://img-blog.csdnimg.cn/20201024224810837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdtaW5nNTIwbGl3ZWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" style="zoom:67%;">
-
-<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/Users\86137\Desktop\JAVA面试\java面试文件存储\MySQL\页存储结构.png"></p>
-<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/Users\86137\Desktop\JAVA面试\java面试文件存储\MySQL\innoDB页结构存储结构.png"></p>
-<p>页存储结构的功能主要分三部分：一：头尾构成的”集装箱”对整体信息的封装；二：索引结构，主要是页目录；三：记录结构，主要是行记录的内容部分。</p>
 <blockquote>
-<p>文章详情见：<a href="https://blog.csdn.net/wangming520liwei/article/details/109267563">https://blog.csdn.net/wangming520liwei/article/details/109267563</a></p>
+<p>虽然实现Externalizable接口能带来一定的性能提升，但由于实现ExternaLizable接口导致了编程复杂度的增加，所以大部分时候都是采用实现Serializable接口方式来实现序列化。</p>
 </blockquote>
-<h4 id="数据库存储过程"><a href="#数据库存储过程" class="headerlink" title="数据库存储过程"></a>数据库存储过程</h4><p>举个栗子（sqlserver）</p>
-<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">--创建存储过程，名称为PROC_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">PROCEDURE</span> [dbo].[PROC_GANTRYRUNSTATUS](</span><br><span class="line"><span class="variable">@batchno</span> <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="variable">@batchtype</span> <span class="type">varchar</span>(<span class="number">20</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="comment">--声明的全局变量</span></span><br><span class="line">  <span class="keyword">DECLARE</span> </span><br><span class="line">    <span class="variable">@v</span>_procname <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    <span class="variable">@v</span>_sql     NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_sql1    NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_starttime DATETIME,</span><br><span class="line">    <span class="variable">@v</span>_batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    <span class="variable">@v</span>_srctab  <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--源表名</span></span><br><span class="line">    <span class="variable">@v</span>_desttab <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--目标表名</span></span><br><span class="line">    <span class="variable">@v</span>_tabdate <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	<span class="variable">@v</span>_jobdate DATETIME,            <span class="comment">--jobdate</span></span><br><span class="line">	<span class="variable">@v</span>_startdate DATETIME,		<span class="comment">--数据开始时间</span></span><br><span class="line">	<span class="variable">@v</span>_enddate DATETIME,			<span class="comment">--数据结束时间</span></span><br><span class="line">	<span class="variable">@v</span>_rownum <span class="type">VARCHAR</span>(<span class="number">10</span>);				<span class="comment">--记录影响行数</span></span><br><span class="line">    	</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_starttime<span class="operator">=</span>GETDATE();</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_procname<span class="operator">=</span><span class="string">'PROC_GANTRYRUNSTATUS'</span>;</span><br><span class="line">	<span class="comment">--cast()转类型（转成datetime），该stuff()表示从第九个字符位置删掉0个字符，并添加一个空格</span></span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_jobdate <span class="operator">=</span> <span class="built_in">cast</span>(stuff(stuff(<span class="variable">@batchno</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="string">' '</span>),<span class="number">12</span>,<span class="number">0</span>,<span class="string">':'</span>) <span class="keyword">as</span> datetime) ;</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_startdate <span class="operator">=</span> <span class="variable">@v</span>_jobdate;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--如果为空直接返回</span></span><br><span class="line">	IF  <span class="variable">@batchtype</span> <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">OR</span> <span class="variable">@batchno</span> <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">	   <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">END</span></span><br><span class="line">    <span class="comment">--SET Data range.</span></span><br><span class="line">	IF <span class="variable">@batchtype</span> <span class="operator">=</span> <span class="string">'Y'</span> </span><br><span class="line">	  <span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">year</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	  <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'M'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">MONTH</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'D'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">day</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'H'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(hh,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'10m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">10</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'5m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">5</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">   <span class="comment">--开启事务</span></span><br><span class="line">   <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">   		<span class="comment">--记录日志</span></span><br><span class="line">	  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程开始'</span>);</span><br><span class="line">   <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--判断临时表是否存在</span></span><br><span class="line">  IF OBJECT_ID(<span class="string">'tempdb.dbo.#TMP_STA_GANTRYRUNSTATUS'</span>) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="comment">--如果不存在，初始化临时表（字段来自源表）</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #TMP_STA_MR_AIRCONDITIONERS(batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">										tabdate <span class="type">varchar</span>(<span class="number">20</span>),[GANTRYID] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[SECTIONID] <span class="type">varchar</span>(<span class="number">11</span>),[<span class="type">TIMESTAMP</span>] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[VERSION] datetime,[ID] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[STATUS] <span class="type">varchar</span>(<span class="number">20</span>),[ERRORMSG] <span class="type">varchar</span>(<span class="number">200</span>),</span><br><span class="line">										[ISWORKING] <span class="type">varchar</span>(<span class="number">20</span>),[WORKMODE] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[SYSTEMWARNING] <span class="type">varchar</span>(<span class="number">20</span>),[TEMPERATUREWARNING] <span class="type">varchar</span>(<span class="number">20</span>));</span><br><span class="line">	<span class="keyword">END</span>;</span><br><span class="line">	<span class="comment">--源头表+日期截串（时间分表）</span></span><br><span class="line">  <span class="keyword">SET</span> <span class="variable">@v</span>_srctab<span class="operator">=</span><span class="string">'STG_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="built_in">SUBSTRING</span>(<span class="variable">@batchno</span>,<span class="number">1</span>,<span class="number">8</span>);</span><br><span class="line">	<span class="comment">--给临时表填数据;quotename()相当于给表加个[]</span></span><br><span class="line">  <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into #TMP_STA_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="string">                   select @batchno batchno,datepart(yy,version) tabdate,</span></span><br><span class="line"><span class="string">				   GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,</span></span><br><span class="line"><span class="string">					 ISWORKING,WORKMODE,SYSTEMWARNING,TEMPERATUREWARNING			</span></span><br><span class="line"><span class="string">                 from  '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_srctab) <span class="operator">+</span><span class="string">' where VERSION &gt;=@v_startdate and VERSION &lt; @v_enddate;'</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">--执行sql，并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> TRY</span><br><span class="line">    <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">      <span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20),@v_startdate DATETIME,@v_enddate DATETIME'</span>,<span class="variable">@batchno</span>,<span class="variable">@v</span>_startdate,<span class="variable">@v</span>_enddate;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span></span><br><span class="line">      <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	        <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到临时表#TMP_STA_GANTRYRUNSTATUS,记录数：'</span><span class="operator">+</span> <span class="variable">@v</span>_rownum );</span><br><span class="line">    <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span> TRY</span><br><span class="line">  <span class="comment">--执行sql异常，catch并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">		<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">			<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入临时表异常：'</span><span class="operator">+</span>error_message());   </span><br><span class="line">		<span class="keyword">COMMIT</span> TRAN		</span><br><span class="line">		RAISERROR(<span class="string">'插入临时表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">		IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">END</span> CATCH	</span><br><span class="line">	</span><br><span class="line">    <span class="comment">--定义游标</span></span><br><span class="line">  <span class="keyword">DECLARE</span> v_cur <span class="keyword">CURSOR</span> <span class="keyword">LOCAL</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> tabdate <span class="keyword">FROM</span> #TMP_STA_GANTRYRUNSTATUS <span class="keyword">GROUP</span> <span class="keyword">BY</span> tabdate;</span><br><span class="line">  <span class="comment">--开启游标，将tabdata insert到@v_tabdate中</span></span><br><span class="line">  <span class="keyword">OPEN</span> v_cur;</span><br><span class="line">    <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">    WHILE @<span class="variable">@FETCH</span>_STATUS<span class="operator">=</span><span class="number">0</span></span><br><span class="line">      <span class="keyword">BEGIN</span></span><br><span class="line">      <span class="comment">--目标表</span></span><br><span class="line">         <span class="keyword">SET</span> <span class="variable">@v</span>_desttab<span class="operator">=</span><span class="string">'STA_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="variable">@v</span>_tabdate;</span><br><span class="line">	     <span class="keyword">BEGIN</span> TRY</span><br><span class="line">		   <span class="keyword">BEGIN</span> TRAN	</span><br><span class="line">		    <span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' where batchno=@batchno'</span>;</span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="comment">--定义插入sql</span></span><br><span class="line">            <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">            <span class="comment">--执行插入sql，从临时表插入到目标表中</span></span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span>;</span><br><span class="line">			<span class="comment">--记录日志</span></span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">				  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到正式表：'</span><span class="operator">+</span><span class="variable">@v</span>_desttab<span class="operator">+</span><span class="string">',影响行数:'</span><span class="operator">+</span><span class="variable">@v</span>_rownum);</span><br><span class="line">            <span class="keyword">COMMIT</span> TRAN		  </span><br><span class="line">	     <span class="keyword">END</span> TRY</span><br><span class="line">	     <span class="comment">--catch异常，记录日志</span></span><br><span class="line">	     <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">			<span class="keyword">BEGIN</span></span><br><span class="line">			  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN				</span><br><span class="line">				  <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">					  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					      <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入日表异常：'</span><span class="operator">+</span>error_message());</span><br><span class="line">				  <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="comment">--添加目标表若不存在则进err表，存在则异常退出。			  </span></span><br><span class="line">				  IF OBJECT_ID(<span class="variable">@v</span>_desttab) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">				  <span class="keyword">BEGIN</span></span><br><span class="line">					 <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			  			<span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM STA_GANTRY_RUNSTATUS_ERR where batchno=@batchno'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line"></span><br><span class="line">						<span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into STA_GANTRY_RUNSTATUS_ERR (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">					 <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="keyword">END</span>				</span><br><span class="line">			  <span class="keyword">ELSE</span></span><br><span class="line">				 <span class="keyword">BEGIN</span></span><br><span class="line">					RAISERROR(<span class="string">'插入数据表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">					IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">	      <span class="keyword">END</span> CATCH;				</span><br><span class="line">        <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">	  <span class="keyword">END</span>;</span><br><span class="line">      </span><br><span class="line">  <span class="keyword">CLOSE</span> v_cur;</span><br><span class="line">  <span class="keyword">DEALLOCATE</span> v_cur;</span><br><span class="line">  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">BEGIN</span></span><br><span class="line">			<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">				 <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程结束'</span>);</span><br><span class="line">			<span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span>;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>什么时候使用序列化？</p>
+</blockquote>
+<ol>
+<li>对象序列化可以实现分布式对象</li>
+</ol>
+<p>应用场景：RMI(远程方法调用)，要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象一样。</p>
+<p>RPC的话应该就要序列化，远程调用还可以用json来传数据。。</p>
+<ol start="2">
+<li>java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据</li>
+</ol>
+<p>这样子就可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递数据。</p>
+<p>此外序列化可以进行对象的“深复制’’,<strong>复制对象本身及引用的对象本身</strong>。序列化一个对象可能得到整个对象序列。</p>
+<p>简而言之序列化作用：</p>
+<p><strong>对象、文件、数据有许多不同的格式，很难统一保存和传输，但是都序列化转成字节流后，就都是同样的形式了，可以使用通用的格式保存或传输。想恢复直接反序列化恢复即可， 这样对象还是对象，文件还是文件。</strong></p>
+<p><strong>当两个JVM（进程）在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。</strong></p>
+<ul>
+<li><code>所有涉及到数据传输或者存储的类，严格意义上来说都要加上序列化ID，这也是一种良好的编程习惯</code>。</li>
+</ul>
+<h5 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h5><p>序列化运行时使用一个称为 serialVersionUID 的版本号与每个可序列化类相关联，该序列号在反序列化过程中用于验证序列化对象的发送者和接收者是否为该对象加载了与序列化兼容的类。为它赋予明确的值。显式地定义serialVersionUID有两种用途：</p>
+<p>在某些场合，希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有相同的serialVersionUID；</p>
+<p>在某些场合，不希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有不同的serialVersionUID。</p>
+<blockquote>
+<p>Tips: 一般人员的密码信息等属性需要标识不被序列化。防止网络传输被窃取，特别是web程序。</p>
+</blockquote>
+<blockquote>
+<p>参考文章：<a href="https://blog.csdn.net/tree_ifconfig/article/details/82766587">https://blog.csdn.net/tree_ifconfig/article/details/82766587</a></p>
+</blockquote>
 ]]></content>
       <categories>
         <category>面试</category>
       </categories>
       <tags>
-        <tag>操作系统</tag>
+        <tag>网络通信</tag>
       </tags>
   </entry>
   <entry>
@@ -2098,58 +2081,6 @@
       </tags>
   </entry>
   <entry>
-    <title>序列化与反序列化</title>
-    <url>/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
-    <content><![CDATA[<p>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</p>
-<blockquote>
-<p>对象流：将对象转换为二进制流byte[]，我们可以对二进制流进行读写操作，流数据也可以在网络中进行传输。</p>
-</blockquote>
-<p>实现方式：</p>
-<ul>
-<li>类实现Serializable接口（标记接口，只是一个单纯的标记而已，说明这个类是可以被序列化的）<strong>（不想序列化的字段可以用transient修饰）</strong></li>
-<li>实现Externalizable接口（是Serializable接口的子类，transient无效）</li>
-<li>我们可以使用一个输出流（<code>FileOutputStream</code>构造一个<code>ObjectOutputStream</code>对象）来承载序列化后的对象，并用<code>ObjectOutputStream</code>对象的<code>writeObject(Object obj)</code>方法可以将obj对象写出（存到磁盘中，保存起来了)，想恢复的话可以使用输入流</li>
-</ul>
-<blockquote>
-<p>虽然实现Externalizable接口能带来一定的性能提升，但由于实现ExternaLizable接口导致了编程复杂度的增加，所以大部分时候都是采用实现Serializable接口方式来实现序列化。</p>
-</blockquote>
-<blockquote>
-<p>什么时候使用序列化？</p>
-</blockquote>
-<ol>
-<li>对象序列化可以实现分布式对象</li>
-</ol>
-<p>应用场景：RMI(远程方法调用)，要利用对象序列化运行远程主机上的服务，就像在本地机上运行对象一样。</p>
-<p>RPC的话应该就要序列化，远程调用还可以用json来传数据。。</p>
-<ol start="2">
-<li>java对象序列化不仅保留一个对象的数据，而且递归保存对象引用的每个对象的数据</li>
-</ol>
-<p>这样子就可以将整个对象层次写入字节流中，可以保存在文件中或在网络连接上传递数据。</p>
-<p>此外序列化可以进行对象的“深复制’’,<strong>复制对象本身及引用的对象本身</strong>。序列化一个对象可能得到整个对象序列。</p>
-<p>简而言之序列化作用：</p>
-<p><strong>对象、文件、数据有许多不同的格式，很难统一保存和传输，但是都序列化转成字节流后，就都是同样的形式了，可以使用通用的格式保存或传输。想恢复直接反序列化恢复即可， 这样对象还是对象，文件还是文件。</strong></p>
-<p><strong>当两个JVM（进程）在进行远程通信时，彼此可以发送各种类型的数据。无论是何种类型的数据，都会以二进制序列的形式在网络上传送。发送方需要把这个Java对象转换为字节序列，才能在网络上传送；接收方则需要把字节序列再恢复为Java对象。</strong></p>
-<ul>
-<li><code>所有涉及到数据传输或者存储的类，严格意义上来说都要加上序列化ID，这也是一种良好的编程习惯</code>。</li>
-</ul>
-<h5 id="serialVersionUID"><a href="#serialVersionUID" class="headerlink" title="serialVersionUID"></a>serialVersionUID</h5><p>序列化运行时使用一个称为 serialVersionUID 的版本号与每个可序列化类相关联，该序列号在反序列化过程中用于验证序列化对象的发送者和接收者是否为该对象加载了与序列化兼容的类。为它赋予明确的值。显式地定义serialVersionUID有两种用途：</p>
-<p>在某些场合，希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有相同的serialVersionUID；</p>
-<p>在某些场合，不希望类的不同版本对序列化兼容，因此需要确保类的不同版本具有不同的serialVersionUID。</p>
-<blockquote>
-<p>Tips: 一般人员的密码信息等属性需要标识不被序列化。防止网络传输被窃取，特别是web程序。</p>
-</blockquote>
-<blockquote>
-<p>参考文章：<a href="https://blog.csdn.net/tree_ifconfig/article/details/82766587">https://blog.csdn.net/tree_ifconfig/article/details/82766587</a></p>
-</blockquote>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>网络通信</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>类加载机制</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
@@ -2165,6 +2096,78 @@
 <h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
 <p>或者就是</p>
 <h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>游标存储结构</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<p>在进行数据库学习的过程中，知识过于零散，导致在工作中往往对于一些相关内容掌握的不牢甚至是完全忘记了。。</p>
+<p>这里就记录一下数据库的两个知识点：游标和存储结构</p>
+<h4 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h4><p>游标其实就是一种能够能够从多条数据记录的结果集中每次提取一条记录的机制。</p>
+<p>可以把游标看做是C中的指针的作用</p>
+<p>举个栗子：</p>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">当前有三张表A、B、C，其中A和B是一对多关系，B和C是一对多关系，现在需要将B中A表的主键存到C中；</span><br><span class="line">常规思路就是将B中查询出来然后通过一个update语句来更新C表就可以了，但是B表中有2000多条数据，</span><br><span class="line">难道要执行2000多次？显然是不现实的；我们最终的处理方式是写一个存储过程然后通过循环来更新C表，存储过程中查询的方法就可以用到游标的方式</span><br></pre></td></tr></tbody></table></figure>
+<p>cursor是数据库中的一种临时对象，它可以用来存放数据库表的数据行副本，游标虽然能够遍历记录中的所有行，但是每次只能指向一行的值。（也就是说游标提供了逐行操作表中数据的方法）</p>
+<p><strong>常用功能：保存查询结果，以便以后使用。</strong></p>
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p>1、允许程序对由查询语句select返回的行集合中的每一行执行相同或不同的操作，而不是对整个行集合执行同一个操作。</p>
+<p>2、提供对基于游标位置的表中的行进行删除和更新的能力。</p>
+<p>3、数据库管理系统实质是面向集合的，SQL SERVER中并没有</p>
+<h5 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h5><p>游标(cursor)必须在声明处理程序之前被声明，并且变量和条件必须在声明游标或处理程序之前被声明。</p>
+<ol>
+<li><p>声明游标：</p>
+<p><code>declare    游标名称    CURSOR    for    table;</code>(table可以是查询出的任何集合)</p>
+</li>
+<li><p>打开游标：</p>
+<p><code>open    游标名称;</code></p>
+</li>
+<li><p>获取下一行数据：</p>
+<p><code>FETCH    游标名称    into    testrangeid,versionid;</code></p>
+</li>
+<li><p>需要执行的操作（看需求）</p>
+</li>
+<li><p>释放游标：</p>
+<p><code>CLOSE    游标名称；</code></p>
+</li>
+</ol>
+<p>举个栗子（sqlserver）：</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">BEGIN</span>  </span><br><span class="line">  </span><br><span class="line"><span class="comment">--定义变量  </span></span><br><span class="line"><span class="keyword">declare</span> testrangeid <span class="type">BIGINT</span>;  </span><br><span class="line"><span class="keyword">declare</span> versionid <span class="type">BIGINT</span>;   </span><br><span class="line"><span class="keyword">declare</span> done <span class="type">int</span>;  </span><br><span class="line"><span class="comment">--创建游标，并存储数据  </span></span><br><span class="line"><span class="keyword">declare</span> cur_test <span class="keyword">CURSOR</span> <span class="keyword">for</span>   </span><br><span class="line">   <span class="keyword">select</span> id <span class="keyword">as</span> testrangeid,version_id <span class="keyword">as</span> versionid <span class="keyword">from</span> tp_testrange;  </span><br><span class="line"><span class="comment">--在MySql中，造成游标溢出时会引发mysql预定义的NOT FOUND错误，所以在上面使用下面的代码指定了当引发not found错误时定义一个continue 的事件，指定这个事件发生时修改done变量的值。</span></span><br><span class="line"> <span class="keyword">DECLARE</span> CONTINUE HANDLER <span class="keyword">FOR</span> <span class="keyword">NOT</span> FOUND <span class="keyword">SET</span> done<span class="operator">=</span><span class="number">1</span>;   </span><br><span class="line"><span class="comment">--打开游标  </span></span><br><span class="line"><span class="keyword">open</span> cur_test;  </span><br><span class="line"><span class="comment">--执行循环  </span></span><br><span class="line">  posLoop:LOOP  </span><br><span class="line"><span class="comment">--当done=1，即没有数据了，就结束循环  </span></span><br><span class="line">        IF done<span class="operator">=</span><span class="number">1</span> <span class="keyword">THEN</span>    </span><br><span class="line">      LEAVE posLoop;  </span><br><span class="line">    <span class="keyword">END</span> IF;   </span><br><span class="line"><span class="comment">--取游标中的值  </span></span><br><span class="line">    <span class="keyword">FETCH</span>  cur_test <span class="keyword">into</span> testrangeid,versionid;  </span><br><span class="line"><span class="comment">--执行更新操作  </span></span><br><span class="line">    <span class="keyword">update</span> tp_data_execute <span class="keyword">set</span> version_id<span class="operator">=</span>versionid <span class="keyword">where</span> testrange_id <span class="operator">=</span> testrangeid;  </span><br><span class="line">  <span class="keyword">END</span> LOOP posLoop;  </span><br><span class="line"><span class="comment">--释放游标  </span></span><br><span class="line"><span class="keyword">CLOSE</span> cur_test;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">END</span>  </span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>栗子2:</p>
+<p>我们现在要用<code>存储过程</code>做一个功能，统计iphone的总库存是多少，并把总数输出到控制台。</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">--在windows系统中写存储过程时，如果需要使用declare声明变量，需要添加这个关键字，否则会报错。  </span></span><br><span class="line">delimiter <span class="operator">/</span><span class="operator">/</span>  </span><br><span class="line"><span class="keyword">drop</span> <span class="keyword">procedure</span> if <span class="keyword">exists</span> StatisticStore;  </span><br><span class="line"><span class="comment">--创建StaticticStore存储过程</span></span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> StatisticStore()  </span><br><span class="line"><span class="keyword">BEGIN</span>  </span><br><span class="line">    <span class="comment">--创建接收游标数据的变量  </span></span><br><span class="line">    <span class="keyword">declare</span> c <span class="type">int</span>;  </span><br><span class="line">    <span class="keyword">declare</span> n <span class="type">varchar</span>(<span class="number">20</span>);  </span><br><span class="line">    <span class="comment">--创建总数变量  </span></span><br><span class="line">    <span class="keyword">declare</span> total <span class="type">int</span> <span class="keyword">default</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="comment">--创建结束标志变量  </span></span><br><span class="line">    <span class="keyword">declare</span> done <span class="type">int</span> <span class="keyword">default</span> <span class="literal">false</span>;  </span><br><span class="line">    <span class="comment">--创建游标  </span></span><br><span class="line">    <span class="keyword">declare</span> cur <span class="keyword">cursor</span> <span class="keyword">for</span> <span class="keyword">select</span> name,count <span class="keyword">from</span> store <span class="keyword">where</span> name <span class="operator">=</span> <span class="string">'iphone'</span>;  </span><br><span class="line">    <span class="comment">--指定游标循环结束时的返回值  </span></span><br><span class="line">    <span class="keyword">declare</span> continue HANDLER <span class="keyword">for</span> <span class="keyword">not</span> found <span class="keyword">set</span> done <span class="operator">=</span> <span class="literal">true</span>;  </span><br><span class="line">    <span class="comment">--设置初始值  </span></span><br><span class="line">    <span class="keyword">set</span> total <span class="operator">=</span> <span class="number">0</span>;  </span><br><span class="line">    <span class="comment">--打开游标  </span></span><br><span class="line">    <span class="keyword">open</span> cur;  </span><br><span class="line">    <span class="comment">--开始循环游标里的数据，循环名字随便取</span></span><br><span class="line">    read_loop:loop  </span><br><span class="line">    <span class="comment">--根据游标当前指向的一条数据  </span></span><br><span class="line">    <span class="keyword">fetch</span> cur <span class="keyword">into</span> n,c;  </span><br><span class="line">    <span class="comment">--判断游标的循环是否结束  </span></span><br><span class="line">    if done <span class="keyword">then</span>  </span><br><span class="line">        leave read_loop;    <span class="comment">--跳出游标循环  </span></span><br><span class="line">    <span class="keyword">end</span> if;  </span><br><span class="line">    <span class="comment">--获取一条数据时，将count值进行累加操作，这里可以做任意你想做的操作，  </span></span><br><span class="line">    <span class="keyword">set</span> total <span class="operator">=</span> total <span class="operator">+</span> c;  </span><br><span class="line">    <span class="comment">--结束游标循环  </span></span><br><span class="line">    <span class="keyword">end</span> loop;  </span><br><span class="line">    <span class="comment">--关闭游标  </span></span><br><span class="line">    <span class="keyword">close</span> cur;  </span><br><span class="line">  </span><br><span class="line">    <span class="comment">--输出结果  </span></span><br><span class="line">    <span class="keyword">select</span> total;  </span><br><span class="line"><span class="keyword">END</span>;  </span><br><span class="line"><span class="comment">--调用存储过程  </span></span><br><span class="line"><span class="keyword">call</span> StatisticStore();  </span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>有三种方式遍历游标，上述方式为loop遍历方式，其余两种为while和repeat遍历方式</p>
+<p>详情可以参照<a href="https://www.cnblogs.com/loong-hon/p/11003189.html">https://www.cnblogs.com/loong-hon/p/11003189.html</a></p>
+</blockquote>
+<h4 id="数据库存储结构"><a href="#数据库存储结构" class="headerlink" title="数据库存储结构"></a>数据库存储结构</h4><blockquote>
+<p>数据库中数据虽然是按照行进行存储的，但是数据库的对信息的读取都是以页为单位的，会将这些行所在的页进行加载。（8K？）</p>
+</blockquote>
+<p>数据库的存储结构：</p>
+<img src="https://img-blog.csdnimg.cn/2020102422482697.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdtaW5nNTIwbGl3ZWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" style="zoom:80%;">
+
+<ul>
+<li>段（segment）：不同的数据库对象以不同的段形式存在。比如建表的时候，会自动创建表段，创建表索引的时候，会创建一个索引段。</li>
+<li>区（Extent）：<strong>区在文件系统中是连续的分片空间</strong>，一个区有64个页，因为<strong>InnoDB中的页大小为16K</strong>，所以一个区的大小为1MB<code>（SQLSERVER中一个区64K，一个页8K，一个区有8个页）</code></li>
+<li>页（Page)：与数据库相关的内容会在页结构中</li>
+</ul>
+<p>页基本结构：</p>
+<img src="https://img-blog.csdnimg.cn/20201024224810837.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhbmdtaW5nNTIwbGl3ZWk=,size_16,color_FFFFFF,t_70#pic_center" alt="在这里插入图片描述" style="zoom:67%;">
+
+<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/Users\86137\Desktop\JAVA面试\java面试文件存储\MySQL\页存储结构.png"></p>
+<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/Users\86137\Desktop\JAVA面试\java面试文件存储\MySQL\innoDB页结构存储结构.png"></p>
+<p>页存储结构的功能主要分三部分：一：头尾构成的”集装箱”对整体信息的封装；二：索引结构，主要是页目录；三：记录结构，主要是行记录的内容部分。</p>
+<blockquote>
+<p>文章详情见：<a href="https://blog.csdn.net/wangming520liwei/article/details/109267563">https://blog.csdn.net/wangming520liwei/article/details/109267563</a></p>
+</blockquote>
+<h4 id="数据库存储过程"><a href="#数据库存储过程" class="headerlink" title="数据库存储过程"></a>数据库存储过程</h4><p>举个栗子（sqlserver）</p>
+<figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">--创建存储过程，名称为PROC_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">PROCEDURE</span> [dbo].[PROC_GANTRYRUNSTATUS](</span><br><span class="line"><span class="variable">@batchno</span> <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="variable">@batchtype</span> <span class="type">varchar</span>(<span class="number">20</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="comment">--声明的全局变量</span></span><br><span class="line">  <span class="keyword">DECLARE</span> </span><br><span class="line">    <span class="variable">@v</span>_procname <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    <span class="variable">@v</span>_sql     NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_sql1    NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_starttime DATETIME,</span><br><span class="line">    <span class="variable">@v</span>_batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    <span class="variable">@v</span>_srctab  <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--源表名</span></span><br><span class="line">    <span class="variable">@v</span>_desttab <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--目标表名</span></span><br><span class="line">    <span class="variable">@v</span>_tabdate <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	<span class="variable">@v</span>_jobdate DATETIME,            <span class="comment">--jobdate</span></span><br><span class="line">	<span class="variable">@v</span>_startdate DATETIME,		<span class="comment">--数据开始时间</span></span><br><span class="line">	<span class="variable">@v</span>_enddate DATETIME,			<span class="comment">--数据结束时间</span></span><br><span class="line">	<span class="variable">@v</span>_rownum <span class="type">VARCHAR</span>(<span class="number">10</span>);				<span class="comment">--记录影响行数</span></span><br><span class="line">    	</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_starttime<span class="operator">=</span>GETDATE();</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_procname<span class="operator">=</span><span class="string">'PROC_GANTRYRUNSTATUS'</span>;</span><br><span class="line">	<span class="comment">--cast()转类型（转成datetime），该stuff()表示从第九个字符位置删掉0个字符，并添加一个空格</span></span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_jobdate <span class="operator">=</span> <span class="built_in">cast</span>(stuff(stuff(<span class="variable">@batchno</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="string">' '</span>),<span class="number">12</span>,<span class="number">0</span>,<span class="string">':'</span>) <span class="keyword">as</span> datetime) ;</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_startdate <span class="operator">=</span> <span class="variable">@v</span>_jobdate;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--如果为空直接返回</span></span><br><span class="line">	IF  <span class="variable">@batchtype</span> <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">OR</span> <span class="variable">@batchno</span> <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">	   <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">END</span></span><br><span class="line">    <span class="comment">--SET Data range.</span></span><br><span class="line">	IF <span class="variable">@batchtype</span> <span class="operator">=</span> <span class="string">'Y'</span> </span><br><span class="line">	  <span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">year</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	  <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'M'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">MONTH</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'D'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">day</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'H'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(hh,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'10m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">10</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'5m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">5</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">   <span class="comment">--开启事务</span></span><br><span class="line">   <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">   		<span class="comment">--记录日志</span></span><br><span class="line">	  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程开始'</span>);</span><br><span class="line">   <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--判断临时表是否存在</span></span><br><span class="line">  IF OBJECT_ID(<span class="string">'tempdb.dbo.#TMP_STA_GANTRYRUNSTATUS'</span>) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="comment">--如果不存在，初始化临时表（字段来自源表）</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #TMP_STA_MR_AIRCONDITIONERS(batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">										tabdate <span class="type">varchar</span>(<span class="number">20</span>),[GANTRYID] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[SECTIONID] <span class="type">varchar</span>(<span class="number">11</span>),[<span class="type">TIMESTAMP</span>] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[VERSION] datetime,[ID] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[STATUS] <span class="type">varchar</span>(<span class="number">20</span>),[ERRORMSG] <span class="type">varchar</span>(<span class="number">200</span>),</span><br><span class="line">										[ISWORKING] <span class="type">varchar</span>(<span class="number">20</span>),[WORKMODE] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[SYSTEMWARNING] <span class="type">varchar</span>(<span class="number">20</span>),[TEMPERATUREWARNING] <span class="type">varchar</span>(<span class="number">20</span>));</span><br><span class="line">	<span class="keyword">END</span>;</span><br><span class="line">	<span class="comment">--源头表+日期截串（时间分表）</span></span><br><span class="line">  <span class="keyword">SET</span> <span class="variable">@v</span>_srctab<span class="operator">=</span><span class="string">'STG_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="built_in">SUBSTRING</span>(<span class="variable">@batchno</span>,<span class="number">1</span>,<span class="number">8</span>);</span><br><span class="line">	<span class="comment">--给临时表填数据;quotename()相当于给表加个[]</span></span><br><span class="line">  <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into #TMP_STA_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="string">                   select @batchno batchno,datepart(yy,version) tabdate,</span></span><br><span class="line"><span class="string">				   GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,</span></span><br><span class="line"><span class="string">					 ISWORKING,WORKMODE,SYSTEMWARNING,TEMPERATUREWARNING			</span></span><br><span class="line"><span class="string">                 from  '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_srctab) <span class="operator">+</span><span class="string">' where VERSION &gt;=@v_startdate and VERSION &lt; @v_enddate;'</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">--执行sql，并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> TRY</span><br><span class="line">    <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">      <span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20),@v_startdate DATETIME,@v_enddate DATETIME'</span>,<span class="variable">@batchno</span>,<span class="variable">@v</span>_startdate,<span class="variable">@v</span>_enddate;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span></span><br><span class="line">      <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	        <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到临时表#TMP_STA_GANTRYRUNSTATUS,记录数：'</span><span class="operator">+</span> <span class="variable">@v</span>_rownum );</span><br><span class="line">    <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span> TRY</span><br><span class="line">  <span class="comment">--执行sql异常，catch并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">		<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">			<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入临时表异常：'</span><span class="operator">+</span>error_message());   </span><br><span class="line">		<span class="keyword">COMMIT</span> TRAN		</span><br><span class="line">		RAISERROR(<span class="string">'插入临时表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">		IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">END</span> CATCH	</span><br><span class="line">	</span><br><span class="line">    <span class="comment">--定义游标</span></span><br><span class="line">  <span class="keyword">DECLARE</span> v_cur <span class="keyword">CURSOR</span> <span class="keyword">LOCAL</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> tabdate <span class="keyword">FROM</span> #TMP_STA_GANTRYRUNSTATUS <span class="keyword">GROUP</span> <span class="keyword">BY</span> tabdate;</span><br><span class="line">  <span class="comment">--开启游标，将tabdata insert到@v_tabdate中</span></span><br><span class="line">  <span class="keyword">OPEN</span> v_cur;</span><br><span class="line">    <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">    WHILE @<span class="variable">@FETCH</span>_STATUS<span class="operator">=</span><span class="number">0</span></span><br><span class="line">      <span class="keyword">BEGIN</span></span><br><span class="line">      <span class="comment">--目标表</span></span><br><span class="line">         <span class="keyword">SET</span> <span class="variable">@v</span>_desttab<span class="operator">=</span><span class="string">'STA_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="variable">@v</span>_tabdate;</span><br><span class="line">	     <span class="keyword">BEGIN</span> TRY</span><br><span class="line">		   <span class="keyword">BEGIN</span> TRAN	</span><br><span class="line">		    <span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' where batchno=@batchno'</span>;</span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="comment">--定义插入sql</span></span><br><span class="line">            <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">            <span class="comment">--执行插入sql，从临时表插入到目标表中</span></span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span>;</span><br><span class="line">			<span class="comment">--记录日志</span></span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">				  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到正式表：'</span><span class="operator">+</span><span class="variable">@v</span>_desttab<span class="operator">+</span><span class="string">',影响行数:'</span><span class="operator">+</span><span class="variable">@v</span>_rownum);</span><br><span class="line">            <span class="keyword">COMMIT</span> TRAN		  </span><br><span class="line">	     <span class="keyword">END</span> TRY</span><br><span class="line">	     <span class="comment">--catch异常，记录日志</span></span><br><span class="line">	     <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">			<span class="keyword">BEGIN</span></span><br><span class="line">			  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN				</span><br><span class="line">				  <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">					  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					      <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入日表异常：'</span><span class="operator">+</span>error_message());</span><br><span class="line">				  <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="comment">--添加目标表若不存在则进err表，存在则异常退出。			  </span></span><br><span class="line">				  IF OBJECT_ID(<span class="variable">@v</span>_desttab) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">				  <span class="keyword">BEGIN</span></span><br><span class="line">					 <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			  			<span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM STA_GANTRY_RUNSTATUS_ERR where batchno=@batchno'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line"></span><br><span class="line">						<span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into STA_GANTRY_RUNSTATUS_ERR (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">					 <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="keyword">END</span>				</span><br><span class="line">			  <span class="keyword">ELSE</span></span><br><span class="line">				 <span class="keyword">BEGIN</span></span><br><span class="line">					RAISERROR(<span class="string">'插入数据表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">					IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">	      <span class="keyword">END</span> CATCH;				</span><br><span class="line">        <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">	  <span class="keyword">END</span>;</span><br><span class="line">      </span><br><span class="line">  <span class="keyword">CLOSE</span> v_cur;</span><br><span class="line">  <span class="keyword">DEALLOCATE</span> v_cur;</span><br><span class="line">  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">BEGIN</span></span><br><span class="line">			<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">				 <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程结束'</span>);</span><br><span class="line">			<span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span>;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
       <categories>
         <category>面试</category>
       </categories>
@@ -2622,74 +2625,6 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>钩子函数</title>
-    <url>/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/</url>
-    <content><![CDATA[<h3 id="钩子线程"><a href="#钩子线程" class="headerlink" title="钩子线程"></a>钩子线程</h3><blockquote>
-<p>参考文章：<a href="https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0">https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0</a></p>
-</blockquote>
-<p>钩子线程一般在并发编程中会使用</p>
-<p>当JVM进程中<strong>没有活跃的非守护进程时</strong>（程序执行完了），或者<strong>受到系统的中断信号，JVM进程便会退出</strong>，而在<strong>JVM进程退出前，hook线程就会启动</strong>做系统最后的一些辅助性的工作。</p>
-<blockquote>
-<p><strong>hook线程使用场景：</strong></p>
-<p>在线上Java程序中经常会遇到进程挂掉，一些状态没有被正确的保存下来，这种情况就需要在JVM关掉时执行一些清理现场的代码。</p>
-<p>Java的ShutdownHook就是一种比较好的解决方案</p>
-<p><strong>调用场景：</strong></p>
-<ol>
-<li>程序正常退出</li>
-<li>使用System.exit()</li>
-<li>终端使用Ctrl + C触发中断</li>
-<li>系统关闭</li>
-<li>使用Kill pid命令干掉进程</li>
-</ol>
-<p><strong>Tips： kill -9 pid命令不会调用JVM注册的钩子</strong>，因为Hook线程只有正确接收到退出信号时，才能被正确执行，而kill -9是强制杀死进程。</p>
-<p><strong>不要在Hook线程中执行一些耗时的操作，这样会导致程序长时间不能退出</strong></p>
-</blockquote>
-<p>例子1：</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Description</span> 使用Timer模拟一个工作线程，该线程重复执行10次，使用</span></span><br><span class="line"><span class="comment"> *System.exit()退出，在钩子函数中取消timer运行，并输出日志</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestHookThread</span></span>{</span><br><span class="line">    <span class="comment">//默认任务</span></span><br><span class="line">    <span class="keyword">static</span> Timer timer = <span class="keyword">new</span> Timer(<span class="string">"job-timer"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计数干活次数</span></span><br><span class="line">    <span class="keyword">static</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//hook线程</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CleanWorkThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>{</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            System.out.println(<span class="string">"clean some work."</span>);</span><br><span class="line">            timer.cancel();</span><br><span class="line">            <span class="keyword">try</span>{</span><br><span class="line">                Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>{</span><br><span class="line">        <span class="comment">//将hook线程添加到运行时环境中去</span></span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> CleanWorkThread());</span><br><span class="line">        System.out.println(<span class="string">"main class start ......"</span>);</span><br><span class="line">        <span class="comment">//简单模拟</span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTask(){</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            count.getAndIncrement();</span><br><span class="line">            System.out.println(<span class="string">"doing job "</span>+ count);</span><br><span class="line">            <span class="keyword">if</span>(count.get() == <span class="number">10</span>){	<span class="comment">//工作了10次退出</span></span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        }, <span class="number">0</span>, <span class="number">2000</span>};</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>当发生了System.exit(int)时，希望在系统退出前，执行一点任务来做一些资源方面的回收操作，ShutdownHook可以达到这个目的。</p>
-<p>例子2：如果系统通过<code>Runtime.getRuntime().exec()</code>或<code>new ProcessBuilder()</code> 启动了子进程（Process），该子进程一直在运行，可能就算当前进程退出，子进程也未必退出，但是在业务上需要它子进程结束，就可以使用钩子进程</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//可以这样写</span></span><br><span class="line">Runtime.getRuntime().addShutdownHook(){</span><br><span class="line">    <span class="keyword">new</span> Thread(){</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            processr.destroy();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<blockquote>
-<p>Q: 钩子函数中的Thread好像都没有start()启动啊？</p>
-<p>A: 传入参数是通过new Thread()创建的线程对象，<strong>在Java进程调用exit()时，会调用该线程对象的start()方法将其运行起来</strong>，所以不要手工先启动了。</p>
-</blockquote>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>源码中有个ApplicationShutdownHooks类，该类用于跟踪和运行在用户层面注的钩子函数</p>
-<p><img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002449448.png" alt="image-20210614002449448"></p>
-<ul>
-<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数<img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002833040.png" alt="image-20210614002833040"></p>
-</li>
-<li><p>该类的内部还维护了一个<code>IdentityHashMap</code>，用于存放hook信息，可以通过add()方法来添加，程序中定义的回调线程都放在这里了。</p>
-</li>
-<li><p>当调用<code>Runnable.getRunnable().addShutdownHook(Thread)</code>时，会间接调用<code>ApplicationShutdownHooks.add(Thread)</code>将线程放到IdentityHashMap中。</p>
-</li>
-<li><p>当调用<code>System.exit(int)</code>方法时，会间接调用<code>Shutdown.exit(int)</code>方法，再调用<code>sequence()-&gt;runHooks()</code>方法</p>
-</li>
-<li><p>循环中的一个hook对象就是由ApplicationShutdownHooks的匿名块定义的，因此会调用ApplicationShutdownHooks类的run()方法，再调用它的runHooks()方法，runHooks()如图所示：</p>
-</li>
-</ul>
-<p><img src="/2021/06/12/%E9%9D%A2%E8%AF%95/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614003624735.png" alt="image-20210614003624735"></p>
-<p>从该方法中取出所有的thread，然后启动所有线程，最后通过join()方法等待各个线程结束动作。看源码发现每个hook都有一个线程处理，所以是并发的，不<strong>是串行执行的</strong></p>
-<ul>
-<li><code>Runtime.getRuntime().removeShutdownHook</code>用于删除一个钩子线程。</li>
-</ul>
-<h4 id="Hook线程的应用场景-amp-注意事项"><a href="#Hook线程的应用场景-amp-注意事项" class="headerlink" title="Hook线程的应用场景&amp;注意事项"></a>Hook线程的应用场景&amp;注意事项</h4><h5 id="防止程序重复执行"><a href="#防止程序重复执行" class="headerlink" title="防止程序重复执行"></a>防止程序重复执行</h5><blockquote>
-<p>Tips：这种防止程序重复执行的策略，也被应用于Mysql服务器，zookeeper，kafka等系统中。</p>
-<p>此外，Hook线程也可以执行一些<strong>资源释放</strong>的操作，如关闭数据库连接，Socket连接等。</p>
-</blockquote>
-<p>具体实现可以在程序启动时，校验是否已经生成 lock 文件，如果已经生成，则退出程序，如果未生成，则生成 lock 文件，程序正常执行，最后再注入 Hook 线程，这样在 JVM 退出的时候，线程中再将 lock 文件删除掉；</p>
-<p><img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155490317738185" alt="流程图"></p>
-]]></content>
-      <categories>
-        <category>面试</category>
-        <category>并发知识</category>
-      </categories>
-      <tags>
-        <tag>多线程</tag>
       </tags>
   </entry>
   <entry>
@@ -3949,7 +3884,7 @@
   </entry>
   <entry>
     <title>计网基础知识概括</title>
-    <url>/2021/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
+    <url>/2021/05/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h2><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/0fa6c237-a909-4e2a-a771-2c5485cd8ce0.png" alt="img" style="zoom:80%;">
 
 <ul>
@@ -4295,7 +4230,7 @@
   </entry>
   <entry>
     <title>计网基础知识概括</title>
-    <url>/2021/05/28/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
+    <url>/2021/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/</url>
     <content><![CDATA[<h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h2><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/0fa6c237-a909-4e2a-a771-2c5485cd8ce0.png" alt="img" style="zoom:80%;">
 
 <ul>

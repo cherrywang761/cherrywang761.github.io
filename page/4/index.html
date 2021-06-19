@@ -190,156 +190,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">常见算法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-11 21:07:11" itemprop="dateModified" datetime="2021-05-11T21:07:11+08:00">2021-05-11</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/" class="post-meta-item leancloud_visitors" data-flag-title="常见算法" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.5k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="冒泡"><a href="#冒泡" class="headerlink" title="冒泡"></a>冒泡</h3><p>原理：相邻两两元素进行比较，不断重复</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] bubbleSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="comment">//非空检测</span></span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>) <span class="keyword">return</span> array;</span><br><span class="line">    <span class="comment">//冒泡是稳定的，所以O（n^2）,两轮for循环</span></span><br><span class="line">    <span class="keyword">int</span> n = array.length;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; i &lt; n - <span class="number">1</span> - i; i++){</span><br><span class="line">            <span class="keyword">if</span>(array[j] &gt; array[j+<span class="number">1</span>]){</span><br><span class="line">                <span class="keyword">int</span> temp = array[j];</span><br><span class="line">                array[j] = array[j+<span class="number">1</span>];</span><br><span class="line">                array[j+<span class="number">1</span>] = temp;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>最佳：O(n)：传的刚好是有序数组，一轮过去啥都没换</p>
-<p>最差: O(n^2)</p>
-<p>平均：O（n^2）</p>
-<h3 id="选排"><a href="#选排" class="headerlink" title="选排"></a>选排</h3><p>原理：先选在排，和开头或结尾的数据位置对换</p>
-<p>先找出最小(最大)，放到有序数组的开头(结尾)</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] SelectionSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++){</span><br><span class="line">        <span class="comment">//定义一个最小的target</span></span><br><span class="line">        <span class="keyword">int</span> min_target = i;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; array.length; j++){</span><br><span class="line">            <span class="keyword">if</span>(array[min_target] &gt; array[j]){</span><br><span class="line">                min_target = j;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">int</span> temp = array[min_target];</span><br><span class="line">        array[min_target] = array[i];</span><br><span class="line">        array[i] = temp; </span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>稳定：都是O(n^2)</p>
-<h3 id="插入排序"><a href="#插入排序" class="headerlink" title="插入排序"></a>插入排序</h3><p>原理：取头数，作为有序数组第一位，然后后面插入从后往前</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] InsertSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="comment">//当前元素</span></span><br><span class="line">    <span class="keyword">int</span> current;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; array.length; i++){</span><br><span class="line">        <span class="comment">//从第二位开始了，第一位默认为开头,</span></span><br><span class="line">        <span class="comment">//把array[i+1]的值存起来了</span></span><br><span class="line">        current = array[i + <span class="number">1</span>];</span><br><span class="line">        <span class="comment">//已排元素的下标</span></span><br><span class="line">        <span class="keyword">int</span> preIndex = i;</span><br><span class="line">        <span class="keyword">while</span>(array[preIndex] &gt; current &amp;&amp; preIndex &gt;= <span class="number">0</span>){</span><br><span class="line">            array[preIndex + <span class="number">1</span>] = array[preIndex];</span><br><span class="line">            preIndex--;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//当碰到一个比我还小的数，那我就排在它后面</span></span><br><span class="line">        array[preIndex + <span class="number">1</span>] = current;</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>最佳O（n）</p>
-<p>最差O（n^2）</p>
-<p>平均O（n^2）</p>
-<h2 id="Shell-Sort"><a href="#Shell-Sort" class="headerlink" title="Shell Sort"></a>Shell Sort</h2><p>原理:改进版的插入排序，引入gap元素</p>
-<p>gap = length / 2;</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] ShellSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">int</span> len = array.length;</span><br><span class="line">    <span class="keyword">if</span>(len == <span class="number">0</span>)<span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">int</span> temp, gap = len/<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">while</span>(gap &gt; <span class="number">0</span>){</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = gap; i &lt; len; i++){</span><br><span class="line">            <span class="comment">//后面的元素</span></span><br><span class="line">            temp = array[i];</span><br><span class="line">            <span class="comment">//前面的元素</span></span><br><span class="line">            <span class="keyword">int</span> preIndex = i - gap;</span><br><span class="line">            <span class="keyword">while</span>(array[preIndex] &gt; temp] &amp;&amp; preIndex &gt;= <span class="number">0</span>){</span><br><span class="line">                array[preIndex + gap] = array[preIndex];</span><br><span class="line">                preIndex -= gap;</span><br><span class="line">            }</span><br><span class="line">            array[preIndex + gap] = temp;</span><br><span class="line">        }</span><br><span class="line">        gap /= <span class="number">2</span>; </span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>O(log n ^2)</p>
-<h3 id="归并排序-稳定"><a href="#归并排序-稳定" class="headerlink" title="归并排序(稳定)"></a>归并排序(稳定)</h3><p>原理：分组排序的算法，感觉主要就是一种<strong>思想</strong>（分治法）</p>
-<p>你把大数组分成小数组，小数组用的其他算法进行排序，最后再合并成一个大数组</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] MergeSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">if</span>(array.length &lt; <span class="number">2</span>) <span class="keyword">return</span> array;</span><br><span class="line">    <span class="keyword">int</span> mid = array.length / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">int</span>[] left = Arrays.copyOfRange(array, <span class="number">0</span>, mid);</span><br><span class="line">    <span class="keyword">int</span>[] right = Arrays.copyOfRange(array, mid, array.length);</span><br><span class="line">	<span class="keyword">return</span> merge(MergeSort(left), MergeSort(right));</span><br><span class="line">}</span><br><span class="line"><span class="comment">//对两个有序数组进行合并</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] merge(<span class="keyword">int</span>[] left, <span class="keyword">int</span>[] right){</span><br><span class="line">    <span class="keyword">int</span>[] result = <span class="keyword">new</span> <span class="keyword">int</span>[left.length + right.length];</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> index = <span class="number">0</span>, i = <span class="number">0</span>, j = <span class="number">0</span>; index &lt; result.length; index++){</span><br><span class="line">        <span class="keyword">if</span>(i &gt; left.length){</span><br><span class="line">            result[index] = right[j++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(j &gt; right.length){</span><br><span class="line">            result[index] = left[i++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(left[i] &gt; right[j]){</span><br><span class="line">            result[index] = right[j++];</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">else</span> {</span><br><span class="line">            result[index] = left[i++];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>最佳O(N)</p>
-<p><strong>最差O（NlogN）</strong></p>
-<h3 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h3><p>原理：（递归）</p>
-<ol>
-<li><p>从数列中挑一个元素作为“基准”（pivot）</p>
-</li>
-<li><p>一般的就是把pivot作为temp，维护两个指针</p>
-<p>然后，前面找小于pivot的数，后面找大于pivot的数，进行交换</p>
-<p><img src="https://img-blog.csdn.net/20150810105908580" alt="这里写图片描述"></p>
-</li>
-</ol>
-<p>3.重复递归</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">* 快排的具体实现方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//这个方法只维护了一个指针</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>{</span><br><span class="line">    <span class="comment">//从start-end中随机找一个基准数，也是一道面试题</span></span><br><span class="line">    <span class="comment">//如何从start-&gt;end中随机找一个数</span></span><br><span class="line">    <span class="keyword">int</span> pivot = (<span class="keyword">int</span>)(Math.random()*(end-start+<span class="number">1</span>)+start);</span><br><span class="line">    <span class="comment">//维护的唯一指针，作用是用来分割pivot左右的数的</span></span><br><span class="line">        <span class="comment">//[0,smallIndex]的是&lt;= pivot; [smallIndex+1, end]的是 &gt;= pivot</span></span><br><span class="line">    <span class="keyword">int</span> smallIndex = start - <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//把pivot移到end处，方便遍历</span></span><br><span class="line">    swap(array, pivot, end);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt;= end; i++){</span><br><span class="line">        <span class="keyword">if</span>(array[i] &lt;= array[end]){</span><br><span class="line">        <span class="comment">//小于无事发生</span></span><br><span class="line">         	smallIndex++;</span><br><span class="line">            <span class="comment">//碰到了大于的数了，开始处理</span></span><br><span class="line">            <span class="comment">//不好的地方就是，一旦出现第一个大于pivot的数，这个if就要一直处理</span></span><br><span class="line">            <span class="keyword">if</span>(i &gt; smallIndex){</span><br><span class="line">                swap(array, i , smallIndex);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//其实这就是pivot的位置，感觉很巧妙</span></span><br><span class="line">    <span class="keyword">return</span> smallIndex;   </span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*	交换方法</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">swap</span> <span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> start, <span class="keyword">int</span> end)</span></span>{</span><br><span class="line">    <span class="keyword">int</span> temp = array[start];</span><br><span class="line">    array[start] = array[end];</span><br><span class="line">    array[end] = temp;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">*	QuickSort</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="comment">//默认start = 0 ,end = array.length,如果有要求具体位置的快排的话也可以</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] QuickSort(<span class="keyword">int</span>[] array<span class="comment">/*, int start, int end*/</span>){</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> start = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> end = array.length;</span><br><span class="line">    <span class="keyword">if</span>(array.length &lt; <span class="number">1</span> || start &lt; <span class="number">0</span> || end &gt;= array.length || start &gt; end){</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">//分割点，求出来的，通过快排方法</span></span><br><span class="line">    <span class="keyword">int</span> smallIndex = partition(array, start, end);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//递归</span></span><br><span class="line">    <span class="keyword">if</span>(smallIndex &lt; end)</span><br><span class="line">        QuickSort(array, smallIndex+<span class="number">1</span>, end);</span><br><span class="line">    <span class="keyword">if</span>(smallIndex &gt; start)</span><br><span class="line">        QuickSort(array, start, smallIndex);</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p>最佳：O（nlogn）</p>
-<p>最差：O（n^2）</p>
-<p>平均：O（nlogn）</p>
-<h3 id="堆排序"><a href="#堆排序" class="headerlink" title="堆排序"></a>堆排序</h3><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/%E9%BB%98%E5%86%99%E5%B8%B8%E8%A7%81%E7%AE%97%E6%B3%95/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201128143005449.png" alt="image-20201128143005449" style="zoom:80%;">
-
-<p>原理：</p>
-<ol>
-<li>先把无序数组构建成大堆顶（此时序列的最大值就是堆顶的根节点）</li>
-<li>将根节点和末尾元素交换，则末尾元素成最大值</li>
-<li>将剩余的n-1元素重构成一个新的大堆顶，并重复上面的过程</li>
-</ol>
-<p><strong>一般升序用大堆顶，降序用小堆顶</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//堆排序主函数</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span>[] HeapSort(<span class="keyword">int</span>[] array){</span><br><span class="line">    <span class="keyword">int</span> len = array.length;</span><br><span class="line">    <span class="keyword">if</span>(len &lt; <span class="number">1</span>)<span class="keyword">return</span> array;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//1.构建一个最大堆</span></span><br><span class="line">    buildMaxHeap(array);</span><br><span class="line">    </span><br><span class="line">    </span><br><span class="line">    <span class="comment">//2.循环堆首位，调整最大值</span></span><br><span class="line">    <span class="keyword">while</span>(len &gt; <span class="number">0</span>){</span><br><span class="line">        swap(array, <span class="number">0</span> ,len - <span class="number">1</span>);</span><br><span class="line">        len--;</span><br><span class="line">        adjustHeap(array, <span class="number">0</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> array;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//建立最大堆的方法</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">buildMaxHeap</span><span class="params">(<span class="keyword">int</span>[] array)</span></span>{</span><br><span class="line">    <span class="comment">//从最后一个非叶子节点开始向上构建最大堆</span></span><br><span class="line">    <span class="comment">//for循环</span></span><br><span class="line">    <span class="comment">//这里的i传的是最深的根节点的位置序列值</span></span><br><span class="line">    <span class="comment">//比如上图中的数组长度为8，最深的根节点就是8/2-1=3</span></span><br><span class="line">    <span class="comment">//在平衡二叉树中，0-3全都是根节点</span></span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = (len/<span class="number">2</span>-<span class="number">1</span>); i &gt;= <span class="number">0</span>; i--){</span><br><span class="line">        adjustHeap(array, i);</span><br><span class="line">    }</span><br><span class="line">} </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//调整最大值的方法</span></span><br><span class="line"><span class="comment">//传的i是最深的根节点！</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span>[] array, <span class="keyword">int</span> i )</span></span>{</span><br><span class="line">    <span class="comment">//先声明一个最大指针</span></span><br><span class="line">    <span class="keyword">int</span> maxIndex = i;</span><br><span class="line">    <span class="comment">//对于左节点，如果左子树大于父节点，那么就将最大指针指向左子树</span></span><br><span class="line">    <span class="keyword">if</span>(i * <span class="number">2</span> &lt; len &amp;&amp; array[i*<span class="number">2</span>] &gt; array[maxIndex])</span><br><span class="line">        maxIndex = i*<span class="number">2</span> ;</span><br><span class="line">    <span class="comment">//对于右节点，如果右子树大于父节点，那么就将最大指针指向右子树</span></span><br><span class="line">    <span class="keyword">if</span>(i * <span class="number">2</span> + <span class="number">1</span> &lt; len &amp;&amp; array[i*<span class="number">2</span> + <span class="number">1</span>] &gt; array[maxIndex])</span><br><span class="line">        maxIndex = i*<span class="number">2</span> + <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">if</span>(maxIndex != i){</span><br><span class="line">        swap(array,maxIndex,i);</span><br><span class="line">        adjustHeap(array,maxIndex);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//找了个看得懂的版本，我人晕了</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">HeapSort</span><span class="params">(<span class="keyword">int</span> []arr)</span></span>{</span><br><span class="line">        <span class="comment">//1.构建大顶堆</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=arr.length/<span class="number">2</span>-<span class="number">1</span>;i&gt;=<span class="number">0</span>;i--){</span><br><span class="line">            <span class="comment">//从第一个非叶子结点从下至上，从右至左调整结构</span></span><br><span class="line">            adjustHeap(arr,i,arr.length);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//2.调整堆结构+交换堆顶元素与末尾元素</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j=arr.length-<span class="number">1</span>;j&gt;<span class="number">0</span>;j--){</span><br><span class="line">            swap(arr,<span class="number">0</span>,j);<span class="comment">//将堆顶元素与末尾元素进行交换</span></span><br><span class="line">            adjustHeap(arr,<span class="number">0</span>,j);<span class="comment">//重新对堆进行调整</span></span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 调整大顶堆（仅是调整过程，建立在大顶堆已构建的基础上）</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> i</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> length</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">adjustHeap</span><span class="params">(<span class="keyword">int</span> []arr,<span class="keyword">int</span> i,<span class="keyword">int</span> length)</span></span>{</span><br><span class="line">        <span class="comment">//i是第一个非叶子节点</span></span><br><span class="line">        <span class="keyword">int</span> temp = arr[i];</span><br><span class="line">        <span class="comment">//从i结点的左子结点开始，也就是2i+1处开始</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> j = i*<span class="number">2</span> + <span class="number">1</span>; j &lt; length; j = j*<span class="number">2</span> + <span class="number">1</span>){</span><br><span class="line">            <span class="comment">//如果左子结点小于右子结点，k指向右子结点</span></span><br><span class="line">        <span class="keyword">if</span>(j+<span class="number">1</span> &lt;length &amp;&amp; arr[j] &lt; arr[j+<span class="number">1</span>]){</span><br><span class="line">                j++;</span><br><span class="line">            }</span><br><span class="line">            <span class="comment">//如果子节点大于父节点，将子节点值赋给父节点（不用进行交换）</span></span><br><span class="line">        <span class="keyword">if</span>(arr[j] &gt;temp){</span><br><span class="line">            arr[i] = arr[j];</span><br><span class="line">            i = j;</span><br><span class="line">        }<span class="keyword">else</span>{</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        }</span><br><span class="line">        arr[i] = temp;<span class="comment">//将temp值放到最终的位置</span></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 交换元素</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> arr</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> a</span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> b</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> []arr,<span class="keyword">int</span> a ,<span class="keyword">int</span> b)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> temp=arr[a];</span><br><span class="line">        arr[a] = arr[b];</span><br><span class="line">        arr[b] = temp;</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/03/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%872/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -968,167 +818,6 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/RPC/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/01/23/RPC/" class="post-title-link" itemprop="url">RPC框架</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-13 19:15:49" itemprop="dateModified" datetime="2021-05-13T19:15:49+08:00">2021-05-13</time>
-              </span>
-
-          
-            <span id="/2021/01/23/RPC/" class="post-meta-item leancloud_visitors" data-flag-title="RPC框架" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>1.6k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
-<ul>
-<li>对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。）</li>
-<li>对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。</li>
-<li>提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）</li>
-</ul>
-<p>而随着集中式架构向分布式架构进行转变，应用系统之间的服务调用于通讯问题成为了首要解决的需求。</p>
-<p>所以RPC站了出来，它就是用来让分布式应用更加简单的。它让调本地方法和调其他模块的方法在外表上看起来是一样的。。（<strong>RPC 框架需提供一种透明调用机制让使用者不必显式的区分本地调用和远程调用。</strong>）</p>
-<blockquote>
-<p>RPC 的全称是 Remote Procedure Call 是一种<strong>进程间通信</strong>方式。 它允许程序调用另一个进程上（通常是共享网络的另一台机器上）的过程或函数，而<strong>不用程序员显式编码这个远程调用的细节</strong>。</p>
-</blockquote>
-<p>RPC解决三件事（公平，公平，还是tm的公平）</p>
-<ul>
-<li>进程间通讯</li>
-<li>提供和本地方法调用一样的调用机制</li>
-<li>屏蔽程序员对远程调用的细节实现</li>
-</ul>
-<h4 id="进程通信问题"><a href="#进程通信问题" class="headerlink" title="进程通信问题"></a>进程通信问题</h4><p>​    对于分布式环境，RPC能够帮助我们解决不同服务器之间的通信及数据传输问题（能够做好方法调用到数据的转换，然后借助网络进行数据传递的内部转换）</p>
-<p>​    rpc客户端向rpc服务端发起远程服务调用。</p>
-<blockquote>
-<p>通过请求的封装，参数的封装，序列化，编码，约定协议传输，解析请求，处理请求，封装返回消息数据，再进行返回数据的序列化， 编码，再通过网络返回给客户端</p>
-</blockquote>
-<p>上述的操作，都需要进行封装，屏蔽远程调用的细节</p>
-<p>什么样的内容封装才能让我们觉得像以本地调用方式调用远程服务呢？</p>
-<p>显而易见：代理</p>
-<p>代理有两种方式</p>
-<ul>
-<li>jdk动态代理（接口代理）</li>
-<li>cglib代理（子类代理）</li>
-</ul>
-<p>RPC还是倾向于动态代理，尽管字节码方式高效强大，但是动态代理易于维护</p>
-<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>rpc需要对远程调用内部细节封装，主要由以下几个方面</p>
-<ul>
-<li>序列码</li>
-<li>编解码</li>
-<li>协议</li>
-<li>网络</li>
-</ul>
-<p>从发起远程调用——&gt;接受数据返回结果，过程如下：</p>
-<ol>
-<li>client以本地调用方式调用服务</li>
-<li>client stub（客户端存根）接受调用负责将方法参数组装成能够进行网络传输的消息体</li>
-<li>client stub 找到服务地址，将消息发送给服务端</li>
-<li>server stub（服务端存根）接收到消息后进行解码</li>
-<li>server stub根据解码结果调用本地服务</li>
-<li>本地服务执行将结果返回给server stub</li>
-<li>server stub将返回结果打包成消息体发送给消费方</li>
-<li>client stub接受信息并解码</li>
-<li>client stub将结果传输给client，消费方得到最终结果</li>
-</ol>
-<p>RPC框架相当于封装了step2-step8这些步骤，对外只暴露client和client stub沟通的接口</p>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
-<h4 id="进一步的拆解"><a href="#进一步的拆解" class="headerlink" title="进一步的拆解"></a>进一步的拆解</h4><blockquote>
-<p>基本的形式要记住，记住方便理解</p>
-</blockquote>
-<img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe94c7fd4edb39?imageView2/0/w/1280/h/960/ignore-error/1" alt="img" style="zoom:150%;">
-
-
-
-<p>​    RPC 服务端通过 RpcServer 去暴露服务接口，而客户端通过 RpcClient 去获取服务接口。</p>
-<p>​    客户端像调用本地方法一样去调用远程接口方法，RPC 框架提供接口的代理实现，实际的调用将委托给代理 RpcProxy。</p>
-<p>​    代理封装调用信息并将调用转交给 RpcInvoker 去实际执行。</p>
-<p>​    在客户端的 RpcInvoker 通过连接器 RpcConnector 去维持与服务端的通道 RpcChannel，并使用 RpcProtocol 执行协议编码（encode）并将编码后的请求消息通过通道发送给服务端。</p>
-<p>​    RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用 RpcProtocol 执行协议解码（decode）。</p>
-<p>​    解码后的调用信息传递给 RpcProcessor 去控制处理调用过程，最后再委托调用给 RpcInvoker 去实际执行并返回调用结果。</p>
-<ul>
-<li>RpcServer（生产者接口）</li>
-<li>RpcClient（消费者接口）</li>
-<li>RpcProxy（代理服务）</li>
-<li>RpcProtocol（编解码服务）</li>
-<li>网络连接器</li>
-</ul>
-<blockquote>
-<p>RPC与MQ比较</p>
-</blockquote>
-<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe963722bccc10?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1349,6 +1038,267 @@
   
   
 
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">全局异常处理</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-13 19:16:25" itemprop="dateModified" datetime="2021-05-13T19:16:25+08:00">2021-05-13</time>
+              </span>
+
+          
+            <span id="/2021/01/23/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" class="post-meta-item leancloud_visitors" data-flag-title="全局异常处理" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>一般项目中都会写一个全局的异常处理</p>
+<p>用@ControllerAdvice标记全局异常处理的类</p>
+<p><strong>@ControllerAdvice</strong><br>这是一个增强的 Controller标签。使用这个 ControllerAdvice，可以实现三个方面的功能：</p>
+<ol>
+<li>全局异常处理</li>
+<li>设置全局变量，也就是设置完，每个接口能获取到整个参数</li>
+<li>数据预处理</li>
+</ol>
+<p>举栗说明</p>
+<p>我们新建一个GlobalControllerAdvice的全局异常类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//一定要加@ControllerAdvice注解才能收集Controller中的方法异常</span></span><br><span class="line"><span class="meta">@ControllerAdvice</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalControllerAdvice</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 收集所有异常，进行统一异常处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//Spring的@ExceptionHandler可以用来统一处理方法抛出的异常</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = Exception.class)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function">ResponseDto <span class="title">exceptionHandler</span><span class="params">(HttpServletRequest request, Exception e)</span></span>{</span><br><span class="line">        ResponseDto dto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        dto.setErrorCode(<span class="number">1001</span>);</span><br><span class="line">        dto.setMessage(<span class="string">"Exception: "</span> + e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> dto;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 收集空指针异常，进行统一处理</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@ExceptionHandler(value = NullPointerException.class)</span></span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@ResponseBody</span></span><br><span class="line">    <span class="function">ResponseDto <span class="title">exceptionHandler</span><span class="params">(HttpServletRequest request, NullPointerException e)</span></span>{</span><br><span class="line">        ResponseDto dto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        dto.setErrorCode(<span class="number">1002</span>);</span><br><span class="line">        dto.setMessage(<span class="string">"Exception: "</span> + e.getMessage());</span><br><span class="line">        <span class="keyword">return</span> dto;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>编写测试Controller类</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value = "/test")</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionController</span> </span>{</span><br><span class="line">    <span class="meta">@RequestMapping(value = "/index")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"/index"</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异常报错</span></span><br><span class="line"><span class="comment">     * 访问路径：http://127.0.0.1:8090/test/exception</span></span><br><span class="line"><span class="comment">     * 自己try_catch的结果：{"message": "NoEnterGlobalException" }</span></span><br><span class="line"><span class="comment">     * 最后返回结果： {"errorCode": 1001,"message": "Exception:4"}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//try_catch内部捕获异常，不会走全局异常处理</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">	<span class="comment">//内部没有异常捕获，检测到Controller中存在异常就会被@ControllerAdvice注解捕获异常</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  空指针异常报错</span></span><br><span class="line"><span class="comment">     *  访问路径：http://127.0.0.1:8090/test/nullPointException</span></span><br><span class="line"><span class="comment">     *  不走全局处理类结果：{"message": "NoEnterGlobalNullPointException" }</span></span><br><span class="line"><span class="comment">     *  最后返回结果：{"message":"Exception: null","errorCode":1002}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            object.toString();</span><br><span class="line">        }<span class="keyword">catch</span> (NullPointerException e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        object.toString();</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/RPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/01/23/RPC/" class="post-title-link" itemprop="url">RPC框架</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-05-13 19:15:49" itemprop="dateModified" datetime="2021-05-13T19:15:49+08:00">2021-05-13</time>
+              </span>
+
+          
+            <span id="/2021/01/23/RPC/" class="post-meta-item leancloud_visitors" data-flag-title="RPC框架" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
+<ul>
+<li>对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。）</li>
+<li>对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。</li>
+<li>提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）</li>
+</ul>
+<p>而随着集中式架构向分布式架构进行转变，应用系统之间的服务调用于通讯问题成为了首要解决的需求。</p>
+<p>所以RPC站了出来，它就是用来让分布式应用更加简单的。它让调本地方法和调其他模块的方法在外表上看起来是一样的。。（<strong>RPC 框架需提供一种透明调用机制让使用者不必显式的区分本地调用和远程调用。</strong>）</p>
+<blockquote>
+<p>RPC 的全称是 Remote Procedure Call 是一种<strong>进程间通信</strong>方式。 它允许程序调用另一个进程上（通常是共享网络的另一台机器上）的过程或函数，而<strong>不用程序员显式编码这个远程调用的细节</strong>。</p>
+</blockquote>
+<p>RPC解决三件事（公平，公平，还是tm的公平）</p>
+<ul>
+<li>进程间通讯</li>
+<li>提供和本地方法调用一样的调用机制</li>
+<li>屏蔽程序员对远程调用的细节实现</li>
+</ul>
+<h4 id="进程通信问题"><a href="#进程通信问题" class="headerlink" title="进程通信问题"></a>进程通信问题</h4><p>​    对于分布式环境，RPC能够帮助我们解决不同服务器之间的通信及数据传输问题（能够做好方法调用到数据的转换，然后借助网络进行数据传递的内部转换）</p>
+<p>​    rpc客户端向rpc服务端发起远程服务调用。</p>
+<blockquote>
+<p>通过请求的封装，参数的封装，序列化，编码，约定协议传输，解析请求，处理请求，封装返回消息数据，再进行返回数据的序列化， 编码，再通过网络返回给客户端</p>
+</blockquote>
+<p>上述的操作，都需要进行封装，屏蔽远程调用的细节</p>
+<p>什么样的内容封装才能让我们觉得像以本地调用方式调用远程服务呢？</p>
+<p>显而易见：代理</p>
+<p>代理有两种方式</p>
+<ul>
+<li>jdk动态代理（接口代理）</li>
+<li>cglib代理（子类代理）</li>
+</ul>
+<p>RPC还是倾向于动态代理，尽管字节码方式高效强大，但是动态代理易于维护</p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>rpc需要对远程调用内部细节封装，主要由以下几个方面</p>
+<ul>
+<li>序列码</li>
+<li>编解码</li>
+<li>协议</li>
+<li>网络</li>
+</ul>
+<p>从发起远程调用——&gt;接受数据返回结果，过程如下：</p>
+<ol>
+<li>client以本地调用方式调用服务</li>
+<li>client stub（客户端存根）接受调用负责将方法参数组装成能够进行网络传输的消息体</li>
+<li>client stub 找到服务地址，将消息发送给服务端</li>
+<li>server stub（服务端存根）接收到消息后进行解码</li>
+<li>server stub根据解码结果调用本地服务</li>
+<li>本地服务执行将结果返回给server stub</li>
+<li>server stub将返回结果打包成消息体发送给消费方</li>
+<li>client stub接受信息并解码</li>
+<li>client stub将结果传输给client，消费方得到最终结果</li>
+</ol>
+<p>RPC框架相当于封装了step2-step8这些步骤，对外只暴露client和client stub沟通的接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+<h4 id="进一步的拆解"><a href="#进一步的拆解" class="headerlink" title="进一步的拆解"></a>进一步的拆解</h4><blockquote>
+<p>基本的形式要记住，记住方便理解</p>
+</blockquote>
+<img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe94c7fd4edb39?imageView2/0/w/1280/h/960/ignore-error/1" alt="img" style="zoom:150%;">
+
+
+
+<p>​    RPC 服务端通过 RpcServer 去暴露服务接口，而客户端通过 RpcClient 去获取服务接口。</p>
+<p>​    客户端像调用本地方法一样去调用远程接口方法，RPC 框架提供接口的代理实现，实际的调用将委托给代理 RpcProxy。</p>
+<p>​    代理封装调用信息并将调用转交给 RpcInvoker 去实际执行。</p>
+<p>​    在客户端的 RpcInvoker 通过连接器 RpcConnector 去维持与服务端的通道 RpcChannel，并使用 RpcProtocol 执行协议编码（encode）并将编码后的请求消息通过通道发送给服务端。</p>
+<p>​    RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用 RpcProtocol 执行协议解码（decode）。</p>
+<p>​    解码后的调用信息传递给 RpcProcessor 去控制处理调用过程，最后再委托调用给 RpcInvoker 去实际执行并返回调用结果。</p>
+<ul>
+<li>RpcServer（生产者接口）</li>
+<li>RpcClient（消费者接口）</li>
+<li>RpcProxy（代理服务）</li>
+<li>RpcProtocol（编解码服务）</li>
+<li>网络连接器</li>
+</ul>
+<blockquote>
+<p>RPC与MQ比较</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe963722bccc10?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
 
   
   <nav class="pagination">
@@ -1418,7 +1368,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">45</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1467,12 +1417,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">238k</span>
+    <span title="站点总字数">236k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:37</span>
+    <span title="站点阅读时长">3:34</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
