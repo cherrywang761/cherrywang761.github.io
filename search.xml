@@ -220,41 +220,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Spring面试</title>
-    <url>/2021/01/31/Spring%E9%9D%A2%E8%AF%95/</url>
-    <content><![CDATA[<h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
-<p>在引入IOC后，如下方的图所示软件就接管了这一个过程，对象A和对象B失去了直接关系，当对象A需要对象B时，IOC容器会主动创建一个对象B注入到对象A中。<strong>一切为了解耦</strong></p>
-<a id="more"></a>
-<img src="http://qiniu.xiaoming.net.cn/%E6%9C%AA%E5%BC%95%E5%85%A5IOC.jpg" alt="未引入IOC容器" style="zoom:80%;">
-
-<img src="http://qiniu.xiaoming.net.cn/%E5%BC%95%E5%85%A5IOC.jpg" alt="引入OIC容器" style="zoom:80%;">
-
-
-
-<p><strong>对象A获得对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</strong></p>
-<ul>
-<li>何为控制，控制的是什么</li>
-</ul>
-<blockquote>
-<p>控制的是bean创建，管理的权利，控制bean的整个生命周期</p>
-</blockquote>
-<ul>
-<li>何为反转</li>
-</ul>
-<blockquote>
-<p>把权利由自己控制交给IOC容器控制，就叫做反转</p>
-</blockquote>
-<p>IOC实际上就是个Map(key,value)，Map中存放的是各种对象</p>
-<h4 id="IOC的初始化过程"><a href="#IOC的初始化过程" class="headerlink" title="IOC的初始化过程"></a>IOC的初始化过程</h4><h4 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h4><h4 id="什么是Bean？"><a href="#什么是Bean？" class="headerlink" title="什么是Bean？"></a>什么是Bean？</h4>]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>框架</tag>
-        <tag>Spring</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>RPC框架</title>
     <url>/2021/01/23/RPC/</url>
     <content><![CDATA[<h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
@@ -457,9 +422,39 @@
       </tags>
   </entry>
   <entry>
-    <title>hadoop学习笔记</title>
-    <url>/2021/03/15/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
-    <content><![CDATA[]]></content>
+    <title>Spring面试</title>
+    <url>/2021/01/31/Spring%E9%9D%A2%E8%AF%95/</url>
+    <content><![CDATA[<h3 id="1-Spring的IOC底层"><a href="#1-Spring的IOC底层" class="headerlink" title="1. Spring的IOC底层"></a>1. Spring的IOC底层</h3><p>IOC即Inversion of Control，控制反转，在未引入IOC时，如上方的图所示，对象A依赖于对象B，那么对象A在初始化或者运行到某一点时，自己必须主动去创建对象B或者使用对象B，控制权在自己手上。</p>
+<p>在引入IOC后，如下方的图所示软件就接管了这一个过程，对象A和对象B失去了直接关系，当对象A需要对象B时，IOC容器会主动创建一个对象B注入到对象A中。<strong>一切为了解耦</strong></p>
+<a id="more"></a>
+<img src="http://qiniu.xiaoming.net.cn/%E6%9C%AA%E5%BC%95%E5%85%A5IOC.jpg" alt="未引入IOC容器" style="zoom:80%;">
+
+<img src="http://qiniu.xiaoming.net.cn/%E5%BC%95%E5%85%A5IOC.jpg" alt="引入OIC容器" style="zoom:80%;">
+
+
+
+<p><strong>对象A获得对象B的过程,由主动行为变为了被动行为，控制权颠倒过来了，这就是“控制反转”这个名称的由来。</strong></p>
+<ul>
+<li>何为控制，控制的是什么</li>
+</ul>
+<blockquote>
+<p>控制的是bean创建，管理的权利，控制bean的整个生命周期</p>
+</blockquote>
+<ul>
+<li>何为反转</li>
+</ul>
+<blockquote>
+<p>把权利由自己控制交给IOC容器控制，就叫做反转</p>
+</blockquote>
+<p>IOC实际上就是个Map(key,value)，Map中存放的是各种对象</p>
+<h4 id="IOC的初始化过程"><a href="#IOC的初始化过程" class="headerlink" title="IOC的初始化过程"></a>IOC的初始化过程</h4><h4 id="DI：依赖注入"><a href="#DI：依赖注入" class="headerlink" title="DI：依赖注入"></a>DI：依赖注入</h4><h4 id="什么是Bean？"><a href="#什么是Bean？" class="headerlink" title="什么是Bean？"></a>什么是Bean？</h4>]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>框架</tag>
+        <tag>Spring</tag>
+      </tags>
   </entry>
   <entry>
     <title>guli-shop高级篇3</title>
@@ -504,6 +499,11 @@
       <tags>
         <tag>项目</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>hadoop学习笔记</title>
+    <url>/2021/03/15/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>全局异常处理</title>
@@ -722,6 +722,45 @@
       </tags>
   </entry>
   <entry>
+    <title>算法数组</title>
+    <url>/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/</url>
+    <content><![CDATA[<h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//如果全是负的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果全是正的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果有正有负，要最大乘积也是两负+一正</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">return</span> Math.max(nums[length-<span class="number">1</span>] * nums[length-<span class="number">2</span>] * nums[length-<span class="number">3</span>], nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length-<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="2-Leetcode-989-数组形式的整数加减法（简单题）"><a href="#2-Leetcode-989-数组形式的整数加减法（简单题）" class="headerlink" title="2. Leetcode 989 数组形式的整数加减法（简单题）"></a>2. Leetcode 989 数组形式的整数加减法（简单题）</h4><p>给定非负整数 <code>X</code> 的数组形式 <code>A</code>，返回整数 <code>X+K</code> 的数组形式。</p>
+<img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210122230456222.png" alt="image-20210122230456222" style="zoom:80%;">
+
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addToArrayForm</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> K)</span> </span>{</span><br><span class="line">        <span class="comment">//返回List，创建一个List</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; --i){</span><br><span class="line">            <span class="comment">//从最后一位开始计算</span></span><br><span class="line">            <span class="keyword">int</span> sum = A[i] + K % <span class="number">10</span>;</span><br><span class="line">            K /= <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//满10进1</span></span><br><span class="line">            <span class="keyword">if</span>(sum &gt;= <span class="number">10</span>){</span><br><span class="line">                K++;</span><br><span class="line">                sum -= <span class="number">10</span>;</span><br><span class="line">            }</span><br><span class="line">            res.add(sum);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//如果K整数的位数比X的大</span></span><br><span class="line">        <span class="keyword">for</span>(; K &gt; <span class="number">0</span>; K/=<span class="number">10</span>){</span><br><span class="line">            res.add(K % <span class="number">10</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//反转列表</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）"><a href="#3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）" class="headerlink" title="3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）"></a>3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）</h4><img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210126112627183.png" alt="image-20210126112627183" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(<span class="keyword">int</span>[][] dominoes)</span> </span>{</span><br><span class="line">        <span class="comment">//定义一个用来存储对应数字数量的数组</span></span><br><span class="line">        <span class="comment">//2维数组不超过100</span></span><br><span class="line">        <span class="keyword">int</span>[] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dominoes.length; i++){</span><br><span class="line">            <span class="keyword">int</span> m = dominoes[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> n = dominoes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="comment">//排序，一律按照从小到大排序（51--&gt;15) </span></span><br><span class="line">            <span class="keyword">int</span> k = m &gt; n ? m * <span class="number">10</span> + n : n * <span class="number">10</span> + m;</span><br><span class="line">            map[k]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//进行统计</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">100</span>; i++){</span><br><span class="line">            <span class="comment">// 根据组合数公式 C_n^2 = (n * (n - 1)) / 2 计算等价骨牌能够组成的组合数，再求和</span></span><br><span class="line">            res += map[i] *(map[i] - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="4-Leetcode-724-寻找数组的中心索引"><a href="#4-Leetcode-724-寻找数组的中心索引" class="headerlink" title="4. Leetcode 724 寻找数组的中心索引"></a>4. Leetcode 724 寻找数组的中心索引</h4><p>数组 中心索引 是数组的一个索引，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
+<p>如果数组不存在中心索引，返回 -1 。如果数组有多个中心索引，应该返回最靠近左边的那一个。</p>
+<img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210128232432201.png" alt="image-20210128232432201" style="zoom:80%;">
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//两次遍历，第一次遍历算出数组全部元素相加的数</span></span><br><span class="line">        <span class="comment">//第二次遍历进行中心索引的判断</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums){</span><br><span class="line">            sum += num;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            index += nums[i];</span><br><span class="line">            <span class="comment">//(11+6) * 2 - 6 = 11 * 2 + 6 = prefix + suffix + index </span></span><br><span class="line">            <span class="keyword">if</span>(index * <span class="number">2</span> - nums[i] == sum){</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>面试</tag>
+        <tag>数组</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>算法并查集篇</title>
     <url>/2021/01/23/%E7%AE%97%E6%B3%95%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%AF%87/</url>
     <content><![CDATA[<p>并查集理解可见</p>
@@ -778,45 +817,6 @@
       <tags>
         <tag>面试</tag>
         <tag>贪心算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>算法数组</title>
-    <url>/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/</url>
-    <content><![CDATA[<h4 id="1-Leetcode-628-三个数的最大乘积-简单题"><a href="#1-Leetcode-628-三个数的最大乘积-简单题" class="headerlink" title="1. Leetcode 628 三个数的最大乘积(简单题)"></a>1. Leetcode 628 三个数的最大乘积(简单题)</h4><img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210120153320912.png" alt="image-20210120153320912" style="zoom:67%;">
-
-
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">maximumProduct</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//如果全是负的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果全是正的，那么也是最后三个相乘</span></span><br><span class="line">        <span class="comment">//如果有正有负，要最大乘积也是两负+一正</span></span><br><span class="line">        Arrays.sort(nums);</span><br><span class="line">        <span class="keyword">int</span> length = nums.length;</span><br><span class="line">        <span class="keyword">return</span> Math.max(nums[length-<span class="number">1</span>] * nums[length-<span class="number">2</span>] * nums[length-<span class="number">3</span>], nums[<span class="number">0</span>] * nums[<span class="number">1</span>] * nums[length-<span class="number">1</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="2-Leetcode-989-数组形式的整数加减法（简单题）"><a href="#2-Leetcode-989-数组形式的整数加减法（简单题）" class="headerlink" title="2. Leetcode 989 数组形式的整数加减法（简单题）"></a>2. Leetcode 989 数组形式的整数加减法（简单题）</h4><p>给定非负整数 <code>X</code> 的数组形式 <code>A</code>，返回整数 <code>X+K</code> 的数组形式。</p>
-<img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210122230456222.png" alt="image-20210122230456222" style="zoom:80%;">
-
-
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> List&lt;Integer&gt; <span class="title">addToArrayForm</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span> K)</span> </span>{</span><br><span class="line">        <span class="comment">//返回List，创建一个List</span></span><br><span class="line">        List&lt;Integer&gt; res = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        <span class="keyword">int</span> n = A.length;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = n-<span class="number">1</span>; i &gt;= <span class="number">0</span>; --i){</span><br><span class="line">            <span class="comment">//从最后一位开始计算</span></span><br><span class="line">            <span class="keyword">int</span> sum = A[i] + K % <span class="number">10</span>;</span><br><span class="line">            K /= <span class="number">10</span>;</span><br><span class="line">            <span class="comment">//满10进1</span></span><br><span class="line">            <span class="keyword">if</span>(sum &gt;= <span class="number">10</span>){</span><br><span class="line">                K++;</span><br><span class="line">                sum -= <span class="number">10</span>;</span><br><span class="line">            }</span><br><span class="line">            res.add(sum);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//如果K整数的位数比X的大</span></span><br><span class="line">        <span class="keyword">for</span>(; K &gt; <span class="number">0</span>; K/=<span class="number">10</span>){</span><br><span class="line">            res.add(K % <span class="number">10</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//反转列表</span></span><br><span class="line">        Collections.reverse(res);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<h4 id="3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）"><a href="#3-Leetcode-1128-等价多米诺骨牌对的数量（简单题）" class="headerlink" title="3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）"></a>3. Leetcode 1128 等价多米诺骨牌对的数量（简单题）</h4><img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210126112627183.png" alt="image-20210126112627183" style="zoom:80%;">
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numEquivDominoPairs</span><span class="params">(<span class="keyword">int</span>[][] dominoes)</span> </span>{</span><br><span class="line">        <span class="comment">//定义一个用来存储对应数字数量的数组</span></span><br><span class="line">        <span class="comment">//2维数组不超过100</span></span><br><span class="line">        <span class="keyword">int</span>[] map = <span class="keyword">new</span> <span class="keyword">int</span>[<span class="number">100</span>];</span><br><span class="line">        <span class="keyword">int</span> res = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dominoes.length; i++){</span><br><span class="line">            <span class="keyword">int</span> m = dominoes[i][<span class="number">0</span>];</span><br><span class="line">            <span class="keyword">int</span> n = dominoes[i][<span class="number">1</span>];</span><br><span class="line">            <span class="comment">//排序，一律按照从小到大排序（51--&gt;15) </span></span><br><span class="line">            <span class="keyword">int</span> k = m &gt; n ? m * <span class="number">10</span> + n : n * <span class="number">10</span> + m;</span><br><span class="line">            map[k]++;</span><br><span class="line">        }</span><br><span class="line">        <span class="comment">//进行统计</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; <span class="number">100</span>; i++){</span><br><span class="line">            <span class="comment">// 根据组合数公式 C_n^2 = (n * (n - 1)) / 2 计算等价骨牌能够组成的组合数，再求和</span></span><br><span class="line">            res += map[i] *(map[i] - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<h4 id="4-Leetcode-724-寻找数组的中心索引"><a href="#4-Leetcode-724-寻找数组的中心索引" class="headerlink" title="4. Leetcode 724 寻找数组的中心索引"></a>4. Leetcode 724 寻找数组的中心索引</h4><p>数组 中心索引 是数组的一个索引，其左侧所有元素相加的和等于右侧所有元素相加的和。</p>
-<p>如果数组不存在中心索引，返回 -1 。如果数组有多个中心索引，应该返回最靠近左边的那一个。</p>
-<img src="/2021/01/23/%E7%AE%97%E6%B3%95%E6%95%B0%E7%BB%84%E7%AF%87/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210128232432201.png" alt="image-20210128232432201" style="zoom:80%;">
-
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">pivotIndex</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>{</span><br><span class="line">        <span class="comment">//两次遍历，第一次遍历算出数组全部元素相加的数</span></span><br><span class="line">        <span class="comment">//第二次遍历进行中心索引的判断</span></span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> index = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> num : nums){</span><br><span class="line">            sum += num;</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++){</span><br><span class="line">            index += nums[i];</span><br><span class="line">            <span class="comment">//(11+6) * 2 - 6 = 11 * 2 + 6 = prefix + suffix + index </span></span><br><span class="line">            <span class="keyword">if</span>(index * <span class="number">2</span> - nums[i] == sum){</span><br><span class="line">                <span class="keyword">return</span> i;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>面试</tag>
-        <tag>数组</tag>
       </tags>
   </entry>
   <entry>
@@ -1079,12 +1079,9 @@
 <p>A: 传入参数是通过new Thread()创建的线程对象，<strong>在Java进程调用exit()时，会调用该线程对象的start()方法将其运行起来</strong>，所以不要手工先启动了。</p>
 </blockquote>
 <h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>源码中有个ApplicationShutdownHooks类，该类用于跟踪和运行在用户层面注的钩子函数</p>
-<img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/钩子函数图片/ApplicationShutdownHooks.png">
-
-
-
+<p><img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/ApplicationShutdownHooks.png" alt="ApplicationShutdownHooks.png"></p>
 <ul>
-<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数<img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614002833040.png" alt="image-20210614002833040"></p>
+<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数</p>
 </li>
 <li><p>该类的内部还维护了一个<code>IdentityHashMap</code>，用于存放hook信息，可以通过add()方法来添加，程序中定义的回调线程都放在这里了。</p>
 </li>
@@ -1347,6 +1344,86 @@
       </tags>
   </entry>
   <entry>
+    <title>close()和shutdown()</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
+    <content><![CDATA[<h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
+<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
+<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
+<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
+<p>举个栗子：</p>
+<ol>
+<li>服务器收到一个客户端请求</li>
+</ol>
+<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
+
+
+
+<ol start="2">
+<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<ol start="3">
+<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
+</ol>
+<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
+<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
+<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>close函数是用来关闭套接字的</p>
+<p>成功返回0，失败返回-1</p>
+<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
+<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
+<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
+<p>如上图，在第二步中，connfd和listenfd都为2</p>
+<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
+<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
+<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
+<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
+<p>成功返回0，失败返回-1</p>
+<p>该函数的行为依赖howto参数的值</p>
+<ul>
+<li>SHUT_RD（读关闭）</li>
+</ul>
+<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
+<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
+<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<ul>
+<li>SHUT_WR（写关闭）</li>
+</ul>
+<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
+<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
+<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<ul>
+<li>SHUT_RDWR</li>
+</ul>
+<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
+<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
+
+
+
+<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
+<ul>
+<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
+</li>
+<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
+</li>
+<li><p>其实就是半双工和全双工的区别</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>IOC与AOP</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Spring%E7%9A%84IOC%E5%92%8CAOP/</url>
     <content><![CDATA[<p>IOC</p>
@@ -1436,77 +1513,103 @@
       </tags>
   </entry>
   <entry>
-    <title>close()和shutdown()</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/Socket%E4%B8%ADclose%EF%BC%88%EF%BC%89%E5%92%8Cshutdown%EF%BC%88%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB/</url>
-    <content><![CDATA[<h3 id="Socket中close（）和shutdown（）的区别"><a href="#Socket中close（）和shutdown（）的区别" class="headerlink" title="Socket中close（）和shutdown（）的区别"></a>Socket中close（）和shutdown（）的区别</h3><p>编写并发服务器最简单的方法就是fork一个子进程来服务每个客户。</p>
-<p>当一个连接建立时，accept返回，服务器接着调用fork创建子进程通过connfd套接字服务客户端</p>
-<p>父进程继续等待另一个连接（通过监听套接字listenfd）。</p>
-<p>新客户由子进程提供服务，父进程就会关闭自己和服务的socket</p>
-<p>举个栗子：</p>
-<ol>
-<li>服务器收到一个客户端请求</li>
-</ol>
-<img src="https://img-blog.csdn.net/20170514102514737?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述" style="zoom:67%;">
-
-
-
-<ol start="2">
-<li>服务器调用fork，此时子进程会复制父进程的全部信息，包括套接字</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514102553125?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<ol start="3">
-<li>父进程关闭连接套接字（connfd），子进程关闭监听套接字（listenfd)</li>
-</ol>
-<p><img src="https://img-blog.csdn.net/20170514103308756?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMTM5MTYyOQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<p>最终就是子进程来处理这个新进来的服务，父进程可以在监听套接字上调用accept来处理下一个客户连接</p>
-<h4 id="close函数"><a href="#close函数" class="headerlink" title="close函数"></a>close函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">close</span><span class="params">(<span class="keyword">int</span> sockfd)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>close函数是用来关闭套接字的</p>
-<p>成功返回0，失败返回-1</p>
-<p>TCP如果说要停止通信，会发送一个FIN命令嘛，但是什么时候发送FIN命令，是看引用计数是否为0,</p>
-<p>close()只是导致相应描述符的引用计数-1，但是如果引用计数扔&gt;0，还是不会发FIN</p>
-<p>如果想要强制发送FIN，可以使用shutdown()函数。</p>
-<p>如上图，在第二步中，connfd和listenfd都为2</p>
-<p>第三步，父进程关闭connfd，子进程关闭listenfd，这样子connfd和listenfd都为1</p>
-<p>而该套接字真正的关闭是要引用计数==0才关闭。</p>
-<p><strong>即close只要一到0就关闭，是粗暴式的关闭。</strong></p>
-<h4 id="shutdown函数"><a href="#shutdown函数" class="headerlink" title="shutdown函数"></a>shutdown函数</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">shutdown</span><span class="params">(<span class="keyword">int</span> sockfd,<span class="keyword">int</span> howto)</span></span>;</span><br></pre></td></tr></tbody></table></figure>
-<p>成功返回0，失败返回-1</p>
-<p>该函数的行为依赖howto参数的值</p>
-<ul>
-<li>SHUT_RD（读关闭）</li>
+    <title>ThreadLocal</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
+    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
+<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
+<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
+<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
+<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
+<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
+<li>set方法</li>
 </ul>
-<p>套接字中不再有数据可接收，对该套接字进行read直接返回EOF</p>
-<p>而且套接字接收缓冲区中的现有数据都被丢弃。</p>
-<img src="https://segmentfault.com/img/bVbxlTz?w=776&amp;h=644" alt="clipboard.png" style="zoom:67%;">
-
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 <ul>
-<li>SHUT_WR（写关闭）</li>
+<li>get方法</li>
 </ul>
-<p>对于TCP套接字，称为<strong>半关闭</strong>（half-close）。</p>
-<p>当前在套接字发送缓冲区中的数据将被发送掉，后跟TCP的正常连接终止序列。（不管套接字的引用计数是否等于0）</p>
-<img src="https://segmentfault.com/img/bVbxlTA?w=780&amp;h=646" alt="clipboard.png" style="zoom:67%;">
-
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
 
 <ul>
-<li>SHUT_RDWR</li>
+<li>remove方法</li>
 </ul>
-<p>等于调用shutdown函数两次，连接的读半部和写半部都关闭。</p>
-<img src="https://segmentfault.com/img/bVbxlTE?w=774&amp;h=648" alt="clipboard.png" style="zoom:67%;">
-
-
-
-<p><strong>shutdown可以不管引用计数就激发TCP的正常连接终止序列，比较优雅</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
+</blockquote>
 <ul>
-<li><p>shutdown是一种优雅地单方向或者双方向关闭socket的方法。 而close则立即双方向强制关闭socket并释放相关资源。</p>
-</li>
-<li><p>如果有多个进程共享一个socket，shutdown影响所有进程，而close只影响本进程。</p>
-</li>
-<li><p>其实就是半双工和全双工的区别</p>
-</li>
+<li>initialValue方法</li>
 </ul>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>返回该线程局部变量的初始值</p>
+</blockquote>
+<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
+<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
+<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
+<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
+<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
+<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
+</ul>
+<p>Tips: Object和T的区别？</p>
+<blockquote>
+<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
+</blockquote>
+<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
+<p>举个例子：抗日上下线</p>
+<blockquote>
+<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
+</blockquote>
+<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
+<p><strong>（1）key 使用强引用</strong></p>
+<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
+<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
+<p><strong>（2）key 使用弱引</strong></p>
+<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
+<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
+<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
+<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
+<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
+<li>当需要存储线程私有变量的时候。</li>
+<li>当需要实现线程安全的变量时。</li>
+<li>当需要减少线程资源竞争的时候。</li>
+</ul>
+<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
+<blockquote>
+<p>String name = “cherrywang”;</p>
+<p>User cherrywang = new User();</p>
+</blockquote>
+<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
+<p>可达性分析结果不可达，则GC时会回收</p>
+<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
+<p>当JVM内存不足，才会被垃圾回收器回收</p>
+<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
+<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
+<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
+<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
+<p><strong>虚引用必须和引用队列一起使用</strong></p>
+<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
+<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
+<p>它有机会让跟踪的对象“复活”</p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -1713,112 +1816,6 @@
 </ol>
 <p><strong>比如我现在是滴滴，我早上有打车高峰，我代码使用了大量的synchronized，有什么问题？锁升级过程是不可逆的，过了高峰我们还是重量级的锁，那效率是不是大打折扣了？这个时候你用Lock是不是很好？</strong></p>
 <p>脱离了业务场景说性能都是耍流氓</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ThreadLocal</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/</url>
-    <content><![CDATA[<h3 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h3><h4 id="是什么"><a href="#是什么" class="headerlink" title="是什么"></a>是什么</h4><p>ThreadLocal为解决多线程并发提供了另一种思路</p>
-<p>传统的多线程同步方式，只有一份共享变量，多个线程排队等待使用该变量，是<strong>一种时间换空间的方式</strong>，</p>
-<p>​    所以在使用同步机制的时候，要缜密的分析什么时候对变量进行读写，加锁解锁这些方面</p>
-<p>ThreadLocal维护变量时，它会为每个变量创建一个线程本地的变量副本，所以每一个线程都可以独立改变自己的副本，就不用考虑同步性的问题，是<strong>一种空间换时间的方式</strong>，</p>
-<p>​    在用ThreadLocal时，它提供了线程安全的共享对象，所以可以把不安全的变量封装到ThreadLocal中</p>
-<h4 id="常用方法（4个）"><a href="#常用方法（4个）" class="headerlink" title="常用方法（4个）"></a>常用方法（4个）</h4><ul>
-<li>set方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">set</span><span class="params">(ThreadLocal&lt;?&gt; key, Object value)</span></span>{</span><br><span class="line">    <span class="comment">//。。</span></span><br><span class="line">    <span class="comment">//set就是获取当前的ThreadLocalMap，然后往map中添加kv</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>get方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> T <span class="title">get</span><span class="params">()</span> </span>{</span><br><span class="line">    <span class="comment">//获取当前线程</span></span><br><span class="line">    Thread t = Thread.currentThread();</span><br><span class="line">    <span class="comment">//获取当前线程的ThreadLocalMap实例</span></span><br><span class="line">    ThreadLocalMap map = getMap(t);</span><br><span class="line">    <span class="keyword">if</span> (map != <span class="keyword">null</span>) {</span><br><span class="line">        <span class="comment">//不为空，以当前ThreadLocal实例为key获取value</span></span><br><span class="line">        ThreadLocalMap.Entry e = map.getEntry(<span class="keyword">this</span>);</span><br><span class="line">        <span class="keyword">if</span> (e != <span class="keyword">null</span>) {</span><br><span class="line">            <span class="comment">//如果ThreadLocalMap为空或者value为空，则执行initialValue()</span></span><br><span class="line">           	T result = (T)e.value;</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="keyword">return</span> setInitialValue();</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<ul>
-<li>remove方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">remove</span><span class="params">()</span> </span>{</span><br><span class="line">    ThreadLocalMap m = getMap(Thread.currentThread());</span><br><span class="line">    <span class="keyword">if</span> (m != <span class="keyword">null</span>)</span><br><span class="line">        m.remove(<span class="keyword">this</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>remove()：将当前线程的局部变量的值删除，为了减小内存的占用</p>
-</blockquote>
-<ul>
-<li>initialValue方法</li>
-</ul>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> Object <span class="title">initialValue</span><span class="params">()</span></span></span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>返回该线程局部变量的初始值</p>
-</blockquote>
-<h4 id="为什么？（原理）"><a href="#为什么？（原理）" class="headerlink" title="为什么？（原理）"></a>为什么？（原理）</h4><p>ThreadLocal类提供set/get方法存储和获取value值，但是它本身是不存储值的，ThreadLocal内部维护了一个ThreadLocalMap类，这个类才是真正存储数据的。<strong>（key是ThreadLocal实例对象，value是Object对象）</strong></p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">ThreadLocalMap</span> </span>{</span><br><span class="line">    <span class="comment">// 定义一个table数组，存储多个threadLocal对象及其value值</span></span><br><span class="line">    <span class="keyword">private</span> Entry[] table;</span><br><span class="line">    ThreadLocalMap(ThreadLocal&lt;?&gt; firstKey, Object firstValue) {</span><br><span class="line">        table = <span class="keyword">new</span> Entry[INITIAL_CAPACITY];</span><br><span class="line">        <span class="keyword">int</span> i = firstKey.threadLocalHashCode &amp; (INITIAL_CAPACITY - <span class="number">1</span>);</span><br><span class="line">        table[i] = <span class="keyword">new</span> Entry(firstKey, firstValue);</span><br><span class="line">        size = <span class="number">1</span>;</span><br><span class="line">        setThreshold(INITIAL_CAPACITY);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 定义一个Entry类，key是一个弱引用的ThreadLocal对象</span></span><br><span class="line">    <span class="comment">// value是任意对象</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span> <span class="keyword">extends</span> <span class="title">WeakReference</span>&lt;<span class="title">ThreadLocal</span>&lt;?&gt;&gt; </span>{</span><br><span class="line">        Object value;</span><br><span class="line">        Entry(ThreadLocal&lt;?&gt; k, Object v) {</span><br><span class="line">            <span class="keyword">super</span>(k);</span><br><span class="line">            value = v;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">// 省略其他</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="ThreadLocal相关类总结"><a href="#ThreadLocal相关类总结" class="headerlink" title="ThreadLocal相关类总结"></a>ThreadLocal相关类总结</h4><ul>
-<li>每个线程是一个Thread实例，其内部维护一个threadLocals的实例成员，其类型是ThreadLocal.ThreadLocalMap。</li>
-<li>通过实例化ThreadLocal实例，我们可以对当前运行的线程设置一些线程私有的变量，通过调用ThreadLocal的set和get方法存取。</li>
-<li>ThreadLocal本身并不是一个容器，我们存取的value实际上存储在ThreadLocalMap中，ThreadLocal只是作为TheadLocalMap的key。</li>
-<li>每个线程实例都对应一个TheadLocalMap实例，我们可以在同一个线程里实例化很多个ThreadLocal来存储很多种类型的值，这些ThreadLocal实例分别作为key，对应各自的value，最终存储在Entry table数组中。</li>
-<li>当调用ThreadLocal的set/get进行赋值/取值操作时，首先获取当前线程的ThreadLocalMap实例，然后就像操作一个普通的map一样，进行put和get。</li>
-</ul>
-<p>Tips: Object和T的区别？</p>
-<blockquote>
-<p>Object是根类，是真实存在的，T只是占位符，仅仅在编译器有效，最终解析时会被擦除，用Object代替</p>
-</blockquote>
-<h4 id="内存泄漏问题"><a href="#内存泄漏问题" class="headerlink" title="内存泄漏问题"></a>内存泄漏问题</h4><h5 id="什么是内存泄漏"><a href="#什么是内存泄漏" class="headerlink" title="什么是内存泄漏"></a>什么是内存泄漏</h5><p>简单的说，就是东西放在内存里面，但你忘记它放哪里了，它占着一块内存，但是不能回收。当这样的东西越来越多，内存就吃紧，最终导致服务器宕机。</p>
-<p>举个例子：抗日上下线</p>
-<blockquote>
-<p>在抗日时期，有两名地下党A和B，A是上线，B是下线，B不能直接联系党中央的，他需要通过A来帮忙传话。一旦A发生意外，党中央就找不到B了，B一直存在，但是茫茫人海，党中央是无法启用B做战斗任务的安排，这种情况类似内存泄漏。</p>
-</blockquote>
-<h5 id="ThreadLocal内存分配"><a href="#ThreadLocal内存分配" class="headerlink" title="ThreadLocal内存分配"></a>ThreadLocal内存分配</h5><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//新建一个ThreadLocal变量num，此时是一个强引用</span></span><br><span class="line">ThreadLocal&lt;Integer&gt; num = <span class="keyword">new</span> ThreadLocal&lt;Integer&gt;();</span><br><span class="line"></span><br><span class="line"><span class="comment">//set数据之后，再增加一个弱引用，此时计数器为2</span></span><br><span class="line"><span class="comment">//tips：10不是放在num中的喔，他们是分开存放的，num是key，10是value</span></span><br><span class="line">num.set(<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">//强引用不再被使用，系统回收强引用，计数器减1，此时只存在一个弱引用</span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//我们必须要通过num才能访问10，但是num被弱引用包装，万一被GC了，其登记的key-value形式的数据，此时就变成了null-value，这样子组织就联系不到10了。。</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-<h5 id="为什么不用强引用？"><a href="#为什么不用强引用？" class="headerlink" title="为什么不用强引用？"></a>为什么不用强引用？</h5><p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322135647982.png" alt="image-20210322135647982"></p>
-<p><strong>（1）key 使用强引用</strong></p>
-<p>引用ThreadLocal的对象被回收了（栈中的引用结束了）</p>
-<p>但是ThreadLocalMap还持有ThreadLocal的强引用，如果没有手动删除，ThreadLocal不会被回收，导致Entry内存泄漏。</p>
-<p><strong>（2）key 使用弱引</strong></p>
-<p>引用ThreadLocal的对象被回收了，由于ThreadLocalMap持有ThreadLocal的弱引用，即使没有手动删除，ThreadLocal也会被回收。value在下一次ThreadLocalMap调用set、get、remove的时候会被清除。</p>
-<p>比较两种情况，我们可以发现：由于ThreadLocalMap的生命周期跟Thread一样长，如果都没有手动删除对应key，都会导致内存泄漏，但是使用弱引用可以多一层保障：弱引用ThreadLocal被清理后key为null，对应的value在下一次ThreadLocalMap调用set、get、remove的时候可能会被清除。</p>
-<p>因此，ThreadLocal内存泄漏的根源是：由于ThreadLocalMap的生命周期跟Thread一样长，如果没有手动删除对应key就会导致内存泄漏，而不是因为弱引用。</p>
-<h5 id="如何避免内存泄漏"><a href="#如何避免内存泄漏" class="headerlink" title="如何避免内存泄漏"></a>如何避免内存泄漏</h5><p><strong>每次使用完ThreadLocal，调用它的remove()方法，清除数据。</strong></p>
-<h4 id="ThreadLocal使用场景"><a href="#ThreadLocal使用场景" class="headerlink" title="ThreadLocal使用场景"></a>ThreadLocal使用场景</h4><ul>
-<li>当需要存储线程私有变量的时候。</li>
-<li>当需要实现线程安全的变量时。</li>
-<li>当需要减少线程资源竞争的时候。</li>
-</ul>
-<h3 id="强软弱虚"><a href="#强软弱虚" class="headerlink" title="强软弱虚"></a>强软弱虚</h3><h4 id="强引用"><a href="#强引用" class="headerlink" title="强引用"></a>强引用</h4><p>默认对象都是强引用</p>
-<blockquote>
-<p>String name = “cherrywang”;</p>
-<p>User cherrywang = new User();</p>
-</blockquote>
-<p>可达性分析结果可达，不会被GC回收（即使OOM）</p>
-<p>可达性分析结果不可达，则GC时会回收</p>
-<h4 id="软引用"><a href="#软引用" class="headerlink" title="软引用"></a>软引用</h4><p>JVM内存充足，软引用不会被垃圾回收器回收，</p>
-<p>当JVM内存不足，才会被垃圾回收器回收</p>
-<p>所以软引用经常用来实现一些内存敏感的缓存。只要内存充足就不会被GC掉。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">SoftReference&lt;String&gt; softReference = <span class="keyword">new</span> SoftReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">String name = softReference.get();</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-<h4 id="弱引用"><a href="#弱引用" class="headerlink" title="弱引用"></a>弱引用</h4><p>弱引用是比软引用生命周期更短的引用。</p>
-<p>不论当前内存是否充足，都只能存活到下一次垃圾收集之前。</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@Test</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testWeakReference</span><span class="params">()</span></span>{</span><br><span class="line">    WeakReference&lt;String&gt; weakReference = <span class="keyword">new</span> WeakReference&lt;String&gt;(<span class="keyword">new</span> String(<span class="string">"cherrywang"</span>));</span><br><span class="line">    System.out.println(weakReference);</span><br><span class="line">    System.gc();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(weakReference.get()==<span class="keyword">null</span>){</span><br><span class="line">        System.out.println(<span class="string">"weakReference已被清理"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<p><img src="/2021/03/10/%E9%9D%A2%E8%AF%95/ThreadLocal/Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210322142147916.png" alt="image-20210322142147916"></p>
-<h4 id="虚引用"><a href="#虚引用" class="headerlink" title="虚引用"></a>虚引用</h4><p>最弱的引用</p>
-<p>这种引用不会对对象的生命周期有影响，就跟没有一样</p>
-<p><strong>虚引用必须和引用队列一起使用</strong></p>
-<p>在对象的垃圾回收过程中，如果GC发现一个对象还存在虚引用，则会把这个虚引用加入到与之关联的引用队列中。</p>
-<p>虚引用主要用来跟踪对象被垃圾回收器回收的活动。</p>
-<p>它有机会让跟踪的对象“复活”</p>
 ]]></content>
       <categories>
         <category>面试</category>
@@ -2081,29 +2078,6 @@
       </tags>
   </entry>
   <entry>
-    <title>类加载机制</title>
-    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
-<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象</p>
-<p>首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader</p>
-<p>类加载器一般分为三层（三种）</p>
-<p>Bootstrap Class Loader：引导类加载器，是最顶层的</p>
-<p>Extension Class Loader: 拓展类加载器，Boostrap的子类</p>
-<p>最底下的是Application Class  Loader:系统类加载器</p>
-<p>类加载器也多嘛，所以有个双亲委派的这种机制，就是说</p>
-<p>如果我要加载一个类(.java)，那么我默认是用Application类加载器来加载的，</p>
-<p>但是我不直接加载，我会往上抛给我的父类，Extension类加载器，如果它能够加载，它会继续上抛，直到super构造器进行加载，如果不能够加载，就会回调到最后一个能加载该类的加载器进行加载。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
-<p>或者就是</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>游标存储结构</title>
     <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86%E7%82%B9%E4%B9%8B%E6%B8%B8%E6%A0%87%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84/</url>
     <content><![CDATA[<p>在进行数据库学习的过程中，知识过于零散，导致在工作中往往对于一些相关内容掌握的不牢甚至是完全忘记了。。</p>
@@ -2168,6 +2142,29 @@
 <h4 id="数据库存储过程"><a href="#数据库存储过程" class="headerlink" title="数据库存储过程"></a>数据库存储过程</h4><p>举个栗子（sqlserver）</p>
 <figure class="highlight sql"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">--创建存储过程，名称为PROC_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">PROCEDURE</span> [dbo].[PROC_GANTRYRUNSTATUS](</span><br><span class="line"><span class="variable">@batchno</span> <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line"><span class="variable">@batchtype</span> <span class="type">varchar</span>(<span class="number">20</span>)</span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="keyword">AS</span></span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">	<span class="comment">--声明的全局变量</span></span><br><span class="line">  <span class="keyword">DECLARE</span> </span><br><span class="line">    <span class="variable">@v</span>_procname <span class="type">VARCHAR</span>(<span class="number">100</span>),</span><br><span class="line">    <span class="variable">@v</span>_sql     NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_sql1    NVARCHAR(MAX),</span><br><span class="line">    <span class="variable">@v</span>_starttime DATETIME,</span><br><span class="line">    <span class="variable">@v</span>_batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">    <span class="variable">@v</span>_srctab  <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--源表名</span></span><br><span class="line">    <span class="variable">@v</span>_desttab <span class="type">VARCHAR</span>(<span class="number">100</span>),         <span class="comment">--目标表名</span></span><br><span class="line">    <span class="variable">@v</span>_tabdate <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">	<span class="variable">@v</span>_jobdate DATETIME,            <span class="comment">--jobdate</span></span><br><span class="line">	<span class="variable">@v</span>_startdate DATETIME,		<span class="comment">--数据开始时间</span></span><br><span class="line">	<span class="variable">@v</span>_enddate DATETIME,			<span class="comment">--数据结束时间</span></span><br><span class="line">	<span class="variable">@v</span>_rownum <span class="type">VARCHAR</span>(<span class="number">10</span>);				<span class="comment">--记录影响行数</span></span><br><span class="line">    	</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_starttime<span class="operator">=</span>GETDATE();</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_procname<span class="operator">=</span><span class="string">'PROC_GANTRYRUNSTATUS'</span>;</span><br><span class="line">	<span class="comment">--cast()转类型（转成datetime），该stuff()表示从第九个字符位置删掉0个字符，并添加一个空格</span></span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_jobdate <span class="operator">=</span> <span class="built_in">cast</span>(stuff(stuff(<span class="variable">@batchno</span>,<span class="number">9</span>,<span class="number">0</span>,<span class="string">' '</span>),<span class="number">12</span>,<span class="number">0</span>,<span class="string">':'</span>) <span class="keyword">as</span> datetime) ;</span><br><span class="line">	<span class="keyword">SET</span> <span class="variable">@v</span>_startdate <span class="operator">=</span> <span class="variable">@v</span>_jobdate;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--如果为空直接返回</span></span><br><span class="line">	IF  <span class="variable">@batchtype</span> <span class="keyword">IS</span> <span class="keyword">NULL</span> <span class="keyword">OR</span> <span class="variable">@batchno</span> <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">	   <span class="keyword">return</span>;</span><br><span class="line">	<span class="keyword">END</span></span><br><span class="line">    <span class="comment">--SET Data range.</span></span><br><span class="line">	IF <span class="variable">@batchtype</span> <span class="operator">=</span> <span class="string">'Y'</span> </span><br><span class="line">	  <span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">year</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	  <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'M'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">MONTH</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'D'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(<span class="keyword">day</span>,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'H'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(hh,<span class="number">1</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'10m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">10</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">	 IF <span class="variable">@batchtype</span><span class="operator">=</span><span class="string">'5m'</span></span><br><span class="line">	   <span class="keyword">BEGIN</span></span><br><span class="line">		 <span class="keyword">SET</span> <span class="variable">@v</span>_enddate <span class="operator">=</span> DATEADD(mm,<span class="number">5</span>,<span class="variable">@v</span>_jobdate);</span><br><span class="line">	   <span class="keyword">END</span></span><br><span class="line">   <span class="comment">--开启事务</span></span><br><span class="line">   <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">   		<span class="comment">--记录日志</span></span><br><span class="line">	  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程开始'</span>);</span><br><span class="line">   <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line"></span><br><span class="line">	<span class="comment">--判断临时表是否存在</span></span><br><span class="line">  IF OBJECT_ID(<span class="string">'tempdb.dbo.#TMP_STA_GANTRYRUNSTATUS'</span>) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">	<span class="comment">--如果不存在，初始化临时表（字段来自源表）</span></span><br><span class="line">	<span class="keyword">BEGIN</span></span><br><span class="line">		<span class="keyword">CREATE</span> <span class="keyword">TABLE</span> #TMP_STA_MR_AIRCONDITIONERS(batchno <span class="type">VARCHAR</span>(<span class="number">20</span>),</span><br><span class="line">										tabdate <span class="type">varchar</span>(<span class="number">20</span>),[GANTRYID] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[SECTIONID] <span class="type">varchar</span>(<span class="number">11</span>),[<span class="type">TIMESTAMP</span>] <span class="type">varchar</span>(<span class="number">25</span>),</span><br><span class="line">										[VERSION] datetime,[ID] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[STATUS] <span class="type">varchar</span>(<span class="number">20</span>),[ERRORMSG] <span class="type">varchar</span>(<span class="number">200</span>),</span><br><span class="line">										[ISWORKING] <span class="type">varchar</span>(<span class="number">20</span>),[WORKMODE] <span class="type">varchar</span>(<span class="number">20</span>),</span><br><span class="line">										[SYSTEMWARNING] <span class="type">varchar</span>(<span class="number">20</span>),[TEMPERATUREWARNING] <span class="type">varchar</span>(<span class="number">20</span>));</span><br><span class="line">	<span class="keyword">END</span>;</span><br><span class="line">	<span class="comment">--源头表+日期截串（时间分表）</span></span><br><span class="line">  <span class="keyword">SET</span> <span class="variable">@v</span>_srctab<span class="operator">=</span><span class="string">'STG_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="built_in">SUBSTRING</span>(<span class="variable">@batchno</span>,<span class="number">1</span>,<span class="number">8</span>);</span><br><span class="line">	<span class="comment">--给临时表填数据;quotename()相当于给表加个[]</span></span><br><span class="line">  <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into #TMP_STA_GANTRYRUNSTATUS</span></span><br><span class="line"><span class="string">                   select @batchno batchno,datepart(yy,version) tabdate,</span></span><br><span class="line"><span class="string">				   GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,</span></span><br><span class="line"><span class="string">					 ISWORKING,WORKMODE,SYSTEMWARNING,TEMPERATUREWARNING			</span></span><br><span class="line"><span class="string">                 from  '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_srctab) <span class="operator">+</span><span class="string">' where VERSION &gt;=@v_startdate and VERSION &lt; @v_enddate;'</span></span><br><span class="line"></span><br><span class="line">	<span class="comment">--执行sql，并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> TRY</span><br><span class="line">    <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">      <span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20),@v_startdate DATETIME,@v_enddate DATETIME'</span>,<span class="variable">@batchno</span>,<span class="variable">@v</span>_startdate,<span class="variable">@v</span>_enddate;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span></span><br><span class="line">      <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">	        <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到临时表#TMP_STA_GANTRYRUNSTATUS,记录数：'</span><span class="operator">+</span> <span class="variable">@v</span>_rownum );</span><br><span class="line">    <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span> TRY</span><br><span class="line">  <span class="comment">--执行sql异常，catch并记录日志</span></span><br><span class="line">  <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">		<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">			<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入临时表异常：'</span><span class="operator">+</span>error_message());   </span><br><span class="line">		<span class="keyword">COMMIT</span> TRAN		</span><br><span class="line">		RAISERROR(<span class="string">'插入临时表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">		IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">return</span>;</span><br><span class="line">  <span class="keyword">END</span> CATCH	</span><br><span class="line">	</span><br><span class="line">    <span class="comment">--定义游标</span></span><br><span class="line">  <span class="keyword">DECLARE</span> v_cur <span class="keyword">CURSOR</span> <span class="keyword">LOCAL</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> tabdate <span class="keyword">FROM</span> #TMP_STA_GANTRYRUNSTATUS <span class="keyword">GROUP</span> <span class="keyword">BY</span> tabdate;</span><br><span class="line">  <span class="comment">--开启游标，将tabdata insert到@v_tabdate中</span></span><br><span class="line">  <span class="keyword">OPEN</span> v_cur;</span><br><span class="line">    <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">    WHILE @<span class="variable">@FETCH</span>_STATUS<span class="operator">=</span><span class="number">0</span></span><br><span class="line">      <span class="keyword">BEGIN</span></span><br><span class="line">      <span class="comment">--目标表</span></span><br><span class="line">         <span class="keyword">SET</span> <span class="variable">@v</span>_desttab<span class="operator">=</span><span class="string">'STA_GANTRY_RUNSTATUS'</span><span class="operator">+</span><span class="variable">@v</span>_tabdate;</span><br><span class="line">	     <span class="keyword">BEGIN</span> TRY</span><br><span class="line">		   <span class="keyword">BEGIN</span> TRAN	</span><br><span class="line">		    <span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' where batchno=@batchno'</span>;</span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="comment">--定义插入sql</span></span><br><span class="line">            <span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into '</span><span class="operator">+</span>quotename(<span class="variable">@v</span>_desttab)<span class="operator">+</span>N<span class="string">' (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">            <span class="comment">--执行插入sql，从临时表插入到目标表中</span></span><br><span class="line">			<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">			<span class="keyword">SET</span> <span class="variable">@v</span>_rownum <span class="operator">=</span> @<span class="variable">@rowcount</span>;</span><br><span class="line">			<span class="comment">--记录日志</span></span><br><span class="line">			<span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">				  <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'同步到正式表：'</span><span class="operator">+</span><span class="variable">@v</span>_desttab<span class="operator">+</span><span class="string">',影响行数:'</span><span class="operator">+</span><span class="variable">@v</span>_rownum);</span><br><span class="line">            <span class="keyword">COMMIT</span> TRAN		  </span><br><span class="line">	     <span class="keyword">END</span> TRY</span><br><span class="line">	     <span class="comment">--catch异常，记录日志</span></span><br><span class="line">	     <span class="keyword">BEGIN</span> CATCH</span><br><span class="line">			<span class="keyword">BEGIN</span></span><br><span class="line">			  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN				</span><br><span class="line">				  <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">					  <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					      <span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="string">'插入日表异常：'</span><span class="operator">+</span>error_message());</span><br><span class="line">				  <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="comment">--添加目标表若不存在则进err表，存在则异常退出。			  </span></span><br><span class="line">				  IF OBJECT_ID(<span class="variable">@v</span>_desttab) <span class="keyword">IS</span> <span class="keyword">NULL</span></span><br><span class="line">				  <span class="keyword">BEGIN</span></span><br><span class="line">					 <span class="keyword">BEGIN</span> TRAN</span><br><span class="line">			  			<span class="keyword">SET</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'delete FROM STA_GANTRY_RUNSTATUS_ERR where batchno=@batchno'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@batchno VARCHAR(20)'</span>,<span class="variable">@batchno</span>;</span><br><span class="line"></span><br><span class="line">						<span class="keyword">set</span> <span class="variable">@v</span>_sql<span class="operator">=</span>N<span class="string">'insert into STA_GANTRY_RUNSTATUS_ERR (GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,loadtime,batchno) </span></span><br><span class="line"><span class="string">						select GANTRYID,SECTIONID,TIMESTAMP,VERSION,ID,STATUS,ERRORMSG,ISWORKING,WORKMODE,</span></span><br><span class="line"><span class="string">SYSTEMWARNING,TEMPERATUREWARNING,getdate(),@batchno</span></span><br><span class="line"><span class="string">						 from #TMP_STA_GANTRYRUNSTATUS a</span></span><br><span class="line"><span class="string">                        where a.tabdate=@v_tabdate'</span>;</span><br><span class="line">						<span class="keyword">EXEC</span> sp_executesql <span class="variable">@v</span>_sql,N<span class="string">'@v_tabdate NVARCHAR(50),@batchno VARCHAR(20)'</span>,<span class="variable">@v</span>_tabdate,<span class="variable">@batchno</span>;</span><br><span class="line">					 <span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">				  <span class="keyword">END</span>				</span><br><span class="line">			  <span class="keyword">ELSE</span></span><br><span class="line">				 <span class="keyword">BEGIN</span></span><br><span class="line">					RAISERROR(<span class="string">'插入数据表异常'</span>,<span class="number">16</span>,<span class="number">1</span>)</span><br><span class="line">					IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">					<span class="keyword">return</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">				 <span class="keyword">END</span>;</span><br><span class="line">	      <span class="keyword">END</span> CATCH;				</span><br><span class="line">        <span class="keyword">FETCH</span> NEXT <span class="keyword">FROM</span> v_cur <span class="keyword">INTO</span> <span class="variable">@v</span>_tabdate;</span><br><span class="line">	  <span class="keyword">END</span>;</span><br><span class="line">      </span><br><span class="line">  <span class="keyword">CLOSE</span> v_cur;</span><br><span class="line">  <span class="keyword">DEALLOCATE</span> v_cur;</span><br><span class="line">  IF(@<span class="variable">@TRANCOUNT</span><span class="operator">&gt;</span><span class="number">0</span>)  <span class="keyword">COMMIT</span> TRAN</span><br><span class="line">		<span class="keyword">BEGIN</span></span><br><span class="line">			<span class="keyword">BEGIN</span> TRAN</span><br><span class="line">				 <span class="keyword">INSERT</span> <span class="keyword">INTO</span> tb_proc_log(proc_name,batchno,starttime,endtime,stepdesc)</span><br><span class="line">					<span class="keyword">VALUES</span>(<span class="variable">@v</span>_procname,<span class="variable">@batchno</span>,<span class="variable">@v</span>_starttime,GETDATE(),<span class="variable">@v</span>_procname<span class="operator">+</span><span class="string">'存储过程结束'</span>);</span><br><span class="line">			<span class="keyword">COMMIT</span> TRAN;</span><br><span class="line">  <span class="keyword">END</span>;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>类加载机制</title>
+    <url>/2021/03/10/%E9%9D%A2%E8%AF%95/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象</p>
+<p>首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader</p>
+<p>类加载器一般分为三层（三种）</p>
+<p>Bootstrap Class Loader：引导类加载器，是最顶层的</p>
+<p>Extension Class Loader: 拓展类加载器，Boostrap的子类</p>
+<p>最底下的是Application Class  Loader:系统类加载器</p>
+<p>类加载器也多嘛，所以有个双亲委派的这种机制，就是说</p>
+<p>如果我要加载一个类(.java)，那么我默认是用Application类加载器来加载的，</p>
+<p>但是我不直接加载，我会往上抛给我的父类，Extension类加载器，如果它能够加载，它会继续上抛，直到super构造器进行加载，如果不能够加载，就会回调到最后一个能加载该类的加载器进行加载。</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
+<p>或者就是</p>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>]]></content>
       <categories>
         <category>面试</category>
       </categories>
@@ -2276,6 +2273,91 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>线程通信方式</title>
+    <url>/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h4 id="如何让两个线程按顺序执行？"><a href="#如何让两个线程按顺序执行？" class="headerlink" title="如何让两个线程按顺序执行？"></a>如何让两个线程按顺序执行？</h4><p>想要让A先执行完后，再让B执行</p>
+<blockquote>
+<p>普通的new两个线程，无法控制先后顺序</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testThread</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"A"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNum</span><span class="params">(String threadName)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i++ &lt; <span class="number">3</span>){</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">            System.out.println(threadName + <span class="string">" print: "</span> + i);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>这样子处理显然无法让A,B有顺序的执行。</p>
+<p>如果希望B在A执行完后才执行，可以使用thread.join()方法</p>
+<blockquote>
+<p>在线程B中添加让步方法join()</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">try</span>{</span><br><span class="line">                    A.join();	<span class="comment">//B给A让步</span></span><br><span class="line">                }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>B print: 1<br>A print: 1<br>B print: 2<br>A print: 2<br>A print: 3<br>B print: 3</p>
+</blockquote>
+<h5 id="线程通信方式其一：join"><a href="#线程通信方式其一：join" class="headerlink" title="线程通信方式其一：join()"></a>线程通信方式其一：join()</h5><h4 id="如何让线程以有序方式相交？"><a href="#如何让线程以有序方式相交？" class="headerlink" title="如何让线程以有序方式相交？"></a>如何让线程以有序方式相交？</h4><p>如果现在我们希望B在A打印完1之后立即开始打印1，2，3，然后A继续打印2，3呢</p>
+<p>这就需要更加细粒度的锁进行控制了，可以使用object.lock()和object.notify()的优势</p>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"A 1"</span>);</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                 <span class="comment">//调用lock.wait()使它进入等待状态的方法,移交对锁的控制</span></span><br><span class="line">                        lock.wait();</span><br><span class="line">                    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"A 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"A 3"</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"B 1"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 3"</span>);</span><br><span class="line">                <span class="comment">//调用该lock.notify()方法唤醒正在等待的A</span></span><br><span class="line">                    lock.notify();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>A 1<br>B 1<br>B 2<br>B 3<br>A 2<br>A 3</p>
+</blockquote>
+<h5 id="线程通信方式其二：object的lock-和notify-方法"><a href="#线程通信方式其二：object的lock-和notify-方法" class="headerlink" title="线程通信方式其二：object的lock()和notify()方法"></a>线程通信方式其二：object的lock()和notify()方法</h5><h4 id="在A-B-C都完成同步执行后，执行D"><a href="#在A-B-C都完成同步执行后，执行D" class="headerlink" title="在A,B,C都完成同步执行后，执行D"></a>在A,B,C都完成同步执行后，执行D</h4><p>前面说过如果有先后顺序，可以使用thread.join()方法，但是如果想让多个线程同步执行，最后在执行D，如何实现？</p>
+<p><code>Tips：普通使用thread.join()会让ABC顺序执行，起不到同步作用。</code></p>
+<p>三个线程同步运行，当三个线程全部完成运行后，D才开始运行</p>
+<p>这里我们可以使用<code>CountdownLatch</code>计数器功能</p>
+<ol>
+<li>创建一个定时器，设置一个初始值</li>
+<li>countDownLatch.await()进入等待状态，直到计时器变为0</li>
+<li>countDownLatch.countDown()在其他线程调用该方法，使计数器减一</li>
+<li>当计数器为0，countDownLatch.await()等待线程中方法将立即退出并执行方法</li>
+</ol>
+<blockquote>
+<p>练习代码如下</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> workers = <span class="number">3</span>;</span><br><span class="line">    CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(workers);</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(<span class="string">"D is waiting for other three workers"</span>);</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">           <span class="comment">//await()方法会检测计数值是否为0了，不是就继续等待</span></span><br><span class="line">                countDownLatch.await();</span><br><span class="line">                System.out.println(<span class="string">"All done, D starts working"</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }).start();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> threadName = <span class="string">'A'</span>; threadName &lt;= <span class="string">'C'</span>; threadName++){</span><br><span class="line">        <span class="keyword">final</span> String tN = String.valueOf(threadName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(tN + <span class="string">" is working"</span>);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(tN + <span class="string">"finished"</span>);</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>D is waiting for other three workers<br>C is working<br>A is working<br>B is working<br>Cfinished<br>Bfinished<br>Afinished<br>All done, D starts working</p>
+</blockquote>
+<p><strong>因此，CountDownLatch适用于一个线程需要等待多个线程的情况。</strong></p>
+<h5 id="线程通信方式其三：CountDownLatch计数器"><a href="#线程通信方式其三：CountDownLatch计数器" class="headerlink" title="线程通信方式其三：CountDownLatch计数器"></a>线程通信方式其三：CountDownLatch计数器</h5><h4 id="三个跑步者准备跑步"><a href="#三个跑步者准备跑步" class="headerlink" title="三个跑步者准备跑步"></a>三个跑步者准备跑步</h4><p>三个跑步者，在各自准备好了开跑。</p>
+<p>这里三个线程A,B,C需要分别进行准备，然后在三个人都准备好后开始同时运行。如何实现？</p>
+<p><strong>CountDownLatch用于计数下降，完成计数后的实施者是主线程，具有不可重复性。所以只有一个线程的一个await()会被响应。</strong></p>
+<p><strong>CyclicBarrier的下一步动作实施者还是“其他线程”本身，具有往复多次实施动作的特点。我们这里可以使用它来实现。</strong></p>
+<ol>
+<li>首先创建一个公共对象CyclicBarrier，并设置同时等待的线程数</li>
+<li>这些线程会开始同时进行准备，准备好后要等待其他人完成准备工作，所以要调用cyclicBarrier.await()方法来等待其他人</li>
+<li>当所有人都调用cyclicBarrier.await()方法时，意味着都准备好了，那么这些线程将开始同时执行。</li>
+</ol>
+<p>实现代码如下</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    CyclicBarrier cyclicBarrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">3</span>);</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> runnerName = <span class="string">'A'</span>; runnerName &lt;= <span class="string">'C'</span>; runnerName++){</span><br><span class="line">        <span class="keyword">final</span> String rN = String.valueOf(runnerName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="comment">//模拟不同的准备时间</span></span><br><span class="line">                <span class="keyword">long</span> prepareTime = random.nextInt(<span class="number">10000</span>) + <span class="number">100</span>;</span><br><span class="line">                System.out.println(rN + <span class="string">"is preparing for time:"</span> + prepareTime);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(prepareTime);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    System.out.println(rN + <span class="string">"is prepared, waiting for others"</span>);</span><br><span class="line">                    <span class="comment">//这个线程已经准备好了就要调用await()方法表示它准备好了</span></span><br><span class="line">                    cyclicBarrier.await();</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                } <span class="keyword">catch</span> (BrokenBarrierException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(rN + <span class="string">"Starts running"</span>);</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>Bis preparing for time:626<br>Cis preparing for time:812<br>Ais preparing for time:914<br>Bis prepared, waiting for others<br>Cis prepared, waiting for others<br>Ais prepared, waiting for others<br>AStarts running<br>BStarts running<br>CStarts running</p>
+</blockquote>
+<h5 id="线程通信方式其四：CyclicBarrier-信号量"><a href="#线程通信方式其四：CyclicBarrier-信号量" class="headerlink" title="线程通信方式其四：CyclicBarrier 信号量"></a>线程通信方式其四：CyclicBarrier 信号量</h5><h4 id="子线程将结果返回到主线程"><a href="#子线程将结果返回到主线程" class="headerlink" title="子线程将结果返回到主线程"></a>子线程将结果返回到主线程</h4><p>在开发中，我们会遇到需要fork子进程执行一些耗时任务，执行完后将结果返回给主线程，那么如何具体实现呢?</p>
+<p><strong>需要返回结果，显然需要使用Callable接口来实现</strong></p>
+<p>Callable通常会和FutureTask结合使用</p>
+<p>例如我们希望子线程计算1到100的总和，计算完毕后将结果返回给主线程，具体的代码如下：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    Callable&lt;Integer&gt; callable = <span class="keyword">new</span> Callable&lt;Integer&gt;(){</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">            System.out.println(<span class="string">"Task starts"</span>);</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//线程执行1加到100</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++){</span><br><span class="line">                result += i;</span><br><span class="line">            }</span><br><span class="line">            System.out.println(<span class="string">"Task finished and return result"</span>);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line">    <span class="comment">//通过FutureTask拿到callable的返回值</span></span><br><span class="line">    FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(callable);</span><br><span class="line">    <span class="comment">//子线程直接去跑</span></span><br><span class="line">    <span class="keyword">new</span> Thread(futureTask).start();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        System.out.println(<span class="string">"Before futureTask.get()"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Result:"</span> + futureTask.get());</span><br><span class="line">        System.out.println(<span class="string">"After futureTask.get()"</span>);</span><br><span class="line">    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }<span class="keyword">catch</span> (ExecutionException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>Before futureTask.get()<br>Task starts<br>Task finished and return result<br>Result:5050<br>After futureTask.get()</p>
+</blockquote>
+<p>主线程调用futureTask.get()方法时，会阻塞主线程。</p>
+<p>子线程Callable开始在内部执行并返回操作结果，通过get()方法获取结果后，主线程结束阻塞，继续运行</p>
+<blockquote>
+<p>Tips: 在这里，我们可以了解到FutureTask和Callable可以直接在主线程中获得子线程的结果，但是它们会阻塞主线程。当然，如果您不想阻塞主线程，可以考虑使用ExecutorService将FutureTask线程放入线程池来管理执行。</p>
+</blockquote>
+<p><strong>转载链接：<a href="https://juejin.cn/post/6963265870151811103">https://juejin.cn/post/6963265870151811103</a></strong></p>
+<p>（主要是手打代码熟悉这些方法的调用过程）</p>
+]]></content>
+      <categories>
+        <category>面试</category>
+      </categories>
+      <tags>
+        <tag>并发</tag>
       </tags>
   </entry>
   <entry>
@@ -2401,91 +2483,6 @@
       </categories>
       <tags>
         <tag>操作系统</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>线程通信方式</title>
-    <url>/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h4 id="如何让两个线程按顺序执行？"><a href="#如何让两个线程按顺序执行？" class="headerlink" title="如何让两个线程按顺序执行？"></a>如何让两个线程按顺序执行？</h4><p>想要让A先执行完后，再让B执行</p>
-<blockquote>
-<p>普通的new两个线程，无法控制先后顺序</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">testThread</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"A"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">printNum</span><span class="params">(String threadName)</span></span>{</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(i++ &lt; <span class="number">3</span>){</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">            System.out.println(threadName + <span class="string">" print: "</span> + i);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<p>这样子处理显然无法让A,B有顺序的执行。</p>
-<p>如果希望B在A执行完后才执行，可以使用thread.join()方法</p>
-<blockquote>
-<p>在线程B中添加让步方法join()</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">try</span>{</span><br><span class="line">                    A.join();	<span class="comment">//B给A让步</span></span><br><span class="line">                }<span class="keyword">catch</span>(Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                printNum(<span class="string">"B"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>B print: 1<br>A print: 1<br>B print: 2<br>A print: 2<br>A print: 3<br>B print: 3</p>
-</blockquote>
-<h5 id="线程通信方式其一：join"><a href="#线程通信方式其一：join" class="headerlink" title="线程通信方式其一：join()"></a>线程通信方式其一：join()</h5><h4 id="如何让线程以有序方式相交？"><a href="#如何让线程以有序方式相交？" class="headerlink" title="如何让线程以有序方式相交？"></a>如何让线程以有序方式相交？</h4><p>如果现在我们希望B在A打印完1之后立即开始打印1，2，3，然后A继续打印2，3呢</p>
-<p>这就需要更加细粒度的锁进行控制了，可以使用object.lock()和object.notify()的优势</p>
-<blockquote>
-<p>练习代码如下</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        Object lock = <span class="keyword">new</span> Object();</span><br><span class="line">        Thread A = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"A 1"</span>);</span><br><span class="line">                    <span class="keyword">try</span> {</span><br><span class="line">                 <span class="comment">//调用lock.wait()使它进入等待状态的方法,移交对锁的控制</span></span><br><span class="line">                        lock.wait();</span><br><span class="line">                    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                        e.printStackTrace();</span><br><span class="line">                    }</span><br><span class="line">                    System.out.println(<span class="string">"A 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"A 3"</span>);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        Thread B = <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">synchronized</span> (lock){</span><br><span class="line">                    System.out.println(<span class="string">"B 1"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 2"</span>);</span><br><span class="line">                    System.out.println(<span class="string">"B 3"</span>);</span><br><span class="line">                <span class="comment">//调用该lock.notify()方法唤醒正在等待的A</span></span><br><span class="line">                    lock.notify();</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        A.start();</span><br><span class="line">        B.start();</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>A 1<br>B 1<br>B 2<br>B 3<br>A 2<br>A 3</p>
-</blockquote>
-<h5 id="线程通信方式其二：object的lock-和notify-方法"><a href="#线程通信方式其二：object的lock-和notify-方法" class="headerlink" title="线程通信方式其二：object的lock()和notify()方法"></a>线程通信方式其二：object的lock()和notify()方法</h5><h4 id="在A-B-C都完成同步执行后，执行D"><a href="#在A-B-C都完成同步执行后，执行D" class="headerlink" title="在A,B,C都完成同步执行后，执行D"></a>在A,B,C都完成同步执行后，执行D</h4><p>前面说过如果有先后顺序，可以使用thread.join()方法，但是如果想让多个线程同步执行，最后在执行D，如何实现？</p>
-<p><code>Tips：普通使用thread.join()会让ABC顺序执行，起不到同步作用。</code></p>
-<p>三个线程同步运行，当三个线程全部完成运行后，D才开始运行</p>
-<p>这里我们可以使用<code>CountdownLatch</code>计数器功能</p>
-<ol>
-<li>创建一个定时器，设置一个初始值</li>
-<li>countDownLatch.await()进入等待状态，直到计时器变为0</li>
-<li>countDownLatch.countDown()在其他线程调用该方法，使计数器减一</li>
-<li>当计数器为0，countDownLatch.await()等待线程中方法将立即退出并执行方法</li>
-</ol>
-<blockquote>
-<p>练习代码如下</p>
-</blockquote>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    <span class="keyword">int</span> workers = <span class="number">3</span>;</span><br><span class="line">    CountDownLatch countDownLatch = <span class="keyword">new</span> CountDownLatch(workers);</span><br><span class="line">    <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">            System.out.println(<span class="string">"D is waiting for other three workers"</span>);</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">           <span class="comment">//await()方法会检测计数值是否为0了，不是就继续等待</span></span><br><span class="line">                countDownLatch.await();</span><br><span class="line">                System.out.println(<span class="string">"All done, D starts working"</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }).start();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> threadName = <span class="string">'A'</span>; threadName &lt;= <span class="string">'C'</span>; threadName++){</span><br><span class="line">        <span class="keyword">final</span> String tN = String.valueOf(threadName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                System.out.println(tN + <span class="string">" is working"</span>);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(tN + <span class="string">"finished"</span>);</span><br><span class="line">                countDownLatch.countDown();</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>D is waiting for other three workers<br>C is working<br>A is working<br>B is working<br>Cfinished<br>Bfinished<br>Afinished<br>All done, D starts working</p>
-</blockquote>
-<p><strong>因此，CountDownLatch适用于一个线程需要等待多个线程的情况。</strong></p>
-<h5 id="线程通信方式其三：CountDownLatch计数器"><a href="#线程通信方式其三：CountDownLatch计数器" class="headerlink" title="线程通信方式其三：CountDownLatch计数器"></a>线程通信方式其三：CountDownLatch计数器</h5><h4 id="三个跑步者准备跑步"><a href="#三个跑步者准备跑步" class="headerlink" title="三个跑步者准备跑步"></a>三个跑步者准备跑步</h4><p>三个跑步者，在各自准备好了开跑。</p>
-<p>这里三个线程A,B,C需要分别进行准备，然后在三个人都准备好后开始同时运行。如何实现？</p>
-<p><strong>CountDownLatch用于计数下降，完成计数后的实施者是主线程，具有不可重复性。所以只有一个线程的一个await()会被响应。</strong></p>
-<p><strong>CyclicBarrier的下一步动作实施者还是“其他线程”本身，具有往复多次实施动作的特点。我们这里可以使用它来实现。</strong></p>
-<ol>
-<li>首先创建一个公共对象CyclicBarrier，并设置同时等待的线程数</li>
-<li>这些线程会开始同时进行准备，准备好后要等待其他人完成准备工作，所以要调用cyclicBarrier.await()方法来等待其他人</li>
-<li>当所有人都调用cyclicBarrier.await()方法时，意味着都准备好了，那么这些线程将开始同时执行。</li>
-</ol>
-<p>实现代码如下</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    CyclicBarrier cyclicBarrier = <span class="keyword">new</span> CyclicBarrier(<span class="number">3</span>);</span><br><span class="line">    Random random = <span class="keyword">new</span> Random();</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">char</span> runnerName = <span class="string">'A'</span>; runnerName &lt;= <span class="string">'C'</span>; runnerName++){</span><br><span class="line">        <span class="keyword">final</span> String rN = String.valueOf(runnerName);</span><br><span class="line">        <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="comment">//模拟不同的准备时间</span></span><br><span class="line">                <span class="keyword">long</span> prepareTime = random.nextInt(<span class="number">10000</span>) + <span class="number">100</span>;</span><br><span class="line">                System.out.println(rN + <span class="string">"is preparing for time:"</span> + prepareTime);</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    Thread.sleep(prepareTime);</span><br><span class="line">                }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">try</span> {</span><br><span class="line">                    System.out.println(rN + <span class="string">"is prepared, waiting for others"</span>);</span><br><span class="line">                    <span class="comment">//这个线程已经准备好了就要调用await()方法表示它准备好了</span></span><br><span class="line">                    cyclicBarrier.await();</span><br><span class="line">                } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                } <span class="keyword">catch</span> (BrokenBarrierException e){</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                }</span><br><span class="line">                System.out.println(rN + <span class="string">"Starts running"</span>);</span><br><span class="line">            }</span><br><span class="line">        }).start();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<blockquote>
-<p>Bis preparing for time:626<br>Cis preparing for time:812<br>Ais preparing for time:914<br>Bis prepared, waiting for others<br>Cis prepared, waiting for others<br>Ais prepared, waiting for others<br>AStarts running<br>BStarts running<br>CStarts running</p>
-</blockquote>
-<h5 id="线程通信方式其四：CyclicBarrier-信号量"><a href="#线程通信方式其四：CyclicBarrier-信号量" class="headerlink" title="线程通信方式其四：CyclicBarrier 信号量"></a>线程通信方式其四：CyclicBarrier 信号量</h5><h4 id="子线程将结果返回到主线程"><a href="#子线程将结果返回到主线程" class="headerlink" title="子线程将结果返回到主线程"></a>子线程将结果返回到主线程</h4><p>在开发中，我们会遇到需要fork子进程执行一些耗时任务，执行完后将结果返回给主线程，那么如何具体实现呢?</p>
-<p><strong>需要返回结果，显然需要使用Callable接口来实现</strong></p>
-<p>Callable通常会和FutureTask结合使用</p>
-<p>例如我们希望子线程计算1到100的总和，计算完毕后将结果返回给主线程，具体的代码如下：</p>
-<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">    Callable&lt;Integer&gt; callable = <span class="keyword">new</span> Callable&lt;Integer&gt;(){</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> Integer <span class="title">call</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>{</span><br><span class="line">            System.out.println(<span class="string">"Task starts"</span>);</span><br><span class="line">            Thread.sleep(<span class="number">1000</span>);</span><br><span class="line">            <span class="keyword">int</span> result = <span class="number">0</span>;</span><br><span class="line">            <span class="comment">//线程执行1加到100</span></span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= <span class="number">100</span>; i++){</span><br><span class="line">                result += i;</span><br><span class="line">            }</span><br><span class="line">            System.out.println(<span class="string">"Task finished and return result"</span>);</span><br><span class="line">            <span class="keyword">return</span> result;</span><br><span class="line">        }</span><br><span class="line">    };</span><br><span class="line">    <span class="comment">//通过FutureTask拿到callable的返回值</span></span><br><span class="line">    FutureTask&lt;Integer&gt; futureTask = <span class="keyword">new</span> FutureTask&lt;&gt;(callable);</span><br><span class="line">    <span class="comment">//子线程直接去跑</span></span><br><span class="line">    <span class="keyword">new</span> Thread(futureTask).start();</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">        System.out.println(<span class="string">"Before futureTask.get()"</span>);</span><br><span class="line">        System.out.println(<span class="string">"Result:"</span> + futureTask.get());</span><br><span class="line">        System.out.println(<span class="string">"After futureTask.get()"</span>);</span><br><span class="line">    }<span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }<span class="keyword">catch</span> (ExecutionException e){</span><br><span class="line">        e.printStackTrace();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-<blockquote>
-<p>Before futureTask.get()<br>Task starts<br>Task finished and return result<br>Result:5050<br>After futureTask.get()</p>
-</blockquote>
-<p>主线程调用futureTask.get()方法时，会阻塞主线程。</p>
-<p>子线程Callable开始在内部执行并返回操作结果，通过get()方法获取结果后，主线程结束阻塞，继续运行</p>
-<blockquote>
-<p>Tips: 在这里，我们可以了解到FutureTask和Callable可以直接在主线程中获得子线程的结果，但是它们会阻塞主线程。当然，如果您不想阻塞主线程，可以考虑使用ExecutorService将FutureTask线程放入线程池来管理执行。</p>
-</blockquote>
-<p><strong>转载链接：<a href="https://juejin.cn/post/6963265870151811103">https://juejin.cn/post/6963265870151811103</a></strong></p>
-<p>（主要是手打代码熟悉这些方法的调用过程）</p>
-]]></content>
-      <categories>
-        <category>面试</category>
-      </categories>
-      <tags>
-        <tag>并发</tag>
       </tags>
   </entry>
   <entry>
