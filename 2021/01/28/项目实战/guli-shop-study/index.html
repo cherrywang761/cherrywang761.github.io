@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="项目准备1. 环境搭建 使用docker进行环境的搭建  1. docker安装mysql systemctl status docker        #查看docker状态 docker pull mysql:5.7            #下载mysql5.7 docker images                        #查看docker下载的镜像">
+<meta property="og:type" content="article">
+<meta property="og:title" content="guli_shop_study">
+<meta property="og:url" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/index.html">
+<meta property="og:site_name" content="Nonbioclock">
+<meta property="og:description" content="项目准备1. 环境搭建 使用docker进行环境的搭建  1. docker安装mysql systemctl status docker        #查看docker状态 docker pull mysql:5.7            #下载mysql5.7 docker images                        #查看docker下载的镜像">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129172344647.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129172417482.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129172444479.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129172602807.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129181305158.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129181407595.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129181502533.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129181703556.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129182145651.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129182249365.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201215606454.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/daa627be6f5ec78f0a9849eb2ebc5fa8.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129214142301.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129223222749.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210130143737073.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210130144037233.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210130221848437.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210130230737450.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210131160444727.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210131211859398.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210131221009829.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201123620551.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201124245123.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201124307547.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201164755700.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201165120387.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/fdc2f8288ce78208ae8283ba3badc009.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201195338664.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210201195415297.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/img_convert/444b9dd76dff765120b81ef622d1ab8c.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210202212428498.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210202220024318.png">
+<meta property="article:published_time" content="2021-01-28T13:44:54.000Z">
+<meta property="article:modified_time" content="2021-06-20T14:52:54.909Z">
+<meta property="article:author" content="CherryWang761">
+<meta property="article:tag" content="项目">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users/86137/AppData/Roaming/Typora/typora-user-images/image-20210129172344647.png">
+
+<link rel="canonical" href="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>guli_shop_study | Nonbioclock</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nonbioclock</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">没有生物钟的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          guli_shop_study
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-28 21:44:54" itemprop="dateCreated datePublished" datetime="2021-01-28T21:44:54+08:00">2021-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 22:52:54" itemprop="dateModified" datetime="2021-06-20T22:52:54+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/" class="post-meta-item leancloud_visitors" data-flag-title="guli_shop_study" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>8.3k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>8 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="项目准备"><a href="#项目准备" class="headerlink" title="项目准备"></a>项目准备</h2><h3 id="1-环境搭建"><a href="#1-环境搭建" class="headerlink" title="1. 环境搭建"></a>1. 环境搭建</h3><blockquote>
+<p>使用docker进行环境的搭建</p>
+</blockquote>
+<h4 id="1-docker安装mysql"><a href="#1-docker安装mysql" class="headerlink" title="1. docker安装mysql"></a>1. docker安装mysql</h4><blockquote>
+<p>systemctl status docker        #查看docker状态</p>
+<p>docker pull mysql:5.7            #下载mysql5.7</p>
+<p>docker images                        #查看docker下载的镜像</p>
+</blockquote>
+<a id="more"></a>
+
+<blockquote>
+<p>#创建实例并启动</p>
+<p>docker run -p 3306:3306 –name mysql \        #将容器的3306端口映射到主机的3306端口</p>
+<p>-v /mydata/mysql/log:/var/log/mysql \            #将配置文件夹挂载到主机</p>
+<p>-v /mydata/mysql/data:/var/lib/mysql \           #将日志文件夹挂载到主机</p>
+<p>-v /mydata/mysql/conf:/etc/mysql \                 #将配置文件夹挂载到主机</p>
+<p>-e MYSQL_ROOT_PASSWORD=root \                #初始化root用户的密码</p>
+<p>-d mysql:5.7                                                          #后台方式运行</p>
+</blockquote>
+<p>Tips: 遇到端口占用</p>
+<blockquote>
+<p>netstat -nap            #查看端口占用情况</p>
+<p>kill  pid</p>
+</blockquote>
+<p>Tips：遇到容器占用</p>
+<blockquote>
+<p>docker ps -a             #查看所有的container</p>
+<p>docker rm xxx         #删除容器</p>
+</blockquote>
+<ul>
+<li>进入mysql中</li>
+</ul>
+<blockquote>
+<p>docker exec -it mysql /bin/bash        #进入到mysql容器内部</p>
+</blockquote>
+<ul>
+<li>在挂载的文件夹中修改mysql的配置信息</li>
+</ul>
+<blockquote>
+<p>vi /mydata/mysql/conf/my.conf             #编辑配置文件</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[client]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysql]</span><br><span class="line">default-character-set=utf8</span><br><span class="line">[mysqld]</span><br><span class="line">init_connect=<span class="string">'SET collation_connection = utf8_unicode_ci'</span></span><br><span class="line">init_connect=<span class="string">'SET NAMES utf8'</span></span><br><span class="line">character-set-server=utf8</span><br><span class="line">collation-server=utf8_unicode_ci</span><br><span class="line">skip-character-set-client-handshake</span><br><span class="line">skip-name-resolve</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h4 id="2-docker安装Redis"><a href="#2-docker安装Redis" class="headerlink" title="2. docker安装Redis"></a>2. docker安装Redis</h4><ul>
+<li>下载镜像</li>
+</ul>
+<blockquote>
+<p>docker pull redis</p>
+</blockquote>
+<ul>
+<li>先把配置文件创建出来（不然挂载的时候就变成目录了）</li>
+</ul>
+<blockquote>
+<p>mkdir -p /mydata/redis/conf</p>
+<p>touch /mydata/redis/conf/redis.conf</p>
+</blockquote>
+<ul>
+<li>启动Redis实例</li>
+</ul>
+<blockquote>
+<p>docker run -p 6379:6379 –name redis \</p>
+<p> -v /mydata/redis/data:/data \</p>
+<p> -v /mydata/redis/conf/redis.conf:/etc/redis/redis.conf \</p>
+<p> -d redis redis-server /etc/redis/redis.conf</p>
+</blockquote>
+<ul>
+<li>进入redis客户端</li>
+</ul>
+<blockquote>
+<p>docker exec -it redis redis-cli</p>
+</blockquote>
+<ul>
+<li>配置redis持久化（默认是没有开启持久化的）</li>
+</ul>
+<blockquote>
+<p>vi /mydata/redis/conf/redis.conf</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendonly yes</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>其他的什么maven，git，vscode。。参考百度</p>
+<h3 id="2-创建项目微服务的骨架"><a href="#2-创建项目微服务的骨架" class="headerlink" title="2. 创建项目微服务的骨架"></a>2. 创建项目微服务的骨架</h3><h4 id="1-创建并导入项目存储的仓库"><a href="#1-创建并导入项目存储的仓库" class="headerlink" title="1. 创建并导入项目存储的仓库"></a>1. 创建并导入项目存储的仓库</h4><img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129172344647.png" alt="image-20210129172344647" style="zoom:50%;">
+
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129172417482.png" alt="image-20210129172417482" style="zoom:50%;">
+
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129172444479.png" alt="image-20210129172444479" style="zoom:50%;">
+
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129172602807.png" alt="image-20210129172602807" style="zoom:50%;">
+
+<ul>
+<li>创建出微服务的各个模块</li>
+</ul>
+<p>共同点：</p>
+<blockquote>
+<ol>
+<li>Spring Web， Open Feign(各个微服务项目间进行通信)</li>
+<li>每个服务包名：com.hong.gulimall.xxx</li>
+<li>模块名：gulimall-xxx</li>
+</ol>
+</blockquote>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129181305158.png" alt="image-20210129181305158" style="zoom:50%;">
+
+<h4 id="2-父工程配置"><a href="#2-父工程配置" class="headerlink" title="2. 父工程配置"></a>2. 父工程配置</h4><img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129181407595.png" alt="image-20210129181407595" style="zoom:67%;">
+
+<ul>
+<li>git版本控制配置（.gitignore文件配置，把这些过滤掉）</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129181502533.png" alt="image-20210129181502533" style="zoom:50%;">
+
+
+
+<h4 id="3-安装git提交的插件"><a href="#3-安装git提交的插件" class="headerlink" title="3. 安装git提交的插件"></a>3. 安装git提交的插件</h4><img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129181703556.png" alt="image-20210129181703556" style="zoom:50%;">
+
+<ul>
+<li>给码云提交代码</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129182145651.png" alt="image-20210129182145651" style="zoom:50%;">
+
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129182249365.png" alt="image-20210129182249365" style="zoom:50%;">
+
+
+
+<h3 id="3-数据库前期准备"><a href="#3-数据库前期准备" class="headerlink" title="3. 数据库前期准备"></a>3. 数据库前期准备</h3><blockquote>
+<p>建表不用外键！</p>
+</blockquote>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201215606454.png" alt="image-20210201215606454" style="zoom:50%;">
+
+
+
+<h2 id="快速搭建整体架构"><a href="#快速搭建整体架构" class="headerlink" title="快速搭建整体架构"></a>快速搭建整体架构</h2><img src="https://img-blog.csdnimg.cn/img_convert/daa627be6f5ec78f0a9849eb2ebc5fa8.png" alt="img" style="zoom:30%;"> 
+
+
+
+<h3 id="1-后台管理系统"><a href="#1-后台管理系统" class="headerlink" title="1. 后台管理系统"></a>1. 后台管理系统</h3><blockquote>
+<p>手写十分繁杂，需要一个脚手架（人人开源（Gitee））</p>
+</blockquote>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129214142301.png" alt="image-20210129214142301" style="zoom:67%;">
+
+<h4 id="1-renren-fast项目配置"><a href="#1-renren-fast项目配置" class="headerlink" title="1. renren-fast项目配置"></a>1. renren-fast项目配置</h4><ul>
+<li>将renren-fast项目导入guli_mall中</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210129223222749.png" alt="image-20210129223222749" style="zoom:50%;">
+
+<ul>
+<li>将renren-fast中的mysql.sql文件导入mysql中</li>
+<li>修改renren-fast的application.yml</li>
+</ul>
+<blockquote>
+<p>主要是数据库的配置信息要进行修改</p>
+</blockquote>
+<h4 id="2-renren-fast-vue前端配置"><a href="#2-renren-fast-vue前端配置" class="headerlink" title="2. renren-fast-vue前端配置"></a>2. renren-fast-vue前端配置</h4><p>node.js版本10.16.3</p>
+<blockquote>
+<p>npm install        #把前端需要的资源下载下来（类似于maven）</p>
+<p>npm run dev     #启动项目</p>
+</blockquote>
+<h4 id="3-renren-generator"><a href="#3-renren-generator" class="headerlink" title="3. renren-generator"></a>3. renren-generator</h4><p>基本做法同renren-fast</p>
+<ul>
+<li>使用代码生成器</li>
+</ul>
+<ol>
+<li>修改配置文件（application.yml）</li>
+</ol>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210130143737073.png" alt="image-20210130143737073" style="zoom:50%;">
+
+<p>generator.properties</p>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210130144037233.png" alt="image-20210130144037233" style="zoom:60%;">
+
+<p>启动后，到localhost:80，可以看到有哪些表，可以选择对哪些表进行逆向工程</p>
+<p>然后会下载一个zip包，把zip包中的main覆盖到gulimall-product中</p>
+<h4 id="4-代码生成器的部分依赖缺失解决"><a href="#4-代码生成器的部分依赖缺失解决" class="headerlink" title="4. 代码生成器的部分依赖缺失解决"></a>4. 代码生成器的部分依赖缺失解决</h4><ul>
+<li>建立一个公共的项目存放公共的依赖(gulimall-common)</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210130221848437.png" alt="image-20210130221848437" style="zoom:67%;">
+
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210130230737450.png" alt="image-20210130230737450" style="zoom:50%;">
+
+<ul>
+<li><p>修改renren-generator的Controller.vm，把@RequiresPermissions(“${moduleName}:${pathName}:info”)注释掉（这个是shiro的，我们一般用SpringSecurity）</p>
+</li>
+<li><p>重启逆向工程，重新进行下载并把controller进行替换</p>
+</li>
+</ul>
+<h4 id="5-整合mybatis-plus"><a href="#5-整合mybatis-plus" class="headerlink" title="5. 整合mybatis-plus"></a>5. 整合mybatis-plus</h4><ol>
+<li><p>导入依赖</p>
+</li>
+<li><p>配置</p>
+<ul>
+<li><p>配置数据源</p>
+<ul>
+<li>导入数据库的驱动</li>
+<li>在application.yml配置数据源相关信息</li>
+</ul>
+</li>
+<li><p>配置Mybatis-Plus</p>
+<ul>
+<li>使用@MapperScan</li>
+<li>告诉mybatis-plus，sql映射文件位置</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210131160444727.png" alt="image-20210131160444727" style="zoom:50%;">
+
+
+
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="6-其他模块进行逆向工程"><a href="#6-其他模块进行逆向工程" class="headerlink" title="6. 其他模块进行逆向工程"></a>6. 其他模块进行逆向工程</h4><ol>
+<li><p>改renren-generator的配置信息</p>
+</li>
+<li><p>下载zip包</p>
+</li>
+<li><p>copy到项目中</p>
+</li>
+<li><p>依赖common项目</p>
+</li>
+<li><p>添加模块中的数据库配置文件</p>
+</li>
+<li><p>进行测试</p>
+</li>
+</ol>
+<h2 id="搭建分布式系统的基本环境"><a href="#搭建分布式系统的基本环境" class="headerlink" title="搭建分布式系统的基本环境"></a>搭建分布式系统的基本环境</h2><h3 id="SpringCloud-Alibaba"><a href="#SpringCloud-Alibaba" class="headerlink" title="SpringCloud-Alibaba"></a>SpringCloud-Alibaba</h3><p>很多人可能会问，有了spring cloud这个微服务的框架，为什么又要使用spring cloud alibaba这个框架了？</p>
+<blockquote>
+<p>最重要的原因在于spring cloud中的几乎所有的组件都使用Netflix公司的产品，然后在其基础上做了一层封装。然而Netflix的服务发现组件Eureka已经停止更新；而其他的众多组件也快停止维护。所以急需其他的一些替代产品，也就是spring cloud alibaba，目前正处于蓬勃发展的态式。</p>
+</blockquote>
+<h4 id="Nacos作注册中心"><a href="#Nacos作注册中心" class="headerlink" title="Nacos作注册中心"></a>Nacos作注册中心</h4><ul>
+<li>导入依赖</li>
+</ul>
+<blockquote>
+<p>因为所以项目都需要服务注册中心，来将他们的服务注册上去，所以将依赖导入到common项目中</p>
+</blockquote>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210131211859398.png" alt="image-20210131211859398" style="zoom:50%;">
+
+<ul>
+<li>下载Nacos客户端</li>
+</ul>
+<p>Tips: 启动时报错！</p>
+<blockquote>
+<p>解决方法： 将startup.cmd中的set MODE=”cluster”修改为set MODE=”standalone”。</p>
+</blockquote>
+<ul>
+<li>需要在项目中配置Nacos服务器的地址</li>
+</ul>
+<blockquote>
+<p>spring.cloud.nacos.discovery.server-addr: localhost:8848</p>
+</blockquote>
+<ul>
+<li><p>使用@EnableDiscoveryClient注解开启服务注册与发现功能（我没有这步也能被发现。。）</p>
+</li>
+<li><p>要为每个注册服务取一个名字</p>
+</li>
+</ul>
+<blockquote>
+<p>spring.application.name: gulimall-coupon</p>
+</blockquote>
+<ul>
+<li>同理给所有项目都进行服务注册的配置</li>
+</ul>
+<h4 id="Feign声明式远程调用"><a href="#Feign声明式远程调用" class="headerlink" title="Feign声明式远程调用"></a>Feign声明式远程调用</h4><blockquote>
+<p>Feign是一个声明式的HTTP客户端，它的目的就是让远程调用更加简单。</p>
+<p>Feign提供了HTTP请求的模板，通过编写简单的接口和插入注解，就可以定义好HTTP请求的参数、格式、地址等信息。</p>
+<p>Feign整合了Ribbon（负载均衡）和Hystrix（服务熔断），可以让我们不再需要显示地使用这两个组件。</p>
+</blockquote>
+<ul>
+<li><p>远程调用的步骤</p>
+<ul>
+<li>引入依赖</li>
+</ul>
+<blockquote>
+<p>当初搭建项目骨架的时候已经引入了open feign的依赖了</p>
+</blockquote>
+<ul>
+<li>编写一个接口，告诉SpringCloud这个接口需要调用远程调用，声明接口的每一个方法都是调用哪个远程服务的哪个请求</li>
+</ul>
+<blockquote>
+<p>如果我们调用的是该远程接口下的membercoupons()方法，那么就会先去找远程服务gulimall-coupon所在的位置，然后再去调用/coupon/coupon/member/list路径下的方法。</p>
+</blockquote>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210131221009829.png" alt="image-20210131221009829" style="zoom:50%;">
+
+<ul>
+<li>开启远程调用的功能@EnableFeignClients</li>
+</ul>
+</li>
+</ul>
+<h4 id="Nacos作配置中心"><a href="#Nacos作配置中心" class="headerlink" title="Nacos作配置中心"></a>Nacos作配置中心</h4><ul>
+<li><p>引入依赖</p>
+<blockquote>
+<figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--Nacos: 配置中心来做配置管理--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>com.alibaba.cloud<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-cloud-starter-alibaba-nacos-config<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure></blockquote>
+</li>
+<li><p>新建bootstrap.properties配置文件中配置Nacos Config</p>
+</li>
+</ul>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.application.name</span>=<span class="string">gulimall-coupon</span></span><br><span class="line"><span class="meta">spring.cloud.nacos.config.server-addr</span>=<span class="string">localhost:8848</span></span><br></pre></td></tr></tbody></table></figure>
+<blockquote>
+<p>原来的配置修改，需要在配置文件中进行修改，然后重新部署，不能实时性的进行变换</p>
+</blockquote>
+<ul>
+<li><p>在nacos配置列表中添加配置</p>
+<ul>
+<li>进入到localhost:8848/nacos中的配置列表，新增配置</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201123620551.png" alt="image-20210201123620551" style="zoom:50%;">
+
+<ul>
+<li>在Controller类上添加@RefreshScope注解，每次需要动态获取配置信息时会刷新。</li>
+</ul>
+</li>
+</ul>
+<p><strong>测试现象</strong></p>
+<p><img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201124245123.png" alt="image-20210201124245123"></p>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201124307547.png" alt="image-20210201124307547" style="zoom:67%;">
+
+
+
+<h5 id="核心概念"><a href="#核心概念" class="headerlink" title="核心概念"></a>核心概念</h5><ul>
+<li>命名空间（为了配置隔离的）</li>
+</ul>
+<blockquote>
+<p>默认：public（保留空间）：默认新增的所有配置都在public空间。</p>
+<p>因为现实情况中要根据不同的环境进行不同的配置，就可以创建出对应的命名空间，如dev，prop啊</p>
+</blockquote>
+<ol>
+<li><strong>我们可以利用命名空间进行环境隔离</strong></li>
+</ol>
+<p><strong>具体使用哪个命名空间需要在bootstrap.properties中进行配置</strong></p>
+<blockquote>
+<p>spring.cloud.nacos.config.namespace=命名空间的UUID</p>
+</blockquote>
+<ol start="2">
+<li>每一个微服务之间互相隔离配置，每一个微服务都创建自己的命名空间，只加载自己命名空间下的配置</li>
+</ol>
+<ul>
+<li>配置集</li>
+</ul>
+<blockquote>
+<p>一组相关或者不相关的配置项的集合称为配置集</p>
+</blockquote>
+<p><strong>说白了就是所有配置的集合就是配置集</strong></p>
+<ul>
+<li>配置集ID</li>
+</ul>
+<blockquote>
+<p>类似于文件名，即Date ID</p>
+</blockquote>
+<ul>
+<li>配置分组</li>
+</ul>
+<blockquote>
+<p>默认所有的配置集都属于：DEFAULT_GROUP;</p>
+<p>比如可以在双11就用1111组，618用618组，520用520组啊等等</p>
+</blockquote>
+<p>如果需要改变使用其他组的配置文件需要在bootstrap.properties中添加分组的配置信息</p>
+<figure class="highlight properties"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">spring.cloud.nacos.config.group</span>=<span class="string">组的名字</span></span><br></pre></td></tr></tbody></table></figure>
+<p><strong>每个微服务创建自己的命名空间，使用配置分组区分环境</strong></p>
+<h5 id="拆分配置集"><a href="#拆分配置集" class="headerlink" title="拆分配置集"></a>拆分配置集</h5><ul>
+<li>我们可以把配置文件中的配置信息进行拆分，并部署到nacos配置列表中</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201164755700.png" alt="image-20210201164755700" style="zoom:67%;">
+
+<ul>
+<li>修改bootstrap配置信息</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201165120387.png" alt="image-20210201165120387" style="zoom:50%;">
+
+
+
+<h4 id="API网关"><a href="#API网关" class="headerlink" title="API网关"></a>API网关</h4><blockquote>
+<p>网关作为流量的入口，常用功能包括路由转发、鉴权、限流控制等。</p>
+<p>springcloud gateway作为SpringCloud推出的第二代网关框架，取代了Zuul网关。</p>
+</blockquote>
+<img src="https://img-blog.csdnimg.cn/img_convert/fdc2f8288ce78208ae8283ba3badc009.png" alt="img" style="zoom:50%;">
+
+<p>客户端发请求给服务端。中间有网关。先交给映射器，如果能处理就交给handler处理，而后要经过一系列filter，最后路由到指定的服务。</p>
+<ul>
+<li><strong>Route</strong>: 发一个请求给网关，网关要将请求路由到指定的服务。路由有id，目的地uri，断言的集合，匹配了断言就能到达指定位置，</li>
+<li><strong>Predicate</strong>断言: 就是java里的断言函数，匹配请求里的任何信息，包括请求头等。只要断言条件判断成功了，才给你路由到指定的地方。</li>
+<li><strong>Filter</strong>: 请求和响应都可以通过过滤器进行修改。</li>
+</ul>
+<h5 id="网关实操"><a href="#网关实操" class="headerlink" title="网关实操"></a>网关实操</h5><ul>
+<li><p>新建一个spring项目（初始化载入SpringCloud Route）</p>
+</li>
+<li><p>pom文件引入common依赖</p>
+</li>
+<li><p>开启服务注册发现</p>
+<ul>
+<li>@EnableDiscoveryClient</li>
+<li>配置Nacos服务注册中心地址</li>
+<li>配置bootstrap.properties配置文件</li>
+<li>配置路由规则</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201195338664.png" alt="image-20210201195338664" style="zoom:50%;">
+
+<ul>
+<li>启动测试（exclude = {DataSourceAutoConfiguration.class}）</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210201195415297.png" alt="image-20210201195415297" style="zoom:50%;">
+
+
+
+
+
+</li>
+</ul>
+<h3 id="前端知识快速入门"><a href="#前端知识快速入门" class="headerlink" title="前端知识快速入门"></a>前端知识快速入门</h3><img src="https://img-blog.csdnimg.cn/img_convert/444b9dd76dff765120b81ef622d1ab8c.png" alt="img" style="zoom:67%;">
+
+
+
+<h4 id="ES6"><a href="#ES6" class="headerlink" title="ES6"></a>ES6</h4><blockquote>
+<p>ECMAScript6.0简称ES6，是JavaScript语言的下一代版本。</p>
+<p>它是浏览器脚本语言的规范，而我们熟知的，如JavaScript则是规范的具体实现</p>
+</blockquote>
+<ul>
+<li>let</li>
+</ul>
+<blockquote>
+<p>let类似于var，是用来声明变量的。</p>
+<p>不同于var，var声明的变量往往会越域，而let声明的变量有严格的局部作用域</p>
+<p>var可以声明多次，而let只能声明一次</p>
+<p>var会变量提升，而let不存在变量提升</p>
+</blockquote>
+<ul>
+<li>const</li>
+</ul>
+<blockquote>
+<p>声明常量，一旦声明，不允许改变</p>
+</blockquote>
+<ul>
+<li>解构表达式</li>
+</ul>
+<blockquote>
+<p>#数组解构</p>
+<p>let arr = [1,2,3];</p>
+<p>let [a,b,c] = arr;        #这样子能够快速将数组中的内容赋值到指定的变量上</p>
+</blockquote>
+<blockquote>
+<p>#对象解构</p>
+<p>const person = {name: “jack”, “age:21”, “language: [‘java’,’js’,’css’]”}</p>
+<p>const {name,age,language} = person;    #这样子能够快速将对象的属性快速取出来</p>
+</blockquote>
+<ul>
+<li>字符串插入变量和表达式</li>
+</ul>
+<blockquote>
+<p>let info = (反引号)我是${abc},今年${age}岁了(反引号)    #字符串要用反引号包起来哦</p>
+</blockquote>
+<ul>
+<li>函数参数的默认值</li>
+</ul>
+<blockquote>
+<p>如果一个函数接收两个值，但是只传一个值，那么第二个值的默认值也是一个值</p>
+</blockquote>
+<ul>
+<li>不定参数</li>
+</ul>
+<blockquote>
+<p>function fun(…values){console.log(values.length)}    </p>
+<p>fun(1,2)        #输出2</p>
+<p>fun(1,2,3,4,5)        #输出5</p>
+</blockquote>
+<ul>
+<li>箭头函数</li>
+</ul>
+<blockquote>
+<p>var print = obj =&gt; console.log(obj);        #表示传一个obj参数并打印出来</p>
+<p>var sum2 = (a,b) =&gt; a + b;        #表示传入两个参数返回相加的值</p>
+</blockquote>
+<ul>
+<li>对象函数属性简写</li>
+</ul>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> person3 = {</span><br><span class="line">	name: <span class="string">"jack"</span>,</span><br><span class="line">	<span class="comment">//以前：</span></span><br><span class="line">	eat: <span class="function"><span class="keyword">function</span> (<span class="params">food</span>)</span>{</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="built_in">this</span>.name + <span class="string">"在吃"</span> + food);</span><br><span class="line">    },</span><br><span class="line">    <span class="comment">//现在，但是有个问题就是箭头函数无法获取this，只能用对象.属性</span></span><br><span class="line">    eat2: <span class="function"><span class="params">food</span> =&gt;</span> <span class="built_in">console</span>.log(person3.name + <span class="string">"在吃"</span> + food)</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>map函数</li>
+</ul>
+<blockquote>
+<p>map()：接收一个函数，将原数组中的所有元素用这个函数处理后放入新数组返回</p>
+</blockquote>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> arr = [<span class="string">'1'</span>,<span class="string">'20'</span>,<span class="string">'-10'</span>,<span class="string">'6'</span>];</span><br><span class="line">arr = arr.map(<span class="function"><span class="params">item</span> =&gt;</span> item*<span class="number">2</span>);		<span class="comment">//2,40,-20,12</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>reduce函数</li>
+</ul>
+<blockquote>
+<p>reduce()为数组中的每一个元素依次执行回调函数，不包括数组中被删除或从未被复制的元素</p>
+</blockquote>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> result = arr.reduce(<span class="function">(<span class="params">a,b</span>)=&gt;</span>{</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"上一次处理后："</span> + a);	</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"当前正在处理："</span> + b);</span><br><span class="line">    <span class="keyword">return</span> a + b; 	<span class="comment">//100(设100为初始值) + 2 + 40 +(-10) + 6 = 38</span></span><br><span class="line">},<span class="number">100</span>);</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>Promise方法</li>
+</ul>
+<blockquote>
+<p>Promise方法可以封装异步操作，<strong>它可以避免非常长的嵌套循环</strong></p>
+</blockquote>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> p = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function">(<span class="params">resolve, reject</span>)=&gt;</span>{	<span class="comment">//resolve表示如果操作成功，reject表示如果操作失败</span></span><br><span class="line">   <span class="comment">//异步操作</span></span><br><span class="line">   $.ajax({</span><br><span class="line">       url: <span class="string">"mock/user.json"</span>,</span><br><span class="line">       success:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{</span><br><span class="line">           resolve(data);</span><br><span class="line">       },</span><br><span class="line">       error:<span class="function"><span class="keyword">function</span>(<span class="params">data</span>)</span>{</span><br><span class="line">           reject(err);</span><br><span class="line">       }</span><br><span class="line">   });</span><br><span class="line">});</span><br><span class="line">p.then(<span class="function">(<span class="params">obj</span>)=&gt;</span> {</span><br><span class="line">    <span class="comment">//成功后续操作</span></span><br><span class="line">}).catch(<span class="function">(<span class="params">err</span>)=&gt;</span>{</span><br><span class="line">    <span class="comment">//失败后续操作</span></span><br><span class="line">})</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Vue"><a href="#Vue" class="headerlink" title="Vue"></a>Vue</h4><p><strong>不知道咋总结，反正实操就完事了</strong></p>
+<ul>
+<li>MVVM思想</li>
+</ul>
+<blockquote>
+<p>M：即Model，模型，包括数据和一些基本操作</p>
+<p>V： 即View，视图，页面渲染结果</p>
+<p>VM：即View-Model，模型与视图间的双向操作</p>
+</blockquote>
+
+
+
+
+<figure class="highlight html"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"X-UA-Compatible"</span> <span class="attr">content</span>=<span class="string">"ie=edge"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">v-model</span>=<span class="string">"num"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"num++"</span>&gt;</span>点赞<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">button</span> <span class="attr">v-on:click</span>=<span class="string">"cancel"</span>&gt;</span>取消<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span> {{name}} ,非常帅，有{{num}}个人为他点赞{{hello()}}<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">//{{表达式}}的这种格式我们称为插值表达式</span><br><span class="line"><span class="comment">&lt;!-- 导入依赖 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"./node_modules/vue/dist/vue.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//1、vue声明式渲染</span></span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> vm = <span class="keyword">new</span> Vue({ <span class="comment">//生成vue对象</span></span></span><br><span class="line"><span class="javascript">        el: <span class="string">"#app"</span>,<span class="comment">//绑定元素 div id="app"</span></span></span><br><span class="line"><span class="javascript">        data: {  <span class="comment">//封装数据</span></span></span><br><span class="line"><span class="javascript">            name: <span class="string">"张三"</span>,  <span class="comment">// 也可以使用{} //表单中可以取出</span></span></span><br><span class="line">            num: 1</span><br><span class="line">        },</span><br><span class="line"><span class="javascript">        methods:{  <span class="comment">//封装方法</span></span></span><br><span class="line"><span class="javascript">            <span class="function"><span class="title">cancel</span>(<span class="params"></span>)</span>{</span></span><br><span class="line"><span class="javascript">                <span class="built_in">this</span>.num -- ;</span></span><br><span class="line">            },</span><br><span class="line"><span class="javascript">            <span class="function"><span class="title">hello</span>(<span class="params"></span>)</span>{</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="string">"1"</span></span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    });</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//2、双向绑定,模型变化，视图变化。反之亦然。</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//3、事件处理</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//v-xx：指令</span></span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//1、创建vue实例，关联页面的模板，将自己的数据（data）渲染到关联的模板，响应式的</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//2、指令来简化对dom的一些操作。</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//3、声明方法来做更复杂的操作。methods里面可以封装方法。</span></span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>v-bind</li>
+</ul>
+<blockquote>
+<p>插值表达式只能用在标签体里面，v-bind的作用就是给标签的属性绑定值</p>
+</blockquote>
+<ul>
+<li>v-model</li>
+</ul>
+<blockquote>
+<p>v-model一般用于表单项，用于双向绑定的过程</p>
+</blockquote>
+<ul>
+<li>v-on</li>
+</ul>
+<blockquote>
+<p>v-on一般是用来绑定事件的，也可以用@来绑定</p>
+</blockquote>
+<ul>
+<li>v-for</li>
+</ul>
+<blockquote>
+<p>v-for一般是用来遍历循环的，遍历的时候都加上：key来区分不同的数据，提高Vue渲染效率</p>
+<p>v-for=”item in items”  :key=”item.id”</p>
+</blockquote>
+<ul>
+<li>v-if</li>
+</ul>
+<blockquote>
+<p>v-if,顾名思义，条件判断，当得到结果为true是，所在的元素才会被渲染</p>
+<p>v-show，当得到结果为true是，所在的元素才会被显示</p>
+<p>v-if是连语句都没有渲染进去，而v-show是通过样式将元素隐藏起来</p>
+</blockquote>
+<ul>
+<li>计算属性</li>
+</ul>
+<blockquote>
+<p>某些结果是基于之前数据实时计算出来的，我们可以利用计算属性来完成</p>
+<figure class="highlight javascript"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: {		<span class="comment">//可以实时的计算出总价</span></span><br><span class="line">		<span class="function"><span class="title">totalPrice</span>(<span class="params"></span>)</span>{</span><br><span class="line">            <span class="keyword">return</span> <span class="built_in">this</span>.xyjPrice*<span class="built_in">this</span>.xyjNum + <span class="built_in">this</span>.shzPrice*<span class="built_in">this</span>.shzNum</span><br><span class="line">        }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<ul>
+<li>侦听器</li>
+</ul>
+<blockquote>
+<p>watch可以让我们监控一个值的变化，从而做出相应的反应</p>
+<figure class="highlight js"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">watch: {		<span class="comment">//每次xyjNum的值发生变换，都会触发alert()显示数据</span></span><br><span class="line">		xyjNum: <span class="function"><span class="keyword">function</span>(<span class="params">newVal, oldVal</span>)</span>{</span><br><span class="line">			alert(<span class="string">"newVal"</span> + newVal + <span class="string">"==&gt; oldVal"</span> + oldVal)</span><br><span class="line">	}		</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<ul>
+<li>过滤器</li>
+</ul>
+<blockquote>
+<p>过滤器常用来处理文本格式化的操作，过滤器可以用在两个地方：双花括号插值和v-bind表达式</p>
+</blockquote>
+<h5 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h5><blockquote>
+<p>每个Vue实例在被创建时都要经过一系列的初始化过程：创建实例，装载模板，渲染模板等。</p>
+<p>Vue为生命周期中的每个状态都设置了钩子函数（监听函数）</p>
+<p>每当Vue实例出不同的生命周期是，对应的函数就会被触发调用。</p>
+</blockquote>
+<h3 id="Vue模块化开发"><a href="#Vue模块化开发" class="headerlink" title="Vue模块化开发"></a>Vue模块化开发</h3><ul>
+<li>全局安装webpack</li>
+</ul>
+<blockquote>
+<p>webpack可以理解为是前端的maven</p>
+</blockquote>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install webpack -g</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>全局安装vue脚手架</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g @vue/cli-init</span><br></pre></td></tr></tbody></table></figure>
+<ul>
+<li>配置vue环境变量</li>
+</ul>
+<blockquote>
+<p>全局找到vue.cmd，将它的上级目录添加到环境变量即可</p>
+</blockquote>
+<ul>
+<li>配置vue环境变量</li>
+</ul>
+<ul>
+<li>初始化vue项目</li>
+</ul>
+<blockquote>
+<p>新建一个vue-demo文件，在文件内启动cmd</p>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vue-demo</span><br></pre></td></tr></tbody></table></figure>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210202212428498.png" alt="image-20210202212428498" style="zoom:50%;">
+</blockquote>
+<h4 id="整合Element-UI"><a href="#整合Element-UI" class="headerlink" title="整合Element-UI"></a>整合Element-UI</h4><ul>
+<li>npm安装</li>
+</ul>
+<figure class="highlight bash"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i element-ui -S</span><br></pre></td></tr></tbody></table></figure>
+
+
+<ul>
+<li>在main页面导入element-ui</li>
+</ul>
+<img src="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210202220024318.png" alt="image-20210202220024318" style="zoom:50%;">
+
+
+
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\04\06\项目实战\guli-shop高级篇3\" rel="bookmark">guli-shop高级篇3</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\03\项目实战\guli-shop高级篇2\" rel="bookmark"></a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\02\21\项目实战\guli-shop高级篇1\" rel="bookmark">guli-shop高级篇1</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\01\28\项目实战\guli-shop-study2\" rel="bookmark">guli_shop_study</a></div>
+    </li>
+  </ul>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E9%A1%B9%E7%9B%AE/" rel="tag"><i class="fa fa-tag"></i> 项目</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/26/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/Docker%E5%AD%A6%E4%B9%A0/" rel="prev" title="Docker学习">
+      <i class="fa fa-chevron-left"></i> Docker学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/28/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop-study2/" rel="next" title="guli_shop_study">
+      guli_shop_study <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A1%B9%E7%9B%AE%E5%87%86%E5%A4%87"><span class="nav-number">1.</span> <span class="nav-text">项目准备</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="nav-number">1.1.</span> <span class="nav-text">1. 环境搭建</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-docker%E5%AE%89%E8%A3%85mysql"><span class="nav-number">1.1.1.</span> <span class="nav-text">1. docker安装mysql</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-docker%E5%AE%89%E8%A3%85Redis"><span class="nav-number">1.1.2.</span> <span class="nav-text">2. docker安装Redis</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E9%AA%A8%E6%9E%B6"><span class="nav-number">1.2.</span> <span class="nav-text">2. 创建项目微服务的骨架</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-%E5%88%9B%E5%BB%BA%E5%B9%B6%E5%AF%BC%E5%85%A5%E9%A1%B9%E7%9B%AE%E5%AD%98%E5%82%A8%E7%9A%84%E4%BB%93%E5%BA%93"><span class="nav-number">1.2.1.</span> <span class="nav-text">1. 创建并导入项目存储的仓库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-%E7%88%B6%E5%B7%A5%E7%A8%8B%E9%85%8D%E7%BD%AE"><span class="nav-number">1.2.2.</span> <span class="nav-text">2. 父工程配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-%E5%AE%89%E8%A3%85git%E6%8F%90%E4%BA%A4%E7%9A%84%E6%8F%92%E4%BB%B6"><span class="nav-number">1.2.3.</span> <span class="nav-text">3. 安装git提交的插件</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E6%95%B0%E6%8D%AE%E5%BA%93%E5%89%8D%E6%9C%9F%E5%87%86%E5%A4%87"><span class="nav-number">1.3.</span> <span class="nav-text">3. 数据库前期准备</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E6%90%AD%E5%BB%BA%E6%95%B4%E4%BD%93%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">快速搭建整体架构</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%90%8E%E5%8F%B0%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F"><span class="nav-number">2.1.</span> <span class="nav-text">1. 后台管理系统</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-renren-fast%E9%A1%B9%E7%9B%AE%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. renren-fast项目配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-renren-fast-vue%E5%89%8D%E7%AB%AF%E9%85%8D%E7%BD%AE"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. renren-fast-vue前端配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-renren-generator"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. renren-generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-%E4%BB%A3%E7%A0%81%E7%94%9F%E6%88%90%E5%99%A8%E7%9A%84%E9%83%A8%E5%88%86%E4%BE%9D%E8%B5%96%E7%BC%BA%E5%A4%B1%E8%A7%A3%E5%86%B3"><span class="nav-number">2.1.4.</span> <span class="nav-text">4. 代码生成器的部分依赖缺失解决</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-%E6%95%B4%E5%90%88mybatis-plus"><span class="nav-number">2.1.5.</span> <span class="nav-text">5. 整合mybatis-plus</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-%E5%85%B6%E4%BB%96%E6%A8%A1%E5%9D%97%E8%BF%9B%E8%A1%8C%E9%80%86%E5%90%91%E5%B7%A5%E7%A8%8B"><span class="nav-number">2.1.6.</span> <span class="nav-text">6. 其他模块进行逆向工程</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E5%88%86%E5%B8%83%E5%BC%8F%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">搭建分布式系统的基本环境</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SpringCloud-Alibaba"><span class="nav-number">3.1.</span> <span class="nav-text">SpringCloud-Alibaba</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Nacos%E4%BD%9C%E6%B3%A8%E5%86%8C%E4%B8%AD%E5%BF%83"><span class="nav-number">3.1.1.</span> <span class="nav-text">Nacos作注册中心</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Feign%E5%A3%B0%E6%98%8E%E5%BC%8F%E8%BF%9C%E7%A8%8B%E8%B0%83%E7%94%A8"><span class="nav-number">3.1.2.</span> <span class="nav-text">Feign声明式远程调用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Nacos%E4%BD%9C%E9%85%8D%E7%BD%AE%E4%B8%AD%E5%BF%83"><span class="nav-number">3.1.3.</span> <span class="nav-text">Nacos作配置中心</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">3.1.3.1.</span> <span class="nav-text">核心概念</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%8B%86%E5%88%86%E9%85%8D%E7%BD%AE%E9%9B%86"><span class="nav-number">3.1.3.2.</span> <span class="nav-text">拆分配置集</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#API%E7%BD%91%E5%85%B3"><span class="nav-number">3.1.4.</span> <span class="nav-text">API网关</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E7%BD%91%E5%85%B3%E5%AE%9E%E6%93%8D"><span class="nav-number">3.1.4.1.</span> <span class="nav-text">网关实操</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E7%9F%A5%E8%AF%86%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">3.2.</span> <span class="nav-text">前端知识快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ES6"><span class="nav-number">3.2.1.</span> <span class="nav-text">ES6</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Vue"><span class="nav-number">3.2.2.</span> <span class="nav-text">Vue</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0"><span class="nav-number">3.2.2.1.</span> <span class="nav-text">钩子函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue%E6%A8%A1%E5%9D%97%E5%8C%96%E5%BC%80%E5%8F%91"><span class="nav-number">3.3.</span> <span class="nav-text">Vue模块化开发</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%95%B4%E5%90%88Element-UI"><span class="nav-number">3.3.1.</span> <span class="nav-text">整合Element-UI</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CherryWang761</p>
+  <div class="site-description" itemprop="description">一个技术交流的平台</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CherryWang761</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">228k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:27</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"SEubJA0iXoCFhEtdun7BlYhh-gzGzoHsz","app_key":"zR78UlxNAiCsY7wCRsktXobq","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

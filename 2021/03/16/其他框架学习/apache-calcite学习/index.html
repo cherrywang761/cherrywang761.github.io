@@ -1,0 +1,688 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="Calcite前言简介Apache Calcite是一个动态数据管理的框架 它能对各种数据库（不同数据源）的查询进行封装，对外提供查询入口。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="apache calcite学习">
+<meta property="og:url" content="https://cherrywang761.github.io/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Nonbioclock">
+<meta property="og:description" content="Calcite前言简介Apache Calcite是一个动态数据管理的框架 它能对各种数据库（不同数据源）的查询进行封装，对外提供查询入口。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-16T02:14:12.000Z">
+<meta property="article:modified_time" content="2021-06-20T15:00:34.935Z">
+<meta property="article:author" content="CherryWang761">
+<meta property="article:tag" content="apache_calcite">
+<meta property="article:tag" content="SQL">
+<meta property="article:tag" content="java">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="https://cherrywang761.github.io/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>apache calcite学习 | Nonbioclock</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nonbioclock</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">没有生物钟的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          apache calcite学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-16 10:14:12" itemprop="dateCreated datePublished" datetime="2021-03-16T10:14:12+08:00">2021-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 23:00:34" itemprop="dateModified" datetime="2021-06-20T23:00:34+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E9%9D%A2%E8%AF%95/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="apache calcite学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="Calcite前言简介"><a href="#Calcite前言简介" class="headerlink" title="Calcite前言简介"></a>Calcite前言简介</h3><p>Apache Calcite是一个动态数据管理的框架</p>
+<p>它能对各种数据库（不同数据源）的查询进行封装，对外提供查询入口。</p>
+<a id="more"></a>
+
+<p>默认不指定数据库配置信息时，Calcite是基于Linq4j进行操作的，利用Linq4j进行groupBy和Join</p>
+<p>如果将</p>
+<blockquote>
+<p>Schema可以理解为database，只不过calcite有另外的一种叫法）</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Schema schema = ReflectiveSchema.create(calciteConnection, rootSchema, <span class="string">"hr"</span>, <span class="keyword">new</span> HrSchema());</span><br></pre></td></tr></tbody></table></figure>
+<p>替换成：</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">BasicDataSource dataSource = <span class="keyword">new</span> BasicDataSource();</span><br><span class="line">dataSource.setUrl(<span class="string">"jdbc:mysql://localhost"</span>);</span><br><span class="line">dataSource.setUsername(<span class="string">"username"</span>);</span><br><span class="line">dataSource.setPassword(<span class="string">"password"</span>);</span><br><span class="line">Schema schema = JdbcSchema.create(rootSchema, <span class="string">"hr"</span>, dataSource, <span class="keyword">null</span>, <span class="string">"name"</span>);</span><br></pre></td></tr></tbody></table></figure>
+<p>那么calcite将会使用jdbc进行同样的查询</p>
+<p>尽管数据和api都是一样的，但是背后的实现是完全不同的。</p>
+<p>Calcite是使用<strong>优化器规则</strong>将Join和GroupBy推送到源数据库的。</p>
+<p><strong>Calcite可以适配所有的数据源和数据格式，如果想要添加一种数据源，就需要编写一个适配器，告知Calcite该数据源中的哪些集合在逻辑上可以被认为是“表”。</strong></p>
+<p>Calcite工程的/example/csv目录中的子项目中提供了一个CSV适配器，这个适配器可完全应用在实际的应用中，但是它又是足够的简单以至于能够作为一个案例提供给你，供你自己编写适配器做参考。</p>
+<p>后面会详细说怎么编写适配器</p>
+<h4 id="Calcite的功能"><a href="#Calcite的功能" class="headerlink" title="Calcite的功能"></a>Calcite的功能</h4><ul>
+<li>查询解析,校验,优化</li>
+<li>从json文件中中创建模型</li>
+<li>支持大多数标准函数和聚合函数</li>
+<li>Linq4j front-end</li>
+<li>支持SQL功能</li>
+<li>本地或者远程JDBC,使用Avatica实现</li>
+<li>支持适配器</li>
+</ul>
+<h3 id="快速入门"><a href="#快速入门" class="headerlink" title="快速入门"></a>快速入门</h3><p>本节主要介绍一个CSV适配器怎么一步步创建和连接到Calcite</p>
+<p>适配器能够将一个目录下的csv文件表现成一个包装各种表的Schema</p>
+<p>CSV可以作为构建适配器到其他数据格式的模板，有几个重要的概念：</p>
+<ul>
+<li><p>通过SchemaFactory和Schema接口自定义schema</p>
+</li>
+<li><p>用json模型文件描述schema</p>
+</li>
+<li><p>用json模型文件描述视图view</p>
+</li>
+<li><p>通过表接口自定义表</p>
+</li>
+<li><p>确定表的记录类型</p>
+</li>
+<li><p>创建一个表的简单方法是使<code>ScannableTable</code>接口直接列举所有行</p>
+</li>
+<li><p>创建一个表的更高级方法是实现<code>FilterableTable</code>接口，并且能够根据一些简单的判断来进行过滤</p>
+</li>
+<li><p>创建一个表的高级方法是使用<code>TranslatableTable</code>类，这个类能够将规划规则转换为关系操作符</p>
+</li>
+</ul>
+<blockquote>
+<p>一些对calcite客户端进行操作的流程在这省略，详情见官网（其实就是我进不去。。）</p>
+<p><a target="_blank" rel="noopener" href="https://calcite.apache.org/docs/tutorial.html#download-and-build">https://calcite.apache.org/docs/tutorial.html#download-and-build</a></p>
+</blockquote>
+<h4 id="calcite怎么找到表的？"><a href="#calcite怎么找到表的？" class="headerlink" title="calcite怎么找到表的？"></a>calcite怎么找到表的？</h4><p>calcite可以看做是不包含存储层的数据库，所以它其实不需要关系任何文件格式。</p>
+<p>calcite的执行链条有很多步骤：</p>
+<ol>
+<li>基于在model文件中定义的Schema工厂类定义了一个<a target="_blank" rel="noopener" href="https://calcite.apache.org/javadocAggregate/org/apache/calcite/schema/Schema.html">Schema</a></li>
+<li>schema工厂创建一个schema，并且这个schema创建多张表，每张表都知道如何扫描csv文件获取数据</li>
+<li>calcite解析了查询语句并创建了执行计划来使用这些表</li>
+<li>在执行查询中，calcite利用表来读取数据</li>
+</ol>
+<blockquote>
+<p>用JDBC来举个例子</p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">#JSON格式的模型路径</span><br><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'SALES',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'SALES',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',</span><br><span class="line">      operand: {</span><br><span class="line">        directory: 'target/test-classes/sales'</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>上面的模型定义了一个SALES的schema，是由org.apache.calcite.adapter.csv.CsvSchemaFactory提供的</p>
+<p>这个插件类是calcite-example-csv项目的一部分并且实现了<a target="_blank" rel="noopener" href="https://calcite.apache.org/javadocAggregate/org/apache/calcite/schema/SchemaFactory.html">SchemaFactory</a>接口。</p>
+<p>Schema的create方法可以用来实例化一个模式，从模型文件传入目录参数:</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Schema <span class="title">create</span><span class="params">(SchemaPlus parentSchema, String name,</span></span></span><br><span class="line"><span class="function"><span class="params">    Map&lt;String, Object&gt; operand)</span> </span>{</span><br><span class="line">  String directory = (String) operand.get(<span class="string">"directory"</span>);	<span class="comment">//文件目录地址</span></span><br><span class="line">  String flavorName = (String) operand.get(<span class="string">"flavor"</span>);	<span class="comment">//falvor是查询规则</span></span><br><span class="line">  CsvTable.Flavor flavor;</span><br><span class="line">  <span class="keyword">if</span> (flavorName == <span class="keyword">null</span>) {		</span><br><span class="line">    flavor = CsvTable.Flavor.SCANNABLE;</span><br><span class="line">  } <span class="keyword">else</span> {</span><br><span class="line">    flavor = CsvTable.Flavor.valueOf(flavorName.toUpperCase());</span><br><span class="line">  }</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> CsvSchema(		<span class="comment">//感兴趣可以去看一下CsvSchema的getTableMap()方法</span></span><br><span class="line">      <span class="keyword">new</span> File(directory),</span><br><span class="line">      flavor);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>schema扫描模型文件中定义的目录并且根据以.csv || .csv.gz 结尾的文件创建对应的表</p>
+<p>它可以从directory目录中读取到EMPS.csv和DEPTS.csv，并根据这两个csv文件生成EMPS和DEPTS表</p>
+<h4 id="calcite中的视图"><a href="#calcite中的视图" class="headerlink" title="calcite中的视图"></a>calcite中的视图</h4><p>视图其实就是一条取了名字的查询语句，它是一个虚拟表，存储的是查询后的数据</p>
+<p>下面是定义了一个视图的schema：</p>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'SALES',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'SALES',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.csv.CsvSchemaFactory',</span><br><span class="line">      operand: {</span><br><span class="line">        directory: 'target/test-classes/sales'</span><br><span class="line">      },</span><br><span class="line">      tables: [</span><br><span class="line">        {</span><br><span class="line">          name: 'FEMALE_EMPS',</span><br><span class="line">          type: 'view',		#定义类型为视图view</span><br><span class="line">          sql: 'SELECT * FROM emps WHERE gender = \'F\''	#json单引号用反斜杠转义</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="Calcite自定义表"><a href="#Calcite自定义表" class="headerlink" title="Calcite自定义表"></a>Calcite自定义表</h4><blockquote>
+<p>准备一个.csv || .csv.gz结尾的表文件，编写一个适配器如下</p>
+</blockquote>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'CUSTOM_TABLE',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'CUSTOM_TABLE',</span><br><span class="line">      tables: [</span><br><span class="line">        {</span><br><span class="line">          name: 'EMPS',</span><br><span class="line">          type: 'custom',</span><br><span class="line">          factory: 'org.apache.calcite.adapter.csv.CsvTableFactory',</span><br><span class="line">          operand: {</span><br><span class="line">            file: 'target/test-classes/sales/EMPS.csv.gz',</span><br><span class="line">            flavor: "scannable"</span><br><span class="line">          }</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>这是一个常规的schema，并且包含了一个由<code>org.apache.calcite.adapter.csv.CsvTableFactory</code>支持的自定义表，它实现了Calcite的接口<code>TableFactory</code>，它的<code>create</code>方法实例化一个<code>CsvScannableTable</code>，传入来自模型文件的<code>file</code>参数：</p>
+<figure class="highlight plain"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public CsvTable create(SchemaPlus schema, String name,</span><br><span class="line">    Map&lt;String, Object&gt; map, RelDataType rowType) {</span><br><span class="line">  String fileName = (String) map.get("file");</span><br><span class="line">  final File file = new File(fileName);</span><br><span class="line">  final RelProtoDataType protoRowType =</span><br><span class="line">      rowType != null ? RelDataTypeImpl.proto(rowType) : null;</span><br><span class="line">  return new CsvScannableTable(file, protoRowType);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>实现自定义的表比实现自定义模式更简单，虽然都创建了相似的Table接口实现，但自定义表不需要实现元数据的发现。</p>
+<h4 id="执行计划优化查询"><a href="#执行计划优化查询" class="headerlink" title="执行计划优化查询"></a>执行计划优化查询</h4><p>Calcite支持通过添加查询计划规则来优化查询。</p>
+<h2 id="优化器？-todo"><a href="#优化器？-todo" class="headerlink" title="优化器？//todo"></a>优化器？//todo</h2><h4 id="简述查询优化过程"><a href="#简述查询优化过程" class="headerlink" title="简述查询优化过程"></a>简述查询优化过程</h4><blockquote>
+<p>Calcite的查询计划非常巧妙</p>
+</blockquote>
+<ol>
+<li><p>Calcite并没有按照规定的顺序去触发规则，查询优化过程会尝试分枝树中很多分支</p>
+<p>如果规则A和规则B都符合查询运算符树中的给定部分，Calcite会同时触发他们。</p>
+</li>
+<li><p>Calcite会用”成本”来筛选计划，但是成本模型不会阻止Calcite选择短期内成本更昂贵的计划（可能长远来说成本会更平滑低廉，<code>括号内容我猜的嘻嘻</code>）</p>
+</li>
+<li><blockquote>
+<p>很多优化器都会有一个线性优化方案。在面对选择规则A或者规则B时，如上所述，这样的优化器需要立即选择。一般的优化器可能会有这样的策略，例如”将规则A应用于整棵树，然后将规则B应用于整棵树”，或者基于成本的策略，使用成本更便宜的结果的规则。</p>
+<p>其实这些做法是一种妥协，但是Calcite并没有这么做，这使得组合各种规则变得简单。如果你想要将规则组合在一起以识别具有规则的物化视图从而能够从csv或者jdbc源系统中读取数据的话，你只需要将Calcite设置为所有规则的集合并告知她即可。</p>
+<p>Calcite使用了一个成本模型。这个成本模型决定哪个计划最终得到执行，并且有时候会对搜索树进行剪纸操作以防止搜索空间爆炸，但是它不会强制你在规则A还是B之间做出选择。这个非常重要，因为这能避免实际上并不是最佳的搜索空间中陷入局部极小值。</p>
+<p>这个成本模型也是”可插拔”的，就像它基于的表和查询运算符统计一样。这个会在后面讲到。</p>
+<p>(不理解等学会了回来。。)</p>
+</blockquote>
+</li>
+</ol>
+<h4 id="JDBC适配器"><a href="#JDBC适配器" class="headerlink" title="JDBC适配器"></a>JDBC适配器</h4>   <figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  version: '1.0',</span><br><span class="line">  defaultSchema: 'FOODMART',</span><br><span class="line">  schemas: [</span><br><span class="line">    {</span><br><span class="line">      name: 'FOODMART',</span><br><span class="line">      type: 'custom',</span><br><span class="line">      factory: 'org.apache.calcite.adapter.jdbc.JdbcSchema$Factory',</span><br><span class="line">      operand: {</span><br><span class="line">        jdbcDriver: 'com.mysql.jdbc.Driver',</span><br><span class="line">        jdbcUrl: 'jdbc:mysql://localhost/foodmart',</span><br><span class="line">        jdbcUser: 'foodmart',</span><br><span class="line">        jdbcPassword: 'foodmart'</span><br><span class="line">      }</span><br><span class="line">    }</span><br><span class="line">  ]</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>   限制：JDBC适配器目前只能下推表扫描的操作；所有的其他的操作（过滤，链接，聚合等等）都没有发生在Calcite中。如果Calcite查询是建立在单一的JDBC数据库中的表上，原则上整个查询应该都转到数据库中执行。如果数据表是来自于多个JDBC源，或者是JDBC和非JDBC的混合源，Calcite将使用最有效的分布式查询方法。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/apache-calcite/" rel="tag"><i class="fa fa-tag"></i> apache_calcite</a>
+              <a href="/tags/SQL/" rel="tag"><i class="fa fa-tag"></i> SQL</a>
+              <a href="/tags/java/" rel="tag"><i class="fa fa-tag"></i> java</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="hadoop学习笔记">
+      <i class="fa fa-chevron-left"></i> hadoop学习笔记
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/04/06/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" rel="next" title="guli-shop高级篇3">
+      guli-shop高级篇3 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Calcite%E5%89%8D%E8%A8%80%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">Calcite前言简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Calcite%E7%9A%84%E5%8A%9F%E8%83%BD"><span class="nav-number">1.1.</span> <span class="nav-text">Calcite的功能</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BF%AB%E9%80%9F%E5%85%A5%E9%97%A8"><span class="nav-number">2.</span> <span class="nav-text">快速入门</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#calcite%E6%80%8E%E4%B9%88%E6%89%BE%E5%88%B0%E8%A1%A8%E7%9A%84%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">calcite怎么找到表的？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#calcite%E4%B8%AD%E7%9A%84%E8%A7%86%E5%9B%BE"><span class="nav-number">2.2.</span> <span class="nav-text">calcite中的视图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Calcite%E8%87%AA%E5%AE%9A%E4%B9%89%E8%A1%A8"><span class="nav-number">2.3.</span> <span class="nav-text">Calcite自定义表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%89%A7%E8%A1%8C%E8%AE%A1%E5%88%92%E4%BC%98%E5%8C%96%E6%9F%A5%E8%AF%A2"><span class="nav-number">2.4.</span> <span class="nav-text">执行计划优化查询</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8%EF%BC%9F-todo"><span class="nav-number"></span> <span class="nav-text">优化器？&#x2F;&#x2F;todo</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AE%80%E8%BF%B0%E6%9F%A5%E8%AF%A2%E4%BC%98%E5%8C%96%E8%BF%87%E7%A8%8B"><span class="nav-number">0.1.</span> <span class="nav-text">简述查询优化过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#JDBC%E9%80%82%E9%85%8D%E5%99%A8"><span class="nav-number">0.2.</span> <span class="nav-text">JDBC适配器</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CherryWang761</p>
+  <div class="site-description" itemprop="description">一个技术交流的平台</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CherryWang761</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">228k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:27</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"SEubJA0iXoCFhEtdun7BlYhh-gzGzoHsz","app_key":"zR78UlxNAiCsY7wCRsktXobq","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

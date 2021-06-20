@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="RPC框架系统架构从以前的单一系统走向分布式系统，好处：  对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。） 对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。 提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）  而随着集中式架构向分布式架构进行转变，应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RPC框架">
+<meta property="og:url" content="https://cherrywang761.github.io/2021/01/23/%E5%88%86%E5%B8%83%E5%BC%8F/RPC/index.html">
+<meta property="og:site_name" content="Nonbioclock">
+<meta property="og:description" content="RPC框架系统架构从以前的单一系统走向分布式系统，好处：  对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。） 对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。 提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）  而随着集中式架构向分布式架构进行转变，应">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/23/15fe94c7fd4edb39?imageView2/0/w/1280/h/960/ignore-error/1">
+<meta property="og:image" content="https://user-gold-cdn.xitu.io/2017/11/23/15fe963722bccc10?imageView2/0/w/1280/h/960/ignore-error/1">
+<meta property="article:published_time" content="2021-01-23T12:53:57.000Z">
+<meta property="article:modified_time" content="2021-06-20T15:09:14.402Z">
+<meta property="article:author" content="CherryWang761">
+<meta property="article:tag" content="操作系统">
+<meta property="article:tag" content="java基础">
+<meta property="article:tag" content="分布式">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1">
+
+<link rel="canonical" href="https://cherrywang761.github.io/2021/01/23/%E5%88%86%E5%B8%83%E5%BC%8F/RPC/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>RPC框架 | Nonbioclock</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nonbioclock</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">没有生物钟的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/01/23/%E5%88%86%E5%B8%83%E5%BC%8F/RPC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          RPC框架
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-01-23 20:53:57" itemprop="dateCreated datePublished" datetime="2021-01-23T20:53:57+08:00">2021-01-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 23:09:14" itemprop="dateModified" datetime="2021-06-20T23:09:14+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/01/23/%E5%88%86%E5%B8%83%E5%BC%8F/RPC/" class="post-meta-item leancloud_visitors" data-flag-title="RPC框架" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h4 id="RPC框架"><a href="#RPC框架" class="headerlink" title="RPC框架"></a>RPC框架</h4><p>系统架构从以前的单一系统走向分布式系统，好处：</p>
+<ul>
+<li>对业务模块的拆分，能够使得各个模块的职责更加清晰明了（虽然模块职责边界划分十分头疼。。）</li>
+<li>对业务模块细致的划分能使得项目在管理上面会更加方便，从代码角度上看，开发和维护的成本也会降低。</li>
+<li>提高了系统的容错率，单一系统如果宕机就GG，分布式一般都会使用冗余的方式来提高可用性（坏处就是成本提高了。。）</li>
+</ul>
+<p>而随着集中式架构向分布式架构进行转变，应用系统之间的服务调用于通讯问题成为了首要解决的需求。</p>
+<p>所以RPC站了出来，它就是用来让分布式应用更加简单的。它让调本地方法和调其他模块的方法在外表上看起来是一样的。。（<strong>RPC 框架需提供一种透明调用机制让使用者不必显式的区分本地调用和远程调用。</strong>）</p>
+<blockquote>
+<p>RPC 的全称是 Remote Procedure Call 是一种<strong>进程间通信</strong>方式。 它允许程序调用另一个进程上（通常是共享网络的另一台机器上）的过程或函数，而<strong>不用程序员显式编码这个远程调用的细节</strong>。</p>
+</blockquote>
+<p>RPC解决三件事（公平，公平，还是tm的公平）</p>
+<ul>
+<li>进程间通讯</li>
+<li>提供和本地方法调用一样的调用机制</li>
+<li>屏蔽程序员对远程调用的细节实现</li>
+</ul>
+<h4 id="进程通信问题"><a href="#进程通信问题" class="headerlink" title="进程通信问题"></a>进程通信问题</h4><p>​    对于分布式环境，RPC能够帮助我们解决不同服务器之间的通信及数据传输问题（能够做好方法调用到数据的转换，然后借助网络进行数据传递的内部转换）</p>
+<p>​    rpc客户端向rpc服务端发起远程服务调用。</p>
+<blockquote>
+<p>通过请求的封装，参数的封装，序列化，编码，约定协议传输，解析请求，处理请求，封装返回消息数据，再进行返回数据的序列化， 编码，再通过网络返回给客户端</p>
+</blockquote>
+<p>上述的操作，都需要进行封装，屏蔽远程调用的细节</p>
+<p>什么样的内容封装才能让我们觉得像以本地调用方式调用远程服务呢？</p>
+<p>显而易见：代理</p>
+<p>代理有两种方式</p>
+<ul>
+<li>jdk动态代理（接口代理）</li>
+<li>cglib代理（子类代理）</li>
+</ul>
+<p>RPC还是倾向于动态代理，尽管字节码方式高效强大，但是动态代理易于维护</p>
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>rpc需要对远程调用内部细节封装，主要由以下几个方面</p>
+<ul>
+<li>序列码</li>
+<li>编解码</li>
+<li>协议</li>
+<li>网络</li>
+</ul>
+<p>从发起远程调用——&gt;接受数据返回结果，过程如下：</p>
+<ol>
+<li>client以本地调用方式调用服务</li>
+<li>client stub（客户端存根）接受调用负责将方法参数组装成能够进行网络传输的消息体</li>
+<li>client stub 找到服务地址，将消息发送给服务端</li>
+<li>server stub（服务端存根）接收到消息后进行解码</li>
+<li>server stub根据解码结果调用本地服务</li>
+<li>本地服务执行将结果返回给server stub</li>
+<li>server stub将返回结果打包成消息体发送给消费方</li>
+<li>client stub接受信息并解码</li>
+<li>client stub将结果传输给client，消费方得到最终结果</li>
+</ol>
+<p>RPC框架相当于封装了step2-step8这些步骤，对外只暴露client和client stub沟通的接口</p>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe93fb307ec7e9?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+<h4 id="进一步的拆解"><a href="#进一步的拆解" class="headerlink" title="进一步的拆解"></a>进一步的拆解</h4><blockquote>
+<p>基本的形式要记住，记住方便理解</p>
+</blockquote>
+<img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe94c7fd4edb39?imageView2/0/w/1280/h/960/ignore-error/1" alt="img" style="zoom:150%;">
+
+
+
+<p>​    RPC 服务端通过 RpcServer 去暴露服务接口，而客户端通过 RpcClient 去获取服务接口。</p>
+<p>​    客户端像调用本地方法一样去调用远程接口方法，RPC 框架提供接口的代理实现，实际的调用将委托给代理 RpcProxy。</p>
+<p>​    代理封装调用信息并将调用转交给 RpcInvoker 去实际执行。</p>
+<p>​    在客户端的 RpcInvoker 通过连接器 RpcConnector 去维持与服务端的通道 RpcChannel，并使用 RpcProtocol 执行协议编码（encode）并将编码后的请求消息通过通道发送给服务端。</p>
+<p>​    RPC 服务端接收器 RpcAcceptor 接收客户端的调用请求，同样使用 RpcProtocol 执行协议解码（decode）。</p>
+<p>​    解码后的调用信息传递给 RpcProcessor 去控制处理调用过程，最后再委托调用给 RpcInvoker 去实际执行并返回调用结果。</p>
+<ul>
+<li>RpcServer（生产者接口）</li>
+<li>RpcClient（消费者接口）</li>
+<li>RpcProxy（代理服务）</li>
+<li>RpcProtocol（编解码服务）</li>
+<li>网络连接器</li>
+</ul>
+<blockquote>
+<p>RPC与MQ比较</p>
+</blockquote>
+<p><img src="https://user-gold-cdn.xitu.io/2017/11/23/15fe963722bccc10?imageView2/0/w/1280/h/960/ignore-error/1" alt="img"></p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\并发知识\ThreadLocal\" rel="bookmark">ThreadLocal</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\Spring\Spring的IOC和AOP\" rel="bookmark">IOC与AOP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\05\17\操作系统\大端系统小端系统\" rel="bookmark">红黑树</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\操作系统\排查CPU高负载问题+epoll\" rel="bookmark">排查CPU高负载问题</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\操作系统\操作系统\" rel="bookmark">OS问题通俗版</a></div>
+    </li>
+  </ul>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 操作系统</a>
+              <a href="/tags/java%E5%9F%BA%E7%A1%80/" rel="tag"><i class="fa fa-tag"></i> java基础</a>
+              <a href="/tags/%E5%88%86%E5%B8%83%E5%BC%8F/" rel="tag"><i class="fa fa-tag"></i> 分布式</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/01/23/%E7%AE%97%E6%B3%95/%E7%AE%97%E6%B3%95%E5%B9%B6%E6%9F%A5%E9%9B%86%E7%AF%87/" rel="prev" title="算法并查集篇">
+      <i class="fa fa-chevron-left"></i> 算法并查集篇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/01/23/Java%E5%9F%BA%E7%A1%80/%E5%85%A8%E5%B1%80%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/" rel="next" title="全局异常处理">
+      全局异常处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#RPC%E6%A1%86%E6%9E%B6"><span class="nav-number">1.</span> <span class="nav-text">RPC框架</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B%E9%80%9A%E4%BF%A1%E9%97%AE%E9%A2%98"><span class="nav-number">2.</span> <span class="nav-text">进程通信问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E5%8E%9F%E7%90%86"><span class="nav-number"></span> <span class="nav-text">基本原理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%BF%9B%E4%B8%80%E6%AD%A5%E7%9A%84%E6%8B%86%E8%A7%A3"><span class="nav-number">1.</span> <span class="nav-text">进一步的拆解</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CherryWang761</p>
+  <div class="site-description" itemprop="description">一个技术交流的平台</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CherryWang761</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">228k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:27</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"SEubJA0iXoCFhEtdun7BlYhh-gzGzoHsz","app_key":"zR78UlxNAiCsY7wCRsktXobq","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

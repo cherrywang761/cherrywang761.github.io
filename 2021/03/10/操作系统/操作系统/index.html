@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bus.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="1. 操作系统概念OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死） Kernel内核决定程序在什么时候对硬件操作多久 内核其实就是完成了对硬件的抽象，给一些硬件API让你调 这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。  内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。  内核连接硬件和程序的桥梁，决定OS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OS问题通俗版">
+<meta property="og:url" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/index.html">
+<meta property="og:site_name" content="Nonbioclock">
+<meta property="og:description" content="1. 操作系统概念OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死） Kernel内核决定程序在什么时候对硬件操作多久 内核其实就是完成了对硬件的抽象，给一些硬件API让你调 这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。  内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。  内核连接硬件和程序的桥梁，决定OS">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步阻塞.gif">
+<meta property="og:image" content="http://images2015.cnblogs.com/blog/37237/201512/37237-20151222220329015-207666376.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/同步非阻塞.gif">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/难点-重点/异步非阻塞.gif">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并发图.webp">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users/86137/Desktop/JAVA面试/java面试文件存储/多线程/并行图.webp">
+<meta property="article:published_time" content="2021-03-10T01:52:48.000Z">
+<meta property="article:modified_time" content="2021-06-20T14:45:27.827Z">
+<meta property="article:author" content="CherryWang761">
+<meta property="article:tag" content="操作系统">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png">
+
+<link rel="canonical" href="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>OS问题通俗版 | Nonbioclock</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Nonbioclock</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">没有生物钟的博客</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          OS问题通俗版
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-10 09:52:48" itemprop="dateCreated datePublished" datetime="2021-03-10T09:52:48+08:00">2021-03-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 22:45:27" itemprop="dateModified" datetime="2021-06-20T22:45:27+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="OS问题通俗版" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="1-操作系统概念"><a href="#1-操作系统概念" class="headerlink" title="1. 操作系统概念"></a>1. 操作系统概念</h2><p>OS其实就是管理硬件和软件的程序，它屏蔽了直接操作硬件（直接操作硬件烦的要死）</p>
+<h3 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h3><p>内核决定程序在什么时候对硬件操作多久</p>
+<p>内核其实就是完成了对硬件的抽象，给一些硬件API让你调</p>
+<p>这样子，可以通过进程间通信和系统调用，进程可间接控制硬件资源。</p>
+<ol>
+<li><p><strong>内核是OS的核心部分，负责系统的内存管理，硬件设备的管理，文件系统的管理以及应用程序的管理。</strong></p>
+</li>
+<li><p><strong>内核连接硬件和程序的桥梁，决定OS的性能和稳定性。</strong></p>
+</li>
+</ol>
+<h3 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h3><ol>
+<li>cpu是运算核心（core）+控制核心（Control Unit），可以称之为计算机的大脑</li>
+<li>CPU主要包括控制器+运算器</li>
+<li>CPU根本任务是执行指令，一串串0，1序列</li>
+</ol>
+<h3 id="CPU与Kernel"><a href="#CPU与Kernel" class="headerlink" title="CPU与Kernel"></a>CPU与Kernel</h3><p><img src="http://qiniu.xiaoming.net.cn/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5.png" alt="操作系统的基本概念"></p>
+<ol>
+<li>Kernel属于OS层面，CPU属于硬件层面</li>
+<li>CPU提供运算，处理各种指令，Kernel屏蔽了对硬件的操作，提供四种管理。</li>
+</ol>
+<h2 id="2-同步异步，阻塞非阻塞"><a href="#2-同步异步，阻塞非阻塞" class="headerlink" title="2. 同步异步，阻塞非阻塞"></a>2. 同步异步，阻塞非阻塞</h2><h3 id="2-1-同步异步"><a href="#2-1-同步异步" class="headerlink" title="2.1 同步异步"></a>2.1 同步异步</h3><p>同步和异步关注的是<strong>消息通信机制</strong> (synchronous communication/ asynchronous communication)</p>
+<p>同步：就是在发出一个调用时，在没有得到结果之前，该调用就不返回。（一直等直到要到值为止）<br>换句话说，就是由<strong>调用者</strong>主动等待这个调用的结果。(等到它返回值为止)</p>
+<p>异步：调用在发出之后，这个调用就直接返回了，所以没有返回结果。</p>
+<p>换句话说，当一个异步过程调用发出后，调用者不会立刻得到结果。而是在<em>调用</em>发出后，<em>被调用者</em>通过状态、通知来通知调用者，或通过回调函数处理这个调用。</p>
+<p>区别：<strong>调用者</strong>需不需要等待处理结果，<strong>被调用者</strong>是否会有回调等机制通知调用者返回结果（针对于被调用者）</p>
+<p>举例：打电话问书店老板有没有《操作系统》这本书，如果是同步通信机制，老板会说<strong>你等等，我查一下</strong></p>
+<p>如果是异步通信机制，老板会说你等等，我查一下等会告诉你，<strong>然后把电话挂了</strong></p>
+<h3 id="2-2-阻塞非阻塞"><a href="#2-2-阻塞非阻塞" class="headerlink" title="2.2 阻塞非阻塞"></a>2.2 阻塞非阻塞</h3><p>阻塞和非阻塞关注的是<strong>程序在等待调用结果（消息，返回值）时的状态.</strong></p>
+<p>阻塞：阻塞就是发起一个请求，调用者一直等待请求结果返回，当前线程挂起</p>
+<p>非阻塞：非阻塞就是发起一个请求，被调用者不用一直等待结果返回。</p>
+<p>你打电话问书店老板有没有《分布式系统》这本书，你如果是阻塞式调用，你会一直把自己“挂起”，直到得到这本书有没有的结果，如果是非阻塞式调用，你不管老板有没有告诉你，你自己先一边去玩了， 当然你也要偶尔过几分钟check一下老板有没有返回结果。</p>
+<h2 id="3-BIO-AIO-NIO"><a href="#3-BIO-AIO-NIO" class="headerlink" title="3. BIO,AIO,NIO"></a>3. BIO,AIO,NIO</h2><p>先了解一下套接字的概念：</p>
+<p>套接字（socket）：操作系统为应用程序与TCP／IP协议交互提供了称为套接字 (Socket)的接口，区分不同应用程序进程间的网络通信和连接。</p>
+<p>Socket(套接字)可以看成是两个网络应用程序进行通信时，各自通信连接中的端点。</p>
+<p>socket 的表现方式  <strong>IP:端口</strong></p>
+<h3 id="BIO"><a href="#BIO" class="headerlink" title="BIO"></a>BIO</h3><p>同步阻塞的IO模型</p>
+<p>一连接一线程，有连接请求就要启动一个线程来处理，</p>
+<p>​    客户端发送请求后，先咨询服务端是否有线程相应，如果没有则会一直等待或者遭到拒绝请求</p>
+<p>​    如果有的话，客户端会线程会等待请求结束后才继续执行。</p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步阻塞.gif"></p>
+<p>线程不必要开销问题可以通过线程池改善</p>
+<p><strong>select的好处是它可以同时监听多个句柄，提高并发量</strong></p>
+<h3 id="NIO"><a href="#NIO" class="headerlink" title="NIO"></a>NIO</h3><p>同步非阻塞IO模型</p>
+<p>一个请求一个线程</p>
+<p><img src="http://images2015.cnblogs.com/blog/37237/201512/37237-20151222220329015-207666376.png" alt="img"></p>
+<p>​    NIO就是，当一个连接创建后，不需要对应一个线程，该连接会被注册到多路复用器上，所以的连接只需要一个线程就可以搞定</p>
+<p>​    当这个线程中的多路复用器进行轮询的时候，发现连接上有请求的话，才开启一个线程进行处理，也就是一个请求一个线程模式。</p>
+<p>​    适合连接数多且连接短。</p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\同步非阻塞.gif"></p>
+<h3 id="AIO"><a href="#AIO" class="headerlink" title="AIO"></a>AIO</h3><p>异步非阻塞IO模型</p>
+<p>一个有效请求一个线程</p>
+<p>客户端的I/O请求都是由OS先完成了再通知服务器应用去启动线程进行处理</p>
+<p>用户进程只需要发起一个IO操作然后立即返回，等IO操作真正的完成以后，应用程序会得到IO操作完成的通知，此时用户进程只需要对数据进行处理就好了<strong>，程序没有进行实际的读写</strong></p>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\难点-重点\异步非阻塞.gif"></p>
+<p>三种IO的使用场景</p>
+<ul>
+<li>BIO方式适用于<strong>连接数目比较小且固定的架构</strong>，这种方式对服务器资源要求比较高，并发局限于应用中，JDK1.4以前的唯一选择，但程序直观简单易理解。</li>
+<li>NIO方式适用于<strong>连接数目多且连接比较短（轻操作）的架构</strong>，比如聊天服务器，并发局限于应用中，编程比较复杂，JDK1.4开始支持。</li>
+<li>AIO方式使用于<strong>连接数目多且连接比较长（重操作）的架构</strong>，比如相册服务器，充分调用OS参与并发操作，编程比较复杂，JDK7开始支持。</li>
+</ul>
+<h2 id="4-操作系统基本特性"><a href="#4-操作系统基本特性" class="headerlink" title="4. 操作系统基本特性"></a>4. 操作系统基本特性</h2><h3 id="并发性"><a href="#并发性" class="headerlink" title="并发性"></a>并发性</h3><ul>
+<li>并发图</li>
+</ul>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并发图.webp"></p>
+<p>多个事件<strong>在同一时间间隔内发生</strong>（宏观上是并发的，微观串行）</p>
+<ul>
+<li>并行图</li>
+</ul>
+<p><img src="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/Users\86137\Desktop\JAVA面试\java面试文件存储\多线程\并行图.webp"></p>
+<p>多个事件<strong>在同一时刻发生</strong></p>
+<p>并行需要硬件支持，多核驱动啊什么的CPU</p>
+<h3 id="共享性"><a href="#共享性" class="headerlink" title="共享性"></a>共享性</h3><p>系统资源可供系统多个并发进程共同使用（资源共享）</p>
+<ul>
+<li>互斥共享方式（互斥锁，独占资源，比如说打印机）</li>
+<li>同时访问方式（磁盘）</li>
+</ul>
+<h3 id="虚拟性"><a href="#虚拟性" class="headerlink" title="虚拟性"></a>虚拟性</h3><p>虚拟技术把一个物理实体转换为多个逻辑实体</p>
+<p>两种技术：时分复用、空分复用</p>
+<p>空分复用：虚拟技术把物理内存抽象为地址空间，进程拥有各自的地址空间，地址空间的页被映射到物理内存中，当用到一个没有在物理内存的页，会执行页面置换算法，将该也置换到内存中。</p>
+<p>时分复用：时间片轮转法</p>
+<h3 id="异步性"><a href="#异步性" class="headerlink" title="异步性"></a>异步性</h3><p>在多道程序环境下允许多个进程并发执行，但只有进程在获得所需的资源后方能执行。</p>
+<h2 id="5-用户态系统态"><a href="#5-用户态系统态" class="headerlink" title="5. 用户态系统态"></a>5. 用户态系统态</h2><p>根据进程访问资源的特点，可分为两个级别：</p>
+<ul>
+<li>用户态：用户态运行的程序可以直接读取用户程序的数据</li>
+<li>系统态：几乎可以访问计算机的任何资源</li>
+</ul>
+<p>一般程序都是在用户态，如果要调用系统资源就需要系统调用</p>
+<ul>
+<li>为什么划分两态？</li>
+</ul>
+<blockquote>
+<p>因为有些指令是十分危险的，如果使用不当，可能造成程序崩溃</p>
+</blockquote>
+<h3 id="用户态切换到内存态的方式"><a href="#用户态切换到内存态的方式" class="headerlink" title="用户态切换到内存态的方式"></a>用户态切换到内存态的方式</h3><ol>
+<li>系统调用</li>
+</ol>
+<blockquote>
+<p>系统调用是OS为应用程序提供能够访问到内核态的资源接口</p>
+</blockquote>
+<ol start="2">
+<li>异常</li>
+</ol>
+<blockquote>
+<p>CPU执行程序时，发生了某些不可知的异常。于是程序进入到处理该异常的内核程序中</p>
+</blockquote>
+<ol start="3">
+<li>硬件设备的中断</li>
+</ol>
+<blockquote>
+<p>硬件完成用户请求后会发送中断给CPU，CPU会暂停执行下一条指令，转而执行与中断信号对应的应用程序。转换过程涉及到用户态到内核态的转换</p>
+</blockquote>
+<h2 id="6-程序进程协程"><a href="#6-程序进程协程" class="headerlink" title="6. 程序进程协程"></a>6. 程序进程协程</h2><h3 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h3><p>是系统资源分配和调度的基本单位</p>
+<p>是程序的一次执行过程，是系统运行程序的基本单位</p>
+<p>系统运行一个程序就是一个进程从创建，运行到消亡的过程</p>
+<p>程序段，相关的数据段和PCB三部分便构成了进程实体。</p>
+<blockquote>
+<p>PCB:进程控制块，一般在内存中，所谓的进程的创建和销毁都是对PCB的操作。（动态特征的集中反映）</p>
+</blockquote>
+<h3 id="线程"><a href="#线程" class="headerlink" title="线程"></a>线程</h3><p>线程是比进程更小的一个单位，是独立调度和分派的基本单位</p>
+<p>一个进程在其执行过程可以产生多个线程</p>
+<p>引入线程的原因是为了减少程序在并发执行过程中的时空开销</p>
+<h3 id="线程进程区别"><a href="#线程进程区别" class="headerlink" title="线程进程区别"></a>线程进程区别</h3><ol>
+<li><p>同类的线程共享进程的堆和方法区资源。但是线程本身有程序计数器，虚拟机栈，本地方法栈。所以线程在上下文切换的开销小</p>
+</li>
+<li><p>进程是独立的，同一进程内的线程可能互相干扰。</p>
+</li>
+<li><p>进程是OS的范畴，可以并发，线程更像是并行；线程执行开销小，不利于资源的管理和保护。</p>
+</li>
+<li><p>线程内可以通过读写进程内数据进行通信，进程通信需要依靠IPC</p>
+</li>
+</ol>
+<h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p><strong>本质上是一种用户态的轻量级线程</strong></p>
+<p>线程==内核态线程</p>
+<p>协程==用户态线程</p>
+<p>协程和线程关系</p>
+<p>N:1    N个线程绑定一个协程</p>
+<p>1:1    </p>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\并发知识\ThreadLocal\" rel="bookmark">ThreadLocal</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\Spring\Spring的IOC和AOP\" rel="bookmark">IOC与AOP</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\操作系统\JMM\" rel="bookmark">JMM</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\05\17\操作系统\大端系统小端系统\" rel="bookmark">红黑树</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="\2021\03\10\操作系统\排查CPU高负载问题+epoll\" rel="bookmark">排查CPU高负载问题</a></div>
+    </li>
+  </ul>
+
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/" rel="tag"><i class="fa fa-tag"></i> 操作系统</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E8%BF%9B%E7%A8%8B%E5%90%8C%E6%AD%A5%E6%9C%BA%E5%88%B6/" rel="prev" title="进程同步机制">
+      <i class="fa fa-chevron-left"></i> 进程同步机制
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%8E%92%E6%9F%A5CPU%E9%AB%98%E8%B4%9F%E8%BD%BD%E9%97%AE%E9%A2%98+epoll/" rel="next" title="排查CPU高负载问题">
+      排查CPU高负载问题 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E5%BF%B5"><span class="nav-number">1.</span> <span class="nav-text">1. 操作系统概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Kernel"><span class="nav-number">1.1.</span> <span class="nav-text">Kernel</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU"><span class="nav-number">1.2.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU%E4%B8%8EKernel"><span class="nav-number">1.3.</span> <span class="nav-text">CPU与Kernel</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5%EF%BC%8C%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">2.</span> <span class="nav-text">2. 同步异步，阻塞非阻塞</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-%E5%90%8C%E6%AD%A5%E5%BC%82%E6%AD%A5"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 同步异步</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-%E9%98%BB%E5%A1%9E%E9%9D%9E%E9%98%BB%E5%A1%9E"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 阻塞非阻塞</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-BIO-AIO-NIO"><span class="nav-number">3.</span> <span class="nav-text">3. BIO,AIO,NIO</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BIO"><span class="nav-number">3.1.</span> <span class="nav-text">BIO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NIO"><span class="nav-number">3.2.</span> <span class="nav-text">NIO</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AIO"><span class="nav-number">3.3.</span> <span class="nav-text">AIO</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%9F%BA%E6%9C%AC%E7%89%B9%E6%80%A7"><span class="nav-number">4.</span> <span class="nav-text">4. 操作系统基本特性</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B9%B6%E5%8F%91%E6%80%A7"><span class="nav-number">4.1.</span> <span class="nav-text">并发性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B1%E4%BA%AB%E6%80%A7"><span class="nav-number">4.2.</span> <span class="nav-text">共享性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E6%80%A7"><span class="nav-number">4.3.</span> <span class="nav-text">虚拟性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%82%E6%AD%A5%E6%80%A7"><span class="nav-number">4.4.</span> <span class="nav-text">异步性</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E7%94%A8%E6%88%B7%E6%80%81%E7%B3%BB%E7%BB%9F%E6%80%81"><span class="nav-number">5.</span> <span class="nav-text">5. 用户态系统态</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%94%A8%E6%88%B7%E6%80%81%E5%88%87%E6%8D%A2%E5%88%B0%E5%86%85%E5%AD%98%E6%80%81%E7%9A%84%E6%96%B9%E5%BC%8F"><span class="nav-number">5.1.</span> <span class="nav-text">用户态切换到内存态的方式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E7%A8%8B%E5%BA%8F%E8%BF%9B%E7%A8%8B%E5%8D%8F%E7%A8%8B"><span class="nav-number">6.</span> <span class="nav-text">6. 程序进程协程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%9B%E7%A8%8B"><span class="nav-number">6.1.</span> <span class="nav-text">进程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B"><span class="nav-number">6.2.</span> <span class="nav-text">线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E7%A8%8B%E8%BF%9B%E7%A8%8B%E5%8C%BA%E5%88%AB"><span class="nav-number">6.3.</span> <span class="nav-text">线程进程区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8D%8F%E7%A8%8B"><span class="nav-number">6.4.</span> <span class="nav-text">协程</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">CherryWang761</p>
+  <div class="site-description" itemprop="description">一个技术交流的平台</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">CherryWang761</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-chart-area"></i>
+    </span>
+    <span title="站点总字数">228k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">3:27</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+<script>
+  (function() {
+    function leancloudSelector(url) {
+      url = encodeURI(url);
+      return document.getElementById(url).querySelector('.leancloud-visitors-count');
+    }
+
+    function addCount(Counter) {
+      var visitors = document.querySelector('.leancloud_visitors');
+      var url = decodeURI(visitors.id);
+      var title = visitors.dataset.flagTitle;
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          if (results.length > 0) {
+            var counter = results[0];
+            leancloudSelector(url).innerText = counter.time + 1;
+            Counter('put', '/classes/Counter/' + counter.objectId, { time: { '__op': 'Increment', 'amount': 1 } })
+              .catch(error => {
+                console.error('Failed to save visitor count', error);
+              });
+          } else {
+              leancloudSelector(url).innerText = 'Counter not initialized! More info at console err msg.';
+              console.error('ATTENTION! LeanCloud counter has security bug, see how to solve it here: https://github.com/theme-next/hexo-leancloud-counter-security. \n However, you can still use LeanCloud without security, by setting `security` option to `false`.');
+            
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    function showTime(Counter) {
+      var visitors = document.querySelectorAll('.leancloud_visitors');
+      var entries = [...visitors].map(element => {
+        return decodeURI(element.id);
+      });
+
+      Counter('get', '/classes/Counter?where=' + encodeURIComponent(JSON.stringify({ url: { '$in': entries } })))
+        .then(response => response.json())
+        .then(({ results }) => {
+          for (let url of entries) {
+            let target = results.find(item => item.url === url);
+            leancloudSelector(url).innerText = target ? target.time : 0;
+          }
+        })
+        .catch(error => {
+          console.error('LeanCloud Counter Error', error);
+        });
+    }
+
+    let { app_id, app_key, server_url } = {"enable":true,"app_id":"SEubJA0iXoCFhEtdun7BlYhh-gzGzoHsz","app_key":"zR78UlxNAiCsY7wCRsktXobq","server_url":null,"security":true};
+    function fetchData(api_server) {
+      var Counter = (method, url, data) => {
+        return fetch(`${api_server}/1.1${url}`, {
+          method,
+          headers: {
+            'X-LC-Id'     : app_id,
+            'X-LC-Key'    : app_key,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data)
+        });
+      };
+      if (CONFIG.page.isPost) {
+        if (CONFIG.hostname !== location.hostname) return;
+        addCount(Counter);
+      } else if (document.querySelectorAll('.post-title-link').length >= 1) {
+        showTime(Counter);
+      }
+    }
+
+    let api_server = app_id.slice(-9) !== '-MdYXbMMI' ? server_url : `https://${app_id.slice(0, 8).toLowerCase()}.api.lncldglobal.com`;
+
+    if (api_server) {
+      fetchData(api_server);
+    } else {
+      fetch('https://app-router.leancloud.cn/2/route?appId=' + app_id)
+        .then(response => response.json())
+        .then(({ api_server }) => {
+          fetchData('https://' + api_server);
+        });
+    }
+  })();
+</script>
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

@@ -221,7 +221,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 00:28:57" itemprop="dateModified" datetime="2021-06-20T00:28:57+08:00">2021-06-20</time>
+                <time title="修改时间：2021-06-20 23:09:35" itemprop="dateModified" datetime="2021-06-20T23:09:35+08:00">2021-06-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -250,14 +250,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
+              <span>2.6k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -270,7 +270,8 @@
 
       
           <h3 id="钩子线程"><a href="#钩子线程" class="headerlink" title="钩子线程"></a>钩子线程</h3><blockquote>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0">https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0</a></p>
+<p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0">https://www.zhihu.com/search?type=content&amp;q=java%E9%92%A9%E5%AD%90%E5%87%BD%E6%95%B0</a></p>
 </blockquote>
 <p>钩子线程一般在并发编程中会使用</p>
 <p>当JVM进程中<strong>没有活跃的非守护进程时</strong>（程序执行完了），或者<strong>受到系统的中断信号，JVM进程便会退出</strong>，而在<strong>JVM进程退出前，hook线程就会启动</strong>做系统最后的一些辅助性的工作。</p>
@@ -289,43 +290,14 @@
 <p><strong>Tips： kill -9 pid命令不会调用JVM注册的钩子</strong>，因为Hook线程只有正确接收到退出信号时，才能被正确执行，而kill -9是强制杀死进程。</p>
 <p><strong>不要在Hook线程中执行一些耗时的操作，这样会导致程序长时间不能退出</strong></p>
 </blockquote>
-<p>例子1：</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *<span class="doctag">@Description</span> 使用Timer模拟一个工作线程，该线程重复执行10次，使用</span></span><br><span class="line"><span class="comment"> *System.exit()退出，在钩子函数中取消timer运行，并输出日志</span></span><br><span class="line"><span class="comment">**/</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestHookThread</span></span>{</span><br><span class="line">    <span class="comment">//默认任务</span></span><br><span class="line">    <span class="keyword">static</span> Timer timer = <span class="keyword">new</span> Timer(<span class="string">"job-timer"</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//计数干活次数</span></span><br><span class="line">    <span class="keyword">static</span> AtomicInteger count = <span class="keyword">new</span> AtomicInteger(<span class="number">0</span>);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//hook线程</span></span><br><span class="line">    <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">CleanWorkThread</span> <span class="keyword">extends</span> <span class="title">Thread</span></span>{</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            System.out.println(<span class="string">"clean some work."</span>);</span><br><span class="line">            timer.cancel();</span><br><span class="line">            <span class="keyword">try</span>{</span><br><span class="line">                Thread.sleep(<span class="number">2000</span>);</span><br><span class="line">            } <span class="keyword">catch</span> (InterruptedException e){</span><br><span class="line">                e.printStackTrace();</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> InterruptedException </span>{</span><br><span class="line">        <span class="comment">//将hook线程添加到运行时环境中去</span></span><br><span class="line">        Runtime.getRuntime().addShutdownHook(<span class="keyword">new</span> CleanWorkThread());</span><br><span class="line">        System.out.println(<span class="string">"main class start ......"</span>);</span><br><span class="line">        <span class="comment">//简单模拟</span></span><br><span class="line">        timer.schedule(<span class="keyword">new</span> TimerTask(){</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            count.getAndIncrement();</span><br><span class="line">            System.out.println(<span class="string">"doing job "</span>+ count);</span><br><span class="line">            <span class="keyword">if</span>(count.get() == <span class="number">10</span>){	<span class="comment">//工作了10次退出</span></span><br><span class="line">                System.exit(<span class="number">0</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        }, <span class="number">0</span>, <span class="number">2000</span>};</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-<p>当发生了System.exit(int)时，希望在系统退出前，执行一点任务来做一些资源方面的回收操作，ShutdownHook可以达到这个目的。</p>
-<p>例子2：如果系统通过<code>Runtime.getRuntime().exec()</code>或<code>new ProcessBuilder()</code> 启动了子进程（Process），该子进程一直在运行，可能就算当前进程退出，子进程也未必退出，但是在业务上需要它子进程结束，就可以使用钩子进程</p>
-<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//可以这样写</span></span><br><span class="line">Runtime.getRuntime().addShutdownHook(){</span><br><span class="line">    <span class="keyword">new</span> Thread(){</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span><span class="params">()</span></span>{</span><br><span class="line">            processr.destroy();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-<blockquote>
-<p>Q: 钩子函数中的Thread好像都没有start()启动啊？</p>
-<p>A: 传入参数是通过new Thread()创建的线程对象，<strong>在Java进程调用exit()时，会调用该线程对象的start()方法将其运行起来</strong>，所以不要手工先启动了。</p>
-</blockquote>
-<h4 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h4><p>源码中有个ApplicationShutdownHooks类，该类用于跟踪和运行在用户层面注的钩子函数</p>
-<p><img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/ApplicationShutdownHooks.png" alt="ApplicationShutdownHooks.png"></p>
-<ul>
-<li><p>在该类中，通过add方法注册了一个hook，在run()内部运行静态方法runHooks()，顾名思义运行所有注册的钩子函数。源码规定最多可以有10个钩子函数</p>
-</li>
-<li><p>该类的内部还维护了一个<code>IdentityHashMap</code>，用于存放hook信息，可以通过add()方法来添加，程序中定义的回调线程都放在这里了。</p>
-</li>
-<li><p>当调用<code>Runnable.getRunnable().addShutdownHook(Thread)</code>时，会间接调用<code>ApplicationShutdownHooks.add(Thread)</code>将线程放到IdentityHashMap中。</p>
-</li>
-<li><p>当调用<code>System.exit(int)</code>方法时，会间接调用<code>Shutdown.exit(int)</code>方法，再调用<code>sequence()-&gt;runHooks()</code>方法</p>
-</li>
-<li><p>循环中的一个hook对象就是由ApplicationShutdownHooks的匿名块定义的，因此会调用ApplicationShutdownHooks类的run()方法，再调用它的runHooks()方法，runHooks()如图所示：</p>
-</li>
-</ul>
-<p><img src="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210614003624735.png" alt="image-20210614003624735"></p>
-<p>从该方法中取出所有的thread，然后启动所有线程，最后通过join()方法等待各个线程结束动作。看源码发现每个hook都有一个线程处理，所以是并发的，不<strong>是串行执行的</strong></p>
-<ul>
-<li><code>Runtime.getRuntime().removeShutdownHook</code>用于删除一个钩子线程。</li>
-</ul>
-<h4 id="Hook线程的应用场景-amp-注意事项"><a href="#Hook线程的应用场景-amp-注意事项" class="headerlink" title="Hook线程的应用场景&amp;注意事项"></a>Hook线程的应用场景&amp;注意事项</h4><h5 id="防止程序重复执行"><a href="#防止程序重复执行" class="headerlink" title="防止程序重复执行"></a>防止程序重复执行</h5><blockquote>
-<p>Tips：这种防止程序重复执行的策略，也被应用于Mysql服务器，zookeeper，kafka等系统中。</p>
-<p>此外，Hook线程也可以执行一些<strong>资源释放</strong>的操作，如关闭数据库连接，Socket连接等。</p>
-</blockquote>
-<p>具体实现可以在程序启动时，校验是否已经生成 lock 文件，如果已经生成，则退出程序，如果未生成，则生成 lock 文件，程序正常执行，最后再注入 Hook 线程，这样在 JVM 退出的时候，线程中再将 lock 文件删除掉；</p>
-<p><img src="https://exception-image-bucket.oss-cn-hangzhou.aliyuncs.com/155490317738185" alt="流程图"></p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/06/12/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E9%92%A9%E5%AD%90%E7%BA%BF%E7%A8%8B/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -344,7 +316,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/06/08/MySQL/UUID/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/06/08/%E6%95%B0%E6%8D%AE%E5%BA%93/UUID/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -358,7 +330,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/06/08/MySQL/UUID/" class="post-title-link" itemprop="url">UUID</a>
+            <a href="/2021/06/08/%E6%95%B0%E6%8D%AE%E5%BA%93/UUID/" class="post-title-link" itemprop="url">UUID</a>
         </h2>
 
         <div class="post-meta">
@@ -392,7 +364,7 @@
             </span>
 
           
-            <span id="/2021/06/08/MySQL/UUID/" class="post-meta-item leancloud_visitors" data-flag-title="UUID" title="阅读次数">
+            <span id="/2021/06/08/%E6%95%B0%E6%8D%AE%E5%BA%93/UUID/" class="post-meta-item leancloud_visitors" data-flag-title="UUID" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -522,635 +494,6 @@
 <p>即页合并的操作主要看相邻页的利用率如何。</p>
 <p><strong>所以常常说MySQL记录的删除和插入都可能会造成空闲空间的增加。</strong></p>
 </blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/" class="post-title-link" itemprop="url">UUID</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-06-08 21:44:54" itemprop="dateCreated datePublished" datetime="2021-06-08T21:44:54+08:00">2021-06-08</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-15 21:23:44" itemprop="dateModified" datetime="2021-06-15T21:23:44+08:00">2021-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">数据库知识</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9F%A5%E8%AF%86/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/06/08/%E9%9D%A2%E8%AF%95/UUID/" class="post-meta-item leancloud_visitors" data-flag-title="UUID" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>2.8k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>3 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h3 id="UUID"><a href="#UUID" class="headerlink" title="UUID"></a>UUID</h3><p>今天看到掘金的一篇文章，感觉又学到了丰富的知识</p>
-<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6911555489067171853#heading-9">为什么MySQL不推荐使用uuid作为主键？ (juejin.cn)</a></p>
-<blockquote>
-<p>摘要：</p>
-</blockquote>
-<h4 id="自增id做索引和uuid做索引对比"><a href="#自增id做索引和uuid做索引对比" class="headerlink" title="自增id做索引和uuid做索引对比"></a>自增id做索引和uuid做索引对比</h4><h5 id="自增id做索引"><a href="#自增id做索引" class="headerlink" title="自增id做索引"></a>自增id做索引</h5><p>MySQL中推荐使用自增id（auto_increment)作主键索引</p>
-<p>因为自增主键的值是顺序的，所以每一条插入的数据都会在最后一条数据后。</p>
-<p>当达到最大填充因子时候<strong>（innodb默认的最大填充因子是页大小的15/16，留1/16的空间用作修改使用)</strong></p>
-<p>①当满了15/16后，下一条记录就会写入新的页中，一旦数据以auto_increment的方式顺序加载，主键页也会以近乎于顺序的记录填满，提升了页面的最大填充率，不会有页的浪费</p>
-<p>②新插入的行一定会在原有的最大数据行的下一行，mysql的定位和寻址速度很快，不会为计算新行的位置做出额外消耗</p>
-<p>③减少了页分裂和碎片的产生</p>
-<h5 id="使用uuid的索引内部结构"><a href="#使用uuid的索引内部结构" class="headerlink" title="使用uuid的索引内部结构"></a>使用uuid的索引内部结构</h5><p>因为uuid相对顺序是无规律的，新的值不一定比之前的值都要大，所以innodb无法做到总是把新行插入到索引的最后，而是需要为新行寻找新的合适的位置从而分配新空间。</p>
-<p>该过程需要很多额外的操作：</p>
-<p>①写入的目标页很可能已经刷新到磁盘上并且从缓存上移除；亦或者可能还没有加载到缓存中，innodb在插入之前需要先找到该页，并从磁盘读取目标页到内存中，将导致非常多的随机IO</p>
-<p>②因为写入是乱序的，innodb不得不频繁的做页分裂操作，以便为新的行分配空间，页分裂导致移动大量数据。</p>
-<p>③频繁的页分裂，页会变得稀疏且被不规则填充，最终会出现数据碎片</p>
-<p>此外往往将随机值（uuid和雪花id）载入到聚簇索引后，需要做一次optimeize table来重建表并优化页的填充，又要耗费一定时间。</p>
-<h5 id="使用自增id的缺点"><a href="#使用自增id的缺点" class="headerlink" title="使用自增id的缺点"></a>使用自增id的缺点</h5><p>① 别人能轻易的爬取你的数据库信息，根据你数据库的自增id获取到你的业务增长信息。</p>
-<p>②对于高并发情况，innodb在按主键进行插入时会造成明显的锁争用，主键的上界会成为争抢的热点，所有的插入都发生在这里，并发插入会导致间隙锁竞争</p>
-<p>③auto_increment锁机制会造成自增锁的抢夺，有一定性能损失。</p>
-<h4 id="UUID使用场景"><a href="#UUID使用场景" class="headerlink" title="UUID使用场景"></a>UUID使用场景</h4><p>uuid即通用唯一识别码，由32位的16进制数字构成</p>
-<p>UUID的作用就是让分布式系统中的所有元素都能有唯一的辨识信息，这样就不需要考虑数据库创建时的名称重复问题。</p>
-<p>UUID的缺陷就是在于生成的结果串会比较长。而且无规律，此外上文中也提到了相关的缺陷。</p>
-<p>使用场景：</p>
-<ol>
-<li>会话session使用UUID做token</li>
-<li>Redis的防误删会使用UUID</li>
-<li>图片视频等多媒体数据不需要有序性情况存储可以使用UUID</li>
-</ol>
-<h4 id="页分裂与索引合并"><a href="#页分裂与索引合并" class="headerlink" title="页分裂与索引合并"></a>页分裂与索引合并</h4><p>在没接触到该知识点时，我也不知道什么是页分裂。。</p>
-<p>所以干脆一起写在这里</p>
-<blockquote>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
-<p><a target="_blank" rel="noopener" href="https://www.cnblogs.com/ZhuChangwu/p/14041410.html">https://www.cnblogs.com/ZhuChangwu/p/14041410.html</a></p>
-</blockquote>
-<p><strong>InnoDB从磁盘读取数据的最小单位是数据页</strong></p>
-<blockquote>
-<p>MySQL数据存储基本格式</p>
-</blockquote>
-<p><img src="https://img-blog.csdn.net/20171128200439925?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvcXFfMTgzMTIwMjU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="这里写图片描述"></p>
-<h5 id="数据页"><a href="#数据页" class="headerlink" title="数据页"></a>数据页</h5><blockquote>
-<p>数据页的基本样式</p>
-</blockquote>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113029931-1621355504.png" alt="img"></p>
-<blockquote>
-<ul>
-<li>FIleHeader 文件头：记录页的通用信息，比如上下页的页号，页类型，所有的数据页其实是一个双链表</li>
-<li>PageHeader 页头：记录本页存储记录的状态信息，比如本页记录数量，槽数量</li>
-<li>Infimum + supremum 最小与最大记录，是虚拟记录</li>
-<li>User Records 真正存数据的地方：以链表的形式存储一条条行记录</li>
-<li>Free Space 存数据空间中尚未使用的区域</li>
-<li>Page Directory 页目录：页中某些记录的相对位置，用于提升查询效率</li>
-<li>File Trailer 文件尾：刷盘时校验页是否完整</li>
-</ul>
-</blockquote>
-<h6 id="User-Records"><a href="#User-Records" class="headerlink" title="User Records"></a>User Records</h6><p>一开始其实是没有user records这个空间的。当插入第一条数据的时候，会从free space空间分出出一个空间到user records，当所有空间全部用完就会再去申请一个新的页使用。</p>
-<p>user record空间是一个<strong>单链表</strong>。链表中的各个节点是按照<strong>主键值从小到大的顺序</strong>进行连接起来的。</p>
-<h6 id="Page-Directory"><a href="#Page-Directory" class="headerlink" title="Page Directory"></a>Page Directory</h6><p>如果我们要在一个页中查找指定的一条记录。除了从头遍历user records还有更高效的方法吗?</p>
-<p>Page Directory就为这种情况提供了解决方案</p>
-<blockquote>
-<p>innoDB会将一个页中的所有记录划分成若干个组，每个组4-8个记录。</p>
-<p><strong>将每个组最后一个记录相对于第一个记录的地址偏移量</strong>提取出来存放在页中叫做Page Direcotry的数组中，数组的元素就是这些<strong>地址偏移量</strong>，也叫做槽</p>
-<p>所以在页中根据主键查找记录是很快的</p>
-<ol>
-<li>二分法确定该记录所在的槽，并找到该槽所在分组中主键值最小的那条记录。</li>
-<li>通过next_record属性遍历单链表找到记录。</li>
-</ol>
-<p>Tips: 二分法是对Page Directory<strong>数组</strong>的，而user records单链表只能是逐步遍历</p>
-</blockquote>
-<p><img src="https://img-blog.csdnimg.cn/20191218103707559.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dhaXRfZm9yX2V2YQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>MySQL的设定中，一个表空间内的一组连续的数据页为一个extent（区），默认区的大小为1MB，一个区有64个页，每个数据页大小为16KB（16*64=1024）</p>
-<p>一组数据区 = 256个数据区</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113030834-1060222235.jpg" alt="img"></p>
-<h5 id="数据页分裂问题"><a href="#数据页分裂问题" class="headerlink" title="数据页分裂问题"></a>数据页分裂问题</h5><p>假设你现在已经有两个数据页了。并且你正在往第二个数据页中写数据。</p>
-<p>关于B+Tree，你肯定知道B+Tree中的叶子结点之间是通过双向链表关联起来的。</p>
-<p>在InnoDB索引的设定中，要求主键索引是递增的，这样在构建索引树的时候才更加方便。你可以脑补一下。如果按1、2、3…递增的顺序给你这些数。是不是很方便的构建一棵树。然后你可以自由自在的在这棵树上玩二分查找。</p>
-<p>那假设你自定义了主键索引，而且你自定义的这个主键索引并不一定是自增的。</p>
-<p>那就有可能出现下面这种情况 如下图：</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113031695-1349347128.png" alt="img"></p>
-<blockquote>
-<p>假设上图中的id就是你自定义的不会自增的主键</p>
-</blockquote>
-<p>然后随着你将数据写入。就导致后一个数据页中的所有行并不一定比前一个数据页中的行的id大。</p>
-<p>这时就会触发页分裂的逻辑。</p>
-<p>页分裂的目的就是保证：后一个数据页中的所有行主键值比前一个数据页中主键值大。</p>
-<p>经过分裂调整，可以得到下面的这张图。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1496926/202011/1496926-20201126113032271-1519023118.png" alt="img"></p>
-<h5 id="页合并"><a href="#页合并" class="headerlink" title="页合并"></a>页合并</h5><blockquote>
-<p>参考文章：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/98818611">https://zhuanlan.zhihu.com/p/98818611</a></p>
-</blockquote>
-<p>在MySQL中，当你删除了一行记录是，实际上记录并没有被物理删除，记录只是被标记（flaged）为删除并且它的空间变成允许其他记录声明访问。</p>
-<p>当需要插入数据id正好在这个标记点，就会复用这个空闲空间。</p>
-<p>当该页中删除的记录达到<code>MERGE_THRESHOLD</code><strong>(合并的阈值，默认页体积的50%)</strong>,InnoDB会开始寻找最靠近的页（前后页），如果看看相邻两个数据页利用率是否低于MERGE_THERSHOLD,如果都很小，系统就会将两个页合并以优化空间使用。</p>
-<p>合并操作后，前一页保留之前的数据并且获得另一个页的数据，另一个页将变成一个空页，可以容纳新数据。</p>
-<blockquote>
-<p>Tips1: update操作如果让页中数据体积达到类似的阈值点，同样会进行页合并的操作。</p>
-<p>即页合并的操作主要看相邻页的利用率如何。</p>
-<p><strong>所以常常说MySQL记录的删除和插入都可能会造成空闲空间的增加。</strong></p>
-</blockquote>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="CherryWang761">
-      <meta itemprop="description" content="一个技术交流的平台">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Nonbioclock">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2021/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" class="post-title-link" itemprop="url">计网基础知识概括</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-calendar"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2021-05-28 21:44:54" itemprop="dateCreated datePublished" datetime="2021-05-28T21:44:54+08:00">2021-05-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="far fa-calendar-check"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-15 21:23:24" itemprop="dateModified" datetime="2021-06-15T21:23:24+08:00">2021-06-15</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="far fa-folder"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" itemprop="url" rel="index"><span itemprop="name">基础知识</span></a>
-                </span>
-                  ，
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/" itemprop="url" rel="index"><span itemprop="name">计算机网络</span></a>
-                </span>
-            </span>
-
-          
-            <span id="/2021/05/28/%E9%9D%A2%E8%AF%95/%E8%AE%A1%E7%BD%91%E5%9F%BA%E6%9C%AC%E7%9F%A5%E8%AF%86/" class="post-meta-item leancloud_visitors" data-flag-title="计网基础知识概括" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span><br>
-            <span class="post-meta-item" title="本文字数">
-              <span class="post-meta-item-icon">
-                <i class="far fa-file-word"></i>
-              </span>
-                <span class="post-meta-item-text">本文字数：</span>
-              <span>5.3k</span>
-            </span>
-            <span class="post-meta-item" title="阅读时长">
-              <span class="post-meta-item-icon">
-                <i class="far fa-clock"></i>
-              </span>
-                <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>5 分钟</span>
-            </span>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="计算机网络体系结构"><a href="#计算机网络体系结构" class="headerlink" title="计算机网络体系结构"></a>计算机网络体系结构</h2><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/0fa6c237-a909-4e2a-a771-2c5485cd8ce0.png" alt="img" style="zoom:80%;">
-
-<ul>
-<li><strong>应用层</strong> ：为特定<strong>应用程序</strong>提供<strong>数据传输服务</strong>，例如 HTTP、DNS 等协议。数据单位为报文。</li>
-<li><strong>表示层</strong> ：数据压缩、加密以及数据描述，这使得应用程序不必关心在各台主机中数据内部格式不同的问题。</li>
-<li><strong>会话层</strong> ：建立及管理会话。</li>
-<li><strong>传输层</strong> ：为<strong>进程</strong>提供通用<strong>数据传输服务</strong>。由于应用层协议很多，定义通用的传输层协议就可以支持不断增多的应用层协议。运输层包括两种协议：传输控制协议 TCP，提供面向连接、可靠的数据传输服务，数据单位为报文段；用户数据报协议 UDP，提供无连接、尽最大努力的数据传输服务，数据单位为用户数据报。<strong>TCP 主要提供完整性服务，UDP 主要提供及时性服务。</strong></li>
-<li><strong>网络层</strong> ：为<strong>主机</strong>提供<strong>数据传输服务</strong>。而传输层协议是为主机中的进程提供数据传输服务。网络层把传输层传递下来的报文段或者用户数据报封装成分组。</li>
-<li><strong>数据链路层</strong> ：网络层针对的还是<strong>主机之间的数据传输服务</strong>，而主机之间可以有很多链路，链路层协议就是为同一链路的主机提供数据传输服务。数据链路层把网络层传下来的<strong>分组封装成帧</strong>。</li>
-<li><strong>物理层</strong> ：考虑如何传输比特流，<strong>物理层的作用是尽可能屏蔽传输媒体和通信手段的差异，使数据链路层感觉不到这些差异。</strong></li>
-</ul>
-<blockquote>
-<p><strong>Q：路由器需要的协议？</strong></p>
-<p>A：路由器只有下面三层协议，因为路由器位于网络核心中，不需要为进程或者应用程序提供服务，因此也就不需要传输层和应用层。</p>
-</blockquote>
-<h3 id="物理层（PASS）"><a href="#物理层（PASS）" class="headerlink" title="物理层（PASS）"></a>物理层（PASS）</h3><h3 id="链路层"><a href="#链路层" class="headerlink" title="链路层"></a>链路层</h3><p>基本三操作：封装成帧，透明传输，差错检测</p>
-<ul>
-<li>封装成帧：网络层传下来的分组会添加首部和尾部封装成帧</li>
-<li>透明传输：需要对首部和尾部字段进行定界操作，通过<strong>转义字符</strong>进行判定，用户是察觉不到转义字符的存在的。</li>
-<li>差错检测：广泛使用循环冗余检验（CRC）来检测比特差错</li>
-</ul>
-<h4 id="常见协议"><a href="#常见协议" class="headerlink" title="常见协议"></a>常见协议</h4><h5 id="CSMA-CD协议"><a href="#CSMA-CD协议" class="headerlink" title="CSMA/CD协议"></a><strong>CSMA/CD协议</strong></h5><p>CSMA/CD表示载波监听多点接入/碰撞检测</p>
-<ul>
-<li>多点接入：主机以多点方式连接到主机上</li>
-<li>载波监听：主机需要不停的监听信道</li>
-<li>碰撞检测：如果监听到信道已有其他主机正在发送数据，就表示发生碰撞，就要一个碰撞的退避策略。</li>
-</ul>
-<blockquote>
-<p>截断二进制指数退避算法：从离散的整数集合 {0, 1, .., (2k-1)} 中随机取出一个数，记作 r，然后取 r 倍的争用期作为重传等待时间。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/19d423e9-74f7-4c2b-9b97-55890e0d5193.png" alt="img"></p>
-</blockquote>
-<h5 id="PPP协议"><a href="#PPP协议" class="headerlink" title="PPP协议"></a><strong>PPP协议</strong></h5><p>PPP协议是用户计算机和ISP进行通信时所使用的协议</p>
-<h5 id="MAC地址"><a href="#MAC地址" class="headerlink" title="MAC地址"></a>MAC地址</h5><p>MAC地址是链路层地址，长度为6字节（48位），用于唯一标识网卡</p>
-<p>有多少网卡就有多少MAC地址。</p>
-<h3 id="网络层"><a href="#网络层" class="headerlink" title="网络层"></a>网络层</h3><p>网络层可以说是整个互联网的核心，网络层向上只提供简单灵活的、无连接的、经最大努力交互的数据包服务。</p>
-<p>使用IP协议，可以把异构的物理网络连接起来，使得在网络层看起来好像是一个统一的网络。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/8d779ab7-ffcc-47c6-90ec-ede8260b2368.png" alt="img"></p>
-<p>与 IP 协议配套使用的还有三个协议：</p>
-<ul>
-<li>地址解析协议 ARP（Address Resolution Protocol）</li>
-<li>网际控制报文协议 ICMP（Internet Control Message Protocol）</li>
-<li>网际组管理协议 IGMP（Internet Group Management Protocol）</li>
-</ul>
-<h4 id="IP分类"><a href="#IP分类" class="headerlink" title="IP分类"></a>IP分类</h4><p>由两部分组成：网络号+主机号</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/cbf50eb8-22b4-4528-a2e7-d187143d57f7.png" alt="img"></p>
-<blockquote>
-<p>CIDR记法：采用在 IP 地址后面加上网络前缀长度的方法，例如 128.14.35.7/20 表示前 20 位为网络前缀。</p>
-</blockquote>
-<h5 id="地址解析协议-ARP"><a href="#地址解析协议-ARP" class="headerlink" title="地址解析协议 ARP"></a>地址解析协议 ARP</h5><p>网络层实现主机之间的数据传输，而链路层实现具体每段链路之间的数据传输。因此在通信过程中，IP 数据报的源地址和目的地址始终不变，<strong>而 MAC 地址随着链路的改变而改变。</strong></p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/66192382-558b-4b05-a35d-ac4a2b1a9811.jpg" alt="img"></p>
-<p>ARP协议就通过IP地址得到MAC地址</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/b9d79a5a-e7af-499b-b989-f10483e71b8b.jpg" alt="img"></p>
-<p>ARP内部有个高速缓存记录局域网上的各主机和路由器的 IP 地址到 MAC 地址的映射表。</p>
-<p>如果A知道B的IP，但是ARP中没有记录B的MAC映射，那么它会广播通知并获得MAC值写入ARP高速缓存中。</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/8006a450-6c2f-498c-a928-c927f758b1d0.png" alt="img"></p>
-<h5 id="网际控制报文ICMP"><a href="#网际控制报文ICMP" class="headerlink" title="网际控制报文ICMP"></a>网际控制报文ICMP</h5><p>ICMP是为了更有效的转发IP数据报和提高交付成功的机会。它被封装在IP数据报中。</p>
-<p>ICMP报文分为差错报文和询问报文</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/aa29cc88-7256-4399-8c7f-3cf4a6489559.png" alt="img"></p>
-<p>常用操作：PING，他就是ICMP的一个重要应用，来测试两台主机之间的连通性</p>
-<p>ping原理就是通过向目的主机发送ICMP Echo请求报文</p>
-<p>目的主机收到之后会发送Echo回答报文。</p>
-<h3 id="传输层"><a href="#传输层" class="headerlink" title="传输层"></a>传输层</h3><p>网络中真正通信的并不是主机而是主机中的进程。</p>
-<p>传输层提供了进程间的逻辑通信。</p>
-<p>传输层最重要的两个协议：UDP和TCP</p>
-<h4 id="UDP"><a href="#UDP" class="headerlink" title="UDP"></a>UDP</h4><blockquote>
-<p>用户数据报协议，无连接，是为了保证及时性传输的，没有拥塞控制</p>
-<p>面向报文（对应用程序传下来的报文不合并也不拆分，只添加UDP首部）</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/d4c3a4a1-0846-46ec-9cc3-eaddfca71254.jpg" alt="img"></p>
-<h4 id="TCP"><a href="#TCP" class="headerlink" title="TCP"></a>TCP</h4><blockquote>
-<p>传输控制协议TCP，面向连接，是为了保证可靠性传输的，有流量控制，拥塞控制，面向字节流（应用层传下来的报文当做字节流，把字节流组织成大小不等的数据块），TCP只能一对一</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/55dc4e84-573d-4c13-a765-52ed1dd251f9.png" alt="img"></p>
-<h4 id="三握四挥"><a href="#三握四挥" class="headerlink" title="三握四挥"></a>三握四挥</h4><blockquote>
-<p>三次握手</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/e92d0ebc-7d46-413b-aec1-34a39602f787.png" alt="img"></p>
-<p>Client想和Server建立连接，于是主动发送TCP握手请求</p>
-<ul>
-<li>C向S发送连接诶请求报文，SYN = 1, ACK = 0, 选择一个初始序号seq= x</li>
-<li>S接收到请求报文，如果同意建立连接，向A发送连接确认报文，SYN = 1, ACK = 1, 确认号ack = x+1, 同时也选择一个初始序号 seq= y;</li>
-<li>C收到S发送的确认报文后，还要最终核实一下，向B发送确认, ACK = 1, 确认号ack = y+1，序号为x+1</li>
-<li>S收到确认后，建立连接</li>
-</ul>
-<p><strong>为什么要三次握手？</strong></p>
-<p>保证C，S的收发都没有问题，这样能防止失效的连接请求到服务器，让服务器错误打开连接，消耗资源</p>
-<p><strong>第三次握手取消掉行不行？</strong></p>
-<p>不行啊</p>
-<ol>
-<li><p>如果取消掉的话，S端不知道C收和S发正不正常</p>
-</li>
-<li><p>倘若有网络问题，S端第二次握手返回的确认报文很慢，C端等了一个超时重传时间还没到，它就要重新请求连接。</p>
-<p>结果重新请求完，这个确认报文到了，如果没有第三次握手，那么服务器就会对滞留的连接请求进行确认（但实际上它应该是过期了）</p>
-</li>
-</ol>
-<blockquote>
-<p>四次挥手</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/f87afe72-c2df-4c12-ac03-9b8d581a8af8.jpg" alt="img"></p>
-<blockquote>
-<p>在建立连接后ACK = 1</p>
-</blockquote>
-<p>Client想与Server结束连接</p>
-<ul>
-<li>A发送连接释放报文， FIN = 1,选择初始序号seq = u</li>
-<li>B收到释放报文后进行确定，ACK=1,ack = u+1, 选择一个初始序号seq=v，这时候TCP属于半关闭状态（CLOSE WAIT)，B能向A发送数据但是A不能向B发送数据</li>
-<li>等B发送完数据后，不需要维持这个连接了，就发送释放报文给A，FIN=1,ACK=1,ack=u+1,选择一个初始序号seq = w</li>
-<li>A收到后，进入TIME-WAIT状态，等待2MSL(最大报文存活时间)后释放连接，ACK=1, ack = w+1, seq = u+1</li>
-<li>B收到A的确认后释放连接</li>
-</ul>
-<p><strong>为什么要四次挥手？</strong></p>
-<ol>
-<li>CLOSE_WAIT过程是为了让服务端发送完所有数据。</li>
-<li>TIME_WAIT过程的2MSL时间：（为什么要等2MSL呢？）</li>
-</ol>
-<blockquote>
-<ol>
-<li>确保最后一个A发向B的确认报文能够到达。如果B没收到A发送的确认报文，那么会重新发送连接释放请求报文，等2MSL这段时间就是为了处理这种情况</li>
-<li>等一段时间也是为了让本次连接产生的所有报文都从网络中消失，使得下次新连接出现旧连接报文</li>
-</ol>
-</blockquote>
-<h4 id="拥塞控制"><a href="#拥塞控制" class="headerlink" title="拥塞控制"></a>拥塞控制</h4><p>拥塞控制为了降低整个网络的拥塞程度。</p>
-<blockquote>
-<p>因为如果网络出现拥塞，分组将会丢失。所以发送方会再次重传数据，从而导致网络的拥塞程度更高，这样的恶性循环必须避免，因此当出现拥塞时，应当控制发送方的速率。</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/51e2ed95-65b8-4ae9-8af3-65602d452a25.jpg" alt="img"></p>
-<p>TCP主要通过四个算法来进行拥塞控制：</p>
-<p>慢开始、拥塞避免、快重传、快恢复</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/910f613f-514f-4534-87dd-9b4699d59d31.png" alt="img"></p>
-<blockquote>
-<p>cwnd：拥塞窗口，是一个状态变量，但实际发送多少数据取决于发送方窗口</p>
-<p>ssthresh：慢开始门限</p>
-</blockquote>
-<ul>
-<li>慢开始</li>
-</ul>
-<blockquote>
-<p>最初令cwnd为1，当<strong>cwnd &lt; ssthresh</strong>时，每次<strong>cwnd加倍</strong></p>
-<p>当cwnd &gt;= ssthresh时，进入拥塞避免</p>
-</blockquote>
-<ul>
-<li>拥塞避免</li>
-</ul>
-<blockquote>
-<p>当进入拥塞避免：每个轮次cwnd加1</p>
-<p>如果超时，令ssthresh = cwnd / 2，并重新执行慢开始</p>
-</blockquote>
-<ul>
-<li>快重传</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20190731184314574.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNDMxNDA2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>发送方传输数据给接收方，先发送M1数据，接收方接收到并返回接收M1数据的确认报文，接着发送M2，假设发送M3数据时，数据丢失了，当发送方发送M4数据时，接收方发现M3没有确认，就会要求重复确认M2，发送M5，再次要求重复确认M2，发送M6，第三次重复确认M2，因为三次重复确认请求就会触发快重传机制，这时候发送方的第一要务就是把M3给发出来..</p>
-<ul>
-<li>快恢复</li>
-</ul>
-<p><img src="https://img-blog.csdnimg.cn/20190731184640178.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNDMxNDA2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p><img src="https://img-blog.csdnimg.cn/20190731184935595.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxNDMxNDA2,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<h3 id="应用层"><a href="#应用层" class="headerlink" title="应用层"></a>应用层</h3><h4 id="DNS域名系统"><a href="#DNS域名系统" class="headerlink" title="DNS域名系统"></a>DNS域名系统</h4><p>DNS是一个分布式<strong>数据库</strong>，提供了主机名和IP地址之间相互转换的服务。</p>
-<blockquote>
-<p>分布式的意思就是每个站点只保留它自己的那部分数据</p>
-</blockquote>
-<p>DNS域名有层级结构，自上而下为：根域名、顶级域名、二级域名</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/b54eeb16-0b0e-484c-be62-306f57c40d77.jpg" alt="img"></p>
-<p>DNS虽然可以使用UDP和TCP进行传输，但是大部分情况下都是使用UDP进行传输的，使用端口号为53。</p>
-<p>以下两种情况DNS会使用TCP进行传输：</p>
-<ul>
-<li>因为UDP最大只支持512字节的数据，所以当返回的响应超过512字节时候，会进行TCP进行传输</li>
-<li>区域传送（区域传送指的是主域名服务器向辅助域名服务器传送变化的那部分数据）</li>
-</ul>
-<h4 id="文件传输协议（FTP）"><a href="#文件传输协议（FTP）" class="headerlink" title="文件传输协议（FTP）"></a>文件传输协议（FTP）</h4><blockquote>
-<p>A: 如果有两台不同的主机，使用不同的操作系统，不同的字符集，如何进行文件传输呢？</p>
-<p>Q: 可以采用FTP的传输方式，也可以使用Telnet协议进行不同操作系统之间的文件传输。但是FTP与Telnet的区别在于FTP使用2个TCP连接传输文件，且不需要强制两端都使用同一个标准。</p>
-</blockquote>
-<p>为什么要使用两个连接呢？</p>
-<p>要是用一条连接的话，端口既要处理数据连接数据，又要处理控制连接，很容易出错，而且效率很低。区分控制连接和数据连接后，数据连接的速度要快一些。</p>
-<h5 id="2个连接"><a href="#2个连接" class="headerlink" title="2个连接"></a>2个连接</h5><ul>
-<li>控制连接</li>
-</ul>
-<blockquote>
-<p>控制连接使用端口21，主要用于在两个主机间传输控制信息，如用户标识、口令相关数据，相关命令从客户端传送给服务端，同时将服务端的应答传送给客户端</p>
-</blockquote>
-<ul>
-<li>数据连接</li>
-</ul>
-<blockquote>
-<p>用于传输一个文件数据，使用端口20</p>
-</blockquote>
-<h5 id="2种模式"><a href="#2种模式" class="headerlink" title="2种模式"></a>2种模式</h5><p>根据数据连接是否是让服务端主动建立的，分为主动模式和被动模式</p>
-<p>而两者建立连接的过程，就是两次TCP请求的构建，只不过两种模式的数据连接构建并不大相同。。</p>
-<ul>
-<li>主动模式</li>
-</ul>
-<blockquote>
-<p>服务端主动建立数据连接，服务器端的端口号为20，客户端端口号随机，但必须大于1024（因为0~1023是熟知端口号）</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/03f47940-3843-4b51-9e42-5dcaff44858b.jpg" alt="img"></p>
-<p><strong>主动模式的利弊</strong></p>
-<p>主动模式对FTP服务器的管理有利，因为FTP服务器只需要开启21端口的“准入”和20端口的“准出”即可。</p>
-<p>但这种模式对客户端的管理不利，因为FTP服务器20端口连接客户端的数据端口时，有可能被客户端的防火墙拦截掉。</p>
-<ul>
-<li>被动模式</li>
-</ul>
-<blockquote>
-<p>服务端不是主动建立数据连接，而是由客户端主动建立数据，且客户端的端口号也由自己决定，服务端端口号随机</p>
-</blockquote>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/be5c2c61-86d2-4dba-a289-b48ea23219de.jpg" alt="img"></p>
-<p><strong>被动模式的利弊</strong></p>
-<p>被动模式对FTP客户端的管理有利，因为客户端的命令端口和数据端口都是“准出”，windows防火墙对于“准出”一般是不拦截的，所以客户端不需要任何多余的配置就可以连接FTP服务器了。</p>
-<p>但对服务器端的管理不利。因为客户端数据端口连到FTP服务器的数据端口P时，很有可能被服务器端的防火墙阻塞掉。</p>
-<h4 id="动态主机配置协议（DHCP）"><a href="#动态主机配置协议（DHCP）" class="headerlink" title="动态主机配置协议（DHCP）"></a>动态主机配置协议（DHCP）</h4><p>DHCP协议提供了即插即用的联网方式，用户不需要再手动的配置IP地址等信息</p>
-<p>相关信息包括：IP地址，子网掩码，网关IP地址等</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/23219e4c-9fc0-4051-b33a-2bd95bf054ab.jpg" alt="img"></p>
-<h4 id="远程登录协议（Telnet协议）"><a href="#远程登录协议（Telnet协议）" class="headerlink" title="远程登录协议（Telnet协议）"></a>远程登录协议（Telnet协议）</h4><p>该协议用于一台主机登录到远程主机上，且能够获得远程主机的输出。</p>
-<p>一次TCP</p>
-<p>可以适应两台主题不同的操作系统和编码集（同FTP）</p>
-<h4 id="电子邮件协议"><a href="#电子邮件协议" class="headerlink" title="电子邮件协议"></a>电子邮件协议</h4><p>一个邮件系统有三部分组成：用户代理、邮件服务器、邮件协议。</p>
-<p>邮件协议包括发送协议和读取协议</p>
-<p>发送协议通常使用SMTP协议，读取协议使用POP3和IMAP</p>
-<p><img src="https://cs-notes-1256109796.cos.ap-guangzhou.myqcloud.com/7b3efa99-d306-4982-8cfb-e7153c33aab4.png" alt="img"></p>
-<h3 id="常用端口"><a href="#常用端口" class="headerlink" title="常用端口"></a>常用端口</h3><table>
-<thead>
-<tr>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-<th align="center"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">应用</td>
-<td align="center">应用层协议</td>
-<td align="center">端口号</td>
-<td align="center">传输层协议</td>
-<td align="center">备注</td>
-</tr>
-<tr>
-<td align="center">域名解析</td>
-<td align="center">DNS</td>
-<td align="center">53</td>
-<td align="center">UDP/TCP</td>
-<td align="center">长度超过 512 字节时使用 TCP</td>
-</tr>
-<tr>
-<td align="center">动态主机配置协议</td>
-<td align="center">DHCP</td>
-<td align="center">67/68</td>
-<td align="center">UDP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">简单网络管理协议</td>
-<td align="center">SNMP</td>
-<td align="center">161/162</td>
-<td align="center">UDP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">文件传送协议</td>
-<td align="center">FTP</td>
-<td align="center">20/21</td>
-<td align="center">TCP</td>
-<td align="center">控制连接 21，数据连接 20</td>
-</tr>
-<tr>
-<td align="center">远程终端协议</td>
-<td align="center">TELNET</td>
-<td align="center">23</td>
-<td align="center">TCP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">超文本传送协议</td>
-<td align="center">HTTP</td>
-<td align="center">80</td>
-<td align="center">TCP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">简单邮件传送协议</td>
-<td align="center">SMTP</td>
-<td align="center">25</td>
-<td align="center">TCP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">邮件读取协议</td>
-<td align="center">POP3</td>
-<td align="center">110</td>
-<td align="center">TCP</td>
-<td align="center"></td>
-</tr>
-<tr>
-<td align="center">网际报文存取协议</td>
-<td align="center">IMAP</td>
-<td align="center">143</td>
-<td align="center">TCP</td>
-<td align="center"></td>
-</tr>
-</tbody></table>
-<h3 id="访问Web页面过程（面试）"><a href="#访问Web页面过程（面试）" class="headerlink" title="访问Web页面过程（面试）"></a>访问Web页面过程（面试）</h3><ol>
-<li><h4 id="DHCP配置主机信息"><a href="#DHCP配置主机信息" class="headerlink" title="DHCP配置主机信息"></a>DHCP配置主机信息</h4></li>
-</ol>
-<ul>
-<li>当主机开始没有IP地址以及相关信息，就需要使用DHCP进行获取</li>
-<li>主机生成DHCP请求报文，将该报文放入具有目的端口67和源端口68的UDP报文段中</li>
-<li>该UDP报文段需要放到IP数据报中进行传输（广播IP目的地址255.255.255.255）和源IP地址（0.0.0.0）</li>
-<li>IP数据报需要放置在MAC帧中，将广播到与交换机连接的所有设备上</li>
-<li>连接在交换机的DHCP服务器收到广播帧后，会不断向上分解得到IP数据报，UDP数据报、DHCP请求报文，根据DHCP请求报文会得到DHCP ACK报文。。。在封装（UDP握手）</li>
-<li>最后通过DHCP报文，配置IP地址，子网掩码和DNS服务器的IP地址</li>
-</ul>
-<ol start="2">
-<li><h4 id="ARP解析MAC地址"><a href="#ARP解析MAC地址" class="headerlink" title="ARP解析MAC地址"></a>ARP解析MAC地址</h4></li>
-</ol>
-<blockquote>
-<p><strong>因为DHCP过程只能知道网关路由器的IP地址，为了获取网关路由器的MAC地址，需要使用ARP协议</strong></p>
-</blockquote>
-<ul>
-<li>主机通过浏览器生成TCP套接字，该套接字向HTTP服务器发送HTTP请求。为了生成套接字，需要知道网站域名</li>
-<li>主机生成ARP查询报文，然后封装报文成帧，通过交换机转发该帧给所有连接设备</li>
-<li>路由器收到该帧后，向上分解得到ARP报文，进行匹配，成功就返回一个ARP回答报文给主机，其中包括它的MAC地址。</li>
-</ul>
-<ol start="3">
-<li><h4 id="DNS解析域名"><a href="#DNS解析域名" class="headerlink" title="DNS解析域名"></a>DNS解析域名</h4></li>
-</ol>
-<ul>
-<li>知道网关路由器的MAC地址后，就可以进行DNS的解析过程了。</li>
-</ul>
-<ol start="4">
-<li><h4 id="HTTP请求页面"><a href="#HTTP请求页面" class="headerlink" title="HTTP请求页面"></a>HTTP请求页面</h4></li>
-</ol>
-<ul>
-<li>三次握手建立连接后，浏览器生成HTTP GET报文，获得HTTP响应报文，抽取出存放在报文主体的Web页面内容，进行渲染显示出Web页面</li>
-</ul>
 
       
     </div>
@@ -1602,7 +945,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/19/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1616,7 +959,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">线程通信方式</a>
+            <a href="/2021/05/19/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-title-link" itemprop="url">线程通信方式</a>
         </h2>
 
         <div class="post-meta">
@@ -1625,10 +968,16 @@
                 <i class="far fa-calendar"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2021-05-19 09:52:48 / 修改时间：23:52:20" itemprop="dateCreated datePublished" datetime="2021-05-19T09:52:48+08:00">2021-05-19</time>
+              <time title="创建时间：2021-05-19 09:52:48" itemprop="dateCreated datePublished" datetime="2021-05-19T09:52:48+08:00">2021-05-19</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 22:55:09" itemprop="dateModified" datetime="2021-06-20T22:55:09+08:00">2021-06-20</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="far fa-folder"></i>
@@ -1640,7 +989,7 @@
             </span>
 
           
-            <span id="/2021/05/19/%E9%9D%A2%E8%AF%95/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="线程通信方式" title="阅读次数">
+            <span id="/2021/05/19/%E5%B9%B6%E5%8F%91%E7%9F%A5%E8%AF%86/%E7%BA%BF%E7%A8%8B%E9%80%9A%E4%BF%A1%E6%96%B9%E5%BC%8F/" class="post-meta-item leancloud_visitors" data-flag-title="线程通信方式" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -1652,14 +1001,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>6.1k</span>
+              <span>5.4k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>6 分钟</span>
+              <span>5 分钟</span>
             </span>
 
         </div>
@@ -1764,7 +1113,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/18/Java%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -1778,7 +1127,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">序列化与反序列化</a>
+            <a href="/2021/05/18/Java%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-title-link" itemprop="url">序列化与反序列化</a>
         </h2>
 
         <div class="post-meta">
@@ -1795,7 +1144,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-19 23:53:11" itemprop="dateModified" datetime="2021-05-19T23:53:11+08:00">2021-05-19</time>
+                <time title="修改时间：2021-06-20 22:58:48" itemprop="dateModified" datetime="2021-06-20T22:58:48+08:00">2021-06-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1808,7 +1157,7 @@
             </span>
 
           
-            <span id="/2021/05/18/%E9%9D%A2%E8%AF%95/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="序列化与反序列化" title="阅读次数">
+            <span id="/2021/05/18/Java%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/" class="post-meta-item leancloud_visitors" data-flag-title="序列化与反序列化" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -2024,7 +1373,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/05/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2038,7 +1387,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">红黑树</a>
+            <a href="/2021/05/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-title-link" itemprop="url">红黑树</a>
         </h2>
 
         <div class="post-meta">
@@ -2055,7 +1404,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-19 23:55:27" itemprop="dateModified" datetime="2021-05-19T23:55:27+08:00">2021-05-19</time>
+                <time title="修改时间：2021-06-20 22:54:09" itemprop="dateModified" datetime="2021-06-20T22:54:09+08:00">2021-06-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2068,7 +1417,7 @@
             </span>
 
           
-            <span id="/2021/05/17/%E9%9D%A2%E8%AF%95/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="红黑树" title="阅读次数">
+            <span id="/2021/05/17/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E5%A4%A7%E7%AB%AF%E7%B3%BB%E7%BB%9F%E5%B0%8F%E7%AB%AF%E7%B3%BB%E7%BB%9F/" class="post-meta-item leancloud_visitors" data-flag-title="红黑树" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -2080,7 +1429,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>882</span>
+              <span>862</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -2147,7 +1496,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/04/06/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -2161,7 +1510,7 @@
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
           
-            <a href="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-title-link" itemprop="url">guli-shop高级篇3</a>
+            <a href="/2021/04/06/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-title-link" itemprop="url">guli-shop高级篇3</a>
         </h2>
 
         <div class="post-meta">
@@ -2178,7 +1527,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-05-05 15:46:34" itemprop="dateModified" datetime="2021-05-05T15:46:34+08:00">2021-05-05</time>
+                <time title="修改时间：2021-06-20 22:52:55" itemprop="dateModified" datetime="2021-06-20T22:52:55+08:00">2021-06-20</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -2191,7 +1540,7 @@
             </span>
 
           
-            <span id="/2021/04/06/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-meta-item leancloud_visitors" data-flag-title="guli-shop高级篇3" title="阅读次数">
+            <span id="/2021/04/06/%E9%A1%B9%E7%9B%AE%E5%AE%9E%E6%88%98/guli-shop%E9%AB%98%E7%BA%A7%E7%AF%873/" class="post-meta-item leancloud_visitors" data-flag-title="guli-shop高级篇3" title="阅读次数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-eye"></i>
               </span>
@@ -2203,7 +1552,7 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>2.2k</span>
+              <span>2.1k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
@@ -2256,6 +1605,202 @@
 <p>参考文章：<a target="_blank" rel="noopener" href="https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B">https://www.yuque.com/docs/share/34b6d4b9-8bb7-4a27-992d-962620a5ef3d?#%20%E3%80%8A%E9%A1%B9%E7%9B%AE%E5%BC%80%E5%8F%91%E5%BD%93%E4%B8%ADnacos%E9%85%8D%E7%BD%AE%E6%97%A0%E6%95%88%E7%9A%84%E9%97%AE%E9%A2%98%E3%80%8B</a></p>
 </blockquote>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">apache calcite学习</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-16 10:14:12" itemprop="dateCreated datePublished" datetime="2021-03-16T10:14:12+08:00">2021-03-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 23:00:34" itemprop="dateModified" datetime="2021-06-20T23:00:34+08:00">2021-06-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/" itemprop="url" rel="index"><span itemprop="name">大数据</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E9%9D%A2%E8%AF%95/" itemprop="url" rel="index"><span itemprop="name">面试</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%95%B0%E6%8D%AE/%E9%9D%A2%E8%AF%95/%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">学习记录</span></a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/" class="post-meta-item leancloud_visitors" data-flag-title="apache calcite学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>4.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Calcite前言简介"><a href="#Calcite前言简介" class="headerlink" title="Calcite前言简介"></a>Calcite前言简介</h3><p>Apache Calcite是一个动态数据管理的框架</p>
+<p>它能对各种数据库（不同数据源）的查询进行封装，对外提供查询入口。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/16/%E5%85%B6%E4%BB%96%E6%A1%86%E6%9E%B6%E5%AD%A6%E4%B9%A0/apache-calcite%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://cherrywang761.github.io/2021/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="CherryWang761">
+      <meta itemprop="description" content="一个技术交流的平台">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Nonbioclock">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">hadoop学习笔记</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-15 13:38:40" itemprop="dateCreated datePublished" datetime="2021-03-15T13:38:40+08:00">2021-03-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-06-20 22:59:33" itemprop="dateModified" datetime="2021-06-20T22:59:33+08:00">2021-06-20</time>
+              </span>
+
+          
+            <span id="/2021/03/15/%E5%A4%A7%E6%95%B0%E6%8D%AE/hadoop%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-meta-item leancloud_visitors" data-flag-title="hadoop学习笔记" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>0</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>1 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
       
     </div>
 
@@ -2339,7 +1884,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">42</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -2352,7 +1897,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">22</span>
+        <span class="site-state-item-count">26</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -2388,12 +1933,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">258k</span>
+    <span title="站点总字数">228k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:54</span>
+    <span title="站点阅读时长">3:27</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
