@@ -690,19 +690,59 @@
   <entry>
     <title>类加载机制</title>
     <url>/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/</url>
-    <content><![CDATA[<h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
-<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象</p>
-<p>首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader</p>
+    <content><![CDATA[<h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="类的生命周期"></p>
+<h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><p>Java虚拟机规定了类必须进行<strong>初始化</strong>的5种情况</p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA.png" alt="类加载时机"></p>
+<blockquote>
+<p>其中情况1中的4条字节码指令在Java里最常见的场景是：<br>1 . new一个对象时<br>2 . set或者get一个类的静态字段（除去那种被final修饰放入常量池的静态字段）<br>3 . 调用一个类的静态方法</p>
+</blockquote>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><blockquote>
+<p>类加载原因：Class文件描述的各种信息，最终都需要加载到虚拟机中才能运行和使用。</p>
+</blockquote>
+<p>JVM在该阶段主要就是将字节码从不同的数据源（可能是class文件，jar包，甚至网络）转为为二进制字节流，并加载到内存中，生成代表该类的<code>java.lang.Class</code>对象</p>
+<blockquote>
+<p>其实就是三句话:</p>
+<ul>
+<li>通过类的全名，获取类的二进制数据流。</li>
+<li>解析类的二进制数据流为方法区内的数据结构（Java类模型）</li>
+<li>创建java.lang.Class类的实例，表示该类型。作为方法区这个类的各种数据的访问入口</li>
+</ul>
+</blockquote>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E5%8A%A0%E8%BD%BD%E9%98%B6%E6%AE%B5.image" alt="加载阶段"></p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"> <span class="comment">/* 过程一：加载阶段</span></span><br><span class="line"><span class="comment"> * 通过Class类，获得了java.lang.String类的所有方法信息，并打印方法访问标识符、描述符</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadingTest</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Class clazz = Class.forName(<span class="string">"java.lang.String"</span>);</span><br><span class="line">            <span class="comment">//获取当前运行时类声明的所有方法</span></span><br><span class="line">            Method[] ms = clazz.getDeclaredMethods();</span><br><span class="line">            <span class="keyword">for</span> (Method m : ms) {</span><br><span class="line">                <span class="comment">//获取方法的修饰符</span></span><br><span class="line">                String mod = Modifier.toString(m.getModifiers());</span><br><span class="line">                System.out.print(mod + <span class="string">" "</span>);</span><br><span class="line">                <span class="comment">//获取方法的返回值类型</span></span><br><span class="line">                String returnType = m.getReturnType().getSimpleName();</span><br><span class="line">                System.out.print(returnType + <span class="string">" "</span>);</span><br><span class="line">                <span class="comment">//获取方法名</span></span><br><span class="line">                System.out.print(m.getName() + <span class="string">"("</span>);</span><br><span class="line">                <span class="comment">//获取方法的参数列表</span></span><br><span class="line">                Class&lt;?&gt;[] ps = m.getParameterTypes();</span><br><span class="line">                <span class="keyword">if</span> (ps.length == <span class="number">0</span>) System.out.print(<span class="string">')'</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ps.length; i++) {</span><br><span class="line">                    <span class="keyword">char</span> end = (i == ps.length - <span class="number">1</span>) ? <span class="string">')'</span> : <span class="string">','</span>;</span><br><span class="line">                    <span class="comment">//获取参数的类型</span></span><br><span class="line">                    System.out.print(ps[i].getSimpleName() + end);</span><br><span class="line">                }</span><br><span class="line">                System.out.println();</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">catch</span> (ClassNotFoundException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
+<p>在Java中，一个类用全限定类名作为标识</p>
+<p>在JVM中，一个类用全限定类名和其类加载器作为其唯一标识</p>
+<p>类加载器的作用就是根据一个类的全限定类名读取该类的二进制字节流到JVM中。</p>
+</blockquote>
 <p>类加载器一般分为三层（三种）</p>
 <p>Bootstrap Class Loader：引导类加载器，是最顶层的</p>
 <p>Extension Class Loader: 拓展类加载器，Boostrap的子类</p>
-<p>最底下的是Application Class  Loader:系统类加载器</p>
-<p>类加载器也多嘛，所以有个双亲委派的这种机制，就是说</p>
-<p>如果我要加载一个类(.java)，那么我默认是用Application类加载器来加载的，</p>
-<p>但是我不直接加载，我会往上抛给我的父类，Extension类加载器，如果它能够加载，它会继续上抛，直到super构造器进行加载，如果不能够加载，就会回调到最后一个能加载该类的加载器进行加载。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
+<p>Application Class  Loader:系统类加载器</p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8" alt="类加载器"></p>
+<h5 id="BootstrapClassLoader（引导类加载器）"><a href="#BootstrapClassLoader（引导类加载器）" class="headerlink" title="BootstrapClassLoader（引导类加载器）"></a>BootstrapClassLoader（引导类加载器）</h5><p>引导类加载器是最顶层的类加载器，主要加载的是JVM本身需要的类，这个类加载器是使用C++进行实现的，可以看做是JVM的一部分</p>
+<p>它主要负责将<code>JAVA_HOME/lib</code>下的核心类库，如：rt.jar、resource.jar…加载到内存中。</p>
+<h5 id="ExtensionClassLoader（拓展类加载器）"><a href="#ExtensionClassLoader（拓展类加载器）" class="headerlink" title="ExtensionClassLoader（拓展类加载器）"></a>ExtensionClassLoader（拓展类加载器）</h5><p>拓展类加载器是指Sun公司实现的<code>sun.misc.Launcher$ExtClassLoader</code>类，由Java实现</p>
+<p>它主要负责将<code>JAVA_HOME/lib/ext</code>目录下的核心类库加载进内存。</p>
+<p>开发者可以直接使用标准扩展类加载器。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="comment">//ExtClassLoader类中获取路径的代码</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> File[] getExtDirs() {</span><br><span class="line">     <span class="comment">//加载&lt;JAVA_HOME&gt;/lib/ext目录中的类库</span></span><br><span class="line">     String s = System.getProperty(<span class="string">"java.ext.dirs"</span>);</span><br><span class="line">     File[] dirs;</span><br><span class="line">     <span class="keyword">if</span> (s != <span class="keyword">null</span>) {</span><br><span class="line">         <span class="comment">//构造一个用来解析str的StringTokenizer对象，并提供一个指定的分隔符</span></span><br><span class="line">         StringTokenizer st =</span><br><span class="line">             <span class="keyword">new</span> StringTokenizer(s, File.pathSeparator);</span><br><span class="line">         <span class="keyword">int</span> count = st.countTokens();</span><br><span class="line">         dirs = <span class="keyword">new</span> File[count];</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {</span><br><span class="line">             dirs[i] = <span class="keyword">new</span> File(st.nextToken());</span><br><span class="line">         }</span><br><span class="line">     } <span class="keyword">else</span> {</span><br><span class="line">         dirs = <span class="keyword">new</span> File[<span class="number">0</span>];</span><br><span class="line">     }</span><br><span class="line">     <span class="keyword">return</span> dirs;</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="ApplicationClassLoader（系统类加载器）"><a href="#ApplicationClassLoader（系统类加载器）" class="headerlink" title="ApplicationClassLoader（系统类加载器）"></a>ApplicationClassLoader（系统类加载器）</h5><p>也叫应用程序加载器，是Sun公司实现的<code>sun.misc.Launcher$AppClassLoader</code>。</p>
+<p>它主要负责将类路径<code>java -classpath</code>指定路径下的类库（即我们常用的classpath路径）</p>
+<p>开发者可以直接使用系统类加载器，一般情况下该类加载是程序中默认的类加载器。</p>
+<p>我们可以通过<code>ClassLoader#getSystemClassLoader()</code>获取到该类加载器</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>当类加载到系统后，就会开始链接操作。</p>
+<p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
 <p>或者就是</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>]]></content>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>参考文章：</p>
+<p><a href="https://juejin.cn/post/6916461467067744264">https://juejin.cn/post/6916461467067744264</a></p>
+<p><a href="https://juejin.cn/post/6844903886512193550">https://juejin.cn/post/6844903886512193550</a></p>
+<p><a href="https://blog.csdn.net/javazejian/article/details/73413292">https://blog.csdn.net/javazejian/article/details/73413292</a></p>
+]]></content>
       <categories>
         <category>面试</category>
       </categories>
@@ -729,14 +769,18 @@
 <p>编写测试Controller类</p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="meta">@RequestMapping(value = "/test")</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GlobalExceptionController</span> </span>{</span><br><span class="line">    <span class="meta">@RequestMapping(value = "/index")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"/index"</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 异常报错</span></span><br><span class="line"><span class="comment">     * 访问路径：http://127.0.0.1:8090/test/exception</span></span><br><span class="line"><span class="comment">     * 自己try_catch的结果：{"message": "NoEnterGlobalException" }</span></span><br><span class="line"><span class="comment">     * 最后返回结果： {"errorCode": 1001,"message": "Exception:4"}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="comment">//try_catch内部捕获异常，不会走全局异常处理</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        }<span class="keyword">catch</span> (Exception e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">	<span class="comment">//内部没有异常捕获，检测到Controller中存在异常就会被@ControllerAdvice注解捕获异常</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/exception")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getException</span><span class="params">()</span></span>{</span><br><span class="line">        <span class="keyword">int</span>[] arr = {<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>};</span><br><span class="line">        System.out.println(arr[<span class="number">4</span>]);</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NoEnterGlobalException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     *  空指针异常报错</span></span><br><span class="line"><span class="comment">     *  访问路径：http://127.0.0.1:8090/test/nullPointException</span></span><br><span class="line"><span class="comment">     *  不走全局处理类结果：{"message": "NoEnterGlobalNullPointException" }</span></span><br><span class="line"><span class="comment">     *  最后返回结果：{"message":"Exception: null","errorCode":1002}</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/try_catch_nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getTryCatchNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span>{</span><br><span class="line">            object.toString();</span><br><span class="line">        }<span class="keyword">catch</span> (NullPointerException e){</span><br><span class="line">        }</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="meta">@RequestMapping(value = "/nullPointException")</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> ResponseDto <span class="title">getNullPointException</span><span class="params">()</span></span>{</span><br><span class="line">        Object object = <span class="keyword">null</span>;</span><br><span class="line">        object.toString();</span><br><span class="line">        ResponseDto responseDto = <span class="keyword">new</span> ResponseDto();</span><br><span class="line">        responseDto.setMessage(<span class="string">"NullPointerException"</span>);</span><br><span class="line">        <span class="keyword">return</span> responseDto;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 ]]></content>
+      <categories>
+        <category>项目开发</category>
+      </categories>
       <tags>
-        <tag>面试</tag>
+        <tag>java基础</tag>
+        <tag>Springboot</tag>
       </tags>
   </entry>
   <entry>
     <title>序列化与反序列化</title>
     <url>/2021/05/18/Java%E5%9F%BA%E7%A1%80/%E5%BA%8F%E5%88%97%E5%8C%96%E4%B8%8E%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96/</url>
-    <content><![CDATA[<p>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</p>
+    <content><![CDATA[<p><strong>序列化是一种用来处理对象流的机制，是将java对象转换为字节序列的过程</strong></p>
 <blockquote>
 <p>对象流：将对象转换为二进制流byte[]，我们可以对二进制流进行读写操作，流数据也可以在网络中进行传输。</p>
 </blockquote>
@@ -779,6 +823,7 @@
 </blockquote>
 ]]></content>
       <categories>
+        <category>项目开发</category>
         <category>面试</category>
       </categories>
       <tags>
@@ -2923,8 +2968,7 @@
 </li>
 </ol>
 <h3 id="3-hashmap底层"><a href="#3-hashmap底层" class="headerlink" title="3. hashmap底层"></a>3. hashmap底层</h3><p><strong>（get方法比较两key是怎么比较的）</strong></p>
-<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115195934692.png" alt="image-20201115195934692" style="zoom: 25%;">
-
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/hashmap%E7%9A%84add().png" alt="hashmap的add()"></p>
 <p>JDK8以前，hashmap是由<strong>数组+链表</strong>组成的数组是HashMap的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。</p>
 <p>JDK8后，在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）时，将链表转化为红黑树，以减少搜索时间。</p>
 <ul>
@@ -2937,7 +2981,7 @@
 <ul>
 <li><code>threshold</code>：<code>threshold</code> = <code>capacity</code> * <code>loadFactor</code>；当Size&gt;=threshold时，需要考虑扩容</li>
 </ul>
-<p><img src="https://img-blog.csdnimg.cn/20181105181728652.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3dvc2hpbWF4aWFvMQ==,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/hashmap%E6%89%A9%E5%AE%B9%E8%BF%87%E7%A8%8B.png" alt="hashmap扩容过程"></p>
 <p><strong>Tips:链表变成红黑树结构的条件有两个：1.链表长度大于8    2.当前散列表的长度已经达到64；不然它只会发生散列表扩容（resize）</strong></p>
 <h5 id="散列表什么时候创建？"><a href="#散列表什么时候创建？" class="headerlink" title="散列表什么时候创建？"></a>散列表什么时候创建？</h5><p>散列表是懒加载机制，只有在第一次put数据的时候才创建。</p>
 <h5 id="存储的数据类型"><a href="#存储的数据类型" class="headerlink" title="存储的数据类型"></a>存储的数据类型</h5><p>一、Node类型（两个方格那个）(<strong>本质是一个键值对</strong>)</p>
@@ -2945,7 +2989,7 @@
 
 
 <h5 id="散列的过程"><a href="#散列的过程" class="headerlink" title="散列的过程"></a>散列的过程</h5><p>向hashmap插入数据，要确定在hashbucket中的位置：</p>
-<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201115230657766.png" alt="image-20201115230657766"></p>
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/hashmap%E6%95%A3%E5%88%97%E8%BF%87%E7%A8%8B.png" alt="hashmap散列过程"></p>
 <blockquote>
 <p>hashCode()：该方法用于返回字符串的哈希码。</p>
 <p>hashcode: 又叫哈希码，表示key在hash表中的位置</p>
@@ -2959,8 +3003,7 @@
 <blockquote>
 <p>红黑树的主要特性:　　<br>　　（1）每个节点要么是黑色，要么是红色。（节点非黑即红）　　<br>　　（2）根节点是黑色。　　<br>　　（3）每个叶子节点（NIL）是黑色。 　　<br>　　（4）如果一个节点是红色的，则它的子节点必须是黑色的。（也就是说父子节点不能同时为红色）　　        （5）从一个节点到该节点的子孙节点的所有路径上包含相同数目的黑节点。（这一点是平衡的关键）</p>
 </blockquote>
-<img src="https://images2018.cnblogs.com/blog/1043143/201806/1043143-20180626004222951-1996840383.jpg" alt="在这里插入图片描述" style="zoom:50%;">
-
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/%E7%BA%A2%E9%BB%91%E6%A0%91%E6%A0%B7%E5%BC%8F.jpg" alt="红黑树样式"></p>
 <h5 id="get的流程（遇到过）"><a href="#get的流程（遇到过）" class="headerlink" title="get的流程（遇到过）"></a>get的流程（遇到过）</h5><p><strong>get方法</strong></p>
 <figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>{  </span><br><span class="line">    Node&lt;K,V&gt; e;  </span><br><span class="line">    <span class="keyword">return</span> (e = getNode(hash(key), key)) == <span class="keyword">null</span> ? <span class="keyword">null</span> : e.value;  </span><br><span class="line">}  </span><br><span class="line"><span class="comment">/** </span></span><br><span class="line"><span class="comment">     * Implements Map.get and related methods </span></span><br><span class="line"><span class="comment">     * </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> hash hash for key </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@param</span> key the key </span></span><br><span class="line"><span class="comment">     * <span class="doctag">@return</span> the node, or null if none </span></span><br><span class="line"><span class="comment">     */</span>  </span><br></pre></td></tr></tbody></table></figure>
 <p><strong>getNode()方法</strong></p>
@@ -2977,20 +3020,15 @@
 <p>Q：为什么不是x2呢？</p>
 <p>A：①cpu其实看不懂乘法，乘法最终都会变成加法进行运算。</p>
 <p>②实际上编译会自动把x2优化成位运算</p>
-<h5 id="数据迁移-感觉是难点"><a href="#数据迁移-感觉是难点" class="headerlink" title="数据迁移(感觉是难点)"></a>数据迁移(感觉是难点)</h5><h5 id=""><a href="#" class="headerlink" title=""></a><img src="https://img-blog.csdnimg.cn/20200408125143437.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3RjOTc5OTA3NDYx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述" style="zoom:67%;"></h5><p>四种情况：</p>
+<h5 id="数据迁移-感觉是难点"><a href="#数据迁移-感觉是难点" class="headerlink" title="数据迁移(感觉是难点)"></a>数据迁移(感觉是难点)</h5><p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/hashmap%E6%89%A9%E5%AE%B9%E6%95%B0%E6%8D%AE%E8%BF%81%E7%A7%BB.png" alt="hashmap扩容数据迁移"></p>
+<p>四种情况：</p>
 <p>null：不处理</p>
 <p>node无next：说明没有发生hash冲突，根据新表的tablesize计算出在新表中的位置，然后存放过去就可以了</p>
 <p>node+链表：next不是null，说明发生hash冲突，先复制bucket，然后需要在当前slot保存这个链表，把这个链表拆分成两个链表，分别是一个高位表和一个低位表。根据(e.hash&amp;oldCap)是否等于0来判断是在高位表还是在地位表。</p>
 <p><strong>低位表：(e.hash&amp;oldCap) == 0:</strong></p>
-<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165859936.png" alt="image-20201117165859936" style="zoom:80%;">
-
-
-
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/%E4%BD%8E%E8%A1%A8%E4%BD%8D%E8%BF%81%E7%A7%BB.png" alt="低表位迁移"></p>
 <p><strong>高位表：(e.hash &amp; oldCap) != 0:</strong></p>
-<img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20201117165936743.png" alt="image-20201117165936743" style="zoom:80%;">
-
-
-
+<p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/%E9%AB%98%E8%A1%A8%E4%BD%8D%E8%BF%81%E7%A7%BB.png" alt="高表位迁移"></p>
 <p>综上：高位链表新表位置：老表位置+老表长度</p>
 <p>低位链表新表位置：老表位置</p>
 <p>node+树：树结构的链表拆分形式和上面差不多，其中需要注意的就是链表的维护</p>
@@ -3070,11 +3108,6 @@
 <h3 id="5-继承封装多态"><a href="#5-继承封装多态" class="headerlink" title="5. 继承封装多态"></a>5. 继承封装多态</h3><p>继承</p>
 <p>封装</p>
 <p>多态</p>
-<ol>
-<li><p><img src="/2021/01/16/Java%E5%9F%BA%E7%A1%80/Java%E5%9F%BA%E7%A1%80/Users\86137\AppData\Roaming\Typora\typora-user-images\image-20210328181206316.png" alt="image-20210328181206316"></p>
-</li>
-</ol>
-<p>2. </p>
 ]]></content>
       <categories>
         <category>java</category>
@@ -6650,5 +6683,193 @@
       <tags>
         <tag>项目</tag>
       </tags>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/</url>
+    <content><![CDATA[<h2 id="SPI机制"><a href="#SPI机制" class="headerlink" title="SPI机制"></a>SPI机制</h2><h3 id="什么是SPI？"><a href="#什么是SPI？" class="headerlink" title="什么是SPI？"></a>什么是SPI？</h3><p>SPI，全称<code>Service Provider interface</code>，即服务提供发现接口。（本质上就是面向接口编程）</p>
+<p>它能通过在classpath/META-INF/services文件夹中查找文件，自动加载文件中定义的类。</p>
+<blockquote>
+<p>Tips1: 虽然平时并不会直接使用到 SPI 来实现业务，但其实我们使用过的绝大多数框架都会提供 SPI 接口方便使用者扩展自己的功能。</p>
+</blockquote>
+<a id="more"></a>
+
+<p>常见的如Dubbo，它提供了一系列的拓展</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/v2-1d8e3e302fcc9bdbeab2cc00e21da221_1440w.jpg" alt="img"></p>
+<p>此外在JDBC中也使用了SPI机制</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/v2-b8e9ac2019d078008a0e5141be52f8e6_1440w.jpg" alt="img"></p>
+<h3 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h3><blockquote>
+<p>我们先定义一个接口(我们通过该接口发现路径下的相关服务)</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">SPIService</span></span>{</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>定义两个服务A,B，实现SPIService接口</p>
+</blockquote>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">A</span> <span class="keyword">implements</span> <span class="title">SPIService</span></span>{</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"A执行"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">implements</span> <span class="title">SPIService</span></span>{</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">excute</span><span class="params">()</span></span>{</span><br><span class="line">        System.out.println(<span class="string">"B执行"</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<p>最后我们在<code>classpath/META-INF/services</code>文件夹中</p>
+<p>文件名为接口的全限定名：    <code>com.test.spi.service.SPIService</code></p>
+<p>文件内容为接口实现类的全限定类名，多个用换行符隔开：</p>
+<figure class="highlight xml"><table><tbody><tr><td class="code"><pre><span class="line">com.test.spi.service.Impl.A</span><br><span class="line">com.test.spi.service.Impl.B</span><br></pre></td></tr></tbody></table></figure>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703155722492.png" alt="image-20210703155722492" style="zoom:50%;"><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703155737928.png" alt="image-20210703155737928" style="zoom:50%;"></p>
+<p>这样子我们可以根据SPI机制，<strong>通过读取相关路径信息，启动所需要的服务。</strong>写个测试类</p>
+<p>我们有两种方式可以实现，一种是通过<code>ServiceLoad.load()</code>方法，由<code>java.util</code>包提供</p>
+<p>另一种是通过<code>Service.providers</code>方法拿到实现类的实例，由<code>sum.misc.Service</code>提供</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TestSPI</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        FirstCallOfSPI();</span><br><span class="line">        System.out.println(<span class="string">"---------------"</span>);</span><br><span class="line">        SecondCallOfSPI();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Service.providers()</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">FirstCallOfSPI</span><span class="params">()</span> </span>{</span><br><span class="line">        Iterator&lt;SPIService&gt; providers =</span><br><span class="line">                Service.providers(SPIService.class);</span><br><span class="line">        <span class="keyword">while</span> (providers.hasNext()) {</span><br><span class="line">            SPIService next = providers.next();</span><br><span class="line">            next.excute();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">//ServiceLoader.load()</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">SecondCallOfSPI</span><span class="params">()</span> </span>{</span><br><span class="line">        ServiceLoader&lt;SPIService&gt; load =</span><br><span class="line">                ServiceLoader.load(SPIService.class);</span><br><span class="line">        Iterator&lt;SPIService&gt; iterator = load.iterator();</span><br><span class="line">        <span class="keyword">while</span> (iterator.hasNext()) {</span><br><span class="line">            SPIService next = iterator.next();</span><br><span class="line">            next.excute();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<blockquote>
+<p>执行结果</p>
+</blockquote>
+<img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703161207835.png" alt="image-20210703161207835" style="zoom:80%;">
+
+
+
+
+
+<h3 id="源码解析"><a href="#源码解析" class="headerlink" title="源码解析"></a>源码解析</h3><p>这里主要说一下ServiceLoad，由<code>java.util</code>提供（sum.misc.Service看不了源码）</p>
+<h4 id="ServiceLoad类"><a href="#ServiceLoad类" class="headerlink" title="ServiceLoad类"></a>ServiceLoad类</h4><p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703163258619.png" alt="image-20210703163258619"></p>
+<h4 id="load"><a href="#load" class="headerlink" title="load()"></a>load()</h4><p>这步主要是实例化了内部类：<code>LazyIterator</code>,并返回ServiceLoader的实例</p>
+<img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703164005228.png" alt="image-20210703164005228" style="zoom:80%;">
+
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703164348808.png" alt="image-20210703164348808"></p>
+<blockquote>
+<p>Tips2: AccessController的作用（看源码最害怕多几个不认识的名词了。。）</p>
+<p>简单介绍下        // todo 有机会深入了解Java安全策略的话就会更懂了</p>
+</blockquote>
+<p><code>AccessController</code> 类用于与访问控制相关的操作和决定。</p>
+<p>更准确的说：<code>AccessController</code>类用于以下三个目的</p>
+<ul>
+<li>基于当前的Java安全策略决定是允许还是拒绝对关键系统资源的访问</li>
+<li>将代码标记为享有“特权”，从而影响该代码后续的资源访问决定</li>
+<li>获取当前调用上下文的”快照”，这样就可以相对于以保存的上下文做出其他上下文的访问控制决定。</li>
+</ul>
+<p><strong>一般通过调用<code>checkPermission()</code>根据特定算法进行权限判定</strong></p>
+<p>我们可以<strong>通过<code>doPrivileged</code>将调用方标记为特权</strong>，<strong>只要调用方访问拥有权限的域，就不需要checkPermission权限判定了；但是如果过域了，通常直接抛出异常。</strong></p>
+<h4 id="LazyIterator的内部细节"><a href="#LazyIterator的内部细节" class="headerlink" title="LazyIterator的内部细节"></a>LazyIterator的内部细节</h4><p>LazyIterator内部主要是查找实现类和创建实现类的过程。</p>
+<p>其实当我们调用<code>Iterator.hasNext()</code>和<code>Iterator.next()</code>的时候，都是在调用LazyIterator的相应方法</p>
+<p>其中<code>Iterator.hasNext()</code>主要用于查找实现类</p>
+<p>而<code>Iterator.next()</code>主要用于创建实例</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703165036046.png" alt="image-20210703165036046"></p>
+<blockquote>
+<p>所以现在我们更加关注的是，LazyIterator是怎么重写这两个方法来进行实现类的查找和创建呢？</p>
+</blockquote>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210703172541398.png" alt="image-20210703172541398"></p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210705000635361.png" alt="image-20210705000635361"></p>
+<blockquote>
+<p>Tips3: PrivilegedAction的作用？</p>
+<p><code>PrivilegedAction</code> 是一个具有单个方法的接口</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">PrivilegedAction</span>&lt;<span class="title">T</span>&gt; </span>{</span><br><span class="line">	<span class="function">T <span class="title">run</span><span class="params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>方法名为run，并返回一个Object。</p>
+<p>一般该接口要配合AccessController进行权限控制代码进行使用，大概使用场景：</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">aboutingmethod(){</span><br><span class="line">    <span class="comment">// 普通代码写在这。。。</span></span><br><span class="line">    AccessController.doPrivileged(<span class="keyword">new</span> PrivilegedAction(){</span><br><span class="line">        <span class="function"><span class="keyword">public</span> Object <span class="title">run</span><span class="params">()</span></span>{}</span><br><span class="line">        <span class="comment">//特权相关代码在这里编写，比如：</span></span><br><span class="line">        System.out.println(<span class="string">"awt"</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    	}</span><br><span class="line">    });</span><br><span class="line">    <span class="comment">//普通代码...</span></span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<p>上述事例显示了该接口的实现的创建，提供了run方法的具体实现。</p>
+<p>调用<code>doPrivileged</code>时，将<code>PrivilegedAction</code>实现的实例传递给它。</p>
+<p><code>doPrivileged</code> 方法在启用特权后从 PrivilegedAction 实现调用 <code>run</code> 方法，并返回 <code>run</code> 方法的返回值作为 <code>doPrivileged</code> 的返回值、</p>
+<p><strong>在使用“特权”构造时务必 * 特别 * 小心，始终让享有特权的代码段尽可能的小。</strong></p>
+</blockquote>
+<h5 id="查找实现类"><a href="#查找实现类" class="headerlink" title="查找实现类"></a>查找实现类</h5><p>调用<code>Iterator.hasNext()</code>最重要就是调用<code>hasNextService()</code>方法</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210705000048259.png" alt="image-20210705000048259"></p>
+<h5 id="创建实例"><a href="#创建实例" class="headerlink" title="创建实例"></a>创建实例</h5><p>调用next方法的时候，实际调用的是<code>lookupIterator.nextService()</code>。</p>
+<p>它通过反射的方式，创建实现类的实例并返回。</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210705173607120.png" alt="image-20210705173607120"></p>
+<p>到此，SPI机制如何读取/META-INF/services/目录下的文件</p>
+<p>并将文件中的全限定类名进行初始化，获取到类的实例的一系列过程，我们都进行了简单的了解。</p>
+<h3 id="JDBC中的应用"><a href="#JDBC中的应用" class="headerlink" title="JDBC中的应用"></a>JDBC中的应用</h3><p>SPI机制为很多框架的拓展提供了帮助和可能，在JDBC中就应用到了该机制。</p>
+<p>在最初的JDBC，获取数据库连接的过程，需要先设置数据库驱动的连接，在通过<code>DriverManager.getConnection</code>获取一个Connnection</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line">String url = <span class="string">"jdbc:mysql:///xxx"</span></span><br><span class="line">String user = <span class="string">"root"</span>;</span><br><span class="line">String password = <span class="string">"root"</span>;</span><br><span class="line">Class.forName(<span class="string">"com.mysql.jdbc.Driver"</span>);</span><br><span class="line">Connection conn = DriverManager.getConnection(url, user, password);</span><br></pre></td></tr></tbody></table></figure>
+
+
+<p>在新版本中，设置数据库驱动连接，这一步骤就不需要了，而是通过SPI机制进行配置</p>
+<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>我们首先看看<code>DriverManager</code>类，它在静态代码块做了一件重要的事</p>
+<p><img src="/2021/06/18/Java%E5%9F%BA%E7%A1%80/SPI%E6%9C%BA%E5%88%B6/image-20210705192025700.png" alt="image-20210705192025700"></p>
+<p>显然，它已经通过SPI机制，将数据库驱动连接初始化了。</p>
+<figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">loadInitialDrivers</span><span class="params">()</span> </span>{</span><br><span class="line">    String drivers;</span><br><span class="line">    <span class="keyword">try</span> {</span><br><span class="line">    	<span class="comment">//特权控制</span></span><br><span class="line">        drivers = AccessController.doPrivileged(<span class="keyword">new</span> PrivilegedAction&lt;String&gt;() {</span><br><span class="line">            <span class="function"><span class="keyword">public</span> String <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">                <span class="keyword">return</span> System.getProperty(<span class="string">"jdbc.drivers"</span>);</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">    } <span class="keyword">catch</span> (Exception ex) {</span><br><span class="line">        drivers = <span class="keyword">null</span>;</span><br><span class="line">    }</span><br><span class="line">    AccessController.doPrivileged(<span class="keyword">new</span> PrivilegedAction&lt;Void&gt;() {</span><br><span class="line">            <span class="function"><span class="keyword">public</span> Void <span class="title">run</span><span class="params">()</span> </span>{</span><br><span class="line">				<span class="comment">//眼熟吧，SPI机制加载Driver接口的服务类，Driver接口的包为:java.sql.Driver</span></span><br><span class="line">                <span class="comment">//所以它要找的就是META-INF/services/java.sql.Driver文件</span></span><br><span class="line">                ServiceLoader&lt;Driver&gt; loadedDrivers = ServiceLoader.load(Driver.class);</span><br><span class="line">                Iterator&lt;Driver&gt; driversIterator = loadedDrivers.iterator();</span><br><span class="line">                <span class="keyword">try</span>{</span><br><span class="line">                    <span class="comment">//查到后就创建对象</span></span><br><span class="line">                    <span class="keyword">while</span>(driversIterator.hasNext()) {</span><br><span class="line">                        driversIterator.next();</span><br><span class="line">                    }</span><br><span class="line">                } <span class="keyword">catch</span>(Throwable t) {</span><br><span class="line">                <span class="comment">// Do nothing</span></span><br><span class="line">                }</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">            }</span><br><span class="line">        });</span><br><span class="line">        println(<span class="string">"DriverManager.initialize: jdbc.drivers = "</span> + drivers);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (drivers == <span class="keyword">null</span> || drivers.equals(<span class="string">""</span>)) {</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        }</span><br><span class="line">        String[] driversList = drivers.split(<span class="string">":"</span>);</span><br><span class="line">        println(<span class="string">"number of Drivers:"</span> + driversList.length);</span><br><span class="line">        <span class="keyword">for</span> (String aDriver : driversList) {</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: loading "</span> + aDriver);</span><br><span class="line">                Class.forName(aDriver, <span class="keyword">true</span>,</span><br><span class="line">                        ClassLoader.getSystemClassLoader());</span><br><span class="line">            } <span class="keyword">catch</span> (Exception ex) {</span><br><span class="line">                println(<span class="string">"DriverManager.Initialize: load failed: "</span> + ex);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h4 id="获取Connection"><a href="#获取Connection" class="headerlink" title="获取Connection"></a>获取Connection</h4><figure class="highlight java"><table><tbody><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">    String url, java.util.Properties info, Class&lt;?&gt; caller)</span> <span class="keyword">throws</span> SQLException </span>{</span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">     * When callerCl is null, we should check the application's</span></span><br><span class="line"><span class="comment">     * (which is invoking this class indirectly)</span></span><br><span class="line"><span class="comment">     * classloader, so that the JDBC driver class outside rt.jar</span></span><br><span class="line"><span class="comment">     * can be loaded from here.</span></span><br><span class="line"><span class="comment">     (当callerCl是空，我们应该检查间接调用类的应用程序加载器，以便JDBC驱动器能够加载rt.jar外的类)</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    ClassLoader callerCL = caller != <span class="keyword">null</span> ? caller.getClassLoader() : <span class="keyword">null</span>;</span><br><span class="line">    <span class="keyword">synchronized</span>(DriverManager.class) {</span><br><span class="line">        <span class="comment">// synchronize loading of the correct classloader.</span></span><br><span class="line">        <span class="keyword">if</span> (callerCL == <span class="keyword">null</span>) {</span><br><span class="line">            callerCL = Thread.currentThread().getContextClassLoader();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span>(url == <span class="keyword">null</span>) {</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"The url cannot be null"</span>, <span class="string">"08001"</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    println(<span class="string">"DriverManager.getConnection(\""</span> + url + <span class="string">"\")"</span>);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Walk through the loaded registeredDrivers attempting to make a connection.</span></span><br><span class="line">    <span class="comment">// Remember the first exception that gets raised so we can reraise it.</span></span><br><span class="line">    SQLException reason = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//这一段就是加载的核心</span></span><br><span class="line">    <span class="comment">////registeredDrivers中就包含com.mysql.cj.jdbc.Driver实例</span></span><br><span class="line">    <span class="keyword">for</span>(DriverInfo aDriver : registeredDrivers) {</span><br><span class="line">        <span class="keyword">if</span>(isDriverAllowed(aDriver.driver, callerCL)) {</span><br><span class="line">            <span class="keyword">try</span> {</span><br><span class="line">                println(<span class="string">"    trying "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                <span class="comment">//调用connect方法创建连接</span></span><br><span class="line">                Connection con = aDriver.driver.connect(url, info);</span><br><span class="line">                <span class="keyword">if</span> (con != <span class="keyword">null</span>) {</span><br><span class="line">                    println(<span class="string">"getConnection returning "</span> + aDriver.driver.getClass().getName());</span><br><span class="line">                    <span class="keyword">return</span> (con);</span><br><span class="line">                }</span><br><span class="line">            } <span class="keyword">catch</span> (SQLException ex) {</span><br><span class="line">                <span class="keyword">if</span> (reason == <span class="keyword">null</span>) {</span><br><span class="line">                    reason = ex;</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line"></span><br><span class="line">        } <span class="keyword">else</span> {</span><br><span class="line">            println(<span class="string">"    skipping: "</span> + aDriver.getClass().getName());</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="comment">// if we got here nobody could connect.</span></span><br><span class="line">    <span class="keyword">if</span> (reason != <span class="keyword">null</span>)    {</span><br><span class="line">        println(<span class="string">"getConnection failed: "</span> + reason);</span><br><span class="line">        <span class="keyword">throw</span> reason;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    println(<span class="string">"getConnection: no suitable driver found for "</span>+ url);</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> SQLException(<span class="string">"No suitable driver found for "</span>+ url, <span class="string">"08001"</span>);</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h2><p><code>Java</code> 自身的 <code>SPI</code> 其实也有点小毛病，比如：</p>
+<ul>
+<li>遍历加载所有实现类效率较低。</li>
+<li>当多个 <code>ServiceLoader</code> 同时 <code>load</code> 时会有并发问题（虽然没人这么干），所以在JDBC上有一串对类加载器的处理，不知道是不是为了解决这个问题</li>
+</ul>
+<p>最后总结一下，<code>SPI</code> 并不是某项高深的技术，本质就是面向接口编程，而面向接口本身在我们日常开发中也是必备技能，所以了解使用 <code>SPI</code> 也是很用处的。</p>
+<h5 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h5><p><a href="https://www.jianshu.com/p/3a3edbcd8f24">深入理解SPI机制 - 简书 (jianshu.com)</a></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<h1 id="Git学习"><a href="#Git学习" class="headerlink" title="Git学习"></a>Git学习</h1><p>Git是一个<strong>分布式版本管理系统</strong>，是为了更好地管理Linux内核开发而创立的。</p>
+<p>用Git管理文件的话，更新的历史会保存在Git，所以不需要备份文件啦。</p>
+<blockquote>
+<p>Tips: 除git常用的版本控制系统还有svn</p>
+<p>我一般在公司中使用svn进行版本控制，在开源的项目中使用git</p>
+</blockquote>
+<h5 id="git相比于SVN"><a href="#git相比于SVN" class="headerlink" title="git相比于SVN"></a>git相比于SVN</h5><p>git和其他版本控制系统，如svn相比的主要区别是：<strong>Git对待数据的方式</strong></p>
+<p>其他版本控制系统是以<strong>文件变更列表</strong>方式存储信息的，他们将存储的信息看做是<strong>一组基本文件和每个文件随时间逐步积累的差异</strong>，所以svn这类版本控制系统又可称之为<strong>基于差异</strong>的版本控制。</p>
+<p><img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/deltas.png"></p>
+<p>而Git则不是按照如上方式对待或保存数据的。</p>
+<p>Git更像是把数据看做是对小型文件系统的一系列快照。</p>
+<h3 id="远程数据库和本地数据库"><a href="#远程数据库和本地数据库" class="headerlink" title="远程数据库和本地数据库"></a>远程数据库和本地数据库</h3><p>Git的数据库分为两种：远程数据库和本地数据库</p>
+<ul>
+<li>远程数据库：配有专用的服务器，为了多人共享而建立的数据库</li>
+<li>本地数据库：为了方便用户个人使用，在自己机器上配置的数据库</li>
+</ul>
+<p><img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/capture_intro1_2_2.png" alt="img"></p>
+<p>一般在进行代码的编写时，在本地数据库执行即可，当需要上传代码，合并分支时，把内容上传到远程数据库即可。</p>
+<h3 id="数据提交"><a href="#数据提交" class="headerlink" title="数据提交"></a>数据提交</h3><p>当我们需要提交我们的代码到远程公共数据库中，我们需要进行commit</p>
+<p>而每次我们commit时，数据库中都会生成提交的状态与当前状态的差异记录（revision）</p>
+<p><img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/capture_intro1_3_1.png" alt="img"></p>
+<p>执行提交时，系统会要求输入提交信息。也必须要输入提交信息，因为在空白的状态下执行提交会失败的。</p>
+<blockquote>
+<p>Tips: </p>
+<ol>
+<li>建议新增和修复分开提交，这样便于以后查询历史记录时找到修改记录</li>
+<li>提交信息是查看历史记录的重要信息，请用心填写()</li>
+</ol>
+<figure class="highlight bash"><table><tbody><tr><td class="code"><pre><span class="line">第1行：提交修改内容的摘要</span><br><span class="line">第2行：空行</span><br><span class="line">第3行以后：修改的理由</span><br><span class="line">(请以这种方式提交注释)</span><br></pre></td></tr></tbody></table></figure>
+</blockquote>
+<h3 id="工作树和索引"><a href="#工作树和索引" class="headerlink" title="工作树和索引"></a>工作树和索引</h3><p>Git管理下，实际操作的目录被称为工作树</p>
+<p>而数据库和工作树之间有索引关系，索引是为了向数据库提交信息而准备的区域</p>
+<p><img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/capture_intro1_4_1.png" alt="img"></p>
+<p>Git commit时，并非将工作树的状态直接保存到数据库中的，而会先将索引的状态保存到数据库。</p>
+<p>所以在提交文件时，需要先将文件加入到索引区域中。</p>
+<h3 id="推送到远程数据库"><a href="#推送到远程数据库" class="headerlink" title="推送到远程数据库"></a>推送到远程数据库</h3><blockquote>
+<p>如何在远程数据库上共享本地数据库的修改记录?</p>
+</blockquote>
+<h4 id="推送"><a href="#推送" class="headerlink" title="推送"></a>推送</h4><p>为了将本地数据库的修改记录共享到远程数据库，必须上传本地数据库中存储的修改记录。</p>
+<p>这时就需要在Git中执行推送（Push）操作。</p>
+<p>执行Push后，本地修改记录会被上传到远程数据库。</p>
+<p>这样子远程数据库的修改记录就会和本地数据库的修改记录保持同步。</p>
+<p><img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/capture_intro3_1_1.png" alt="img"></p>
+<blockquote>
+<p><strong>（一般就是 git commit 将修改的文件进行提交，提交过程需要编写提交信息，提交后，该文件信息会更新到本地数据库中，如果想要远程共享修改文件，还需要将本地数据库的信息 git push 到远程数据库中）</strong></p>
+</blockquote>
+<h3 id="克隆远程数据库"><a href="#克隆远程数据库" class="headerlink" title="克隆远程数据库"></a>克隆远程数据库</h3><blockquote>
+<p>git clone</p>
+</blockquote>
+<p>一般克隆就是想要将别人的远端数据库的代码抓下来研究一下</p>
+<p>或者是新项目抓一份模板下来进行编辑</p>
+<p><strong>就可以用git clone，将远程数据库的全部内容下载到本地中</strong></p>
+<h3 id="从远程数据库pull"><a href="#从远程数据库pull" class="headerlink" title="从远程数据库pull"></a>从远程数据库pull</h3><p>如果远程数据库是多人合作的话，有人完成作业会提交修改代码到远程数据库。</p>
+<p>但是本地在提交的时候需要更新一下，避免冲突</p>
+<p>这里就可以使用git pull更新其他人推送的变更内容（svn 是 update）</p>
+<h4 id="Pull"><a href="#Pull" class="headerlink" title="Pull"></a>Pull</h4><p>拉取（Pull）操作是将远程数据库的内容实时更新到本地数据库中。</p>
+<p>进行拉取（Pull）操作，就是从远程数据库下载最近的变更日志，并覆盖自己本<img src="/2021/07/01/%E5%B7%A5%E5%85%B7%E5%AD%A6%E4%B9%A0/Git%E4%BD%BF%E7%94%A8%E5%AD%A6%E4%B9%A0/capture_intro3_3_1.png" alt="img">地数据库的相关内容。</p>
+<p><strong>文章学习来源：</strong></p>
+<p><strong><a href="https://backlog.com/git-tutorial/cn/intro/intro1_2.html">https://backlog.com/git-tutorial/cn/intro/intro1_2.html</a></strong></p>
+<p>最好的git学习网站</p>
+<h3 id="Git-关于版本控制-git-scm-com"><a href="#Git-关于版本控制-git-scm-com" class="headerlink" title="Git - 关于版本控制 (git-scm.com)"></a><strong><a href="https://git-scm.com/book/zh/v2/%E8%B5%B7%E6%AD%A5-%E5%85%B3%E4%BA%8E%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6">Git - 关于版本控制 (git-scm.com)</a></strong></h3>]]></content>
   </entry>
 </search>

@@ -21,18 +21,23 @@
     var CONFIG = {"hostname":"cherrywang761.github.io","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":true},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
-  <meta name="description" content="类加载机制类加载机制分为三部分：加载，链接，初始化 加载根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象 首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader 类加载器一般分为三层（三种） Bootstrap Class Loader：引导类加载器，是最顶层的 Extension Class Loader: 拓展类加载器">
+  <meta name="description" content="类加载机制类加载机制分为三部分：加载，链接，初始化  类加载的时机Java虚拟机规定了类必须进行初始化的5种情况   其中情况1中的4条字节码指令在Java里最常见的场景是：1 . new一个对象时2 . set或者get一个类的静态字段（除去那种被final修饰放入常量池的静态字段）3 . 调用一个类的静态方法  加载 类加载原因：Class文件描述的各种信息，最终都需要加载到虚拟机中才能运行和">
 <meta property="og:type" content="article">
 <meta property="og:title" content="类加载机制">
 <meta property="og:url" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/index.html">
 <meta property="og:site_name" content="Nonbioclock">
-<meta property="og:description" content="类加载机制类加载机制分为三部分：加载，链接，初始化 加载根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象 首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader 类加载器一般分为三层（三种） Bootstrap Class Loader：引导类加载器，是最顶层的 Extension Class Loader: 拓展类加载器">
+<meta property="og:description" content="类加载机制类加载机制分为三部分：加载，链接，初始化  类加载的时机Java虚拟机规定了类必须进行初始化的5种情况   其中情况1中的4条字节码指令在Java里最常见的场景是：1 . new一个对象时2 . set或者get一个类的静态字段（除去那种被final修饰放入常量池的静态字段）3 . 调用一个类的静态方法  加载 类加载原因：Class文件描述的各种信息，最终都需要加载到虚拟机中才能运行和">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA.png">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E5%8A%A0%E8%BD%BD%E9%98%B6%E6%AE%B5.image">
+<meta property="og:image" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8">
 <meta property="article:published_time" content="2021-03-10T01:52:48.000Z">
-<meta property="article:modified_time" content="2021-06-20T14:58:57.463Z">
+<meta property="article:modified_time" content="2021-06-24T16:03:28.546Z">
 <meta property="article:author" content="CherryWang761">
 <meta property="article:tag" content="JVM">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png">
 
 <link rel="canonical" href="https://cherrywang761.github.io/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/">
 
@@ -223,7 +228,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-06-20 22:58:57" itemprop="dateModified" datetime="2021-06-20T22:58:57+08:00">2021-06-20</time>
+                <time title="修改时间：2021-06-25 00:03:28" itemprop="dateModified" datetime="2021-06-25T00:03:28+08:00">2021-06-25</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -248,14 +253,14 @@
                 <i class="far fa-file-word"></i>
               </span>
                 <span class="post-meta-item-text">本文字数：</span>
-              <span>465</span>
+              <span>2.5k</span>
             </span>
             <span class="post-meta-item" title="阅读时长">
               <span class="post-meta-item-icon">
                 <i class="far fa-clock"></i>
               </span>
                 <span class="post-meta-item-text">阅读时长 &asymp;</span>
-              <span>1 分钟</span>
+              <span>2 分钟</span>
             </span>
 
         </div>
@@ -267,19 +272,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h3 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h3><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
-<h4 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h4><p>根据全限定类名读取类的二进制字节流，在内存中创建该类的.class对象</p>
-<p>首先读取类的二进制字节流是通过类加载器读取的，一般默认的都是Application Class Loader</p>
+        <h1 id="类加载机制"><a href="#类加载机制" class="headerlink" title="类加载机制"></a>类加载机制</h1><p>类加载机制分为三部分：<strong>加载，链接，初始化</strong></p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E7%9A%84%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F.png" alt="类的生命周期"></p>
+<h2 id="类加载的时机"><a href="#类加载的时机" class="headerlink" title="类加载的时机"></a>类加载的时机</h2><p>Java虚拟机规定了类必须进行<strong>初始化</strong>的5种情况</p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%97%B6%E6%9C%BA.png" alt="类加载时机"></p>
+<blockquote>
+<p>其中情况1中的4条字节码指令在Java里最常见的场景是：<br>1 . new一个对象时<br>2 . set或者get一个类的静态字段（除去那种被final修饰放入常量池的静态字段）<br>3 . 调用一个类的静态方法</p>
+</blockquote>
+<h2 id="加载"><a href="#加载" class="headerlink" title="加载"></a>加载</h2><blockquote>
+<p>类加载原因：Class文件描述的各种信息，最终都需要加载到虚拟机中才能运行和使用。</p>
+</blockquote>
+<p>JVM在该阶段主要就是将字节码从不同的数据源（可能是class文件，jar包，甚至网络）转为为二进制字节流，并加载到内存中，生成代表该类的<code>java.lang.Class</code>对象</p>
+<blockquote>
+<p>其实就是三句话:</p>
+<ul>
+<li>通过类的全名，获取类的二进制数据流。</li>
+<li>解析类的二进制数据流为方法区内的数据结构（Java类模型）</li>
+<li>创建java.lang.Class类的实例，表示该类型。作为方法区这个类的各种数据的访问入口</li>
+</ul>
+</blockquote>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E5%8A%A0%E8%BD%BD%E9%98%B6%E6%AE%B5.image" alt="加载阶段"></p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">/* 过程一：加载阶段</span></span><br><span class="line"><span class="comment"> * 通过Class类，获得了java.lang.String类的所有方法信息，并打印方法访问标识符、描述符</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoadingTest</span> </span>{</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="keyword">try</span> {</span><br><span class="line">            Class clazz = Class.forName(<span class="string">"java.lang.String"</span>);</span><br><span class="line">            <span class="comment">//获取当前运行时类声明的所有方法</span></span><br><span class="line">            Method[] ms = clazz.getDeclaredMethods();</span><br><span class="line">            <span class="keyword">for</span> (Method m : ms) {</span><br><span class="line">                <span class="comment">//获取方法的修饰符</span></span><br><span class="line">                String mod = Modifier.toString(m.getModifiers());</span><br><span class="line">                System.out.print(mod + <span class="string">" "</span>);</span><br><span class="line">                <span class="comment">//获取方法的返回值类型</span></span><br><span class="line">                String returnType = m.getReturnType().getSimpleName();</span><br><span class="line">                System.out.print(returnType + <span class="string">" "</span>);</span><br><span class="line">                <span class="comment">//获取方法名</span></span><br><span class="line">                System.out.print(m.getName() + <span class="string">"("</span>);</span><br><span class="line">                <span class="comment">//获取方法的参数列表</span></span><br><span class="line">                Class&lt;?&gt;[] ps = m.getParameterTypes();</span><br><span class="line">                <span class="keyword">if</span> (ps.length == <span class="number">0</span>) System.out.print(<span class="string">')'</span>);</span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; ps.length; i++) {</span><br><span class="line">                    <span class="keyword">char</span> end = (i == ps.length - <span class="number">1</span>) ? <span class="string">')'</span> : <span class="string">','</span>;</span><br><span class="line">                    <span class="comment">//获取参数的类型</span></span><br><span class="line">                    System.out.print(ps[i].getSimpleName() + end);</span><br><span class="line">                }</span><br><span class="line">                System.out.println();</span><br><span class="line">            }</span><br><span class="line">        } <span class="keyword">catch</span> (ClassNotFoundException e) {</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h3 id="类加载器"><a href="#类加载器" class="headerlink" title="类加载器"></a>类加载器</h3><blockquote>
+<p>在Java中，一个类用全限定类名作为标识</p>
+<p>在JVM中，一个类用全限定类名和其类加载器作为其唯一标识</p>
+<p>类加载器的作用就是根据一个类的全限定类名读取该类的二进制字节流到JVM中。</p>
+</blockquote>
 <p>类加载器一般分为三层（三种）</p>
 <p>Bootstrap Class Loader：引导类加载器，是最顶层的</p>
 <p>Extension Class Loader: 拓展类加载器，Boostrap的子类</p>
-<p>最底下的是Application Class  Loader:系统类加载器</p>
-<p>类加载器也多嘛，所以有个双亲委派的这种机制，就是说</p>
-<p>如果我要加载一个类(.java)，那么我默认是用Application类加载器来加载的，</p>
-<p>但是我不直接加载，我会往上抛给我的父类，Extension类加载器，如果它能够加载，它会继续上抛，直到super构造器进行加载，如果不能够加载，就会回调到最后一个能加载该类的加载器进行加载。</p>
-<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
+<p>Application Class  Loader:系统类加载器</p>
+<p><img src="/2021/03/10/JVM/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6/%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8" alt="类加载器"></p>
+<h5 id="BootstrapClassLoader（引导类加载器）"><a href="#BootstrapClassLoader（引导类加载器）" class="headerlink" title="BootstrapClassLoader（引导类加载器）"></a>BootstrapClassLoader（引导类加载器）</h5><p>引导类加载器是最顶层的类加载器，主要加载的是JVM本身需要的类，这个类加载器是使用C++进行实现的，可以看做是JVM的一部分</p>
+<p>它主要负责将<code>JAVA_HOME/lib</code>下的核心类库，如：rt.jar、resource.jar…加载到内存中。</p>
+<h5 id="ExtensionClassLoader（拓展类加载器）"><a href="#ExtensionClassLoader（拓展类加载器）" class="headerlink" title="ExtensionClassLoader（拓展类加载器）"></a>ExtensionClassLoader（拓展类加载器）</h5><p>拓展类加载器是指Sun公司实现的<code>sun.misc.Launcher$ExtClassLoader</code>类，由Java实现</p>
+<p>它主要负责将<code>JAVA_HOME/lib/ext</code>目录下的核心类库加载进内存。</p>
+<p>开发者可以直接使用标准扩展类加载器。</p>
+<figure class="highlight java"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//ExtClassLoader类中获取路径的代码</span></span><br><span class="line"><span class="keyword">private</span> <span class="keyword">static</span> File[] getExtDirs() {</span><br><span class="line">     <span class="comment">//加载&lt;JAVA_HOME&gt;/lib/ext目录中的类库</span></span><br><span class="line">     String s = System.getProperty(<span class="string">"java.ext.dirs"</span>);</span><br><span class="line">     File[] dirs;</span><br><span class="line">     <span class="keyword">if</span> (s != <span class="keyword">null</span>) {</span><br><span class="line">         <span class="comment">//构造一个用来解析str的StringTokenizer对象，并提供一个指定的分隔符</span></span><br><span class="line">         StringTokenizer st =</span><br><span class="line">             <span class="keyword">new</span> StringTokenizer(s, File.pathSeparator);</span><br><span class="line">         <span class="keyword">int</span> count = st.countTokens();</span><br><span class="line">         dirs = <span class="keyword">new</span> File[count];</span><br><span class="line">         <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {</span><br><span class="line">             dirs[i] = <span class="keyword">new</span> File(st.nextToken());</span><br><span class="line">         }</span><br><span class="line">     } <span class="keyword">else</span> {</span><br><span class="line">         dirs = <span class="keyword">new</span> File[<span class="number">0</span>];</span><br><span class="line">     }</span><br><span class="line">     <span class="keyword">return</span> dirs;</span><br><span class="line"> }</span><br></pre></td></tr></tbody></table></figure>
+
+
+<h5 id="ApplicationClassLoader（系统类加载器）"><a href="#ApplicationClassLoader（系统类加载器）" class="headerlink" title="ApplicationClassLoader（系统类加载器）"></a>ApplicationClassLoader（系统类加载器）</h5><p>也叫应用程序加载器，是Sun公司实现的<code>sun.misc.Launcher$AppClassLoader</code>。</p>
+<p>它主要负责将类路径<code>java -classpath</code>指定路径下的类库（即我们常用的classpath路径）</p>
+<p>开发者可以直接使用系统类加载器，一般情况下该类加载是程序中默认的类加载器。</p>
+<p>我们可以通过<code>ClassLoader#getSystemClassLoader()</code>获取到该类加载器</p>
+<h4 id="链接"><a href="#链接" class="headerlink" title="链接"></a>链接</h4><h5 id="验证"><a href="#验证" class="headerlink" title="验证"></a>验证</h5><p>当类加载到系统后，就会开始链接操作。</p>
+<p>验证步骤就是说，对.class文件进行一个规则的校验，比如说对一些语义的校验，final修饰的类有没有被继承校验</p>
 <p>或者就是</p>
-<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4>
+<h4 id="初始化"><a href="#初始化" class="headerlink" title="初始化"></a>初始化</h4><p>参考文章：</p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6916461467067744264">https://juejin.cn/post/6916461467067744264</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903886512193550">https://juejin.cn/post/6844903886512193550</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/javazejian/article/details/73413292">https://blog.csdn.net/javazejian/article/details/73413292</a></p>
+
     </div>
 
     
@@ -300,12 +345,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/JMM/" rel="prev" title="JMM">
-      <i class="fa fa-chevron-left"></i> JMM
+    <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/%E6%8E%92%E6%9F%A5CPU%E9%AB%98%E8%B4%9F%E8%BD%BD%E9%97%AE%E9%A2%98+epoll/" rel="prev" title="排查CPU高负载问题">
+      <i class="fa fa-chevron-left"></i> 排查CPU高负载问题
     </a></div>
       <div class="post-nav-item">
-    <a href="/2021/03/10/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/SYN%E6%94%BB%E5%87%BB/" rel="next" title="SYN攻击">
-      SYN攻击 <i class="fa fa-chevron-right"></i>
+    <a href="/2021/03/10/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/JMM/" rel="next" title="JMM">
+      JMM <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -365,7 +410,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.1.</span> <span class="nav-text">加载</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.1.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.3.</span> <span class="nav-text">初始化</span></a></li></ol></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="nav-number">1.</span> <span class="nav-text">类加载机制</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E7%9A%84%E6%97%B6%E6%9C%BA"><span class="nav-number">1.1.</span> <span class="nav-text">类加载的时机</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD"><span class="nav-number">1.2.</span> <span class="nav-text">加载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8"><span class="nav-number">1.2.1.</span> <span class="nav-text">类加载器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BootstrapClassLoader%EF%BC%88%E5%BC%95%E5%AF%BC%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.1.0.1.</span> <span class="nav-text">BootstrapClassLoader（引导类加载器）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ExtensionClassLoader%EF%BC%88%E6%8B%93%E5%B1%95%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.1.0.2.</span> <span class="nav-text">ExtensionClassLoader（拓展类加载器）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ApplicationClassLoader%EF%BC%88%E7%B3%BB%E7%BB%9F%E7%B1%BB%E5%8A%A0%E8%BD%BD%E5%99%A8%EF%BC%89"><span class="nav-number">1.2.1.0.3.</span> <span class="nav-text">ApplicationClassLoader（系统类加载器）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%93%BE%E6%8E%A5"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">链接</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E9%AA%8C%E8%AF%81"><span class="nav-number">1.2.1.1.1.</span> <span class="nav-text">验证</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">初始化</span></a></li></ol></li></ol></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
@@ -379,20 +424,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">42</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">26</span>
+        <span class="site-state-item-count">27</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -428,12 +473,12 @@
     <span class="post-meta-item-icon">
       <i class="fa fa-chart-area"></i>
     </span>
-    <span title="站点总字数">228k</span>
+    <span title="站点总字数">237k</span>
     <span class="post-meta-divider">|</span>
     <span class="post-meta-item-icon">
       <i class="fa fa-coffee"></i>
     </span>
-    <span title="站点阅读时长">3:27</span>
+    <span title="站点阅读时长">3:36</span>
 </div>
   <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> 强力驱动
   </div>
